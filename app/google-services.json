@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "874427734748",
+    "project_id": "sogong-c849b",
+    "storage_bucket": "sogong-c849b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874427734748:android:3e007425b9f600ac3e7219",
+        "android_client_info": {
+          "package_name": "com.unit_3.sogong_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874427734748-h482m6fmlh8pi2a327iltgt3k65dvi0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unit_3.sogong_test",
+            "certificate_hash": "07dabb032170e62e68c749d0f354760d5d800284"
+          }
+        },
+        {
+          "client_id": "874427734748-oo1o4jvr2k5cajba458gbukqaall2qap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDomCsu_pzJKQKdVd7mIE16Izx_KegYDxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874427734748-oo1o4jvr2k5cajba458gbukqaall2qap.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
