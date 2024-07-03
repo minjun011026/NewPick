@@ -87,7 +87,7 @@
         android:background="@drawable/insert_box">
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/repeatPassword"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             android:inputType="textPassword"/>
 
         <ImageButton
-            android:id="@+id/showPassword"
+            android:id="@+id/showRepeatPassword"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:src="@drawable/invisible_icon"/>
