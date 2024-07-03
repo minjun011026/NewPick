@@ -28,7 +28,7 @@
         <!-- MainActivity 설정 (일반 액티비티로) -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false">
         </activity>
 
         <!-- SingUpActivity, SplashActivity 등의 설정 -->
