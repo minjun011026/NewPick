@@ -30,12 +30,12 @@
         android:fontFamily="@font/pretendard_bold"
         />
 
-
+    //hint spacebar 4번씩 쳤음
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
-        android:hint="Full Name"
+        android:hint="   Full Name"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:background="@drawable/insert_box"/>
@@ -44,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Enter Email"
+        android:hint="    Enter Email"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:background="@drawable/insert_box"/>
@@ -64,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="    Password"
             android:background="null"
             android:inputType="textPassword"/>
 
@@ -91,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="Repeat Password"
+            android:hint="    Repeat Password"
             android:background="null"
             android:inputType="textPassword"/>
 
