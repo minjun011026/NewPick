@@ -8,6 +8,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        민준형 성진형 준규
+        민준형 성진형 준규 백준규 바보
     }
 }
