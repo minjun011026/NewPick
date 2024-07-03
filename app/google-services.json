@@ -12,7 +12,20 @@
           "package_name": "com.unit_3.sogong_test"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "874427734748-h482m6fmlh8pi2a327iltgt3k65dvi0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.unit_3.sogong_test",
+            "certificate_hash": "07dabb032170e62e68c749d0f354760d5d800284"
+          }
+        },
+        {
+          "client_id": "874427734748-oo1o4jvr2k5cajba458gbukqaall2qap.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDomCsu_pzJKQKdVd7mIE16Izx_KegYDxg"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874427734748-oo1o4jvr2k5cajba458gbukqaall2qap.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
