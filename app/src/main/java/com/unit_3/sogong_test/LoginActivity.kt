@@ -52,9 +52,11 @@ class LoginActivity : AppCompatActivity() {
                         // 로그인 성공 시 처리
                         Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                         // 다음 화면으로 이동 등의 처리
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     } else {
                         // 로그인 실패 시 처리
-                        Toast.makeText(this, "로그인 실패(비밀번호나 이메일을 확인해주세요.)", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "로그인 실패(비밀번호 또는 이메일을 확인해주세요.)", Toast.LENGTH_SHORT).show()
                     }
                 }
         }
@@ -73,4 +75,6 @@ class LoginActivity : AppCompatActivity() {
         // 커서를 맨 끝으로 이동하여 보이는 텍스트를 확인
         passwordEditText.setSelection(passwordEditText.text.length)
     }
+
+
 }

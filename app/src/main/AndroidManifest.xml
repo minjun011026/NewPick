@@ -18,7 +18,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
-            android:exported="false">
+            android:exported="true">
+
         </activity>
 
         <!-- MainActivity 설정 (일반 액티비티로) -->
@@ -26,10 +27,6 @@
             android:name=".MainActivity"
             android:exported="true">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- SingUpActivity, SplashActivity 등의 설정 -->
@@ -40,7 +37,10 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
