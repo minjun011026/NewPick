@@ -88,15 +88,15 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    //로그인 된 상태이면 바로 MainActivity로 이동
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-    }
+//    //로그인 된 상태이면 바로 MainActivity로 이동
+//    public override fun onStart() {
+//        super.onStart()
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
+//    }
 
 }
