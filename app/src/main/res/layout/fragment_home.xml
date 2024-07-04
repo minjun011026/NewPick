@@ -6,8 +6,6 @@
         android:layout_height="match_parent"
         tools:context="fragments.HomeFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
@@ -15,7 +13,6 @@
             tools:ignore="MissingConstraints">
 
             <TextView
-
                 android:id="@+id/helloWorldTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,16 +24,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            <!--        android:onClick="navigateToLogin"-->
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#999999" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,25 +43,25 @@
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout">
 
                 <LinearLayout
-                    android:background="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:background="@color/black" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
 
             </LinearLayout>
