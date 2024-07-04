@@ -55,7 +55,7 @@
             android:id="@+id/showPassword"
             android:layout_width="wrap_content"
             android:layout_height="30dp"/>
-            android:src="@drawable/ic_visibility"/> <!-- drawble에서 눈 이미지 넣기 -->
+            <android:src="@drawable/ic_visibility"/> drawble에서 눈 이미지 넣기 -->
 
 
     </LinearLayout>

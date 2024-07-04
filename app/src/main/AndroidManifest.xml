@@ -29,7 +29,7 @@
 
         <!-- SingUpActivity, SplashActivity 등의 설정 -->
         <activity
-            android:name=".SingUpActivity"
+            android:name=".SignUpActivity"
             android:exported="false" />
 
         <activity
