@@ -12,10 +12,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        fun navigateToLogin(view: View) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        }
 
     }
 }

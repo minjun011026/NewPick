@@ -13,6 +13,7 @@
         android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="앱 이름"
         android:textSize="24sp"
         android:layout_gravity="center"/>
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="Log In"
         android:textSize="20sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"/>
 
     <!-- 이메일 -->
@@ -34,14 +35,14 @@
         android:layout_height="wrap_content"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="30dp"/>
 
     <!-- 비밀번호 입력 및 보기/숨기기 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="30dp">
 
         <EditText
             android:id="@+id/password"
@@ -54,8 +55,10 @@
         <ImageButton
             android:id="@+id/showPassword"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
-            android:src="@drawable/ic_visibility"/> <!-- drawble에서 눈 이미지 넣기 -->
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:src="@drawable/visibility"/>
 
 
     </LinearLayout>

@@ -23,12 +23,14 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+
         // XML에서 뷰들을 찾아 변수에 할당
         val usernameEditText = findViewById<EditText>(R.id.username)
         passwordEditText = findViewById<EditText>(R.id.password)
         val loginButton = findViewById<Button>(R.id.loginButton)
         val registerTextView = findViewById<TextView>(R.id.register)
         val showPasswordButton = findViewById<ImageButton>(R.id.showPassword)
+        val googleSinginButton = findViewById<Button>(R.id.googleSignInButton)
 
         // 비밀번호 보기/숨기기 버튼 클릭 리스너 설정
         showPasswordButton.setOnClickListener {
@@ -51,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // 로그인 성공 시 처리
                         Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                        // 다음 화면으로 이동 등의 처리
+                        // 다음 화면으로 이동
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -76,5 +78,25 @@ class LoginActivity : AppCompatActivity() {
         passwordEditText.setSelection(passwordEditText.text.length)
     }
 
+
+
+
+
+
+
+
+
+
+
+    //로그인 된 상태이면 바로 MainActivity로 이동
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
 
 }
