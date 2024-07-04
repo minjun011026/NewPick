@@ -8,23 +8,21 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_myKeywordFragment"
             app:destination="@id/myKeywordFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_myPageFragment"
-            app:destination="@id/myPageFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
         android:name="fragments.ChatFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" >
+        android:label="fragment_chat">
         <action
             android:id="@+id/action_chatFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -36,25 +34,9 @@
             app:destination="@id/myPageFragment" />
     </fragment>
     <fragment
-        android:id="@+id/myPageFragment"
-        android:name="fragments.MyPageFragment"
-        android:label="fragment_my_page"
-        tools:layout="@layout/fragment_my_page" >
-        <action
-            android:id="@+id/action_myPageFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_myPageFragment_to_myKeywordFragment"
-            app:destination="@id/myKeywordFragment" />
-        <action
-            android:id="@+id/action_myPageFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/myKeywordFragment"
         android:name="fragments.MyKeywordFragment"
-        android:label="fragment_my_keyword"
-        tools:layout="@layout/fragment_my_keyword" >
+        android:label="fragment_my_keyword">
         <action
             android:id="@+id/action_myKeywordFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -64,5 +46,19 @@
         <action
             android:id="@+id/action_myKeywordFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="fragments.MyPageFragment"
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_myKeywordFragment"
+            app:destination="@id/myKeywordFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
 </navigation>
