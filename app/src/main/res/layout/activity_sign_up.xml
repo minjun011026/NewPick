@@ -33,6 +33,7 @@
 
 
     <EditText
+        android:id="@+id/nameText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
@@ -42,6 +43,7 @@
         android:background="@drawable/insert_box"/>
 
     <EditText
+        android:id="@+id/emailText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -61,7 +63,7 @@
         android:background="@drawable/insert_box">
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordText"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -88,7 +90,7 @@
         android:background="@drawable/insert_box">
 
         <EditText
-            android:id="@+id/repeatPassword"
+            android:id="@+id/repeatPasswordText"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -105,6 +107,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/registerBtn"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginLeft="40dp"
