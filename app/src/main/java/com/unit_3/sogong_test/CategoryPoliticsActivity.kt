@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,8 @@ class CategoryPoliticsActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_category_politics)
 
         binding.backBtn.setOnClickListener {
+
+            startActivity(Intent(this, MainActivity::class.java))
 
         }
 
