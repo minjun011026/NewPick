@@ -8,6 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.unit_3.sogong_test.KeywordModel
+import com.unit_3.sogong_test.KeywordRVAdapter
+import com.unit_3.sogong_test.NewsModel
+import com.unit_3.sogong_test.NewsRVAdapter
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
 
@@ -44,11 +50,47 @@ class MyKeywordFragment : Fragment() {
         }
 
 
+
+//        val rv : RecyclerView = binding.rv
+//
+//        val items = ArrayList<KeywordModel>()
+//
+//        items.add(KeywordModel("손흥민"))
+//        items.add(KeywordModel("여중대장"))
+//        items.add(KeywordModel("연준 금리"))
+//
+//        val rvAdapter = KeywordRVAdapter(items)
+//        rv.adapter = rvAdapter
+//
+//        rv.layoutManager = LinearLayoutManager(requireContext())
+//
+//
+//
+//
+//        return binding.root
+
+        // RecyclerView 설정
+        val rvAdapter = KeywordRVAdapter(getDummyData())
+        binding.rv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = rvAdapter
+        }
+
         return binding.root
+    }
+
+    private fun getDummyData(): ArrayList<KeywordModel> {
+        return arrayListOf(
+            KeywordModel("손흥민"),
+            KeywordModel("여중대장"),
+            KeywordModel("연준 금리")
+        )
+    }
 
     }
 
 
 
 
-}
+
+
