@@ -6,60 +6,80 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:gravity="center"
+    android:background="@color/white"
     tools:context=".LoginActivity">
 
-    <!-- 앱 이름 -->
-    <TextView
-        android:id="@+id/appName"
+    <!-- 앱 이름 및 로고 -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="앱이름"
-        android:textSize="24sp"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="-100dp">
 
-    <!-- 로그인 -->
+        <ImageView
+            android:layout_width="79dp"
+            android:layout_height="83dp"
+            android:src="@drawable/splash_svg" />
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앱 이름"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
+
+    <!-- 로그인 텍스트 -->
     <TextView
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Log In"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"/>
 
-    <!-- 이메일 -->
+    <!-- 이메일 입력 -->
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
+        android:layout_height="82dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edit_text_border"
+        android:hint="Enter Username Or Email"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="30dp"/>
+        android:padding="10dp" />
+
 
     <!-- 비밀번호 입력 및 보기/숨기기 버튼 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_border"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/password"
             android:layout_width="0dp"
+            android:layout_height="73dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:hint="Password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:padding="10dp" />
 
         <ImageButton
             android:id="@+id/showPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:background="@color/white"
-            android:layout_gravity="center"
-            android:src="@drawable/visibility"/>
-
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:src="@drawable/eye_off" />
 
     </LinearLayout>
 
@@ -80,33 +100,36 @@
             android:id="@+id/register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't Have An Account? Register"
+            android:text="           Don't Have An Account? Register"
             android:layout_marginStart="16dp"/>
 
-    </LinearLayout>
 
+    </LinearLayout>
     <!-- 로그인 버튼 -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="85dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/black"
         android:text="Log In"
-        android:layout_marginTop="60dp"/>
+        android:textSize="30sp"
+        android:textColor="@color/white" />
 
     <!-- or 텍스트 -->
-    <TextView
-        android:id="@+id/orText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="or"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"
+        android:layout_marginTop="20dp" />
+
 
     <!-- 구글 로그인 버튼 -->
     <Button
         android:id="@+id/googleSignInButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign in with Google"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/google_signin_button"
+        android:text="" />
 </LinearLayout>

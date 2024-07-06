@@ -10,12 +10,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.unit_3.sogong_test.R
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var passwordEditText: EditText
+    private lateinit var showPasswordButton: ImageButton
+    private var isPasswordVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +24,13 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-
         // XML에서 뷰들을 찾아 변수에 할당
         val usernameEditText = findViewById<EditText>(R.id.username)
         passwordEditText = findViewById<EditText>(R.id.password)
         val loginButton = findViewById<Button>(R.id.loginButton)
         val registerTextView = findViewById<TextView>(R.id.register)
-        val showPasswordButton = findViewById<ImageButton>(R.id.showPassword)
-        val googleSinginButton = findViewById<Button>(R.id.googleSignInButton)
+        showPasswordButton = findViewById(R.id.showPassword)
+        val googleSignInButton = findViewById<Button>(R.id.googleSignInButton)
 
         // 비밀번호 보기/숨기기 버튼 클릭 리스너 설정
         showPasswordButton.setOnClickListener {
@@ -62,41 +62,36 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
         }
+
+
+        // 회원가입 텍스트뷰 클릭 리스너 설정
+        //registerTextView.setOnClickListener {
+        // 회원가입 화면으로 이동하는 Intent 작성
+        // val intent = Intent(this, RegisterActivity::class.java)
+        // startActivity(intent)
+        // }
+
+
+        // 구글 로그인 버튼 클릭 리스너 설정
+        googleSignInButton.setOnClickListener {
+            // 구글 로그인 로직 추가
+            // ...
+        }
     }
 
     // 비밀번호 보기/숨기기 기능 메서드
     private fun togglePasswordVisibility() {
-        val currentInputType = passwordEditText.inputType
-        if (currentInputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-            // 현재 보이는 상태-> 비밀변호 숨기기
+        if (isPasswordVisible) {
+            // 현재 보이는 상태 -> 비밀번호 숨기기
             passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            showPasswordButton.setImageResource(R.drawable.eye) // 눈 감김 아이콘
         } else {
-            // 현재 숨겨진 상태-> 비밀번호 보이기
+            // 현재 숨겨진 상태 -> 비밀번호 보이기
             passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            showPasswordButton.setImageResource(R.drawable.eye_off) // 눈 뜸 아이콘
         }
+        isPasswordVisible = !isPasswordVisible
         // 커서를 맨 끝으로 이동하여 보이는 텍스트를 확인
         passwordEditText.setSelection(passwordEditText.text.length)
     }
-
-
-
-
-
-
-
-
-
-
-
-//    //로그인 된 상태이면 바로 MainActivity로 이동
-//    public override fun onStart() {
-//        super.onStart()
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        val currentUser = auth.currentUser
-//        if (currentUser != null) {
-//            startActivity(Intent(this, MainActivity::class.java))
-//            finish()
-//        }
-//    }
-
 }
