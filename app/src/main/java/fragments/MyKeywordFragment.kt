@@ -20,7 +20,7 @@ import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
 
 class MyKeywordFragment : Fragment() {
 
-    private lateinit var binding : FragmentMyKeywordBinding
+    private lateinit var binding: FragmentMyKeywordBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,8 @@ class MyKeywordFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_keyword, container, false)
@@ -40,7 +41,7 @@ class MyKeywordFragment : Fragment() {
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_homeFragment)
         }
-        binding.bottomNavigationMyPage.setOnClickListener{
+        binding.bottomNavigationMyPage.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_myPageFragment)
         }
 
@@ -50,45 +51,44 @@ class MyKeywordFragment : Fragment() {
         }
 
 
+        val rv: RecyclerView = binding.rv
 
-//        val rv : RecyclerView = binding.rv
-//
-//        val items = ArrayList<KeywordModel>()
-//
-//        items.add(KeywordModel("손흥민"))
-//        items.add(KeywordModel("여중대장"))
-//        items.add(KeywordModel("연준 금리"))
-//
-//        val rvAdapter = KeywordRVAdapter(items)
-//        rv.adapter = rvAdapter
-//
-//        rv.layoutManager = LinearLayoutManager(requireContext())
-//
-//
-//
-//
-//        return binding.root
+        val items = ArrayList<KeywordModel>()
 
-        // RecyclerView 설정
-        val rvAdapter = KeywordRVAdapter(getDummyData())
-        binding.rv.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = rvAdapter
-        }
+        items.add(KeywordModel("손흥민"))
+        items.add(KeywordModel("여중대장"))
+        items.add(KeywordModel("연준 금리"))
+
+        val rvAdapter = KeywordRVAdapter(items)
+        rv.adapter = rvAdapter
+
+        rv.layoutManager = LinearLayoutManager(requireContext())
+
+
+
 
         return binding.root
-    }
+//
+//        // RecyclerView 설정
+//        val rvAdapter = KeywordRVAdapter(getDummyData())
+//        binding.rv.apply {
+//            layoutManager = LinearLayoutManager(requireContext())
+//            adapter = rvAdapter
+//        }
+//
+//        return binding.root
+//    }
+//
+//    private fun getDummyData(): ArrayList<KeywordModel> {
+//        return arrayListOf(
+//            KeywordModel("손흥민"),
+//            KeywordModel("여중대장"),
+//            KeywordModel("연준 금리")
+//        )
+//    }
 
-    private fun getDummyData(): ArrayList<KeywordModel> {
-        return arrayListOf(
-            KeywordModel("손흥민"),
-            KeywordModel("여중대장"),
-            KeywordModel("연준 금리")
-        )
     }
-
-    }
-
+}
 
 
 

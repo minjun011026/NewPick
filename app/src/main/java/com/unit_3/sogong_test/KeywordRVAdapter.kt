@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +31,12 @@ class KeywordRVAdapter (val items : ArrayList<KeywordModel>) : RecyclerView.Adap
             val keywordArea = itemView.findViewById<TextView>(R.id.keywordArea)
             keywordArea.text = item.keyword
 
+            // ImageButton에 대한 클릭 이벤트 처리 등 추가 작업이 필요하다면 여기에 구현할 수 있습니다.
+            val moreVertButton = itemView.findViewById<ImageButton>(R.id.moreVertBtn)
+            moreVertButton.setOnClickListener {
+                //"키워드 해제" 다이얼로그 혹은 모달 등등..나오게 해야함..
+
+            }
 
         }
     }
