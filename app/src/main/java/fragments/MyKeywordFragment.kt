@@ -1,5 +1,6 @@
 package fragments
 
+import android.app.appsearch.Migrator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +13,9 @@ import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
 
 
 class MyKeywordFragment : Fragment() {
+
     private lateinit var binding : FragmentMyKeywordBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +38,17 @@ class MyKeywordFragment : Fragment() {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_myPageFragment)
         }
 
+        binding.addKeywordBtn.setOnClickListener {
+            val dialogFragment = AddKeywordDialogFragment()
+            dialogFragment.show(childFragmentManager, "AddKeywordDialogFragment")
+        }
+
+
         return binding.root
 
-
     }
+
+
 
 
 }
