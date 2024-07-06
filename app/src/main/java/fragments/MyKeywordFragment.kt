@@ -29,8 +29,7 @@ class MyKeywordFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_keyword, container, false)
@@ -54,6 +53,9 @@ class MyKeywordFragment : Fragment() {
         val rv: RecyclerView = binding.rv
 
         val items = ArrayList<KeywordModel>()
+
+        //데이터베이스에서 가져온 keyword들을 넣어주는 작업이 필요함.
+
 
         items.add(KeywordModel("손흥민"))
         items.add(KeywordModel("여중대장"))
