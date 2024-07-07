@@ -1,6 +1,5 @@
 package fragments
 
-import android.app.appsearch.Migrator
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.unit_3.sogong_test.KeywordModel
 import com.unit_3.sogong_test.KeywordRVAdapter
-import com.unit_3.sogong_test.NewsModel
-import com.unit_3.sogong_test.NewsRVAdapter
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
 

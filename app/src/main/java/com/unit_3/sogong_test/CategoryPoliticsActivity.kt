@@ -30,14 +30,14 @@ class CategoryPoliticsActivity : AppCompatActivity() {
 
         val items = ArrayList<NewsModel>()
 
-        items.add(NewsModel("imageUrl1", "title1", "companyName1"))
-        items.add(NewsModel("imageUrl2", "title2", "companyName2"))
-        items.add(NewsModel("imageUrl3", "title3", "companyName3"))
+//        items.add(NewsModel("imageUrl1", "title1", "companyName1"))
+//        items.add(NewsModel("imageUrl2", "title2", "companyName2"))
+//        items.add(NewsModel("imageUrl3", "title3", "companyName3"))
 
-        val rvAdapter = NewsRVAdapter(items)
-        rv.adapter = rvAdapter
-
-        rv.layoutManager = LinearLayoutManager(this)
+//        val rvAdapter = NewsRVAdapter(items)
+//        rv.adapter = rvAdapter
+//
+//        rv.layoutManager = LinearLayoutManager(this)
 
         // 1. 웹 페이지에서 가져온 내용 보여주기
 

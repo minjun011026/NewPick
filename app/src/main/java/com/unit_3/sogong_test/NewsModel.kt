@@ -1,7 +1,8 @@
 package com.unit_3.sogong_test
 
-data class NewsModel (
-    var imageUrl : String = "",
-    var title : String = "",
-    var companyName : String =""
+data class NewsModel(
+    val title: String,
+    val description: String,
+    val link: String,
+    val imageUrl: String?
 )
