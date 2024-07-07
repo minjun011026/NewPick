@@ -136,7 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/pretendard_semibold"
-                        android:text="실시간 키워드 순위"
+                        android:text="인기 급상승 검색어"
                         android:textSize="25sp"
                         android:layout_marginStart="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -159,6 +159,7 @@
 <!--                리사이클러뷰에 실검 순위 가져와서 넣어주면됨..-->
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
