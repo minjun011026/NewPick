@@ -120,6 +120,8 @@ class HomeFragment : Fragment() {
                     Log.d(TAG, "Trending Keyword: $keyword")
                 }
                 binding.rv.adapter = TrendRVAdapter(result)
+
+
             } else {
                 Log.d(TAG, "No trending keywords found")
                 Toast.makeText(requireContext(), "인기 검색어를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
