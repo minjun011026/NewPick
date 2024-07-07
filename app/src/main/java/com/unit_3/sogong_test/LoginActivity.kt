@@ -80,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         forgotPasswordBtn.setOnClickListener{
-
+            startActivity(Intent(this, FindPasswordActivity::class.java))
         }
 
         registerBtn.setOnClickListener {
