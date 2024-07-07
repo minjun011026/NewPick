@@ -46,6 +46,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.unit_3.sogong_test.R
@@ -74,6 +75,7 @@ class NewsAdapter(private val context: Context, private val newsArticles: List<N
             .into(holder.newsImageView)
 
         holder.itemView.setOnClickListener {
+            Toast.makeText(context, "기사 클릭", Toast.LENGTH_LONG).show()
 ////            val intent = Intent(context, NewsDetailActivity::class.java)
 //            intent.putExtra("link", article.link)
 //            context.startActivity(intent)
