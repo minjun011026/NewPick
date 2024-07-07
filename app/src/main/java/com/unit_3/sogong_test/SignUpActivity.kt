@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -41,18 +42,11 @@ class SignUpActivity : AppCompatActivity() {
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Toast.makeText(
-                                    baseContext,
-                                    "회원가입 완료",
-                                    Toast.LENGTH_SHORT,
-                                ).show()
+                                Toast.makeText(baseContext, "회원가입 완료", Toast.LENGTH_SHORT,).show()
+                                startActivity(Intent(this, LoginActivity::class.java))
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Toast.makeText(
-                                    baseContext,
-                                    "사용할 수 없는 이메일/비밀번호 형식입니다.",
-                                    Toast.LENGTH_SHORT,
-                                ).show()
+                                Toast.makeText(baseContext, "사용할 수 없는 이메일/비밀번호 형식입니다.", Toast.LENGTH_SHORT,).show()
                             }
                         }
                 }
