@@ -27,6 +27,12 @@ class TrendKeywordActivity : AppCompatActivity() {
         binding.keywordTextView.text = "$keyword"
 
 
+        //네이버 뉴스 검색 API로 keyword에 해당하는 뉴스 가져와서 recyclerview에 올리기
+
+
+
+
+
         binding.backBtn.setOnClickListener {
             navigateBackToMainActivity()
         }
