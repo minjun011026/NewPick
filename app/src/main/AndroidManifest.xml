@@ -47,7 +47,7 @@
             android:name=".MainActivity"
             android:exported="true" /> <!-- SingUpActivity, SplashActivity 등의 설정 -->
         <activity
-            android:name=".SingUpActivity"
+            android:name=".SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

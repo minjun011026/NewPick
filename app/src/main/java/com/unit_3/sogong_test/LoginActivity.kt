@@ -28,7 +28,8 @@ class LoginActivity : AppCompatActivity() {
         val usernameEditText = findViewById<EditText>(R.id.username)
         passwordEditText = findViewById<EditText>(R.id.password)
         val loginButton = findViewById<Button>(R.id.loginButton)
-        val registerTextView = findViewById<TextView>(R.id.register)
+        val forgotPasswordBtn = findViewById<TextView>(R.id.forgotPasswordBtn)
+        val registerBtn = findViewById<TextView>(R.id.registerBtn)
         showPasswordButton = findViewById(R.id.showPassword)
         val googleSignInButton = findViewById<Button>(R.id.googleSignInButton)
 
@@ -76,6 +77,14 @@ class LoginActivity : AppCompatActivity() {
         googleSignInButton.setOnClickListener {
             // 구글 로그인 로직 추가
             // ...
+        }
+
+        forgotPasswordBtn.setOnClickListener{
+
+        }
+
+        registerBtn.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 

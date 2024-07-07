@@ -91,13 +91,13 @@
         android:layout_marginTop="20dp">
 
         <TextView
-            android:id="@+id/forgotPassword"
+            android:id="@+id/forgotPasswordBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Forgot password?" />
 
         <TextView
-            android:id="@+id/register"
+            android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="           Don't Have An Account? Register"
