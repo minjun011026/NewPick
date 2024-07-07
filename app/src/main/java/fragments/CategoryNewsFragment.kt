@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentChatBinding
 
-class ChatFragment : Fragment() {
+class CategoryNewsFragment : Fragment() {
     private lateinit var binding : FragmentChatBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

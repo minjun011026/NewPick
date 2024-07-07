@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="fragments.ChatFragment"
+        android:name="fragments.CategoryNewsFragment"
         android:label="fragment_chat">
         <action
             android:id="@+id/action_chatFragment_to_homeFragment"
