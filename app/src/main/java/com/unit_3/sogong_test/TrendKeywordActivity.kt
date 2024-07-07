@@ -21,7 +21,7 @@ class TrendKeywordActivity : AppCompatActivity() {
         //인기 검색어에서 클릭시 이 화면으로 넘어와서 연관 뉴스를 쭉 recyclerview 위에 뿌려줘야함.
 
         // 인텐트에서 전달받은 키워드 가져오기
-        val keyword = intent.getStringExtra("keyword")
+        val keyword = intent.getStringExtra("keyword_title")
 
         // 가져온 키워드를 TextView에 설정
         binding.keywordTextView.text = "$keyword"

@@ -21,6 +21,7 @@ import com.unit_3.sogong_test.CategoryScienceActivity
 import com.unit_3.sogong_test.CategorySocietyActivity
 import com.unit_3.sogong_test.CategorySportsActivity
 import com.unit_3.sogong_test.R
+import com.unit_3.sogong_test.TrendKeywordsModel
 import com.unit_3.sogong_test.TrendRVAdapter
 import com.unit_3.sogong_test.databinding.FragmentHomeBinding
 import org.jsoup.Jsoup
@@ -92,18 +93,20 @@ class HomeFragment : Fragment() {
 
     }
 
-    private inner class FetchTrendingKeywordsTask : AsyncTask<Void, Void, List<String>>() {
-        override fun doInBackground(vararg params: Void?): List<String> {
-            val trendingKeywords = mutableListOf<String>()
+    private inner class FetchTrendingKeywordsTask : AsyncTask<Void, Void, MutableList<TrendKeywordsModel>>() {
+        override fun doInBackground(vararg params: Void?): MutableList<TrendKeywordsModel> {
+            val trendingKeywords = mutableListOf<TrendKeywordsModel>()
             try {
                 val doc: Document = Jsoup.connect("https://trends.google.co.kr/trends/trendingsearches/daily/rss?geo=KR").get()
                 val items: List<Element> = doc.select("item") // RSS 피드에서 item 요소 선택
 
                 for (item in items) {
                     val title = item.selectFirst("title")?.text()
-                    title?.let {
-                        trendingKeywords.add(it)
-                    }
+                    val searchCount = item.selectFirst("ht|approx_traffic")?.text()
+                    val imageUrl = item.selectFirst("ht|picture")?.text()
+
+                    trendingKeywords.add(TrendKeywordsModel(title.toString(), searchCount.toString(), imageUrl.toString()))
+
                 }
             } catch (e: IOException) {
                 Log.e(TAG, "IOException occurred while fetching data", e)
@@ -113,18 +116,22 @@ class HomeFragment : Fragment() {
             return trendingKeywords
         }
 
-        override fun onPostExecute(result: List<String>) {
-            super.onPostExecute(result)
-            if (result.isNotEmpty()) {
-                for (keyword in result) {
-                    Log.d(TAG, "Trending Keyword: $keyword")
+        override fun onPostExecute(result: MutableList<TrendKeywordsModel>?) {
+            if (result != null) {
+                super.onPostExecute(result.toMutableList())
+            }
+            if (result != null) {
+                if (result.isNotEmpty()) {
+                    for (keyword in result) {
+                        Log.d(TAG, "Trending Keyword: $keyword")
+                    }
+                    binding.rv.adapter = TrendRVAdapter(result)
+
+
+                } else {
+                    Log.d(TAG, "No trending keywords found")
+                    Toast.makeText(requireContext(), "인기 검색어를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
-                binding.rv.adapter = TrendRVAdapter(result)
-
-
-            } else {
-                Log.d(TAG, "No trending keywords found")
-                Toast.makeText(requireContext(), "인기 검색어를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
