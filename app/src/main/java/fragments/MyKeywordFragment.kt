@@ -1,14 +1,20 @@
 package fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import com.unit_3.sogong_test.KeywordModel
 import com.unit_3.sogong_test.KeywordRVAdapter
 import com.unit_3.sogong_test.R
@@ -19,6 +25,8 @@ class MyKeywordFragment : Fragment() {
 
     private lateinit var binding: FragmentMyKeywordBinding
 
+    private val database = Firebase.database
+    val myRef = database.getReference("keyword")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,43 +58,34 @@ class MyKeywordFragment : Fragment() {
         val rv: RecyclerView = binding.rv
 
         val items = ArrayList<KeywordModel>()
-
-        //데이터베이스에서 가져온 keyword들을 넣어주는 작업이 필요함.
-
-
-        items.add(KeywordModel("손흥민"))
-        items.add(KeywordModel("여중대장"))
-        items.add(KeywordModel("연준 금리"))
-
         val rvAdapter = KeywordRVAdapter(items)
         rv.adapter = rvAdapter
 
         rv.layoutManager = LinearLayoutManager(requireContext())
 
 
+        //데이터베이스에서 가져온 keyword들을 넣어주는 작업이 필요함.
+        myRef.child(Firebase.auth.currentUser!!.uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                items.clear()
+                for(keyword in snapshot.children){
+                    try {
+                        items.add(keyword.getValue(KeywordModel::class.java)!!)
+                    }catch(e:Exception){
+
+                    }
+                }
+                rvAdapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
 
 
         return binding.root
-//
-//        // RecyclerView 설정
-//        val rvAdapter = KeywordRVAdapter(getDummyData())
-//        binding.rv.apply {
-//            layoutManager = LinearLayoutManager(requireContext())
-//            adapter = rvAdapter
-//        }
-//
-//        return binding.root
-//    }
-//
-//    private fun getDummyData(): ArrayList<KeywordModel> {
-//        return arrayListOf(
-//            KeywordModel("손흥민"),
-//            KeywordModel("여중대장"),
-//            KeywordModel("연준 금리")
-//        )
-//    }
-
     }
+
 }
 
 

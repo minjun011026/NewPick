@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.contracts.contract
 
@@ -35,9 +37,13 @@ class KeywordRVAdapter (val items : ArrayList<KeywordModel>) : RecyclerView.Adap
 
             //키워드 클릭 시 키워드 연관 뉴스를 보여주는 페이지로 이동해야함.
             keywordArea.setOnClickListener{
-
                 Toast.makeText(itemView.context, "키워드 클릭: ${item.keyword}", Toast.LENGTH_LONG).show()
 
+
+
+                val intent = Intent(itemView.context, KeywordNewsActivity::class.java)
+                intent.putExtra("키워드", item.keyword)
+                itemView.context.startActivity(intent)
             }
 
             // ImageButton에 대한 클릭 이벤트 처리 등 추가 작업이 필요하다면 여기에 구현할 수 있습니다.
