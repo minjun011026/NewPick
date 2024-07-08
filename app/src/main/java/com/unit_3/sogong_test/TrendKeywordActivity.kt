@@ -238,7 +238,7 @@ class TrendKeywordActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(newsArticles: List<NewsModel>) {
         binding.rv.layoutManager = LinearLayoutManager(this)
-        binding.rv.adapter = NewsAdapter(this, newsArticles)
+        binding.rv.adapter = NewsRVAdapter(this, newsArticles)
     }
 
     fun String.stripHtmlAndDecodeEntities(): String {

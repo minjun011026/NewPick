@@ -50,8 +50,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class NewsAdapter(private val context: Context, private val newsArticles: List<NewsModel>) :
-    RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+class NewsRVAdapter(private val context: Context, private val newsArticles: List<NewsModel>) :
+    RecyclerView.Adapter<NewsRVAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
