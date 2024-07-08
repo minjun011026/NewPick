@@ -35,91 +35,91 @@
                     android:layout_height="0.5dp"
                     android:background="#999999" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/pretendard_semibold"
-                    android:text="직접 카테고리 찾기"
-                    android:textSize="25sp" />
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="15dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:fontFamily="@font/pretendard_semibold"-->
+<!--                    android:text="직접 카테고리 찾기"-->
+<!--                    android:textSize="25sp" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <ImageButton
-                        android:id="@+id/category_politics_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_politics" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_politics_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_politics" />-->
 
-                    <ImageButton
-                        android:id="@+id/category_economy_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_economy" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_economy_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_economy" />-->
 
-                    <ImageButton
-                        android:id="@+id/category_life_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_life" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_life_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_life" />-->
 
-                    <ImageButton
-                        android:id="@+id/category_society_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_society" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_society_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_society" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <ImageButton
-                        android:id="@+id/category_sports_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_sports" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_sports_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_sports" />-->
 
-                    <ImageButton
-                        android:id="@+id/category_entertainment_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_entertainment" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_entertainment_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_entertainment" />-->
 
-                    <ImageButton
-                        android:id="@+id/category_science_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_science" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_science_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_science" />-->
 
-                    <ImageButton
-                        android:id="@+id/category_global_Btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/white"
-                        android:src="@drawable/category_global" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/category_global_Btn"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:src="@drawable/category_global" />-->
 
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
