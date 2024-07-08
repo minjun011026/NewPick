@@ -175,6 +175,9 @@ class TrendKeywordActivity : AppCompatActivity() {
             }
         }
 
+
+
+
         binding.backBtn.setOnClickListener {
             finish()
         }

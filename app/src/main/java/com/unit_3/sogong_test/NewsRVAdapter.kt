@@ -49,7 +49,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.unit_3.sogong_test.R
 
 class NewsAdapter(private val context: Context, private val newsArticles: List<NewsModel>) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
@@ -76,9 +75,11 @@ class NewsAdapter(private val context: Context, private val newsArticles: List<N
 
         holder.itemView.setOnClickListener {
             Toast.makeText(context, "기사 클릭", Toast.LENGTH_LONG).show()
-////            val intent = Intent(context, NewsDetailActivity::class.java)
-//            intent.putExtra("link", article.link)
-//            context.startActivity(intent)
+
+            //여기에 기사 클릭시 웹뷰로 이동하는 코드 작성
+            val intent = Intent(context, NewsDetailActivity::class.java)
+            intent.putExtra("link", article.link)
+            context.startActivity(intent)
         }
     }
 
