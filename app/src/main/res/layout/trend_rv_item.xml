@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:padding="8dp">
+
+    <TextView
+        android:text="키워드명"
+        android:id="@+id/keywordTextView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textColor="#3f63bf"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:text="검색 횟수"
+        android:id="@+id/searchCountTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:id="@+id/imageArea"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+
+
+
+</LinearLayout>

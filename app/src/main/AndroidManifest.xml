@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.unit_3.sogong_test">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +16,57 @@
         android:theme="@style/Theme.Sogong_test"
         tools:targetApi="31">
         <activity
+            android:name=".NewsDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrendKeywordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KeywordNewsActivity"
+            android:exported="false" />
+
+        <activity android:name=".KeywordWebViewActivity"
+            android:exported="false"/>
+      
+        <activity
+            android:name=".FindPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryGlobalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryScienceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryEntertainmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategorySportsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryLifeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategorySocietyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryEconomyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryPoliticsActivity"
+            android:exported="false" /> <!-- LoginActivity를 런처 액티비티로 설정 -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="@string/app_name" /> <!-- MainActivity 설정 (일반 액티비티로) -->
+        <activity
             android:name=".MainActivity"
+            android:exported="true" /> <!-- SingUpActivity, SplashActivity 등의 설정 -->
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
