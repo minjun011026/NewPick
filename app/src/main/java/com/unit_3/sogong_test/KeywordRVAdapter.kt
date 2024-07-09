@@ -1,4 +1,5 @@
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 import com.unit_3.sogong_test.KeywordModel
 import com.unit_3.sogong_test.KeywordNewsActivity
 import com.unit_3.sogong_test.R
@@ -80,8 +83,20 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
             notifyItemRemoved(position)
 
             // 여기에 추가적으로 데이터베이스나 파일 시스템에서도 삭제하는 로직을 추가할 수 있습니다.
-            // 예: 데이터베이스에서 키워드 삭제
-            // KeywordDatabase.getInstance(itemView.context).keywordDao().deleteKeyword(item)
+
+            //  Firebase Realtime Database에서 키워드 삭제
+            val database = Firebase.database
+            val myRef = database.getReference("keywords")
+            myRef.child(item.id).removeValue()
+                .addOnSuccessListener {
+                    // 성공적으로 삭제된 경우
+                    Toast.makeText(itemView.context, "${item.keyword} 삭제 완료", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    // 삭제 중 오류가 발생한 경우
+                    Toast.makeText(itemView.context, "삭제 오류: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Log.e("Firebase", "삭제 오류: ${e.message}", e)
+                }
 
             // 삭제 성공 메시지
             Toast.makeText(itemView.context, "${item.keyword} 삭제 완료", Toast.LENGTH_SHORT).show()
