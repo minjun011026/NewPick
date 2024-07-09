@@ -23,8 +23,8 @@ class KeywordNewsActivity : AppCompatActivity()  {
         val previousBtn = findViewById<ImageButton>(R.id.previousBtn)
 
         previousBtn.setOnClickListener{
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
@@ -51,6 +51,5 @@ class KeywordNewsActivity : AppCompatActivity()  {
 
         thread.start()
 
-        Log.d("news title", newsItem.joinToString(" "))
     }
 }

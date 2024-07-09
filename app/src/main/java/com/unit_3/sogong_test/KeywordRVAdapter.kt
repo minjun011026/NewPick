@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.database
 import com.unit_3.sogong_test.KeywordModel
 import com.unit_3.sogong_test.KeywordNewsActivity
@@ -86,7 +88,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
 
             //  Firebase Realtime Database에서 키워드 삭제
             val database = Firebase.database
-            val myRef = database.getReference("keywords")
+            val myRef = database.getReference("keyword").child(Firebase.auth.currentUser!!.uid)
             myRef.child(item.id).removeValue()
 
 

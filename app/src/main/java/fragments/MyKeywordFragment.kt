@@ -70,7 +70,9 @@ class MyKeywordFragment : Fragment() {
                 items.clear()
                 for(keyword in snapshot.children){
                     try {
-                        items.add(keyword.getValue(KeywordModel::class.java)!!)
+                        val getKeyword = keyword.getValue(KeywordModel::class.java)!!
+                        getKeyword.id = keyword.key!!
+                        items.add(getKeyword)
                     }catch(e:Exception){
 
                     }
