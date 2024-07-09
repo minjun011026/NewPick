@@ -88,15 +88,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
             val database = Firebase.database
             val myRef = database.getReference("keywords")
             myRef.child(item.id).removeValue()
-                .addOnSuccessListener {
-                    // 성공적으로 삭제된 경우
-                    Toast.makeText(itemView.context, "${item.keyword} 삭제 완료", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener { e ->
-                    // 삭제 중 오류가 발생한 경우
-                    Toast.makeText(itemView.context, "삭제 오류: ${e.message}", Toast.LENGTH_SHORT).show()
-                    Log.e("Firebase", "삭제 오류: ${e.message}", e)
-                }
+
 
             // 삭제 성공 메시지
             Toast.makeText(itemView.context, "${item.keyword} 삭제 완료", Toast.LENGTH_SHORT).show()
