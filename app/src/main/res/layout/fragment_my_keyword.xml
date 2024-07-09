@@ -7,162 +7,61 @@
         android:layout_height="match_parent"
         tools:context="fragments.MyKeywordFragment">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <!-- 상단 타이틀 -->
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="나의 키워드"
-                android:textSize="30sp"
+                android:text="Mynews"
+                android:textSize="24sp"
                 android:gravity="center"
                 android:fontFamily="@font/ibmplexsanskr_semibold"
-                android:clickable="true"
-                android:focusable="true"/>
+                android:layout_gravity="center"
+                android:paddingBottom="8dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#999999" />
-
+            <!-- 나의 키워드 섹션 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <LinearLayout
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:text="나의 키워드"
+                    android:textSize="30sp"
+                    android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
-                    android:layout_marginTop="20dp">
+                    android:gravity="start"/>
 
-                    <ImageView
-                        android:id="@+id/addKeywordBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:src="@drawable/profile_add"
-                        android:background="@color/white"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="키워드 등록"
-                        android:gravity="center"
-                        android:fontFamily="@font/pretendard_semibold"
-                        android:textSize="20sp" />
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginTop="20dp">
-
-                    <ImageView
-                        android:id="@+id/seeScrapBtn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/bookmark"
-                        android:background="@color/white"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="스크랩 보기"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/pretendard_semibold"
-                        android:textSize="20sp"
-                        android:gravity="center"/>
-                </LinearLayout>
-
-
-
+                <ImageView
+                    android:id="@+id/addKeywordBtn"
+                    android:layout_width="59dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:padding="8dp"
+                    android:src="@drawable/group" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#999999"
-                android:layout_marginTop="10dp"/>
+            <!-- 키워드 리스트 -->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="30sp"
-                android:text="나의 키워드"
-                android:fontFamily="@font/pretendard_semibold"
-                android:layout_margin="20dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#999999"
-                android:layout_marginTop="10dp"/>
-
+            <!-- 하단 네비게이션 바 -->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="20dp">
-
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-
-        </LinearLayout>
-
-
-
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+                android:layout_width="371dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1" />
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout4">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
@@ -204,10 +103,7 @@
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </LinearLayout>
 
     </FrameLayout>
-
-
 </layout>
