@@ -16,16 +16,18 @@
         android:theme="@style/Theme.Sogong_test"
         tools:targetApi="31">
         <activity
+            android:name=".NewsDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".TrendKeywordActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".KeywordNewsActivity"
             android:exported="false" />
 
         <activity android:name=".KeywordWebViewActivity"
             android:exported="false"/>
-
+      
         <activity
             android:name=".FindPasswordActivity"
             android:exported="false" />
