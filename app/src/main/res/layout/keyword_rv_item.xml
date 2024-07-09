@@ -9,6 +9,7 @@
             android:id="@+id/keywordArea"
             android:text="키워드명"
             android:textSize="20sp"
+            android:textColor="#3f63bf"
             android:layout_margin="20dp"
             android:fontFamily="@font/pretendard_semibold"
             android:layout_width="match_parent"

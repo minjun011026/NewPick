@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="#3f63bf"
         app:layout_constraintEnd_toStartOf="@+id/newsImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

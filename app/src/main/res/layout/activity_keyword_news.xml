@@ -32,6 +32,7 @@
             android:fontFamily="@font/ibmplexsanskr_semibold"
             android:gravity="center"
             android:text="키워드 이름"
+            android:textColor="#3f63bf"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

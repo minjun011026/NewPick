@@ -31,8 +31,8 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
             newsArea.text = item.title
 
             newsArea.setOnClickListener{
-                val intent = Intent(itemView.context, KeywordWebViewActivity::class.java)
-                intent.putExtra("링크", item.link)
+                val intent = Intent(itemView.context, NewsDetailActivity::class.java)
+                intent.putExtra("link", item.link)
                 itemView.context.startActivity(intent)
             }
 

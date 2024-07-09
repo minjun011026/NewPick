@@ -23,8 +23,9 @@ class KeywordNewsActivity : AppCompatActivity()  {
         val previousBtn = findViewById<ImageButton>(R.id.previousBtn)
 
         previousBtn.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+            finish()
         }
 
         var newsItem = ArrayList<KeywordNewsModel>()
