@@ -27,7 +27,8 @@ object ApiSearchNews {
         }
 
         val apiURL =
-            "https://openapi.naver.com/v1/search/blog?query=$text" // json 결과
+            "https://openapi.naver.com/v1/search/news.json?query=$text&display=10&start=1&sort=sim"
+
 
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
         val requestHeaders: MutableMap<String, String> = HashMap()
@@ -100,7 +101,11 @@ object ApiSearchNews {
             for (i in 0 until jsonArray.length()) {
                 val item = jsonArray.getJSONObject(i)
                 title = item.getString("title")
-                newsItem.add(KeywordNewsModel(title))
+                link = item.getString("link")
+                title = title.replace("<b>","")
+                title = title.replace("&quot;","\"")
+                title = title.replace("</b>" ," ")
+                newsItem.add(KeywordNewsModel(title, link))
             }
         } catch (e: JSONException) {
             e.printStackTrace()

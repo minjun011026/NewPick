@@ -39,8 +39,6 @@ class KeywordRVAdapter (val items : ArrayList<KeywordModel>) : RecyclerView.Adap
             keywordArea.setOnClickListener{
                 Toast.makeText(itemView.context, "키워드 클릭: ${item.keyword}", Toast.LENGTH_LONG).show()
 
-
-
                 val intent = Intent(itemView.context, KeywordNewsActivity::class.java)
                 intent.putExtra("키워드", item.keyword)
                 itemView.context.startActivity(intent)

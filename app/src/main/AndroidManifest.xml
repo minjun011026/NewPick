@@ -21,8 +21,10 @@
 
         <activity
             android:name=".KeywordNewsActivity"
-            android:exported="false"
-            />
+            android:exported="false" />
+
+        <activity android:name=".KeywordWebViewActivity"
+            android:exported="false"/>
 
         <activity
             android:name=".FindPasswordActivity"
