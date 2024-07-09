@@ -30,13 +30,11 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
             val newsArea = itemView.findViewById<TextView>(R.id.titleTextView)
             newsArea.text = item.title
 
-            //링크연결
-//            newsArea.setOnClickListener{
-//                Toast.makeText(itemView.context, "링크 이동", Toast.LENGTH_LONG).show()
-//
-//                val intent = Intent(itemView.context, Uri.parse(item.link))
-//                itemView.context.startActivity(intent)
-//            }
+            newsArea.setOnClickListener{
+                val intent = Intent(itemView.context, KeywordWebViewActivity::class.java)
+                intent.putExtra("링크", item.link)
+                itemView.context.startActivity(intent)
+            }
 
         }
     }
