@@ -8,11 +8,18 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fragments.SummaryFragment
 
 class KeywordNewsActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyword_news)
+
+        val url = intent.getStringExtra("link")
+        if (url != null) {
+            val fragment = SummaryFragment.newInstance(url)
+            fragment.show(supportFragmentManager, "SummaryFragment")
+        }
 
         val getKeyword = intent.getStringExtra("키워드")
         val setKeyword = findViewById<TextView>(R.id.keywordName)

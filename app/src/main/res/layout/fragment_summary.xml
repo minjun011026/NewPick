@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/summaryTextView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:paddingTop="16dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/ibmplexsanskr_medium"
+            android:text="취소"
+            android:textColor="#ff0000"/>
+
+        <Button
+            android:id="@+id/toWebViewBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/ibmplexsanskr_medium"
+            android:text="원문 기사 보기"
+            android:textColor="#4B89DC" />
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

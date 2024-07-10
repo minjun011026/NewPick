@@ -1,13 +1,12 @@
 package com.unit_3.sogong_test
 
 import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import fragments.SummaryFragment
 
 class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : RecyclerView.Adapter<KeywordNewsAdapter.ViewHolder>(){
 
@@ -31,7 +30,8 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
             newsArea.text = item.title
 
             newsArea.setOnClickListener{
-                val intent = Intent(itemView.context, NewsDetailActivity::class.java)
+//                val intent = Intent(itemView.context, WebViewActivity::class.java)
+                val intent = Intent(itemView.context, KeywordNewsActivity::class.java)
                 intent.putExtra("link", item.link)
                 itemView.context.startActivity(intent)
             }

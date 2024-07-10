@@ -77,7 +77,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
             Toast.makeText(context, "기사 클릭", Toast.LENGTH_LONG).show()
 
             //여기에 기사 클릭시 웹뷰로 이동하는 코드 작성
-            val intent = Intent(context, NewsDetailActivity::class.java)
+            val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("link", article.link)
             context.startActivity(intent)
         }

@@ -71,7 +71,7 @@ class MyKeywordFragment : Fragment() {
                 for(keyword in snapshot.children){
                     try {
                         val getKeyword = keyword.getValue(KeywordModel::class.java)!!
-                        getKeyword.id = keyword.key!!
+                        getKeyword.url = keyword.key!!
                         items.add(getKeyword)
                     }catch(e:Exception){
 

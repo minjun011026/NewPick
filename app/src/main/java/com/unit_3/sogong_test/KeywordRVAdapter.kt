@@ -45,6 +45,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
 
                 val intent = Intent(itemView.context, KeywordNewsActivity::class.java)
                 intent.putExtra("키워드", item.keyword)
+                intent.putExtra("url", item.url)
                 itemView.context.startActivity(intent)
             }
 
@@ -86,7 +87,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
             //  Firebase Realtime Database에서 키워드 삭제
             val database = Firebase.database
             val myRef = database.getReference("keyword").child(Firebase.auth.currentUser!!.uid)
-            myRef.child(item.id).removeValue()
+            myRef.child(item.url).removeValue()
 
 
             // 삭제 성공 메시지

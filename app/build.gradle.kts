@@ -25,6 +25,9 @@ android {
 
         buildConfigField("String", "Naver_Client_ID", properties.getProperty("naver_client_id"))
         buildConfigField("String", "Naver_Client_Secret", properties.getProperty("naver_client_secret"))
+        buildConfigField("String", "Naver_Clova_Client_ID", properties.getProperty("naver_clova_client_id"))
+        buildConfigField("String", "Naver_Clova_Client_Secret", properties.getProperty("naver_clova_client_secret"))
+
 
     }
 

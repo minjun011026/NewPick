@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,7 +17,7 @@
         android:theme="@style/Theme.Sogong_test"
         tools:targetApi="31">
         <activity
-            android:name=".NewsDetailActivity"
+            android:name=".WebViewActivity"
             android:exported="false" />
         <activity
             android:name=".TrendKeywordActivity"
@@ -24,37 +25,9 @@
         <activity
             android:name=".KeywordNewsActivity"
             android:exported="false" />
-
-        <activity android:name=".KeywordWebViewActivity"
-            android:exported="false"/>
-      
         <activity
             android:name=".FindPasswordActivity"
             android:exported="false" />
-        <activity
-            android:name=".CategoryGlobalActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategoryScienceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategoryEntertainmentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategorySportsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategoryLifeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategorySocietyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategoryEconomyActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CategoryPoliticsActivity"
-            android:exported="false" /> <!-- LoginActivity를 런처 액티비티로 설정 -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
