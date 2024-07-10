@@ -83,6 +83,10 @@ class SummaryFragment : DialogFragment() {
                     content = document.select("div._article_content").text()
                     Log.d("SummaryFragment", "div._article_content : $content")
                 }
+                if(content.isBlank()){
+                    content = document.select("article_content").text()
+                    Log.d("SummaryFragment", "article_content : $content")
+                }
                 if (content.isBlank()) {
                     content = document.select("div.article-body").text()
                     Log.d("SummaryFragment", "div.article-body : $content")
@@ -150,7 +154,7 @@ class SummaryFragment : DialogFragment() {
                     callback(summary)
                 } else {
                     Log.e("SummaryFragment", "Error: ${response.message()}")
-                    callback("Error: ${response.message()}")
+                    callback("연예 기사 혹은 스포츠 기사의 경우 요약을 제공하지 않을 수 있습니다.")
                 }
             }
         })

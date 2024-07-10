@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.text.Html
 import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
@@ -100,11 +101,12 @@ object ApiSearchNews {
 
             for (i in 0 until jsonArray.length()) {
                 val item = jsonArray.getJSONObject(i)
-                title = item.getString("title")
+                title = item.getString("title").stripHtmlAndDecodeEntities()
                 link = item.getString("link")
-                title = title.replace("<b>","")
-                title = title.replace("&quot;","\"")
-                title = title.replace("</b>" ," ")
+//                title = title.replace("<b>","")
+//                title = title.replace("&quot;","\"")
+//                title = title.replace("</b>" ," ")
+
                 newsItem.add(KeywordNewsModel(title, link))
             }
         } catch (e: JSONException) {
@@ -112,4 +114,9 @@ object ApiSearchNews {
             Log.d("ParseDataError", "PAAAARRRSE")
         }
     }
+
+    fun String.stripHtmlAndDecodeEntities(): String {
+        return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY).toString().trim()
+    }
+
 }
