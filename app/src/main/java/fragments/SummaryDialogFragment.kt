@@ -82,20 +82,20 @@ class SummaryDialogFragment : DialogFragment() {
                 var content = document.select("article#dic_area").text()
                 Log.d("SummaryFragment", "article#dic_area : $content")
                 if(content.isBlank()){
-                    content = document.select("div._article_content").text()
-                    Log.d("SummaryFragment", "div._article_content : $content")
+                    content = document.select("div#_article_content").text()
+                    Log.d("SummaryFragment", "div#_article_content : $content")
                 }
                 if(content.isBlank()){
-                    content = document.select("article_content").text()
-                    Log.d("SummaryFragment", "article_content : $content")
+                    content = document.select("div.news_end").text()
+                    Log.d("SummaryFragment", "div.news_end : $content")
                 }
                 if (content.isBlank()) {
-                    content = document.select("div.article-body").text()
-                    Log.d("SummaryFragment", "div.article-body : $content")
+                    content = document.select("div#content").text()
+                    Log.d("SummaryFragment", "div#content : $content")
                 }
                 if (content.isBlank()) {
-                    content = document.select("span.article_p").text()
-                    Log.d("SummaryFragment", "span.article_p : $content")
+                    content = document.select("div#articleBodyContents").text()
+                    Log.d("SummaryFragment", "div#articleBodyContents : $content")
                 }
                 if (content.isBlank()) {
                     content = document.select("div._article_content").text()
@@ -105,7 +105,15 @@ class SummaryDialogFragment : DialogFragment() {
                     content = document.select("div#newsEndContents").text()
                     Log.d("SummaryFragment", "div#newsEndContents : $content")
                 }
+                if (content.isBlank()) {
+                    content = document.select("#comp_news_article > div._article_content").text()
+                    Log.d("SummaryFragment", "#comp_news_article > div._article_content : $content")
+                }
 
+//                // 기사 본문을 추출하는 로직
+//                val content = document.select("article#dic_area, div._article_content,div#articleBodyContents,div#content,div.news_end, article_content, div.article-body, span.article_p, div#newsEndContents,#comp_news_article > div._article_content")
+//                    .map { it.text() }
+//                    .firstOrNull { it.isNotBlank() } ?: "본문을 가져올 수 없습니다."
 
                 Log.d("SummaryFragment", "Fetched content: $content")
                 callback(content)
