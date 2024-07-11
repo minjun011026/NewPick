@@ -44,7 +44,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +61,10 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val newsImageView: ImageView = view.findViewById(R.id.newsImageView)
+        val moreVertBtn: ImageButton = view.findViewById(R.id.moreVertBtn)
+        val buttonLayout: LinearLayout = view.findViewById(R.id.buttonLayout)
+        val button1: Button = view.findViewById(R.id.button1)
+        val button2: Button = view.findViewById(R.id.button2)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -75,11 +83,47 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 
         holder.itemView.setOnClickListener {
             Toast.makeText(context, "기사 클릭", Toast.LENGTH_LONG).show()
-
-            //여기에 기사 클릭시 웹뷰로 이동하는 코드 작성
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("link", article.link)
             context.startActivity(intent)
+        }
+
+        holder.moreVertBtn.setOnClickListener {
+            if (holder.buttonLayout.visibility == View.GONE) {
+                holder.buttonLayout.visibility = View.VISIBLE
+            } else {
+                holder.buttonLayout.visibility = View.GONE
+            }
+        }
+
+        holder.button1.setOnClickListener {
+            Toast.makeText(context, "삭제 버튼 클릭", Toast.LENGTH_SHORT).show()
+            // 삭제 버튼 클릭 시 동작 추가
+        }
+
+        holder.button2.setOnClickListener {
+            Toast.makeText(context, "알림 버튼 클릭", Toast.LENGTH_SHORT).show()
+            // 알림 버튼 클릭 시 동작 추가
+        }
+
+        //더보기 버튼
+        holder.moreVertBtn.setOnClickListener {
+            val popupMenu = PopupMenu(context, holder.moreVertBtn)
+            popupMenu.menuInflater.inflate(R.menu.news_popup, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menu_delete -> {
+                        Toast.makeText(context, "삭제 클릭", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    R.id.menu_notify -> {
+                        Toast.makeText(context, "알림 클릭", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
         }
     }
 

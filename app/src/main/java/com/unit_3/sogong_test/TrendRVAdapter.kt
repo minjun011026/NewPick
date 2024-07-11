@@ -45,6 +45,7 @@ class TrendRVAdapter(private val keywords: MutableList<TrendKeywordsModel>) :
 
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.trend_rv_item, parent, false)
