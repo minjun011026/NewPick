@@ -4,6 +4,9 @@
     package="com.unit_3.sogong_test">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:usesCleartextTraffic="true"
@@ -16,6 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogong_test"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="cxo5tj8vfn" />
+
+        <activity
+            android:name=".MapViewActivity"
+            android:exported="true">
+        </activity>
+
         <activity
             android:name=".WebViewActivity"
             android:exported="false" />
