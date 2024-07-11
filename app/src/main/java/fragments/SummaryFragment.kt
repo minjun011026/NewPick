@@ -14,6 +14,7 @@ import com.unit_3.sogong_test.BuildConfig
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.WebViewActivity
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import java.io.IOException
@@ -130,7 +131,7 @@ class SummaryFragment : DialogFragment() {
         }
 
         val body = RequestBody.create(
-            MediaType.parse("application/json; charset=utf-8"), json.toString())
+            "application/json; charset=utf-8".toMediaTypeOrNull(), json.toString())
 
         val request = Request.Builder()
             .url(apiUrl)
@@ -147,13 +148,13 @@ class SummaryFragment : DialogFragment() {
 
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
-                    val responseBody = response.body()?.string()
+                    val responseBody = response.body?.string()
                     val jsonResponse = JSONObject(responseBody)
                     val summary = jsonResponse.getString("summary")
                     Log.d("SummaryFragment", "Summary: $summary")
                     callback(summary)
                 } else {
-                    Log.e("SummaryFragment", "Error: ${response.message()}")
+                    Log.e("SummaryFragment", "Error: ${response.message}")
                     callback("연예 기사 혹은 스포츠 기사의 경우 요약을 제공하지 않을 수 있습니다.")
                 }
             }
