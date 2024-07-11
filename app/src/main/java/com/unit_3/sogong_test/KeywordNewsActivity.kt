@@ -2,13 +2,12 @@ package com.unit_3.sogong_test
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fragments.SummaryFragment
+import fragments.SummaryDialogFragment
 
 class KeywordNewsActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +16,7 @@ class KeywordNewsActivity : AppCompatActivity()  {
 
         val url = intent.getStringExtra("link")
         if (url != null) {
-            val fragment = SummaryFragment.newInstance(url)
+            val fragment = SummaryDialogFragment.newInstance(url)
             fragment.show(supportFragmentManager, "SummaryFragment")
         }
 

@@ -8,18 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.contentValuesOf
 import androidx.fragment.app.DialogFragment
 import com.unit_3.sogong_test.BuildConfig
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.WebViewActivity
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import java.io.IOException
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class SummaryFragment : DialogFragment() {
+class SummaryDialogFragment : DialogFragment() {
 
     private val client = OkHttpClient()
     private var url: String? = null
@@ -130,8 +131,10 @@ class SummaryFragment : DialogFragment() {
             })
         }
 
-        val body = RequestBody.create(
-            "application/json; charset=utf-8".toMediaTypeOrNull(), json.toString())
+//        val body = RequestBody.create(
+//            "application/json; charset=utf-8".toMediaTypeOrNull(), json.toString())
+        val body = json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+
 
         val request = Request.Builder()
             .url(apiUrl)
@@ -154,7 +157,7 @@ class SummaryFragment : DialogFragment() {
                     Log.d("SummaryFragment", "Summary: $summary")
                     callback(summary)
                 } else {
-                    Log.e("SummaryFragment", "Error: ${response.message}")
+                    Log.e("SummaryFragment", "Error: response body is null")
                     callback("연예 기사 혹은 스포츠 기사의 경우 요약을 제공하지 않을 수 있습니다.")
                 }
             }
@@ -166,7 +169,7 @@ class SummaryFragment : DialogFragment() {
 
         @JvmStatic
         fun newInstance(url: String) =
-            SummaryFragment().apply {
+            SummaryDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_URL, url)
                 }

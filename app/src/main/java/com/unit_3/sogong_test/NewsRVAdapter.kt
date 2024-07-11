@@ -51,8 +51,10 @@ import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import fragments.SummaryDialogFragment
 
 class NewsRVAdapter(private val context: Context, private val newsArticles: List<NewsModel>) :
     RecyclerView.Adapter<NewsRVAdapter.ViewHolder>() {
@@ -83,9 +85,14 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 
         holder.itemView.setOnClickListener {
             Toast.makeText(context, "기사 클릭", Toast.LENGTH_LONG).show()
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtra("link", article.link)
-            context.startActivity(intent)
+//            val intent = Intent(context, WebViewActivity::class.java)
+//            intent.putExtra("link", article.link)
+//            context.startActivity(intent)
+            val activity = context as? FragmentActivity
+            activity?.let {
+                val dialogFragment = SummaryDialogFragment.newInstance(article.link)
+                dialogFragment.show(it.supportFragmentManager, "SummaryDialogFragment")
+            }
         }
 
         holder.moreVertBtn.setOnClickListener {
