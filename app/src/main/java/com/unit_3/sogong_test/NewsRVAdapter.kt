@@ -119,12 +119,25 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
             popupMenu.menuInflater.inflate(R.menu.news_popup, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.menu_delete -> {
-                        Toast.makeText(context, "삭제 클릭", Toast.LENGTH_SHORT).show()
+                    R.id.menu_bookmark -> {
+                        Toast.makeText(context, "북마크 클릭", Toast.LENGTH_SHORT).show()
+                        
+                        //데이터 베이스에 해당 기사의 데이터(제목과 url 반드시 포함)을 저장해주는 작업이 필요함.
+
                         true
                     }
-                    R.id.menu_notify -> {
-                        Toast.makeText(context, "알림 클릭", Toast.LENGTH_SHORT).show()
+                    R.id.menu_share_link -> {
+
+                        Toast.makeText(context, "링크 공유 클릭", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(Intent.ACTION_SEND)
+                        intent.type = "text/plain"
+                        val sharedUrl = article.link
+                        val content = "친구가 링크를 공유했어요!\n어떤 링크인지 들어가서 확인해볼까요?"
+                        intent.putExtra(Intent.EXTRA_TEXT, "$content\n\n$sharedUrl")
+                        val chooserTitle = "친구에게 공유하기"
+                        context.startActivity(Intent.createChooser(intent, chooserTitle))
+
                         true
                     }
                     else -> false

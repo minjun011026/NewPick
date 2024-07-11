@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_delete"
-        android:title="삭제" />
+        android:id="@+id/menu_bookmark"
+        android:title="북마크" />
     <item
-        android:id="@+id/menu_notify"
-        android:title="알림" />
+        android:id="@+id/menu_share_link"
+        android:title="공유하기" />
 </menu>
