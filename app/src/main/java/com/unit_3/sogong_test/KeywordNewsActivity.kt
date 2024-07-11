@@ -54,6 +54,7 @@ class KeywordNewsActivity : AppCompatActivity()  {
                     runOnUiThread {
                         newsItem.clear()
                         newsItem.addAll(fetchedNewsItems)
+                        fetchedNewsItems.clear()
                         adapter.notifyDataSetChanged()
                     }
                 }
