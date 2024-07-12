@@ -2,6 +2,7 @@ package com.unit_3.sogong_test
 
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -31,7 +32,7 @@ import java.io.IOException
 import java.util.Locale
 
 
-class MapViewActivity : AppCompatActivity() , OnMapReadyCallback {
+class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickListener {
     private val LOCATION_PERMISSION_REQUEST_CODE = 5000
 
     private val PERMISSIONS = arrayOf(
@@ -43,6 +44,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback {
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private lateinit var listViewAdapter : ListViewAdapter
+    private lateinit var addressBtn1 : Button
+    private lateinit var addressBtn2 : Button
+    private lateinit var bottomSheetDialog: BottomSheetDialog
     var addressName : String = ""
     private val marker = Marker()
     private var curlatitude = 0.0
@@ -57,36 +61,57 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback {
         } else {
             initMapView()
         }
-        val addressBtn1 = findViewById<Button>(R.id.addressBtn1)
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        addressBtn1 = findViewById<Button>(R.id.addressBtn1)
+        bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val bottomSheetView = LayoutInflater.from(applicationContext).inflate(R.layout.layout_bottom_sheet, null)
-        listViewAdapter = ListViewAdapter(this, nearCity, bottomSheetDialog)
+        listViewAdapter = ListViewAdapter(this, nearCity, bottomSheetDialog, this)
 
         addressBtn1.setOnClickListener{
             if(addressName != ""){
-//                val database = Firebase.database
-//                val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
-//                myRef.push().setValue(addressName)
                 readExcel(addressName)
                 bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
                 bottomSheetDialog.setContentView(bottomSheetView)
+                addressBtn1.text="~"
                 bottomSheetDialog.show()
-                Log.d("herere", nearCity.joinToString(" "))
                 addressName = ""
             }
         }
 
-        val addressBtn2 = findViewById<Button>(R.id.addressBtn2)
+        addressBtn2 = findViewById<Button>(R.id.addressBtn2)
 
         addressBtn2.setOnClickListener{
             if(addressName != ""){
-                val database = Firebase.database
-                val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
-                addressBtn2.text = addressName
-                myRef.push().setValue(addressName)
+                readExcel(addressName)
+                bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
+                bottomSheetDialog.setContentView(bottomSheetView)
+                addressBtn2.text="~"
+                bottomSheetDialog.show()
                 addressName = ""
             }
         }
+
+        val saveBtn = findViewById<Button>(R.id.locationSaveBtn)
+
+        saveBtn.setOnClickListener{
+            if(addressBtn1.text.toString()!="+") {
+                val database = Firebase.database
+                val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
+                myRef.push().setValue(addressBtn1.text.toString())
+            }
+            if(addressBtn2.text.toString()!="+"){
+                val database = Firebase.database
+                val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
+                myRef.push().setValue(addressBtn2.text.toString())
+            }
+        }
+
+    }
+    override fun onItemClick(item: String){
+        if(addressBtn1.text.toString() == "~")
+            addressBtn1.text = item
+        else if(addressBtn2.text.toString() == "~")
+            addressBtn2.text = item
+        bottomSheetDialog.dismiss()
     }
 
     private fun initMapView() {
@@ -149,13 +174,18 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback {
                     // getAddressLine(0)
                     toast(address[0].locality)
                     addressName=address[0].locality
+                    curlatitude = latitude
+                    curlongitude = longitude
                 }
             }
         } else { // API 레벨이 33 미만인 경우
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+
             if (addresses != null) {
                 toast(addresses[0].locality)
                 addressName=addresses[0].locality
+                curlatitude = latitude
+                curlongitude = longitude
             }
         }
     }
@@ -185,8 +215,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback {
                         if (contents.contains(localName!!)) {
                             val x = sheet.getCell(5, row).contents
                             val y = sheet.getCell(6, row).contents
-                            if(sheet.getCell(2, row).contents.isNotEmpty()) {
-                                nearCity.add(sheet.getCell(2, row).contents)
+                            if(sheet.getCell(2, row).contents.isNotEmpty() && sheet.getCell(3, row).contents.isEmpty()) {
+                                if(calculateDistance(curlatitude,curlongitude,x.toDouble(),y.toDouble()) < 20000.0)
+                                   nearCity.add(localName+ " " + sheet.getCell(2, row).contents)
                             }
                         }
                         row++
@@ -201,5 +232,20 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback {
             Log.i("READ_EXCEL1", e.message!!)
             e.printStackTrace()
         }
+    }
+
+    private fun calculateDistance(
+        lat1: Double, lon1: Double,
+        lat2: Double, lon2: Double
+    ): Float {
+        val locationA = Location("point A")
+        locationA.latitude = lat1
+        locationA.longitude = lon1
+
+        val locationB = Location("point B")
+        locationB.latitude = lat2
+        locationB.longitude = lon2
+
+        return locationA.distanceTo(locationB) //거리값 미터 단위로 반환
     }
 }

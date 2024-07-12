@@ -9,9 +9,11 @@ import android.widget.TextView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.widget.Toast
 
+
 class ListViewAdapter (val context : Context,
                        val list : ArrayList<String>,
-                       val bottomSheetDialog: BottomSheetDialog) : BaseAdapter()
+                       val bottomSheetDialog: BottomSheetDialog,
+                       val itemClickListener: OnItemClickListener) : BaseAdapter()
 {
     override fun getCount(): Int {
         return list.size
@@ -33,6 +35,7 @@ class ListViewAdapter (val context : Context,
 
         textView.setOnClickListener{
             Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
+            itemClickListener.onItemClick(item)
         }
 
         return view
