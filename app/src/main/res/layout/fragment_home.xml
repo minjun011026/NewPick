@@ -193,7 +193,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="실시간 키워드"
+                    android:text="인기 급상승 검색어"
                     android:textSize="30sp"
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
