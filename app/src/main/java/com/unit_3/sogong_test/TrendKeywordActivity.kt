@@ -1,19 +1,5 @@
 package com.unit_3.sogong_test
 
-//import android.content.Intent
-//import android.os.Bundle
-//import android.util.Log
-//import androidx.appcompat.app.AppCompatActivity
-//import com.unit_3.sogong_test.databinding.ActivityTrendKeywordBinding
-//import org.json.JSONObject
-//import org.jsoup.Jsoup
-//import java.io.BufferedReader
-//import java.io.InputStreamReader
-//import java.net.HttpURLConnection
-//import java.net.URL
-//import java.net.URLEncoder
-//import kotlin.concurrent.thread
-//
 //class TrendKeywordActivity : AppCompatActivity() {
 //
 //    private lateinit var binding: ActivityTrendKeywordBinding
@@ -109,10 +95,6 @@ package com.unit_3.sogong_test
 //            }
 //
 //        }
-//
-//
-//
-//
 //
 //        binding.backBtn.setOnClickListener {
 //            navigateBackToMainActivity()
@@ -212,8 +194,6 @@ class TrendKeywordActivity : AppCompatActivity() {
 
         for (i in 0 until items.length()) {
             val item = items.getJSONObject(i)
-//            val title = item.getString("title")
-//            val description = item.getString("description")
             val title = item.getString("title").stripHtmlAndDecodeEntities()
             val description = item.getString("description").stripHtmlAndDecodeEntities()
             val link = item.getString("link")

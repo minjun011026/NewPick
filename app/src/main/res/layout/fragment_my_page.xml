@@ -7,64 +7,42 @@
         android:layout_height="match_parent"
         tools:context="fragments.MyPageFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/topBar"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            tools:ignore="MissingConstraints">
-
-            <TextView
-                android:id="@+id/helloWorldTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="my page"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#999999"
-            app:layout_constraintTop_toBottomOf="@+id/topBar" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            <!-- 상단 타이틀 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ibmplexsanskr_semibold"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:text="My page"
+                android:textSize="24sp" />
 
-            <!-- 원래의 LinearLayout을 ConstraintLayout으로 변경 -->
+
+
+            <!-- 구분선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginVertical="8dp"/>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout3">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="8dp"/>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/black" />
-
-            </LinearLayout>
-
+            <!-- 하단 네비게이션 바 -->
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
@@ -75,7 +53,7 @@
 
                 <ImageView
                     android:id="@+id/bottomNavigation_home"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
@@ -83,7 +61,7 @@
 
                 <ImageView
                     android:id="@+id/bottomNavigation_my_keyword"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
@@ -91,7 +69,7 @@
 
                 <ImageView
                     android:id="@+id/bottomNavigation_chat"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
@@ -99,15 +77,13 @@
 
                 <ImageView
                     android:id="@+id/bottomNavigation_my_page"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:src="@drawable/account_circle" />
-
             </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </FrameLayout>
 

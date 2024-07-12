@@ -28,11 +28,6 @@
         <activity
             android:name=".MapViewActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".WebViewActivity"
@@ -49,10 +44,18 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:label="@string/app_name" /> <!-- MainActivity 설정 (일반 액티비티로) -->
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity> <!-- MainActivity 설정 (일반 액티비티로) -->
         <activity
             android:name=".MainActivity"
-            android:exported="true" /> <!-- SingUpActivity, SplashActivity 등의 설정 -->
+            android:exported="true" >
+        </activity> <!-- SingUpActivity, SplashActivity 등의 설정 -->
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
