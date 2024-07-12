@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.unit_3.sogong_test">
+    package="com.unit_3.sogong_test" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,7 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogong_test"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31" >
+
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -26,9 +27,13 @@
 
         <activity
             android:name=".MapViewActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".WebViewActivity"
             android:exported="false" />
@@ -52,11 +57,10 @@
             android:name=".SignUpActivity"
             android:exported="false" />
 
-        <activity android:name=".BookmarkedNewsActivity"
-            android:exported="true"/>
 
         <activity
             android:name=".SplashActivity"
+
             android:exported="true">
 
 
@@ -65,6 +69,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 
