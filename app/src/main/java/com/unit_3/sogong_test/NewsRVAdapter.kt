@@ -41,6 +41,8 @@ package com.unit_3.sogong_test
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +53,7 @@ import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -74,6 +77,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
         return ViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = newsArticles[position]
         holder.titleTextView.text = article.title
@@ -143,6 +147,16 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
                     else -> false
                 }
             }
+
+//            //텍스트 숨기는 코드
+//            for (i in 0 until popupMenu.menu.size()) {
+//                val item = popupMenu.menu.getItem(i)
+//                val spannableString = SpannableString("")
+//                item.title = spannableString
+//            }
+
+            //아이콘 보여주는 코드
+            popupMenu.setForceShowIcon(true)
             popupMenu.show()
         }
     }

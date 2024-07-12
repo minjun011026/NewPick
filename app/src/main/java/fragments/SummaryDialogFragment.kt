@@ -166,7 +166,7 @@ class SummaryDialogFragment : DialogFragment() {
                     callback(summary)
                 } else {
                     Log.e("SummaryFragment", "Error: response body is null")
-                    callback("연예 기사 혹은 스포츠 기사의 경우 요약을 제공하지 않을 수 있습니다.")
+                    callback("일부 기사는 요약을 제공하지 않을 수 있습니다.")
                 }
             }
         })
