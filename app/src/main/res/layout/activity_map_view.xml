@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/childrenLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,34 +11,60 @@
         tools:context=".MapViewActivity"
         >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/locationName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="지역명"
-                android:textSize="30sp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
-            <Button
-                android:id="@+id/locationSaveBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="위치 저장"
-                android:textSize="30sp" />
-        </LinearLayout>
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/map_fragment"
             android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="550dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/locationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="내 지역(원하는 위치를 터치)"
+                android:textSize="20sp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addressBtn1"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="60dp"/>
+
+
+                <Button
+                    android:id="@+id/addressBtn2"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="40dp"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/locationSaveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="저장"
+                android:textSize="20sp"
+                android:layout_margin="20dp"/>
+        </LinearLayout>
+
 
     </LinearLayout>
-
 
 
 </layout>
