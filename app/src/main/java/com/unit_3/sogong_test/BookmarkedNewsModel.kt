@@ -5,5 +5,6 @@ data class BookmarkedNewsModel(
     var description: String="",
     var imageRes: Int=0,
     var model: String="",
-    var url: String=""
+    var url: String="",
+    var link: String=""
 )
