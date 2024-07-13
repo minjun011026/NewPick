@@ -1,3 +1,7 @@
+package com.unit_3.sogong_test
+
+
+import BookmarkedNewsAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton

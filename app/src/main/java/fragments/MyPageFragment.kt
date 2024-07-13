@@ -1,3 +1,6 @@
+package fragments
+
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.unit_3.sogong_test.BookmarkedNewsActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 
@@ -28,10 +32,6 @@ class MyPageFragment : Fragment() {
             it.findNavController().navigate(R.id.action_myPageFragment_to_myKeywordFragment)
         }
 
-        // Open BookmarkedNewsActivity on button click
-        binding.buttonChangeNickname.setOnClickListener {
-            openBookmarkedNewsActivity()
-        }
 
         // Handle click on "내가 북마크한 글"
         binding.bookmarkedNewsTextView.setOnClickListener {

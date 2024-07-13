@@ -53,9 +53,15 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" /> <!-- SingUpActivity, SplashActivity 등의 설정 -->
+
+        <activity
+            android:name=".BookmarkedNewsActivity"
+            android:exported="true" />
+
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
+
 
 
         <activity
