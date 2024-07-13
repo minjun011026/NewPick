@@ -61,7 +61,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         } else {
             initMapView()
         }
-        addressBtn1 = binding.addressBtn1
+        addressBtn1 = findViewById<Button>(R.id.addressBtn1)
         bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val bottomSheetView = LayoutInflater.from(applicationContext).inflate(R.layout.layout_bottom_sheet, null)
         listViewAdapter = ListViewAdapter(this, nearCity, bottomSheetDialog, this)
@@ -77,7 +77,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             }
         }
 
-        addressBtn2 = binding.addressBtn2
+        addressBtn2 = findViewById<Button>(R.id.addressBtn2)
 
         addressBtn2.setOnClickListener{
             if(addressName != ""){

@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:src="@drawable/more_vert"
+            android:src="@drawable/more"
             android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:layout_weight="5"/>
