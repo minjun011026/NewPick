@@ -8,21 +8,22 @@
 
     <ImageView
         android:id="@+id/newsImageView"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin = "12dp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_foreground" />
+        tools:src="@drawable/ic_launcher_foreground"
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        android:textColor="#3f63bf"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="15sp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/newsImageView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="News Title" />
@@ -32,6 +33,7 @@
         android:layout_width="24dp"
         android:layout_height="36dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         android:src="@drawable/more_vert"
         app:layout_constraintEnd_toEndOf="parent"

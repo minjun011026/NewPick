@@ -84,7 +84,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 //        holder.descriptionTextView.text = article.description
         Glide.with(context)
             .load(article.imageUrl)
-            .placeholder(R.drawable.favorite)
+            .placeholder(R.drawable.no_image)
             .into(holder.newsImageView)
 
         holder.itemView.setOnClickListener {
