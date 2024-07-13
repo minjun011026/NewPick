@@ -75,32 +75,64 @@ class SummaryDialogFragment : DialogFragment() {
                 Log.d("SummaryFragment", "Fetching article content from URL: $url")
                 val document = Jsoup.connect(url).get()
 
-                // 기사 제목 추출
-                val title = document.title()
-                Log.d("SummaryFragment", "Title: $title")
+                val (title, content) = if ("entertain" in url) {
+                    Pair(
+                        document.selectFirst(".end_tit")?.text() ?: "No title",
+                        document.selectFirst("#articeBody")?.text() ?: "No content"
+                    )
+                } else if ("sports" in url) {
+                    val contentElement = document.selectFirst("#newsEndContents")
+                    // Remove unnecessary div and p elements
+                    contentElement?.select("div")?.forEach { it.remove() }
+                    contentElement?.select("p")?.forEach { it.remove() }
 
-
-                // 기사 본문을 추출하는 로직
-                var content = document.select("article#dic_area").text()
-                Log.d("SummaryFragment", "article#dic_area : $content")
-                if(content.isBlank()){
-                    content = document.select("div#_article_content").text()
-                    Log.d("SummaryFragment", "div#_article_content : $content")
-                }
-                if(content.isBlank()){
-                    content = document.select("#articeBody").text()
-                    Log.d("SummaryFragment", "div.news_end : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("#comp_news_article > div._article_content").text()
-                    Log.d("SummaryFragment", "#comp_news_article > div._article_content : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("div#content").text()
-                    Log.d("SummaryFragment", "div#content : $content")
+                    Pair(
+                        document.selectFirst("h4.title")?.text() ?: "No title",
+                        contentElement?.text() ?: "No content"
+                    )
+                } else {
+                    Pair(
+                        document.selectFirst(".media_end_head_headline")?.text() ?: "No title",
+                        document.selectFirst("#dic_area")?.text() ?: "No content"
+                    )
                 }
 
-                Log.d("SummaryFragment", "Fetched content: $content")
+                Log.d("SummaryFragment", "Title : $title, content : $content")
+
+//                        // 기사 제목 추출
+//                val title = document.title()
+//                Log.d("SummaryFragment", "Title: $title")
+
+//                // 신문사명 추출
+//                var companyName = document.select("#newsct > div.office_headline.more_news.optional_hidden.pc_hidden._FLICKING_WRAP._OFFICE_HEADLINE._PERSIST_HEIGHT._PERSIST_META > div.ofhe_head > div > h2 > a > em").text()
+//                Log.d("SummaryFragment","신문사명 1 : $companyName" )
+//                if(companyName.isBlank()){
+//                    companyName = document.select("#content > div.NewsEnd_container__HcfWh > div > div.NewsEnd_main_group__d5k8S > div > div.NewsEndMain_comp_home_shortcut__BW2sL > a > em").text()
+//                    Log.d("SummaryFragment","신문사명 2 : $companyName" )
+//                }
+//
+//
+//                // 기사 본문을 추출하는 로직
+//                var content = document.select("#dic_area").text()
+//                Log.d("SummaryFragment", "#dic_area : $content")
+//                if(content.isBlank()){
+//                    content = document.select("div#_article_content").text()
+//                    Log.d("SummaryFragment", "div#_article_content : $content")
+//                }
+//                if(content.isBlank()){
+//                    content = document.select("#articeBody").text()
+//                    Log.d("SummaryFragment", "div.news_end : $content")
+//                }
+//                if (content.isBlank()) {
+//                    content = document.select("#comp_news_article").text()
+//                    Log.d("SummaryFragment", "#comp_news_article : $content")
+//                }
+//                if (content.isBlank()) {
+//                    content = document.select("#comp_news_article > div._article_content > span:nth-child(4)").text()
+//                    Log.d("SummaryFragment", "div#content : $content")
+//                }
+//
+//                Log.d("SummaryFragment", "Fetched content: $content")
 
 
                 callback(content)
@@ -121,8 +153,8 @@ class SummaryDialogFragment : DialogFragment() {
             put("option", JSONObject().apply {
                 put("language", "ko")
                 put("model", "news")
-                put("tone", 0)
-                put("summaryCount", 3)
+                put("tone", 3)
+                put("summaryCount", 2)
             })
         }
 
@@ -153,7 +185,7 @@ class SummaryDialogFragment : DialogFragment() {
                     callback(summary)
                 } else {
                     Log.e("SummaryFragment", "Error: response body is null")
-                    callback("일부 기사는 요약을 제공하지 않을 수 있습니다.")
+                    callback("일부 기사는 요약을 제공 하지 않을 수 있습니다.")
                 }
             }
         })
