@@ -1,17 +1,11 @@
 package com.unit_3.sogong_test
 
-
-import BookmarkedNewsAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.unit_3.sogong_test.BookmarkedNewsModel
-import com.unit_3.sogong_test.DatabaseHelper
-import com.unit_3.sogong_test.MainActivity
-import com.unit_3.sogong_test.R
 
 class BookmarkedNewsActivity : AppCompatActivity() {
 
@@ -28,7 +22,7 @@ class BookmarkedNewsActivity : AppCompatActivity() {
 
         dbHelper = DatabaseHelper()
         newsItem = ArrayList()
-        adapter = BookmarkedNewsAdapter(newsItem)
+        adapter = BookmarkedNewsAdapter(this, newsItem)
 
         previousBtn = findViewById(R.id.previousBtn)
         recyclerView = findViewById(R.id.recyclerViewBookmarkedNews)
@@ -51,7 +45,7 @@ class BookmarkedNewsActivity : AppCompatActivity() {
         // Handle item click on RecyclerView
         adapter.setOnItemClickListener { position ->
             val selectedNews = newsItem[position]
-            //  openNewsDetailActivity(selectedNews.url)
+            //  openNewsDetailActivity(selectedNews.link)
         }
     }
 
@@ -64,9 +58,9 @@ class BookmarkedNewsActivity : AppCompatActivity() {
         }
     }
 
-    //private fun openNewsDetailActivity(newsUrl: String) {
+    // private fun openNewsDetailActivity(newsUrl: String) {
     //  val intent = Intent(this, NewsDetailActivity::class.java)
-    //intent.putExtra("newsUrl", newsUrl)
-    //startActivity(intent)
-    //}
+    //  intent.putExtra("newsUrl", newsUrl)
+    //  startActivity(intent)
+    // }
 }

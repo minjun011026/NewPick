@@ -17,11 +17,7 @@ class DatabaseHelper {
             if (newsId != null) {
                 database.child(userId).child(newsId).setValue(news)
                     .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            callback(true)
-                        } else {
-                            callback(false)
-                        }
+                        callback(task.isSuccessful)
                     }
             } else {
                 callback(false)
@@ -56,11 +52,11 @@ class DatabaseHelper {
         }
     }
 
-    fun deleteBookmarkedNews(news: BookmarkedNewsModel, callback: (Boolean) -> Unit) {
+    fun removeBookmarkedNews(news: BookmarkedNewsModel, callback: (Boolean) -> Unit) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
-            database.child(userId).orderByChild("url").equalTo(news.url).addListenerForSingleValueEvent(object : ValueEventListener {
+            database.child(userId).orderByChild("link").equalTo(news.link).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (childSnapshot in snapshot.children) {
                         childSnapshot.ref.removeValue()
