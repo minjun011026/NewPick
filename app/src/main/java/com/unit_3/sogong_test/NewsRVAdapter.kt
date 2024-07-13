@@ -64,7 +64,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
+//        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val newsImageView: ImageView = view.findViewById(R.id.newsImageView)
         val moreVertBtn: ImageButton = view.findViewById(R.id.moreVertBtn)
         val buttonLayout: LinearLayout = view.findViewById(R.id.buttonLayout)
@@ -81,7 +81,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = newsArticles[position]
         holder.titleTextView.text = article.title
-        holder.descriptionTextView.text = article.description
+//        holder.descriptionTextView.text = article.description
         Glide.with(context)
             .load(article.imageUrl)
             .placeholder(R.drawable.favorite)
