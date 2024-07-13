@@ -62,7 +62,9 @@
             android:name=".SignUpActivity"
             android:exported="false" />
 
-
+        <activity android:name=".ChangeNicknameActivity" />
+        <activity android:name=".ChangeEmailActivity" />
+        <activity android:name=".ChangePasswordActivity" />
 
         <activity
             android:name=".SplashActivity"
