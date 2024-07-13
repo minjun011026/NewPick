@@ -5,18 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D9D9D9"
+    android:background="@color/white"
     tools:context=".SignUpActivity"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/pretendard_bold"
         android:gravity="center_horizontal"
         android:text="앱 이름"
-        android:textSize="26sp" />
+        android:textSize="24sp" />
 
 
     <TextView
@@ -26,8 +26,8 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="35dp"
         android:textColor="@color/black"
-        android:textSize="26sp"
-        android:fontFamily="@font/pretendard_bold"
+        android:textSize="30sp"
+        android:textStyle="bold"
         />
 
 
@@ -68,13 +68,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:background="#D9D9D9"
+            android:background="@color/white"
             android:inputType="textPassword"/>
 
         <ImageButton
             android:id="@+id/showPassword"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:background="@color/white"
             android:src="@drawable/eye_off"/>
 
     </LinearLayout>
@@ -95,13 +96,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:hint="Repeat Password"
-            android:background="#D9D9D9"
+            android:background="@color/white"
             android:inputType="textPassword"/>
 
         <ImageButton
             android:id="@+id/showRepeatPassword"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:background="@color/white"
             android:src="@drawable/eye_off"/>
 
     </LinearLayout>
@@ -109,13 +111,14 @@
     <Button
         android:id="@+id/registerBtn"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="85dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:text="Register"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/white"/>
+        android:backgroundTint="@color/custom"
+        android:textColor="@color/white"
+    android:textSize="30sp"/>
 
 
 </LinearLayout>

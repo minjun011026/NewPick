@@ -2,13 +2,12 @@ package com.unit_3.sogong_test
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fragments.SummaryFragment
+import fragments.SummaryDialogFragment
 
 class KeywordNewsActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +16,7 @@ class KeywordNewsActivity : AppCompatActivity()  {
 
         val url = intent.getStringExtra("link")
         if (url != null) {
-            val fragment = SummaryFragment.newInstance(url)
+            val fragment = SummaryDialogFragment.newInstance(url)
             fragment.show(supportFragmentManager, "SummaryFragment")
         }
 
@@ -29,8 +28,12 @@ class KeywordNewsActivity : AppCompatActivity()  {
 
         val previousBtn = findViewById<ImageButton>(R.id.previousBtn)
 
-        previousBtn.setOnClickListener{
+        previousBtn.setOnClickListener {
+            // 이전 화면으로 돌아가기 위해 Intent에 FLAG_ACTIVITY_CLEAR_TOP 플래그 추가
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("키워드", getKeyword)  // 키워드 정보 다시 전달
+            intent.putExtra("link", url)          // 뉴스 링크 정보 다시 전달
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
         }
@@ -50,6 +53,7 @@ class KeywordNewsActivity : AppCompatActivity()  {
                     runOnUiThread {
                         newsItem.clear()
                         newsItem.addAll(fetchedNewsItems)
+                        fetchedNewsItems.clear()
                         adapter.notifyDataSetChanged()
                     }
                 }

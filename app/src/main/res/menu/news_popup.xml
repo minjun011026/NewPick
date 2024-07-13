@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_bookmark"
+        android:title="북마크"
+        android:icon="@drawable/icon_bookmark" />
+    <item
+        android:id="@+id/menu_share_link"
+        android:title="URL 공유"
+        android:icon="@drawable/icon_share_url"/>
+</menu>

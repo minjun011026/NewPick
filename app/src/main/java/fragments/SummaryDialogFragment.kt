@@ -8,18 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.contentValuesOf
 import androidx.fragment.app.DialogFragment
 import com.unit_3.sogong_test.BuildConfig
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.WebViewActivity
 import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import java.io.IOException
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class SummaryFragment : DialogFragment() {
+private const val s = "aticle#_article_content"
+
+class SummaryDialogFragment : DialogFragment() {
 
     private val client = OkHttpClient()
     private var url: String? = null
@@ -81,32 +84,25 @@ class SummaryFragment : DialogFragment() {
                 var content = document.select("article#dic_area").text()
                 Log.d("SummaryFragment", "article#dic_area : $content")
                 if(content.isBlank()){
-                    content = document.select("div._article_content").text()
-                    Log.d("SummaryFragment", "div._article_content : $content")
+                    content = document.select("div#_article_content").text()
+                    Log.d("SummaryFragment", "div#_article_content : $content")
                 }
                 if(content.isBlank()){
-                    content = document.select("article_content").text()
-                    Log.d("SummaryFragment", "article_content : $content")
+                    content = document.select("#articeBody").text()
+                    Log.d("SummaryFragment", "div.news_end : $content")
                 }
                 if (content.isBlank()) {
-                    content = document.select("div.article-body").text()
-                    Log.d("SummaryFragment", "div.article-body : $content")
+                    content = document.select("#comp_news_article > div._article_content").text()
+                    Log.d("SummaryFragment", "#comp_news_article > div._article_content : $content")
                 }
                 if (content.isBlank()) {
-                    content = document.select("span.article_p").text()
-                    Log.d("SummaryFragment", "span.article_p : $content")
+                    content = document.select("div#content").text()
+                    Log.d("SummaryFragment", "div#content : $content")
                 }
-                if (content.isBlank()) {
-                    content = document.select("div._article_content").text()
-                    Log.d("SummaryFragment", "div._article_content : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("div#newsEndContents").text()
-                    Log.d("SummaryFragment", "div#newsEndContents : $content")
-                }
-
 
                 Log.d("SummaryFragment", "Fetched content: $content")
+
+
                 callback(content)
             } catch (e: IOException) {
                 Log.e("SummaryFragment", "Failed to retrieve article content", e)
@@ -130,8 +126,10 @@ class SummaryFragment : DialogFragment() {
             })
         }
 
-        val body = RequestBody.create(
-            "application/json; charset=utf-8".toMediaTypeOrNull(), json.toString())
+//        val body = RequestBody.create(
+//            "application/json; charset=utf-8".toMediaTypeOrNull(), json.toString())
+        val body = json.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+
 
         val request = Request.Builder()
             .url(apiUrl)
@@ -154,8 +152,8 @@ class SummaryFragment : DialogFragment() {
                     Log.d("SummaryFragment", "Summary: $summary")
                     callback(summary)
                 } else {
-                    Log.e("SummaryFragment", "Error: ${response.message}")
-                    callback("연예 기사 혹은 스포츠 기사의 경우 요약을 제공하지 않을 수 있습니다.")
+                    Log.e("SummaryFragment", "Error: response body is null")
+                    callback("일부 기사는 요약을 제공하지 않을 수 있습니다.")
                 }
             }
         })
@@ -166,7 +164,7 @@ class SummaryFragment : DialogFragment() {
 
         @JvmStatic
         fun newInstance(url: String) =
-            SummaryFragment().apply {
+            SummaryDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_URL, url)
                 }
