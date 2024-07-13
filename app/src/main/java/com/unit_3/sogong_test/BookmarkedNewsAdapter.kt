@@ -48,7 +48,7 @@ class BookmarkedNewsAdapter(private val context: Context, private val newsItems:
 
         private fun showPopupMenu(item: BookmarkedNewsModel) {
             val popupMenu = PopupMenu(context, moreVertBtn)
-            popupMenu.menuInflater.inflate(R.menu.news_popup, popupMenu.menu)
+            popupMenu.menuInflater.inflate(R.menu.bookmark_popup, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.menu_bookmark -> {
