@@ -21,7 +21,7 @@
                 android:fontFamily="@font/ibmplexsanskr_semibold"
                 android:gravity="center"
                 android:paddingBottom="8dp"
-                android:text="Mynews"
+                android:text="My keyword"
                 android:textSize="24sp" />
 
             <!-- 나의 키워드 섹션 -->
@@ -79,7 +79,15 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/home" />
+                    android:src="@drawable/icon_home_transparent" />
+
+                <ImageView
+                    android:id="@+id/bottomNavigation_chat"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/icon_local_transparent" />
 
                 <ImageView
                     android:id="@+id/bottomNavigation_my_keyword"
@@ -89,13 +97,6 @@
                     android:layout_weight="1"
                     android:src="@drawable/news" />
 
-                <ImageView
-                    android:id="@+id/bottomNavigation_chat"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/chat" />
 
                 <ImageView
                     android:id="@+id/bottomNavigation_my_page"
@@ -103,7 +104,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
-                    android:src="@drawable/account_circle" />
+                    android:src="@drawable/icon_account_transparent" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

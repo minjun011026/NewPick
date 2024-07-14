@@ -230,21 +230,22 @@
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:src="@drawable/home" />
-
-            <ImageView
-                android:id="@+id/bottomNavigation_my_keyword"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:src="@drawable/news" />
+                android:src="@drawable/icon_home_transparent" />
 
             <ImageView
                 android:id="@+id/bottomNavigation_chat"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:src="@drawable/chat" />
+                android:src="@drawable/icon_local_transparent" />
+
+            <ImageView
+                android:id="@+id/bottomNavigation_my_keyword"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/icon_keyword_transparent" />
+
 
             <ImageView
                 android:id="@+id/bottomNavigation_my_page"

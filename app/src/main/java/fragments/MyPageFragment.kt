@@ -14,6 +14,7 @@ import com.unit_3.sogong_test.BookmarkedNewsActivity
 import com.unit_3.sogong_test.ChangeEmailActivity
 import com.unit_3.sogong_test.ChangeNicknameActivity
 import com.unit_3.sogong_test.ChangePasswordActivity
+import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 
@@ -27,7 +28,8 @@ class MyPageFragment : Fragment() {
 
         // Bottom navigation click listeners
         binding.bottomNavigationChat.setOnClickListener {
-            it.findNavController().navigate(R.id.action_myPageFragment_to_chatFragment)
+//            it.findNavController().navigate(R.id.action_myPageFragment_to_chatFragment)
+            startActivity(Intent(context, MapViewActivity::class.java))
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)

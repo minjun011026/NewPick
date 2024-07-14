@@ -1,6 +1,7 @@
 package fragments
 
 import KeywordRVAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.unit_3.sogong_test.KeywordModel
+import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
 
@@ -40,7 +42,8 @@ class MyKeywordFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_keyword, container, false)
 
         binding.bottomNavigationChat.setOnClickListener {
-            it.findNavController().navigate(R.id.action_myKeywordFragment_to_chatFragment)
+//            it.findNavController().navigate(R.id.action_myKeywordFragment_to_chatFragment)
+            startActivity(Intent(context, MapViewActivity::class.java))
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_homeFragment)
