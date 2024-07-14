@@ -19,6 +19,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.database
 import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraAnimation
+import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
@@ -26,6 +28,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.unit_3.sogong_test.databinding.ActivityMapViewBinding
+import jxl.Sheet
 import jxl.Workbook
 import jxl.read.biff.BiffException
 import java.io.IOException
@@ -51,7 +54,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     private val marker = Marker()
     private var curlatitude = 0.0
     private var curlongitude = 0.0
-
+    private lateinit var adminArea : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +74,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                 readExcel(addressName)
                 bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
                 bottomSheetDialog.setContentView(bottomSheetView)
-                addressBtn1.text="~"
+                addressBtn1.text="+"
                 bottomSheetDialog.show()
                 addressName = ""
             }
@@ -84,7 +87,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                 readExcel(addressName)
                 bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
                 bottomSheetDialog.setContentView(bottomSheetView)
-                addressBtn2.text="~"
+                addressBtn2.text="+"
                 bottomSheetDialog.show()
                 addressName = ""
             }
@@ -107,10 +110,22 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
     }
     override fun onItemClick(item: String){
-        if(addressBtn1.text.toString() == "~")
+        if(addressBtn1.text.toString() == "+")
             addressBtn1.text = item
-        else if(addressBtn2.text.toString() == "~")
+        else if(addressBtn2.text.toString() == "+")
             addressBtn2.text = item
+        nearCity.clear()
+
+        val geocoder = Geocoder(applicationContext, Locale.KOREAN)
+        val laglng = geocoder.getFromLocationName(item, 1)
+
+        val cameraUpdate= CameraUpdate.scrollAndZoomTo(
+
+            LatLng(laglng!![0].latitude, laglng!![0].longitude), 15.0
+        )
+            .animate(CameraAnimation.Fly, 3000)
+
+        naverMap.moveCamera(cameraUpdate)
         bottomSheetDialog.dismiss()
     }
 
@@ -172,8 +187,14 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                 if (address.size != 0) {
                     // 반환 값에서 전체 주소만 사용한다.
                     // getAddressLine(0)
-                    toast(address[0].locality)
-                    addressName=address[0].locality
+                    if(address[0].subLocality!=null) {
+                        toast(address[0].subLocality)
+                        addressName=address[0].subLocality
+                    }else{
+                        toast(address[0].locality)
+                        addressName=address[0].locality
+                    }
+                    adminArea=address[0].adminArea
                     curlatitude = latitude
                     curlongitude = longitude
                 }
@@ -182,8 +203,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
 
             if (addresses != null) {
-                toast(addresses[0].locality)
+                toast(addresses[0].adminArea)
                 addressName=addresses[0].locality
+                adminArea=addresses[0].adminArea
                 curlatitude = latitude
                 curlongitude = longitude
             }
@@ -203,9 +225,29 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             val wb = Workbook.getWorkbook(`is`)
 
             if (wb != null) {
-                val sheet = wb.getSheet(2)
+                var sheet : Sheet? = null
+                when (adminArea) {
+                    "서울특별시" -> sheet = wb.getSheet(0)
+                    "강원도" -> sheet = wb.getSheet(1)
+                    "경기도" -> sheet = wb.getSheet(2)
+                    "경상남도" -> sheet = wb.getSheet(3)
+                    "경상북도" -> sheet = wb.getSheet(4)
+                    "광주광역시" -> sheet = wb.getSheet(5)
+                    "대구광역시" -> sheet = wb.getSheet(6)
+                    "대전광역시" -> sheet = wb.getSheet(7)
+                    "부산광역시" -> sheet = wb.getSheet(8)
+                    "세종특별자치시" -> sheet = wb.getSheet(9)
+                    "울산광역시" -> sheet = wb.getSheet(10)
+                    "전라남도" -> sheet = wb.getSheet(11)
+                    "전라북도" -> sheet = wb.getSheet(12)
+                    "제주특별자치도" -> sheet = wb.getSheet(13)
+                    "충청남도" -> sheet = wb.getSheet(14)
+                    "충청북도" -> sheet = wb.getSheet(15)
+                    "인천광역시" -> sheet = wb.getSheet(16)
+                }
+
+                nearCity.clear()
                 if (sheet != null) {
-                    val colTotal = sheet.columns
                     val rowIndexStart = 1
                     val rowTotal = sheet.rows-1
                     Log.d("rowTotal", "$rowTotal")
