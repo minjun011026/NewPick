@@ -26,6 +26,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.unit_3.sogong_test.databinding.ActivityMapViewBinding
+import jxl.Sheet
 import jxl.Workbook
 import jxl.read.biff.BiffException
 import java.io.IOException
@@ -51,7 +52,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     private val marker = Marker()
     private var curlatitude = 0.0
     private var curlongitude = 0.0
-
+    private lateinit var adminArea : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +112,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             addressBtn1.text = item
         else if(addressBtn2.text.toString() == "~")
             addressBtn2.text = item
+        nearCity.clear()
         bottomSheetDialog.dismiss()
     }
 
@@ -174,6 +176,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                     // getAddressLine(0)
                     toast(address[0].locality)
                     addressName=address[0].locality
+                    adminArea=address[0].adminArea
                     curlatitude = latitude
                     curlongitude = longitude
                 }
@@ -184,6 +187,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             if (addresses != null) {
                 toast(addresses[0].locality)
                 addressName=addresses[0].locality
+                adminArea=addresses[0].adminArea
                 curlatitude = latitude
                 curlongitude = longitude
             }
@@ -202,9 +206,28 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             val wb = Workbook.getWorkbook(`is`)
 
             if (wb != null) {
-                val sheet = wb.getSheet(2)
+                var sheet : Sheet? = null
+                when (adminArea) {
+                    "서울특별시" -> sheet = wb.getSheet(0)
+                    "강원도" -> sheet = wb.getSheet(1)
+                    "경기도" -> sheet = wb.getSheet(2)
+                    "경상남도" -> sheet = wb.getSheet(3)
+                    "경상북도" -> sheet = wb.getSheet(4)
+                    "광주광역시" -> sheet = wb.getSheet(5)
+                    "대구광역시" -> sheet = wb.getSheet(6)
+                    "대전광역시" -> sheet = wb.getSheet(7)
+                    "부산광역시" -> sheet = wb.getSheet(8)
+                    "세종특별자치시" -> sheet = wb.getSheet(9)
+                    "울산광역시" -> sheet = wb.getSheet(10)
+                    "전라남도" -> sheet = wb.getSheet(11)
+                    "전라북도" -> sheet = wb.getSheet(12)
+                    "제주특별자치도" -> sheet = wb.getSheet(13)
+                    "충청남도" -> sheet = wb.getSheet(14)
+                    "충청북도" -> sheet = wb.getSheet(15)
+                    "인천광역시" -> sheet = wb.getSheet(16)
+                }
+
                 if (sheet != null) {
-                    val colTotal = sheet.columns
                     val rowIndexStart = 1
                     val rowTotal = sheet.rows-1
                     Log.d("rowTotal", "$rowTotal")
