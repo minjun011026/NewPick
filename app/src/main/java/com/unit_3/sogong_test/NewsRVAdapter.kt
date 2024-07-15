@@ -64,7 +64,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
+//        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val newsImageView: ImageView = view.findViewById(R.id.newsImageView)
         val moreVertBtn: ImageButton = view.findViewById(R.id.moreVertBtn)
         val buttonLayout: LinearLayout = view.findViewById(R.id.buttonLayout)
@@ -81,10 +81,10 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val article = newsArticles[position]
         holder.titleTextView.text = article.title
-        holder.descriptionTextView.text = article.description
+//        holder.descriptionTextView.text = article.description
         Glide.with(context)
             .load(article.imageUrl)
-            .placeholder(R.drawable.favorite)
+            .placeholder(R.drawable.no_image)
             .into(holder.newsImageView)
 
         holder.itemView.setOnClickListener {
@@ -125,11 +125,25 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
                 when (item.itemId) {
                     R.id.menu_bookmark -> {
                         Toast.makeText(context, "북마크 클릭", Toast.LENGTH_SHORT).show()
-                        
-                        //데이터 베이스에 해당 기사의 데이터(제목과 url 반드시 포함)을 저장해주는 작업이 필요함.
+
+                        // 데이터베이스에 해당 기사의 데이터(제목과 URL 반드시 포함)을 저장해주는 작업이 필요함.
+                        val dbHelper = DatabaseHelper()
+
+                        val newsTitle = article.title
+                        val newsUrl = article.link
+                        val news = BookmarkedNewsModel(newsTitle, "", 0, "", newsUrl)
+
+                        dbHelper.addBookmarkedNews(news) { isSuccess ->
+                            if (isSuccess) {
+                                Toast.makeText(context, "기사가 북마크되었습니다.", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(context, "북마크에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
                         true
                     }
+
                     R.id.menu_share_link -> {
 
                         Toast.makeText(context, "링크 공유 클릭", Toast.LENGTH_SHORT).show()

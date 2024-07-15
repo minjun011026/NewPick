@@ -255,6 +255,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                 curlongitude = longitude
             }
         }
+        Log.d("checheckchcheck", "($curlatitude, $curlongitude)")
     }
 
     private fun toast(text: String) {

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.TrendKeywordsModel
 import com.unit_3.sogong_test.TrendRVAdapter
@@ -38,7 +39,8 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         binding.bottomNavigationChat.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_chatFragment)
+//            it.findNavController().navigate(R.id.action_homeFragment_to_chatFragment)
+            startActivity(Intent(context, MapViewActivity::class.java))
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
            it.findNavController().navigate(R.id.action_homeFragment_to_myKeywordFragment)

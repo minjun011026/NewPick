@@ -20,6 +20,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 
+private const val s = "aticle#_article_content"
+
 class SummaryDialogFragment : DialogFragment() {
 
     private val client = OkHttpClient()
@@ -86,36 +88,21 @@ class SummaryDialogFragment : DialogFragment() {
                     Log.d("SummaryFragment", "div#_article_content : $content")
                 }
                 if(content.isBlank()){
-                    content = document.select("div.news_end").text()
+                    content = document.select("#articeBody").text()
                     Log.d("SummaryFragment", "div.news_end : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("div#content").text()
-                    Log.d("SummaryFragment", "div#content : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("div#articleBodyContents").text()
-                    Log.d("SummaryFragment", "div#articleBodyContents : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("div._article_content").text()
-                    Log.d("SummaryFragment", "div._article_content : $content")
-                }
-                if (content.isBlank()) {
-                    content = document.select("div#newsEndContents").text()
-                    Log.d("SummaryFragment", "div#newsEndContents : $content")
                 }
                 if (content.isBlank()) {
                     content = document.select("#comp_news_article > div._article_content").text()
                     Log.d("SummaryFragment", "#comp_news_article > div._article_content : $content")
                 }
-
-//                // 기사 본문을 추출하는 로직
-//                val content = document.select("article#dic_area, div._article_content,div#articleBodyContents,div#content,div.news_end, article_content, div.article-body, span.article_p, div#newsEndContents,#comp_news_article > div._article_content")
-//                    .map { it.text() }
-//                    .firstOrNull { it.isNotBlank() } ?: "본문을 가져올 수 없습니다."
+                if (content.isBlank()) {
+                    content = document.select("div#content").text()
+                    Log.d("SummaryFragment", "div#content : $content")
+                }
 
                 Log.d("SummaryFragment", "Fetched content: $content")
+
+
                 callback(content)
             } catch (e: IOException) {
                 Log.e("SummaryFragment", "Failed to retrieve article content", e)

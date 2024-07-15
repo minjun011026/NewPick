@@ -6,36 +6,25 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/newsImageView"
-        android:layout_width="120dp"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin = "12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_foreground"
-        android:scaleType="fitXY"/>
-
     <TextView
         android:id="@+id/titleTextView"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
-        android:textSize="15sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toEndOf="@+id/newsImageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#3f63bf"
+        app:layout_constraintEnd_toStartOf="@+id/newsImageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="News Title" />
 
     <ImageButton
         android:id="@+id/moreVertBtn"
-        android:layout_width="24dp"
-        android:layout_height="36dp"
+        android:layout_width="36dp"
+        android:layout_height="9dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/more_vert"
+        android:src="@drawable/more"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -54,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/delete_icon_button" />
+
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
@@ -61,6 +51,24 @@
             android:background="@drawable/bell_icon_button" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/newsImageView"
+        android:layout_width="102dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toBottomOf="@id/moreVertBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/newsImageView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:text="News Description" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
