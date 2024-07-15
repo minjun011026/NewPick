@@ -37,22 +37,58 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/addressBtn1"
+                <LinearLayout
+                    android:id="@+id/btn1bg"
+                    android:layout_marginLeft="60dp"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="20sp"
-                    android:layout_marginStart="60dp"/>
+                    android:background="#d3d3d3">
+                    <Button
+                        android:id="@+id/addressBtn1"
+                        android:layout_width="110dp"
+                        android:layout_height="50dp"
+                        android:text="+"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:background="#00ff0000" />
+
+                    <ImageButton
+                        android:id="@+id/delbtn1"
+                        android:enabled="false"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/x_button"/>
+                </LinearLayout>
 
 
-                <Button
-                    android:id="@+id/addressBtn2"
+                <LinearLayout
+                    android:id="@+id/btn2bg"
+                    android:layout_marginLeft="60dp"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textSize="20sp"
-                    android:layout_marginStart="40dp"/>
+                    android:background="#d3d3d3">
+
+                    <Button
+                        android:id="@+id/addressBtn2"
+                        android:layout_width="110dp"
+                        android:layout_height="50dp"
+                        android:text="+"
+                        android:background="#00ff0000"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <ImageButton
+                        android:id="@+id/delbtn2"
+                        android:enabled="false"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/x_button"/>
+
+                </LinearLayout>
             </LinearLayout>
             <Button
                 android:id="@+id/locationSaveBtn"

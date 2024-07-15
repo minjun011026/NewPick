@@ -1,13 +1,17 @@
 package com.unit_3.sogong_test
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -55,6 +59,11 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     private var curlatitude = 0.0
     private var curlongitude = 0.0
     private lateinit var adminArea : String
+    private lateinit var btn1bg : LinearLayout
+    private lateinit var btn2bg : LinearLayout
+    private lateinit var delbtn1 :ImageButton
+    private lateinit var delbtn2 :ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,33 +73,59 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         } else {
             initMapView()
         }
+        btn1bg = findViewById<LinearLayout>(R.id.btn1bg)
+        btn2bg = findViewById<LinearLayout>(R.id.btn2bg)
+        delbtn1 = findViewById<ImageButton>(R.id.delbtn1)
+        delbtn2 = findViewById<ImageButton>(R.id.delbtn2)
         addressBtn1 = findViewById<Button>(R.id.addressBtn1)
         bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val bottomSheetView = LayoutInflater.from(applicationContext).inflate(R.layout.layout_bottom_sheet, null)
         listViewAdapter = ListViewAdapter(this, nearCity, bottomSheetDialog, this)
 
         addressBtn1.setOnClickListener{
-            if(addressName != ""){
-                readExcel(addressName)
-                bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
-                bottomSheetDialog.setContentView(bottomSheetView)
-                addressBtn1.text="+"
-                bottomSheetDialog.show()
-                addressName = ""
+            if(addressBtn1.text.toString() == "+") {
+                if (addressName != "") {
+                    readExcel(addressName)
+                    bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
+                    bottomSheetDialog.setContentView(bottomSheetView)
+                    addressBtn1.text = "+"
+                    bottomSheetDialog.show()
+                    addressName = ""
+                }
+            }else{
+                cameraMove(addressBtn1.text.toString())
             }
+        }
+
+        delbtn1.setOnClickListener{
+            addressBtn1.text = "+"
+            btn1bg.setBackgroundColor(Color.parseColor("#d3d3d3"))
+            delbtn1.setEnabled(false)
+            delbtn1.visibility = View.GONE
         }
 
         addressBtn2 = findViewById<Button>(R.id.addressBtn2)
 
         addressBtn2.setOnClickListener{
-            if(addressName != ""){
-                readExcel(addressName)
-                bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
-                bottomSheetDialog.setContentView(bottomSheetView)
-                addressBtn2.text="+"
-                bottomSheetDialog.show()
-                addressName = ""
+            if(addressBtn2.text.toString() == "+") {
+                if (addressName != "") {
+                    readExcel(addressName)
+                    bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
+                    bottomSheetDialog.setContentView(bottomSheetView)
+                    addressBtn2.text = "+"
+                    bottomSheetDialog.show()
+                    addressName = ""
+                }
+            }else{
+                cameraMove(addressBtn2.text.toString())
             }
+        }
+
+        delbtn2.setOnClickListener{
+            addressBtn2.text = "+"
+            btn2bg.setBackgroundColor(Color.parseColor("#d3d3d3"))
+            delbtn2.setEnabled(false)
+            delbtn2.visibility = View.GONE
         }
 
         val saveBtn = findViewById<Button>(R.id.locationSaveBtn)
@@ -109,23 +144,33 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         }
 
     }
-    override fun onItemClick(item: String){
-        if(addressBtn1.text.toString() == "+")
-            addressBtn1.text = item
-        else if(addressBtn2.text.toString() == "+")
-            addressBtn2.text = item
-        nearCity.clear()
 
+    private fun cameraMove(item : String){
         val geocoder = Geocoder(applicationContext, Locale.KOREAN)
         val laglng = geocoder.getFromLocationName(item, 1)
 
         val cameraUpdate= CameraUpdate.scrollAndZoomTo(
-
             LatLng(laglng!![0].latitude, laglng!![0].longitude), 15.0
         )
             .animate(CameraAnimation.Fly, 3000)
 
         naverMap.moveCamera(cameraUpdate)
+    }
+
+    override fun onItemClick(item: String){
+        if(addressBtn1.text.toString() == "+") {
+            addressBtn1.text = item.split(" ")[1]
+            btn1bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            delbtn1.setEnabled(true)
+            delbtn1.visibility = View.VISIBLE
+        }else if(addressBtn2.text.toString() == "+") {
+            addressBtn2.text = item.split(" ")[1]
+            btn2bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            delbtn2.setEnabled(true)
+            delbtn2.visibility = View.VISIBLE
+        }
+        nearCity.clear()
+        cameraMove(item)
         bottomSheetDialog.dismiss()
     }
 
