@@ -44,6 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="제목"
+        android:textSize="30sp"
+        android:fontFamily="@font/pretendard_semibold"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         tools:layout_editor_absoluteX="8dp" />
@@ -53,6 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="내가 쓴 글 내용"
+        android:textSize="24sp"
+        android:fontFamily="@font/pretendard_regular"
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         tools:layout_editor_absoluteX="8dp"/>
@@ -68,8 +72,8 @@
 
     <ImageView
         android:id="@+id/likeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/favorite"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,13 +81,23 @@
 
     <ImageView
         android:id="@+id/commentBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/chat"
         android:layout_marginTop="12dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintTop_toBottomOf="@+id/linkTextView"
         app:layout_constraintStart_toEndOf="@+id/likeBtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="좋아요 9999개"
+        android:fontFamily="@font/pretendard_regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/likeBtn" />
+
 
 
 

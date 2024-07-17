@@ -46,7 +46,7 @@ class FeedWriteActivity : AppCompatActivity() {
 
     fun getTime() : String{
         val currentDateTime = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy.MM.dd.HH:mm:ss", Locale.KOREA).format(currentDateTime)
+        val dateFormat = SimpleDateFormat("yyyy.MM.dd(E)HH:mm", Locale.KOREAN).format(currentDateTime)
         return dateFormat
     }
 

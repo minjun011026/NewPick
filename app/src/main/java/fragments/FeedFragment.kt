@@ -79,6 +79,8 @@ class FeedFragment : Fragment() {
                         Log.e("FeedFragment", "Error parsing data: ${e.message}")
                     }
                 }
+                // Reverse the list to show the most recent items at the top
+                items.reverse()
                 rvAdapter.notifyDataSetChanged()
             }
 
