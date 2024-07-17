@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_homeFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -32,6 +35,9 @@
         <action
             android:id="@+id/action_chatFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_chatFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
     <fragment
         android:id="@+id/myKeywordFragment"
@@ -46,6 +52,9 @@
         <action
             android:id="@+id/action_myKeywordFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_myKeywordFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
@@ -59,6 +68,27 @@
             app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_myPageFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="fragments.FeedFragment"
+        android:label="fragment_feed"
+        tools:layout="@layout/fragment_feed" >
+        <action
+            android:id="@+id/action_feedFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_myKeywordFragment"
+            app:destination="@id/myKeywordFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
     </fragment>
 </navigation>

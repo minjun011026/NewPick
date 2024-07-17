@@ -223,7 +223,7 @@
             android:layout_gravity="bottom"
             android:background="@color/white"
             android:orientation="horizontal"
-            android:weightSum="4">
+            android:weightSum="5">
 
             <ImageView
                 android:id="@+id/bottomNavigation_home"
@@ -245,6 +245,13 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:src="@drawable/icon_keyword_transparent" />
+
+            <ImageView
+                android:id="@+id/bottomNavigation_feed"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/chat" />
 
 
             <ImageView

@@ -49,6 +49,10 @@ class HomeFragment : Fragment() {
             it.findNavController().navigate(R.id.action_homeFragment_to_myPageFragment)
         }
 
+        binding.bottomNavigationFeed.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_feedFragment)
+        }
+
         // RecyclerView 초기화
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 

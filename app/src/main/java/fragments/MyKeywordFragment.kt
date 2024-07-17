@@ -51,6 +51,9 @@ class MyKeywordFragment : Fragment() {
         binding.bottomNavigationMyPage.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_myPageFragment)
         }
+        binding.bottomNavigationFeed.setOnClickListener {
+            it.findNavController().navigate(R.id.action_myKeywordFragment_to_feedFragment)
+        }
 
         binding.addKeywordBtn.setOnClickListener {
             val dialogFragment = AddKeywordDialogFragment()

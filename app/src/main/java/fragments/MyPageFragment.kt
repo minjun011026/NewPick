@@ -37,6 +37,9 @@ class MyPageFragment : Fragment() {
         binding.bottomNavigationMyKeyword.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_myKeywordFragment)
         }
+        binding.bottomNavigationFeed.setOnClickListener {
+            it.findNavController().navigate(R.id.action_myPageFragment_to_feedFragment)
+        }
 
 
         // Handle click on "내가 북마크한 글"

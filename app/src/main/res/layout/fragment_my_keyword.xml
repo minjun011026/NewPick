@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/white"
-                android:weightSum="4"
+                android:weightSum="5"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
@@ -96,6 +96,14 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:src="@drawable/news" />
+
+                <ImageView
+                    android:id="@+id/bottomNavigation_feed"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/chat" />
 
 
                 <ImageView
