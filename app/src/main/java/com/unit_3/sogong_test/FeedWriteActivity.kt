@@ -33,7 +33,7 @@ class FeedWriteActivity : AppCompatActivity() {
             Log.d(TAG, content)
             val userId = currentUser!!.uid
             val time = getTime()
-            val feed = database.getReference("feed")
+            val feed = database.getReference("feeds")
 
             feed
                 .push()
