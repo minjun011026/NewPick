@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.unit_3.sogong_test.FeedWriteActivity
 import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentFeedBinding
@@ -39,6 +40,10 @@ class FeedFragment : Fragment() {
 
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_feedFragment_to_homeFragment)
+        }
+
+        binding.addBtn.setOnClickListener {
+            startActivity(Intent(context, FeedWriteActivity::class.java))
         }
 
         // RecyclerView 초기화
