@@ -10,7 +10,7 @@
         android:id="@+id/imageArea"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/account_circle"
         app:civ_border_color="@color/black"
         app:civ_border_overlay="true"
         app:civ_border_width="0.5dp"
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/nameTextView"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginTop="12dp"
         android:layout_marginLeft="24dp"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/timeTextView"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:textSize="15sp"
         android:layout_marginTop="12dp"
