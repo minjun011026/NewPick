@@ -23,6 +23,10 @@ class FeedWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed_write)
 
+        val link = intent.getStringExtra("article_link")
+        val article_title = intent.getStringExtra("article_title")
+        Log.d("FeedWriteActivity", "link : $link, title : $article_title")
+
         binding.registerBtn.setOnClickListener {
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()
@@ -38,7 +42,7 @@ class FeedWriteActivity : AppCompatActivity() {
 
             // Ensure the postId is not null
             if (postId != null) {
-                val feed = FeedModel(postId, userId, title, time, content,0,0)
+                val feed = FeedModel(postId, userId, title, time, content, article_title, link,0,0)
                 newPostRef.setValue(feed)
             }
 

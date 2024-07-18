@@ -158,6 +158,20 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 
                         true
                     }
+
+                    R.id.menu_posting -> {
+
+                        Toast.makeText(context, "글 쓰기 클릭", Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(context, FeedWriteActivity::class.java).apply {
+                            putExtra("article_link", article.link)
+                            putExtra("article_title", article.title)
+                        }
+                        context.startActivity(intent)
+
+                        true
+                    }
+
                     else -> false
                 }
             }

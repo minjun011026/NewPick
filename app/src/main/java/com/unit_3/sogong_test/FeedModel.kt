@@ -6,6 +6,8 @@ data class FeedModel(
     val title: String = "", // 게시물 제목
     val time: String = "", // 게시물 작성 시간
     val content: String = "", // 게시물 내용
+    val articleTitle : String? ="", //기사 제목
+    val link : String? ="", //기사 링크
     var likes: Int = 0, // 좋아요 개수
     var commentsCnt: Int = 0, // 댓글 개수
     val likedUsers: MutableList<String> = mutableListOf(), // 좋아요를 누른 사용자 ID 목록

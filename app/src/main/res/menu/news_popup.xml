@@ -8,4 +8,8 @@
         android:id="@+id/menu_share_link"
         android:title="URL 공유"
         android:icon="@drawable/icon_share_url"/>
+    <item
+        android:id="@+id/menu_posting"
+        android:title="글 쓰기"
+        android:icon="@drawable/pencil"/>
 </menu>

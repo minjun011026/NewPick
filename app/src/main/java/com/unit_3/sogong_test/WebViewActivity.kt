@@ -5,7 +5,7 @@ import android.util.Log
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 
-class WebViewActivity : AppCompatActivity() {
+class  WebViewActivity : AppCompatActivity() {
     private val TAG = "WebViewActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {

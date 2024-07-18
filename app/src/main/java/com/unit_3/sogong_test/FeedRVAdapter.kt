@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             val commentBtn = itemView.findViewById<ImageView>(R.id.commentBtn)
             val likesTextView = itemView.findViewById<TextView>(R.id.likesTextView)
             val commentsTextView = itemView.findViewById<TextView>(R.id.commentsTextView)
+            val articleTextView = itemView.findViewById<TextView>(R.id.articleTextView)
 
             name.text = item.uid
             title.text = item.title
@@ -45,6 +47,15 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             content.text = item.content
             likesTextView.text = "좋아요 ${item.likes}개"
             commentsTextView.text = "댓글 ${item.commentsCnt}개 모두 보기"
+            articleTextView.text = item.articleTitle
+
+            // Check if articleTitle is null or empty
+            if (item.articleTitle.isNullOrEmpty()) {
+                articleTextView.visibility = View.GONE
+            } else {
+                articleTextView.visibility = View.VISIBLE
+                articleTextView.text = item.articleTitle
+            }
 
             likeBtn.setOnClickListener {
                 val currentUserId = auth.currentUser?.uid
@@ -75,6 +86,18 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                 val commentFragment = CommentBottomSheetDialogFragment.newInstance(item.id)
                 commentFragment.show(activity.supportFragmentManager, commentFragment.tag)
             }
+
+            articleTextView.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context,WebViewActivity::class.java).apply {
+                    putExtra("link", item.link)
+                }
+                context.startActivity(intent)
+            }
+
+
+
+
         }
 
         private fun updateLikesInDatabase(item: FeedModel) {

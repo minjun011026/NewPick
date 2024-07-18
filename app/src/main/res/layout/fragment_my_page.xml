@@ -90,6 +90,15 @@
                     android:textColor="@color/blue"
                     android:onClick="openBookmarkedNewsActivity" />
 
+
+                <TextView
+                    android:id="@+id/myFeedTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="내가 작성한 글"
+                    android:textColor="@color/blue" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

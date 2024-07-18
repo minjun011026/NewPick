@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_margin="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageArea"
@@ -62,11 +62,13 @@
         tools:layout_editor_absoluteX="8dp"/>
 
     <TextView
-        android:id="@+id/linkTextView"
+        android:id="@+id/articleTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:text="공유 링크"
+        android:textSize="20sp"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="기사 제목"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         tools:layout_editor_absoluteX="8dp" />
 
@@ -77,7 +79,7 @@
         android:layout_marginTop="12dp"
         android:src="@drawable/favorite"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linkTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/articleTextView" />
 
     <ImageView
         android:id="@+id/commentBtn"
@@ -86,7 +88,7 @@
         android:src="@drawable/chat"
         android:layout_marginTop="12dp"
         android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/linkTextView"
+        app:layout_constraintTop_toBottomOf="@+id/articleTextView"
         app:layout_constraintStart_toEndOf="@+id/likeBtn" />
 
     <TextView
@@ -110,6 +112,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/likesTextView" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#999999"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/commentsTextView"
+        tools:layout_editor_absoluteX="8dp" />
 
 
 
