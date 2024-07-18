@@ -49,7 +49,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageArea"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/no_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="20dp"

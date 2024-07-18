@@ -90,6 +90,7 @@
         app:layout_constraintStart_toEndOf="@+id/likeBtn" />
 
     <TextView
+        android:id="@+id/likesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -97,6 +98,17 @@
         android:fontFamily="@font/pretendard_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/likeBtn" />
+
+    <!-- 댓글 수 표시를 위한 TextView 추가 -->
+    <TextView
+        android:id="@+id/commentsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="댓글 9999개 모두 보기"
+        android:fontFamily="@font/pretendard_regular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/likesTextView" />
 
 
 
