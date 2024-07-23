@@ -131,14 +131,13 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         val saveBtn = findViewById<Button>(R.id.locationSaveBtn)
 
         saveBtn.setOnClickListener{
+            val database = Firebase.database
+            val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
+            myRef.removeValue()
             if(addressBtn1.text.toString()!="+") {
-                val database = Firebase.database
-                val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
                 myRef.push().setValue(addressBtn1.text.toString())
             }
             if(addressBtn2.text.toString()!="+"){
-                val database = Firebase.database
-                val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
                 myRef.push().setValue(addressBtn2.text.toString())
             }
         }
