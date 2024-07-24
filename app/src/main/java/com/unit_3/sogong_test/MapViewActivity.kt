@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Geocoder
@@ -32,6 +33,7 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.unit_3.sogong_test.databinding.ActivityMapViewBinding
+import fragments.MapNewsFragment
 import jxl.Sheet
 import jxl.Workbook
 import jxl.read.biff.BiffException
@@ -140,6 +142,11 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             if(addressBtn2.text.toString()!="+"){
                 myRef.push().setValue(addressBtn2.text.toString())
             }
+
+            // Intent를 사용하여 MapNewsActivity로 이동
+            val intent = Intent(this, MapNewsActivity::class.java)
+            startActivity(intent)
+
         }
 
     }

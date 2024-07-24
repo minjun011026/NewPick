@@ -27,13 +27,10 @@ import com.unit_3.sogong_test.R
 
 class MapNewsFragment : Fragment() {
     private val database = Firebase.database
-    val myRef = database.getReference("lcation")
+    val myRef = database.getReference("location")
     lateinit var recyclerview : RecyclerView
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val v= inflater.inflate(R.layout.fragment_map_news, container, false)
         val spinner = v.findViewById<Spinner>(R.id.city_spinner)

@@ -13,31 +13,14 @@
             android:id="@+id/action_homeFragment_to_myKeywordFragment"
             app:destination="@id/myKeywordFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
         <action
             android:id="@+id/action_homeFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/chatFragment"
-        android:name="fragments.CategoryNewsFragment"
-        android:label="fragment_chat">
         <action
-            android:id="@+id/action_chatFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_chatFragment_to_myKeywordFragment"
-            app:destination="@id/myKeywordFragment" />
-        <action
-            android:id="@+id/action_chatFragment_to_myPageFragment"
-            app:destination="@id/myPageFragment" />
-        <action
-            android:id="@+id/action_chatFragment_to_feedFragment"
-            app:destination="@id/feedFragment" />
+            android:id="@+id/action_homeFragment_to_mapNewsFragment"
+            app:destination="@id/mapNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myKeywordFragment"
@@ -47,14 +30,14 @@
             android:id="@+id/action_myKeywordFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_myKeywordFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <action
             android:id="@+id/action_myKeywordFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
         <action
             android:id="@+id/action_myKeywordFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_myKeywordFragment_to_mapNewsFragment"
+            app:destination="@id/mapNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
@@ -67,11 +50,11 @@
             android:id="@+id/action_myPageFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_myPageFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <action
             android:id="@+id/action_myPageFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_mapNewsFragment"
+            app:destination="@id/mapNewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
@@ -88,7 +71,25 @@
             android:id="@+id/action_feedFragment_to_myPageFragment"
             app:destination="@id/myPageFragment" />
         <action
-            android:id="@+id/action_feedFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            android:id="@+id/action_feedFragment_to_mapNewsFragment"
+            app:destination="@id/mapNewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapNewsFragment"
+        android:name="fragments.MapNewsFragment"
+        android:label="fragment_map_news"
+        tools:layout="@layout/fragment_map_news" >
+        <action
+            android:id="@+id/action_mapNewsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_mapNewsFragment_to_myKeywordFragment"
+            app:destination="@id/myKeywordFragment" />
+        <action
+            android:id="@+id/action_mapNewsFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_mapNewsFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
     </fragment>
 </navigation>
