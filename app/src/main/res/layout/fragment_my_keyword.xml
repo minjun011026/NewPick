@@ -82,7 +82,7 @@
                     android:src="@drawable/icon_home_transparent" />
 
                 <ImageView
-                    android:id="@+id/bottomNavigation_chat"
+                    android:id="@+id/bottomNavigation_local"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"

@@ -143,9 +143,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                 myRef.push().setValue(addressBtn2.text.toString())
             }
 
-            // Intent를 사용하여 MapNewsActivity로 이동
             val intent = Intent(this, MapNewsActivity::class.java)
             startActivity(intent)
+            finish()
 
         }
 

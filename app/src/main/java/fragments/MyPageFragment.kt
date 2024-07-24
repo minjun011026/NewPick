@@ -27,7 +27,7 @@ class MyPageFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
 
         // Bottom navigation click listeners
-        binding.bottomNavigationChat.setOnClickListener {
+        binding.bottomNavigationLocal.setOnClickListener {
 //            it.findNavController().navigate(R.id.action_myPageFragment_to_chatFragment)
             startActivity(Intent(context, MapViewActivity::class.java))
         }

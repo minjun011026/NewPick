@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
@@ -21,21 +23,44 @@ import com.google.firebase.database.database
 import com.unit_3.sogong_test.ApiSearchNews
 import com.unit_3.sogong_test.KeywordNewsAdapter
 import com.unit_3.sogong_test.KeywordNewsModel
+import com.unit_3.sogong_test.MainActivity
 import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
+import com.unit_3.sogong_test.databinding.FragmentMapNewsBinding
 
 
 class MapNewsFragment : Fragment() {
     private val database = Firebase.database
     val myRef = database.getReference("location")
     lateinit var recyclerview : RecyclerView
+    private lateinit var binding : FragmentMapNewsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val v= inflater.inflate(R.layout.fragment_map_news, container, false)
-        val spinner = v.findViewById<Spinner>(R.id.city_spinner)
+//        val v= inflater.inflate(R.layout.fragment_map_news, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map_news, container, false)
+
+        binding.bottomNavigationHome.setOnClickListener {
+            it.findNavController().navigate(R.id.action_mapNewsFragment_to_homeFragment)
+        }
+        binding.bottomNavigationMyKeyword.setOnClickListener {
+            it.findNavController().navigate(R.id.action_mapNewsFragment_to_myKeywordFragment)
+        }
+        binding.bottomNavigationMyPage.setOnClickListener{
+            it.findNavController().navigate(R.id.action_mapNewsFragment_to_myPageFragment)
+        }
+
+        binding.bottomNavigationFeed.setOnClickListener {
+            it.findNavController().navigate(R.id.action_mapNewsFragment_to_feedFragment)
+        }
+
+
+
+//        val spinner = v.findViewById<Spinner>(R.id.city_spinner)
+        val spinner = binding.citySpinner
         val cities = ArrayList<String>()
-        recyclerview = v.findViewById(R.id.rv)
+//        recyclerview = v.findViewById(R.id.rv)
+        recyclerview = binding.rv
 
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cities)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -76,7 +101,7 @@ class MapNewsFragment : Fragment() {
             }
         }
 
-        return v
+        return binding.root
     }
 
     private fun handleCitySelection(city: String) {

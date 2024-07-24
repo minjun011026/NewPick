@@ -1,9 +1,7 @@
 package com.unit_3.sogong_test
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 
 
 class MainActivity : AppCompatActivity() {

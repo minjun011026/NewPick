@@ -35,7 +35,7 @@ class FeedFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
-        binding.bottomNavigationChat.setOnClickListener {
+        binding.bottomNavigationLocal.setOnClickListener {
             startActivity(Intent(context, MapViewActivity::class.java))
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
