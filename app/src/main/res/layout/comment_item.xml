@@ -6,6 +6,7 @@
         android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/account_circle" />
@@ -46,29 +47,19 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <ImageView
                     android:id="@+id/likeBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/favorite" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/favorite" />
-
-                    <TextView
-                        android:layout_marginLeft="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="좋아요"/>
-
-                    <TextView
-                        android:id="@+id/likeCntTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="99" />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/likeCntTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="좋아요 0개"
+                    android:layout_marginStart="8dp"
+                    android:textSize="14sp" />
 
 
                 <TextView
@@ -86,33 +77,14 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/moreVertBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/more_vert"/>
 
-        <LinearLayout
-            android:id="@+id/buttonLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/delete_icon_button"
-                />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/bell_icon_button"
-                />
-        </LinearLayout>
 
 
     </LinearLayout>
 
 </layout>
+
