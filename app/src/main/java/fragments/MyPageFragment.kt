@@ -47,6 +47,10 @@ class MyPageFragment : Fragment() {
             openBookmarkedNewsActivity()
         }
 
+        binding.myFeedTextView.setOnClickListener {
+
+        }
+
         // 닉네임 변경 버튼 클릭 리스너 추가
         binding.buttonChangeNickname.setOnClickListener {
             val intent = Intent(requireContext(), ChangeNicknameActivity::class.java)
