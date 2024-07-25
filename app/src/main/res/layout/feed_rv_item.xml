@@ -19,25 +19,29 @@
 
     <TextView
         android:id="@+id/nameTextView"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:textSize="15sp"
+        android:fontFamily="@font/pretendard_semibold"
         app:layout_constraintStart_toEndOf="@+id/imageArea"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="닉네임" />
 
-
     <TextView
         android:id="@+id/timeTextView"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_regular"
         android:textSize="15sp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="74dp"
+        app:layout_constraintBottom_toTopOf="@+id/titleTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         tools:text="업로드 일시" />
+
+
 
     <TextView
         android:id="@+id/titleTextView"
@@ -47,7 +51,7 @@
         android:textSize="30sp"
         android:fontFamily="@font/pretendard_semibold"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/timeTextView"
         tools:layout_editor_absoluteX="8dp" />
 
     <TextView
@@ -62,6 +66,8 @@
         tools:layout_editor_absoluteX="8dp"/>
 
     <TextView
+        android:background="#999999"
+        android:textColor="@color/white"
         android:id="@+id/articleTextView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -112,6 +118,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/likesTextView" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -119,8 +126,6 @@
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/commentsTextView"
         tools:layout_editor_absoluteX="8dp" />
-
-
 
 
 

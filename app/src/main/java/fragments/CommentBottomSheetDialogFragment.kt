@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
@@ -22,6 +26,7 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var commentsRecyclerView: RecyclerView
     private lateinit var postCommentButton: Button
     private lateinit var commentEditText: EditText
+    private lateinit var noCommentLayout: LinearLayout
 
     private lateinit var feedId: String
 
@@ -46,6 +51,7 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
         commentsRecyclerView = view.findViewById(R.id.commentRecyclerView)
         postCommentButton = view.findViewById(R.id.postCommentButton)
         commentEditText = view.findViewById(R.id.commentEditText)
+        noCommentLayout = view.findViewById(R.id.no_comment_layout)
 
         commentsRecyclerView.layoutManager = LinearLayoutManager(context)
         commentsAdapter = CommentsAdapter(mutableListOf())
@@ -65,7 +71,8 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
         if (commentText.isNotBlank()) {
             val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
             val commentId = FirebaseDatabase.getInstance().reference.child("feeds").child(feedId).child("comments").push().key ?: ""
-            val comment = CommentModel(commentId, userId, commentText)
+            val currentTime = System.currentTimeMillis().toString() // Get current time in milliseconds
+            val comment = CommentModel(commentId, feedId, userId, commentText, currentTime)
 
             val feedRef = FirebaseDatabase.getInstance().reference.child("feeds").child(feedId)
 
@@ -89,6 +96,8 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
+
+
     private fun loadComments() {
         FirebaseDatabase.getInstance().reference.child("feeds").child(feedId).child("comments").addListenerForSingleValueEvent(object :
             ValueEventListener {
@@ -100,6 +109,14 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
                         comments.add(comment)
                     }
                 }
+                //댓글이 하나라도 작성되면 no_comment_layout이 사라지도록.
+                if (comments.isEmpty()) {
+                    noCommentLayout.visibility = View.VISIBLE
+                    commentsRecyclerView.visibility = View.GONE
+                } else {
+                    noCommentLayout.visibility = View.GONE
+                    commentsRecyclerView.visibility = View.VISIBLE
+                }
                 commentsAdapter.updateComments(comments)
             }
 
@@ -107,5 +124,24 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 // 댓글 로드 실패
             }
         })
+    }
+
+    private fun deleteComment(commentId: String) {
+        val feedRef = FirebaseDatabase.getInstance().reference.child("feeds").child(feedId)
+        feedRef.child("comments").child(commentId).removeValue()
+            .addOnSuccessListener {
+                // 댓글 수 감소
+                feedRef.child("commentsCnt").addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val commentsCnt = snapshot.getValue(Int::class.java) ?: 0
+                        feedRef.child("commentsCnt").setValue(commentsCnt - 1)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // 댓글 수 감소 실패
+                    }
+                })
+                loadComments() // 댓글 삭제 후 댓글 목록을 다시 로드
+            }
     }
 }
