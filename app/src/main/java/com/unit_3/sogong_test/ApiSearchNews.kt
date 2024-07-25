@@ -4,6 +4,7 @@ import android.text.Html
 import android.util.Log
 import org.json.JSONException
 import org.json.JSONObject
+import org.jsoup.Jsoup
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -95,6 +96,7 @@ object ApiSearchNews {
         var title: String
         var link:String
         var jsonObject: JSONObject? = null
+        var imageUrl : String
         try {
             jsonObject = JSONObject(responseBody.toString())
             val jsonArray = jsonObject.getJSONArray("items")
@@ -103,11 +105,9 @@ object ApiSearchNews {
                 val item = jsonArray.getJSONObject(i)
                 title = item.getString("title").stripHtmlAndDecodeEntities()
                 link = item.getString("link")
-//                title = title.replace("<b>","")
-//                title = title.replace("&quot;","\"")
-//                title = title.replace("</b>" ," ")
+                imageUrl = fetchImageUrlFromArticle(link).toString()
 
-                newsItem.add(KeywordNewsModel(title, link))
+                newsItem.add(KeywordNewsModel(title, link, imageUrl))
             }
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -117,6 +117,17 @@ object ApiSearchNews {
 
     fun String.stripHtmlAndDecodeEntities(): String {
         return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY).toString().trim()
+    }
+
+    private fun fetchImageUrlFromArticle(articleUrl: String): String? {
+        return try {
+            val doc = Jsoup.connect(articleUrl).get()
+            val imageElement = doc.select("meta[property=og:image]").first()
+            imageElement?.attr("content")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
 }
