@@ -269,7 +269,7 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
                         if (comment.userId == userId) {
                             showDeleteConfirmationDialog(context, comment)
                         } else {
-                            Toast.makeText(context, "자신이 작성한 글이 아닙니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "자신이 작성한 댓글이 아닙니다.", Toast.LENGTH_SHORT).show()
                         }
                         true
                     }

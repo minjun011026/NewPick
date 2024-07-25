@@ -57,19 +57,29 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                 articleTextView.text = item.articleTitle
             }
 
+            val currentUserId = auth.currentUser?.uid
+
+            // Update like button icon based on user's like status
+            if (item.likedUsers.contains(currentUserId)) {
+                likeBtn.setImageResource(R.drawable.heart)
+            } else {
+                likeBtn.setImageResource(R.drawable.favorite)
+            }
+
             likeBtn.setOnClickListener {
-                val currentUserId = auth.currentUser?.uid
                 if (currentUserId != null) {
                     if (!item.likedUsers.contains(currentUserId)) {
                         // 좋아요 추가
                         item.likes += 1
                         item.likedUsers.add(currentUserId)
                         likesTextView.text = "좋아요 ${item.likes}개"
+                        likeBtn.setImageResource(R.drawable.heart)
                     } else {
                         // 좋아요 취소
                         item.likes -= 1
                         item.likedUsers.remove(currentUserId)
                         likesTextView.text = "좋아요 ${item.likes}개"
+                        likeBtn.setImageResource(R.drawable.favorite)
                     }
                     updateLikesInDatabase(item)
                 }
