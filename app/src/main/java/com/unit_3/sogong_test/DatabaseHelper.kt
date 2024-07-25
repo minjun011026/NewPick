@@ -52,37 +52,16 @@ class DatabaseHelper {
         }
     }
 
-//    fun removeBookmarkedNews(news: BookmarkedNewsModel, callback: (Boolean) -> Unit) {
-//        val currentUser = FirebaseAuth.getInstance().currentUser
-//        if (currentUser != null) {
-//            val userId = currentUser.uid
-//            database.child(userId).orderByChild("link").equalTo(news.link).addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    for (childSnapshot in snapshot.children) {
-//                        childSnapshot.ref.removeValue()
-//                    }
-//                    callback(true)
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    callback(false)
-//                }
-//            })
-//        } else {
-//            callback(false)
-//        }
-//    }
-
     fun removeBookmarkedNews(news: BookmarkedNewsModel, callback: (Boolean) -> Unit) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) {
             val userId = currentUser.uid
-            database.child(userId).orderByChild("url").equalTo(news.url).addListenerForSingleValueEvent(object : ValueEventListener {
+            database.child(userId).orderByChild("link").equalTo(news.link).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     var itemDeleted = false
                     for (childSnapshot in snapshot.children) {
                         val currentNews = childSnapshot.getValue(BookmarkedNewsModel::class.java)
-                        if (currentNews != null && currentNews.url == news.url) {
+                        if (currentNews != null && currentNews.link == news.link) {
                             childSnapshot.ref.removeValue()
                             itemDeleted = true
                             break

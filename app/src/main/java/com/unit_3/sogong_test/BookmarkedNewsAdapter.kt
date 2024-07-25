@@ -2,14 +2,21 @@ package com.unit_3.sogong_test
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import fragments.SummaryDialogFragment
 
 class BookmarkedNewsAdapter(private val context: Context, private val newsItems: ArrayList<BookmarkedNewsModel>) :
     RecyclerView.Adapter<BookmarkedNewsAdapter.ViewHolder>() {
@@ -17,10 +24,11 @@ class BookmarkedNewsAdapter(private val context: Context, private val newsItems:
     private var itemClickListener: ((Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_bookmarked_news, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.news_rv_item, parent, false)
         return ViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(newsItems[position])
     }
@@ -32,20 +40,39 @@ class BookmarkedNewsAdapter(private val context: Context, private val newsItems:
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val newsTitleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         private val moreVertBtn: ImageButton = itemView.findViewById(R.id.moreVertBtn)
+        val newsArea = itemView.findViewById<LinearLayout>(R.id.newsArea)
+        val newsImage = itemView.findViewById<ImageView>(R.id.newsImageView)
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         fun bind(item: BookmarkedNewsModel) {
             newsTitleTextView.text = item.title
 
-            // Handle item click
-            itemView.setOnClickListener {
-                itemClickListener?.invoke(adapterPosition)
+            // Glide를 사용하여 이미지 로드
+            if (item.imageUrl.isNullOrEmpty()) {
+                newsImage.visibility = View.GONE // 이미지 URL이 없는 경우 이미지뷰를 숨깁니다.
+            } else {
+                newsImage.visibility = View.VISIBLE
+                Glide.with(itemView.context)
+                    .load(item.imageUrl)
+                    .placeholder(R.drawable.no_image) // 로딩 중에 표시할 기본 이미지
+                    .into(newsImage)
             }
+
+            newsArea.setOnClickListener {
+                val activity = itemView.context as? FragmentActivity
+                activity?.let {
+                    val dialogFragment = SummaryDialogFragment.newInstance(item.link)
+                    dialogFragment.show(it.supportFragmentManager, "SummaryDialogFragment")
+                }
+            }
+
 
             moreVertBtn.setOnClickListener {
                 showPopupMenu(item)
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         private fun showPopupMenu(item: BookmarkedNewsModel) {
             val popupMenu = PopupMenu(context, moreVertBtn)
             popupMenu.menuInflater.inflate(R.menu.bookmark_popup, popupMenu.menu)

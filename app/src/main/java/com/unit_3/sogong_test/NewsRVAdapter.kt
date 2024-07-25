@@ -92,7 +92,8 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
 
                         val newsTitle = article.title
                         val newsUrl = article.link
-                        val news = BookmarkedNewsModel(newsTitle, "", 0, "", newsUrl)
+                        val imageUrl = article.imageUrl
+                        val news = BookmarkedNewsModel(newsTitle, newsUrl, imageUrl)
 
                         dbHelper.addBookmarkedNews(news) { isSuccess ->
                             if (isSuccess) {
