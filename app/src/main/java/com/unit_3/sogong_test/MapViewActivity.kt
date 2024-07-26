@@ -81,6 +81,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         delbtn2 = findViewById<ImageButton>(R.id.delbtn2)
         addressBtn1 = findViewById<Button>(R.id.addressBtn1)
         bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
+        val city1 = intent.getStringExtra("지역1")
+        val city2 = intent.getStringExtra("지역2")
+
         val bottomSheetView = LayoutInflater.from(applicationContext).inflate(R.layout.layout_bottom_sheet, null)
         listViewAdapter = ListViewAdapter(this, nearCity, bottomSheetDialog, this)
 
@@ -149,6 +152,18 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
         }
 
+        if(city1!=null){
+            addressBtn1.text = city1
+            btn1bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            delbtn1.setEnabled(true)
+            delbtn1.visibility = View.VISIBLE
+        }
+        if(city2!=null){
+            addressBtn2.text = city2
+            btn2bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            delbtn2.setEnabled(true)
+            delbtn2.visibility = View.VISIBLE
+        }
     }
 
     private fun cameraMove(item : String){

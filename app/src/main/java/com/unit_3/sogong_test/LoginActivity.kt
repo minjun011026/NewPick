@@ -10,10 +10,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     private lateinit var passwordEditText: EditText
     private lateinit var showPasswordButton: ImageButton
     private var isPasswordVisible: Boolean = false
@@ -23,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference.child("users")
 
         // XML에서 뷰들을 찾아 변수에 할당
         val usernameEditText = findViewById<EditText>(R.id.username)
@@ -38,40 +45,24 @@ class LoginActivity : AppCompatActivity() {
             togglePasswordVisibility()
         }
 
-        // 이메일과 비밀번호를 사용한 로그인
+        // 로그인 버튼 클릭 리스너 설정
         loginButton.setOnClickListener {
-            val email = usernameEditText.text.toString()
+            val input = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
 
-            if (email.isEmpty() || password.isEmpty()) {
+            if (input.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "빈 칸 없이 입력하세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // FirebaseAuth를 사용하여 이메일과 비밀번호로 로그인 시도
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // 로그인 성공 시 처리
-                        Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                        // 다음 화면으로 이동
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        // 로그인 실패 시 처리
-                        Toast.makeText(this, "로그인 실패(비밀번호 또는 이메일을 확인해주세요.)", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            if (input.contains("@")) {
+                // 이메일로 로그인 시도
+                signInWithEmail(input, password)
+            } else {
+                // 닉네임으로 이메일 찾기 후 로그인 시도
+                signInWithNickname(input, password)
+            }
         }
-
-
-        // 회원가입 텍스트뷰 클릭 리스너 설정
-        //registerTextView.setOnClickListener {
-        // 회원가입 화면으로 이동하는 Intent 작성
-        // val intent = Intent(this, RegisterActivity::class.java)
-        // startActivity(intent)
-        // }
-
 
         // 구글 로그인 버튼 클릭 리스너 설정
         googleSignInButton.setOnClickListener {
@@ -79,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
             // ...
         }
 
-        forgotPasswordBtn.setOnClickListener{
+        forgotPasswordBtn.setOnClickListener {
             startActivity(Intent(this, FindPasswordActivity::class.java))
         }
 
@@ -102,5 +93,43 @@ class LoginActivity : AppCompatActivity() {
         isPasswordVisible = !isPasswordVisible
         // 커서를 맨 끝으로 이동하여 보이는 텍스트를 확인
         passwordEditText.setSelection(passwordEditText.text.length)
+    }
+
+    // 이메일로 로그인 시도
+    private fun signInWithEmail(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(this, "로그인 실패(비밀번호 또는 이메일을 확인해주세요.)", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    // 닉네임으로 이메일 찾기 후 로그인 시도
+    private fun signInWithNickname(nickname: String, password: String) {
+        database.orderByChild("nickname").equalTo(nickname)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // 닉네임에 해당하는 이메일 찾기
+                        val email = snapshot.children.first().child("email").getValue(String::class.java)
+                        if (email != null) {
+                            signInWithEmail(email, password)
+                        } else {
+                            Toast.makeText(this@LoginActivity, "이메일을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@LoginActivity, "해당 닉네임을 가진 사용자가 없습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@LoginActivity, "데이터베이스 오류: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 }

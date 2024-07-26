@@ -70,7 +70,10 @@
             android:exported="false" />
         <activity android:name=".ChangeNicknameActivity" />
         <activity android:name=".ChangeEmailActivity" />
-        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".VerifyCurrentPasswordActivity" />
+        <activity android:name=".ChangeNewPasswordActivity" />
+        <activity android:name=".MyPageActivity" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">
