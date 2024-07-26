@@ -1,6 +1,5 @@
 package fragments
 
-
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,12 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import com.unit_3.sogong_test.BookmarkedNewsActivity
-import com.unit_3.sogong_test.ChangeEmailActivity
-import com.unit_3.sogong_test.ChangeNicknameActivity
-import com.unit_3.sogong_test.ChangePasswordActivity
-import com.unit_3.sogong_test.MapViewActivity
-import com.unit_3.sogong_test.R
+import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
@@ -28,7 +22,6 @@ class MyPageFragment : Fragment() {
 
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_myPageFragment_to_chatFragment)
             startActivity(Intent(context, MapViewActivity::class.java))
         }
         binding.bottomNavigationHome.setOnClickListener {
@@ -41,14 +34,13 @@ class MyPageFragment : Fragment() {
             it.findNavController().navigate(R.id.action_myPageFragment_to_feedFragment)
         }
 
-
         // Handle click on "내가 북마크한 글"
         binding.bookmarkedNewsTextView.setOnClickListener {
             openBookmarkedNewsActivity()
         }
 
         binding.myFeedTextView.setOnClickListener {
-
+            // Your code to handle "내가 작성한 글" click
         }
 
         // 닉네임 변경 버튼 클릭 리스너 추가
@@ -69,10 +61,10 @@ class MyPageFragment : Fragment() {
             startActivity(intent)
         }
 
-        // SharedPreferences에서 닉네임 불러오기
+        // SharedPreferences에서 닉네임과 이메일 불러오기
         val sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-        val nickname = sharedPreferences.getString("nickname", "김나눔")
-        val email = sharedPreferences.getString("email", "nanseulgim365@gmail.com")
+        val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
+        val email = sharedPreferences.getString("email", "기본 이메일")
 
         binding.nicknameTextView.text = nickname
         binding.emailTextView.text = email
@@ -89,8 +81,8 @@ class MyPageFragment : Fragment() {
         super.onResume()
         // 닉네임과 이메일이 변경되었을 경우를 대비해 onResume에서 업데이트
         val sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-        val nickname = sharedPreferences.getString("nickname", "김나눔")
-        val email = sharedPreferences.getString("email", "nanseulgim365@gmail.com")
+        val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
+        val email = sharedPreferences.getString("email", "기본 이메일")
         binding.nicknameTextView.text = nickname
         binding.emailTextView.text = email
     }

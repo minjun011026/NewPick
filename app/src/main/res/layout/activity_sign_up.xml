@@ -32,15 +32,35 @@
 
 
 
-    <EditText
-        android:id="@+id/nameText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:hint="Full Name"
+        android:orientation="horizontal"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:background="@drawable/insert_box"/>
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/insert_box">
+
+        <EditText
+            android:id="@+id/nameText"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:background="@color/white"
+            android:inputType="textPassword"/>
+
+        <ImageButton
+            android:id="@+id/showequals"
+            android:layout_width="67dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:src="@drawable/equals_id" />
+
+    </LinearLayout>
+
+
 
     <EditText
         android:id="@+id/emailText"
@@ -92,12 +112,12 @@
 
         <EditText
             android:id="@+id/repeatPasswordText"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:hint="Repeat Password"
+            android:layout_weight="1"
             android:background="@color/white"
-            android:inputType="textPassword"/>
+            android:hint="Repeat Password"
+            android:inputType="textPassword" />
 
         <ImageButton
             android:id="@+id/showRepeatPassword"
