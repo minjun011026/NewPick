@@ -57,7 +57,7 @@ class MyPageFragment : Fragment() {
 
         // 비밀번호 변경 버튼 클릭 리스너 추가
         binding.buttonChangePassword.setOnClickListener {
-            val intent = Intent(requireContext(), ChangePasswordActivity::class.java)
+            val intent = Intent(requireContext(),  VerifyCurrentPasswordActivity::class.java)
             startActivity(intent)
         }
 
