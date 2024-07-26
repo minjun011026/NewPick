@@ -2,10 +2,12 @@ package fragments
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -16,14 +18,20 @@ import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_page, container, false)
-
-        // Initialize Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
+        sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+
+        // Initialize UI components
+        setupUI()
+
+        // Load dark mode preference
+        loadDarkModePreference()
 
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
@@ -69,7 +77,6 @@ class MyPageFragment : Fragment() {
         // 로그아웃 버튼 클릭 리스너 추가
         binding.buttonLogout.setOnClickListener {
             firebaseAuth.signOut()
-            // Navigate to login activity or main activity
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
             requireActivity().finish()  // Close MyPageActivity
@@ -80,19 +87,21 @@ class MyPageFragment : Fragment() {
             val user = firebaseAuth.currentUser
             user?.delete()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // User account deleted
                     val intent = Intent(requireContext(), LoginActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()  // Close MyPageActivity
                 } else {
                     // Handle failure
-                    // You can use Toast or other UI elements to notify the user
                 }
             }
         }
 
+        // 다크 모드 스위치 리스너 추가
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            setDarkMode(isChecked)
+        }
+
         // SharedPreferences에서 닉네임과 이메일 불러오기
-        val sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
         val email = sharedPreferences.getString("email", "기본 이메일")
 
@@ -100,6 +109,28 @@ class MyPageFragment : Fragment() {
         binding.emailTextView.text = email
 
         return binding.root
+    }
+
+    private fun setupUI() {
+        // Initialize any additional UI components if needed
+    }
+
+    private fun loadDarkModePreference() {
+        val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
+        binding.switchDarkMode.isChecked = isDarkMode
+        AppCompatDelegate.setDefaultNightMode(
+            if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        )
+    }
+
+    private fun setDarkMode(enabled: Boolean) {
+        AppCompatDelegate.setDefaultNightMode(
+            if (enabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        )
+        with(sharedPreferences.edit()) {
+            putBoolean("darkMode", enabled)
+            apply()
+        }
     }
 
     private fun openBookmarkedNewsActivity() {
@@ -110,7 +141,6 @@ class MyPageFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         // 닉네임과 이메일이 변경되었을 경우를 대비해 onResume에서 업데이트
-        val sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
         val email = sharedPreferences.getString("email", "기본 이메일")
         binding.nicknameTextView.text = nickname
