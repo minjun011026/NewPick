@@ -90,7 +90,6 @@
                     android:textColor="@color/blue"
                     android:onClick="openBookmarkedNewsActivity" />
 
-
                 <TextView
                     android:id="@+id/myFeedTextView"
                     android:layout_width="wrap_content"
@@ -179,6 +178,7 @@
                     android:background="@android:color/darker_gray" />
 
                 <!-- 기타 -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -188,38 +188,42 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/button_account_deletion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="회원 탈퇴" />
+                    android:text="회원 탈퇴"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/button_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="로그아웃"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="로그아웃" />
+                    android:text="다크모드" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="로그아웃" />
-
+                    android:text="기능1" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="로그아웃" />
+                    android:text="기능2" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="로그아웃" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="로그아웃" />
+                    android:text="기능3" />
 
             </LinearLayout>
         </ScrollView>
@@ -261,7 +265,6 @@
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:src="@drawable/chat" />
-
 
             <ImageView
                 android:id="@+id/bottomNavigation_my_page"
