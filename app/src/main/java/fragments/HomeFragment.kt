@@ -39,8 +39,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_homeFragment_to_chatFragment)
-            startActivity(Intent(context, MapViewActivity::class.java))
+            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
            it.findNavController().navigate(R.id.action_homeFragment_to_myKeywordFragment)

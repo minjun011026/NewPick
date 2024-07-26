@@ -36,7 +36,7 @@ class FeedFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
-            startActivity(Intent(context, MapViewActivity::class.java))
+            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
             it.findNavController().navigate(R.id.action_feedFragment_to_myKeywordFragment)

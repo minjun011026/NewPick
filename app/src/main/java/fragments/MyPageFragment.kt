@@ -35,7 +35,7 @@ class MyPageFragment : Fragment() {
 
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
-            startActivity(Intent(context, MapViewActivity::class.java))
+            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)
