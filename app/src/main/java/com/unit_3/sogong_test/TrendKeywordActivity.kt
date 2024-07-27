@@ -22,13 +22,14 @@ class TrendKeywordActivity : AppCompatActivity() {
 
     val clientId = BuildConfig.Naver_Client_ID
     val clientSecret = BuildConfig.Naver_Client_Secret
+    var keyword =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTrendKeywordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val keyword = intent.getStringExtra("keyword_title") ?: return
+        keyword = intent.getStringExtra("keyword_title") ?: return
         binding.keywordTextView.text = keyword
 
         thread {
@@ -82,7 +83,7 @@ class TrendKeywordActivity : AppCompatActivity() {
             val link = item.getString("link")
             val imageUrl = fetchImageUrlFromArticle(link)
 
-            articles.add(NewsModel(title, description, link, imageUrl))
+            articles.add(NewsModel(keyword, title, description, link, imageUrl))
         }
 
         return articles
