@@ -49,8 +49,9 @@ class FeedFragment : Fragment() {
             it.findNavController().navigate(R.id.action_feedFragment_to_homeFragment)
         }
 
-        binding.addBtn.setOnClickListener {
-            startActivity(Intent(context, FeedWriteActivity::class.java))
+
+        binding.filterBtn.setOnClickListener {
+
         }
 
         // Setup RecyclerView
