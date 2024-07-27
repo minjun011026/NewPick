@@ -37,6 +37,7 @@ class MyPageFragment : Fragment() {
     private lateinit var imageView: ImageView
     private var imageUri: Uri? = null
     private val defaultImageUrl = "URL_OF_DEFAULT_IMAGE"
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,6 +46,7 @@ class MyPageFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         imageView = binding.ivProfile
+        auth = FirebaseAuth.getInstance()
         imageView.setOnClickListener {
             showImagePickerDialog()
         }
@@ -204,8 +206,9 @@ class MyPageFragment : Fragment() {
     }
 
     private fun uploadImageToFirebase(fileUri: Uri) {
+        val user = auth.currentUser ?: return
         val storageRef = Firebase.storage.reference
-        val fileRef = storageRef.child("uploads/${System.currentTimeMillis()}.jpg")
+        val fileRef = storageRef.child("uploads/${user.uid}/${System.currentTimeMillis()}.jpg")
 
         fileRef.putFile(fileUri)
             .addOnSuccessListener {
@@ -218,8 +221,9 @@ class MyPageFragment : Fragment() {
             }
     }
     private fun saveImageUriToDatabase(downloadUri: String) {
+        val user = auth.currentUser ?: return
         val database = Firebase.database
-        val reference = database.getReference("users").child("profile_picture")
+        val reference = database.getReference("users").child(user.uid).child("profile_picture")
         reference.setValue(downloadUri)
     }
 
@@ -228,12 +232,13 @@ class MyPageFragment : Fragment() {
         saveImageUriToDatabase(defaultImageUrl)
     }
     private fun loadImageFromDatabase() {
+        val user = auth.currentUser ?: return
         val database = Firebase.database
-        val reference = database.getReference("users").child("profile_picture")
+        val reference = database.getReference("users").child(user.uid).child("profile_picture")
         reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val imageUrl = snapshot.getValue(String::class.java)
-                if (!imageUrl.isNullOrEmpty()) {
+                if (!imageUrl.isNullOrEmpty() && imageUrl != defaultImageUrl) {
                     Glide.with(requireActivity()).load(imageUrl).into(imageView)
                 } else {
                     imageView.setImageResource(R.drawable.default_image)
