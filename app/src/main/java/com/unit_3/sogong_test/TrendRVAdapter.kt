@@ -51,6 +51,7 @@ class TrendRVAdapter(private val keywords: MutableList<TrendKeywordsModel>) :
                     val database = Firebase.database
                     val myRef = database.getReference("keyword").child(Firebase.auth.currentUser!!.uid)
                     myRef.push().setValue(KeywordModel(keyword.toString()))
+                    Toast.makeText(context,"나의 키워드에 ${keyword} 등록했습니다.", Toast.LENGTH_LONG).show()
                 }
             }
         }
