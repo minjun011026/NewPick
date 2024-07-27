@@ -1,21 +1,22 @@
 package fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.unit_3.sogong_test.FeedModel
 import com.unit_3.sogong_test.FeedRVAdapter
-import com.unit_3.sogong_test.FeedWriteActivity
-import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentFeedBinding
 
@@ -24,6 +25,8 @@ class FeedFragment : Fragment() {
     private lateinit var database: DatabaseReference
     private lateinit var rvAdapter: FeedRVAdapter
     private val items = mutableListOf<FeedModel>()
+    private val filteredItems = mutableListOf<FeedModel>()
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,16 +52,32 @@ class FeedFragment : Fragment() {
             it.findNavController().navigate(R.id.action_feedFragment_to_homeFragment)
         }
 
-
-        binding.moreVertBtn.setOnClickListener {
-
-        }
-
         // Setup RecyclerView
         val rv: RecyclerView = binding.rv
-        rvAdapter = FeedRVAdapter(items)
+        rvAdapter = FeedRVAdapter(filteredItems)
         rv.adapter = rvAdapter
         rv.layoutManager = LinearLayoutManager(requireContext())
+
+        // Setup Spinner
+        val spinner: Spinner = binding.filterSpinner
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.feed_filter_options,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                filterData(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Do nothing
+            }
+        }
 
         // Load data from Firebase
         loadDataFromFirebase()
@@ -82,12 +101,28 @@ class FeedFragment : Fragment() {
                 }
                 // Reverse the list to show the most recent items at the top
                 items.reverse()
-                rvAdapter.notifyDataSetChanged()
+                filterData(binding.filterSpinner.selectedItemPosition)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e("FeedFragment", "Database error: ${error.message}")
             }
         })
+    }
+
+    private fun filterData(position: Int) {
+        val currentUserId = auth.currentUser?.uid
+        filteredItems.clear()
+        when (position) {
+            0 -> {
+                // 전체 게시물 보기
+                filteredItems.addAll(items)
+            }
+            1 -> {
+                // 내가 작성한 게시물 모아보기
+                filteredItems.addAll(items.filter { it.uid == currentUserId })
+            }
+        }
+        rvAdapter.notifyDataSetChanged()
     }
 }
