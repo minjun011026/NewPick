@@ -40,12 +40,12 @@
                     android:gravity="start"/>
 
                 <ImageView
-                    android:id="@+id/filterBtn"
+                    android:id="@+id/moreVertBtn"
                     android:layout_width="59dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="end"
                     android:padding="5dp"
-                    android:src="@drawable/filter" />
+                    android:src="@drawable/more_vert" />
             </LinearLayout>
 
             <!-- 구분선 -->

@@ -155,13 +155,18 @@
 
 package com.unit_3.sogong_test
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -198,6 +203,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             val commentsTextView = itemView.findViewById<TextView>(R.id.commentsTextView)
             val articleTextView = itemView.findViewById<TextView>(R.id.articleTextView)
             val articleImageView = itemView.findViewById<ImageView>(R.id.articleImageArea)
+            val moreVertBtn = itemView.findViewById<ImageView>(R.id.moreVertBtn)
 
             // Firebase에서 사용자 닉네임을 조회하여 설정
             usersDb.child(item.uid).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -241,6 +247,10 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             } else {
                 articleTextView.visibility = View.VISIBLE
                 articleTextView.text = item.articleTitle
+            }
+
+            moreVertBtn.setOnClickListener {
+                showPopupMenu(it, item)
             }
 
             val currentUserId = auth.currentUser?.uid
@@ -301,6 +311,50 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                 }
                 .addOnFailureListener { e ->
                     // 업데이트 실패
+                }
+        }
+
+        private fun showPopupMenu(view: View, item: FeedModel) {
+            val popupMenu = PopupMenu(view.context, view)
+            popupMenu.inflate(R.menu.feed_popup)
+            popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+                when (menuItem.itemId) {
+                    R.id.delete -> {
+                        val currentUserId = auth.currentUser?.uid
+                        if (currentUserId == item.uid) {
+                            showDeleteDialog(view.context, item)
+                        } else {
+                            Toast.makeText(view.context, "삭제 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
+
+        private fun showDeleteDialog(context: Context, item: FeedModel) {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("게시물 삭제")
+            builder.setMessage("정말 삭제하시겠습니까?")
+            builder.setPositiveButton("삭제") { _, _ ->
+                deleteFeedItem(item)
+            }
+            builder.setNegativeButton("취소", null)
+            builder.show()
+        }
+
+        private fun deleteFeedItem(item: FeedModel) {
+            db.child(item.id).removeValue()
+                .addOnSuccessListener {
+                    items.remove(item)
+                    notifyDataSetChanged()
+                    Toast.makeText(itemView.context, "게시물이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(itemView.context, "게시물 삭제에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                    Log.e("FeedRVAdapter", "Failed to delete feed item: ${e.message}")
                 }
         }
     }

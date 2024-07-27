@@ -41,6 +41,13 @@
         app:layout_constraintTop_toBottomOf="@+id/nameTextView"
         tools:text="업로드 일시" />
 
+    <ImageView
+        android:id="@+id/moreVertBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more_vert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
