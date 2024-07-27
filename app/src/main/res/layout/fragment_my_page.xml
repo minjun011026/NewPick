@@ -56,30 +56,55 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="8dp"
+                    android:paddingVertical="4dp"
                     android:text="회원정보"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/nicknameTextView"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="김나눔" />
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="?attr/selectableItemBackground"
+                            android:src="@drawable/default_image"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/emailTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="nanseulgim365@gmail.com" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+                        <TextView
+                            android:id="@+id/nicknameTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="김나눔" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="서울 동작구 흑석동" />
+                        <TextView
+                            android:id="@+id/emailTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="nanseulgim365@gmail.com" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="서울 동작구 흑석동" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/bookmarkedNewsTextView"

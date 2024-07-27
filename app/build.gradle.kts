@@ -92,4 +92,5 @@ dependencies {
     implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("net.sourceforge.jexcelapi:jxl:2.6.12")
+    implementation ("com.google.firebase:firebase-storage-ktx:20.0.0")
 }
