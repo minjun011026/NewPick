@@ -141,6 +141,7 @@ package com.unit_3.sogong_test
 
 import android.app.AlertDialog
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -153,6 +154,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.text.SimpleDateFormat
@@ -160,6 +162,8 @@ import java.util.Date
 import java.util.Locale
 
 class CommentsAdapter(private var comments: MutableList<CommentModel>) : RecyclerView.Adapter<CommentsAdapter.CommentViewHolder>() {
+
+    private val usersDb: DatabaseReference = FirebaseDatabase.getInstance().reference.child("users")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent, false)
@@ -188,7 +192,30 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
         private val moreVertBtn: ImageView = itemView.findViewById(R.id.moreVertBtn)
 
         fun bind(comment: CommentModel) {
-            uidTextView.text = comment.userId
+
+            // Firebase에서 사용자 닉네임을 조회하여 설정
+            usersDb.child(comment.userId).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val nickname = snapshot.child("nickname").getValue(String::class.java)
+                        Log.d("FeedRVAdapter", "Nickname for uid ${comment.userId}: $nickname")
+                        uidTextView.text = nickname ?: "Unknown"
+                    } else {
+                        Log.d("FeedRVAdapter", "User with uid ${comment.userId} does not exist.")
+                        uidTextView.text = "Unknown"
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // 오류 처리
+                    Log.e("FeedRVAdapter", "Error fetching nickname for uid ${comment.userId}: ${error.message}")
+                    uidTextView.text = "Unknown"
+                }
+            })
+
+
+
+//            uidTextView.text = comment.userId
             timeTextView.text = convertTimestampToDate(comment.time)
             commentTextView.text = comment.text
             likeCntTextView.text = comment.likes.toString()
