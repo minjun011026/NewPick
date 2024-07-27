@@ -325,7 +325,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                             val x = sheet.getCell(5, row).contents
                             val y = sheet.getCell(6, row).contents
                             if(sheet.getCell(2, row).contents.isNotEmpty() && sheet.getCell(3, row).contents.isEmpty()) {
-                                if(calculateDistance(curlatitude,curlongitude,x.toDouble(),y.toDouble()) < 20000.0)
+                                if(calculateDistance(curlatitude,curlongitude,x.toDouble(),y.toDouble()) < 10000.0)
                                    nearCity.add(localName+ " " + sheet.getCell(2, row).contents)
                             }
                         }
