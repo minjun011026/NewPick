@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -40,6 +41,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             val likesTextView = itemView.findViewById<TextView>(R.id.likesTextView)
             val commentsTextView = itemView.findViewById<TextView>(R.id.commentsTextView)
             val articleTextView = itemView.findViewById<TextView>(R.id.articleTextView)
+            val articleImageView = itemView.findViewById<ImageView>(R.id.articleImageArea)
 
             name.text = item.uid
             title.text = item.title
@@ -47,7 +49,17 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             content.text = item.content
             likesTextView.text = "좋아요 ${item.likes}개"
             commentsTextView.text = "댓글 ${item.commentsCnt}개 모두 보기"
+
             articleTextView.text = item.articleTitle
+
+            // Use Glide to load image and handle visibility
+            if (item.imageUrl.isNullOrEmpty()) {
+                articleImageView.visibility = View.GONE
+            } else {
+                articleImageView.visibility = View.VISIBLE
+                Glide.with(itemView.context).load(item.imageUrl).into(articleImageView)
+            }
+
 
             // Check if articleTitle is null or empty
             if (item.articleTitle.isNullOrEmpty()) {

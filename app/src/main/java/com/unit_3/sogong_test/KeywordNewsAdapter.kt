@@ -2,6 +2,7 @@ package com.unit_3.sogong_test
 
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: KeywordNewsAdapter.ViewHolder, position: Int) {
+        Log.d("KeywordNewsAdapter", "onBindViewHolder called for position $position")
         holder.bindItems(newsItems[position])
     }
 
@@ -66,6 +68,7 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
             }
 
             moreVertBtn.setOnClickListener {
+                Log.d("KeywordNewsAdapter", "moreVertBtn clicked")
                 showPopupMenu(it, item)
             }
         }
@@ -79,6 +82,7 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.menu_bookmark -> {
+                        Log.d("KeywordNewsAdapter", "menu_bookmark clicked")
                         Toast.makeText(context, "북마크 클릭", Toast.LENGTH_SHORT).show()
 
                         // 데이터베이스에 해당 기사의 데이터(제목과 URL 반드시 포함)을 저장해주는 작업이 필요함.
@@ -101,6 +105,7 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
                     }
 
                     R.id.menu_share_link -> {
+                        Log.d("KeywordNewsAdapter", "menu_share_link clicked")
                         Toast.makeText(context, "링크 공유 클릭", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(Intent.ACTION_SEND)
@@ -115,11 +120,17 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
                     }
 
                     R.id.menu_posting -> {
+                        Log.d("KeywordNewsAdapter", "menu_posting clicked")
                         Toast.makeText(context, "글 쓰기 클릭", Toast.LENGTH_SHORT).show()
+
+                        // 로그 추가
+                        Log.d("KeywordNewsAdapter", "Link: ${article.link}, Title: ${article.title}, ImageUrl: ${article.imageUrl}")
 
                         val intent = Intent(context, FeedWriteActivity::class.java).apply {
                             putExtra("article_link", article.link)
                             putExtra("article_title", article.title)
+                            putExtra("article_imageUrl", article.imageUrl)
+
                         }
                         context.startActivity(intent)
 

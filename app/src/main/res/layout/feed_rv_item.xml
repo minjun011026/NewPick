@@ -65,36 +65,52 @@
         app:layout_constraintTop_toBottomOf="@+id/titleTextView"
         tools:layout_editor_absoluteX="8dp"/>
 
-    <TextView
-        android:background="#999999"
-        android:textColor="@color/white"
-        android:id="@+id/articleTextView"
+    <LinearLayout
+        android:id="@+id/articleArea"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/pretendard_regular"
-        android:text="기사 제목"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView"
-        tools:layout_editor_absoluteX="8dp" />
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/articleImageArea"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <TextView
+            android:id="@+id/articleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#999999"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="기사 제목"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/likeBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/favorite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/articleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/articleArea" />
 
     <ImageView
         android:id="@+id/commentBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/chat"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/articleTextView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/articleArea"
         app:layout_constraintStart_toEndOf="@+id/likeBtn" />
 
     <TextView
@@ -104,8 +120,7 @@
         android:layout_marginTop="10dp"
         android:text="좋아요 9999개"
         android:fontFamily="@font/pretendard_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/likeBtn" />
+        app:layout_constraintTop_toBottomOf="@id/likeBtn"/>
 
     <!-- 댓글 수 표시를 위한 TextView 추가 -->
     <TextView
@@ -120,12 +135,13 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#999999"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/commentsTextView"
-        tools:layout_editor_absoluteX="8dp" />
+        android:background="#999999"
+        app:layout_constraintTop_toBottomOf="@+id/commentsTextView"
+        tools:ignore="Orientation" />
 
 
 

@@ -128,6 +128,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
                         val intent = Intent(context, FeedWriteActivity::class.java).apply {
                             putExtra("article_link", article.link)
                             putExtra("article_title", article.title)
+                            putExtra("article_imageUrl", article.imageUrl)
                         }
                         context.startActivity(intent)
 
