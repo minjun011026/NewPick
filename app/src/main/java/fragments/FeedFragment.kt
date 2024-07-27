@@ -50,7 +50,7 @@ class FeedFragment : Fragment() {
         }
 
 
-        binding.filterBtn.setOnClickListener {
+        binding.moreVertBtn.setOnClickListener {
 
         }
 
