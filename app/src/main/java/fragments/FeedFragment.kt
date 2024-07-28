@@ -1,5 +1,6 @@
 package fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,12 +12,14 @@ import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.unit_3.sogong_test.FeedModel
 import com.unit_3.sogong_test.FeedRVAdapter
+import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentFeedBinding
 
@@ -39,7 +42,7 @@ class FeedFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
+            checkUserLocation()
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
             it.findNavController().navigate(R.id.action_feedFragment_to_myKeywordFragment)
@@ -128,5 +131,29 @@ class FeedFragment : Fragment() {
             }
         }
         rvAdapter.notifyDataSetChanged()
+    }
+
+    private fun checkUserLocation() {
+        val currentUserId = auth.currentUser?.uid
+        currentUserId?.let {
+            val locationRef = FirebaseDatabase.getInstance().getReference("location").child(it)
+            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+                        // Location exists, navigate to MapNewsFragment
+                        findNavController().navigate(R.id.action_feedFragment_to_mapNewsFragment)
+                    } else {
+                        // No location, navigate to MapViewActivity
+                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+//                        intent.putExtra("from", "feed")
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("FeedFragment", "Database error: ${error.message}")
+                }
+            })
+        }
     }
 }

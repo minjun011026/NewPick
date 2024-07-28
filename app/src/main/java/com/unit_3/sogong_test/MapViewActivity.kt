@@ -19,9 +19,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraAnimation
@@ -39,6 +47,7 @@ import jxl.Workbook
 import jxl.read.biff.BiffException
 import java.io.IOException
 import java.util.Locale
+
 
 
 class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickListener {
@@ -70,6 +79,8 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_map_view)
+
+
         if (!hasPermission()) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, LOCATION_PERMISSION_REQUEST_CODE)
         } else {
@@ -146,9 +157,11 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                 myRef.push().setValue(addressBtn2.text.toString())
             }
 
-            val intent = Intent(this, MapNewsActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("fromActivity", "MapViewActivity")
             startActivity(intent)
             finish()
+
 
         }
 
@@ -165,6 +178,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             delbtn2.visibility = View.VISIBLE
         }
     }
+
 
     private fun cameraMove(item : String){
         val geocoder = Geocoder(applicationContext, Locale.KOREAN)
@@ -358,3 +372,4 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         return locationA.distanceTo(locationB) //거리값 미터 단위로 반환
     }
 }
+

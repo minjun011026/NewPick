@@ -1,7 +1,9 @@
 package fragments
 
 import KeywordRVAdapter
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.ktx.database
 import com.unit_3.sogong_test.KeywordModel
+import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
 
@@ -38,7 +41,7 @@ class MyKeywordFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_keyword, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
+            checkUserLocation()
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_homeFragment)
@@ -95,8 +98,30 @@ class MyKeywordFragment : Fragment() {
 
         return binding.root
     }
-}
+    private fun checkUserLocation() {
+        val currentUserId = Firebase.auth.currentUser?.uid
+        currentUserId?.let {
+            val locationRef = Firebase.database.getReference("location").child(it)
+            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+                        // Location exists, navigate to MapNewsFragment
+                        view?.findNavController()?.navigate(R.id.action_myKeywordFragment_to_mapNewsFragment)
+                    } else {
+                        // No location, navigate to MapViewActivity
+                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+//                        intent.putExtra("from", "myKeyword")
+                        startActivity(intent)
+                    }
+                }
 
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+                }
+            })
+        }
+    }
+}
 
 
 

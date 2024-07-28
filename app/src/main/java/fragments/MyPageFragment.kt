@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +23,12 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.model.Circle
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.database.ktx.database
 import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
@@ -62,7 +65,7 @@ class MyPageFragment : Fragment() {
 
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
+            checkUserLocation()
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)
@@ -251,5 +254,29 @@ class MyPageFragment : Fragment() {
                 // Handle database error
             }
         })
+    }
+
+    private fun checkUserLocation() {
+        val currentUserId = com.google.firebase.ktx.Firebase.auth.currentUser?.uid
+        currentUserId?.let {
+            val locationRef = com.google.firebase.ktx.Firebase.database.getReference("location").child(it)
+            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+                        // Location exists, navigate to MapNewsFragment
+                        view?.findNavController()?.navigate(R.id.action_myPageFragment_to_mapNewsFragment)
+                    } else {
+                        // No location, navigate to MapViewActivity
+                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+//                        intent.putExtra("from", "myPage")
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+                }
+            })
+        }
     }
 }
