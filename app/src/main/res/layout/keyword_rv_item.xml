@@ -1,54 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/keywordArea"
-            android:text="키워드명"
-            android:textSize="20sp"
-            android:textColor="#3f63bf"
-            android:layout_margin="20dp"
-            android:fontFamily="@font/pretendard_semibold"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="10dp"
-            android:layout_weight="1"/>
-
-        <ImageButton
-            android:id="@+id/moreVertBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:src="@drawable/more_vert"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="5"/>
 
         <LinearLayout
-            android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/delete_icon_button"
-                   />
+                <TextView
+                    android:id="@+id/keywordArea"
+                    android:text="키워드명"
+                    android:textSize="20sp"
+                    android:textColor="#3f63bf"
+                    android:fontFamily="@font/pretendard_semibold"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:gravity="center_vertical"
+                    android:padding="15dp"
+                    android:layout_weight="1"/>
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/moreVertBtn"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/bell_icon_button"
-                    />
+                    android:background="@color/white"
+                    android:src="@drawable/more_vert"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"/>
+
         </LinearLayout>
 
+<!--        <LinearLayout-->
+<!--            android:id="@+id/buttonLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:visibility="gone">-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/button1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/delete_icon_button"-->
+<!--                    />-->
+
+<!--                <Button-->
+<!--                    android:id="@+id/button2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/bell_icon_button"-->
+<!--                    />-->
+<!--        </LinearLayout>-->
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#999999"/>
 
 
 
