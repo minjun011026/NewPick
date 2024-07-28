@@ -56,6 +56,17 @@
                 android:background="@android:color/darker_gray"
                 android:layout_marginVertical="8dp"/>
 
+
+            <TextView
+                android:id="@+id/no_keyword_textview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="아직 등록된 키워드가 없습니다.\n키워드를 등록해보세요!"/>
+
+
             <!-- 키워드 리스트 -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"

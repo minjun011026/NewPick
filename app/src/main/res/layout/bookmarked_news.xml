@@ -39,6 +39,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/no_bookmarked_textview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="아직 북마크한 뉴스가 없습니다.\n다시 보고 싶은 뉴스를 북마크해보세요!"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBookmarkedNews"
         android:layout_width="match_parent"

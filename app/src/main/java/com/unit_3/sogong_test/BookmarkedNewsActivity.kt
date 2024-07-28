@@ -2,7 +2,9 @@ package com.unit_3.sogong_test
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +17,7 @@ class BookmarkedNewsActivity : AppCompatActivity() {
 
     private lateinit var previousBtn: ImageButton
     private lateinit var recyclerView: RecyclerView
+    private lateinit var noBookmarkedTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +29,12 @@ class BookmarkedNewsActivity : AppCompatActivity() {
 
         previousBtn = findViewById(R.id.previousBtn)
         recyclerView = findViewById(R.id.recyclerViewBookmarkedNews)
+        noBookmarkedTextView = findViewById(R.id.no_bookmarked_textview)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         loadBookmarkedNews()
-
         setupPreviousButton()
     }
 
@@ -40,12 +43,20 @@ class BookmarkedNewsActivity : AppCompatActivity() {
             newsItem.clear()
             newsItem.addAll(list)
             adapter.notifyDataSetChanged()
+
+            if (newsItem.isEmpty()) {
+                noBookmarkedTextView.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                noBookmarkedTextView.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
         }
 
         // Handle item click on RecyclerView
         adapter.setOnItemClickListener { position ->
             val selectedNews = newsItem[position]
-            //  openNewsDetailActivity(selectedNews.link)
+            // openNewsDetailActivity(selectedNews.link)
         }
     }
 
@@ -57,10 +68,4 @@ class BookmarkedNewsActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    // private fun openNewsDetailActivity(newsUrl: String) {
-    //  val intent = Intent(this, NewsDetailActivity::class.java)
-    //  intent.putExtra("newsUrl", newsUrl)
-    //  startActivity(intent)
-    // }
 }
