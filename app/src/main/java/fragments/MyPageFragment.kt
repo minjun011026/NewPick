@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.model.Circle
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -28,13 +29,14 @@ import com.google.firebase.database.database
 import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
+import de.hdodenhof.circleimageview.CircleImageView
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
     private val PICK_IMAGE_REQUEST = 1
-    private lateinit var imageView: ImageView
+    private lateinit var imageView: CircleImageView
     private var imageUri: Uri? = null
     private val defaultImageUrl = "URL_OF_DEFAULT_IMAGE"
     private lateinit var auth: FirebaseAuth
