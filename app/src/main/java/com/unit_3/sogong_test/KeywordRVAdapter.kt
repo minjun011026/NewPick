@@ -7,12 +7,14 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.database
 import com.unit_3.sogong_test.KeywordModel
 import com.unit_3.sogong_test.KeywordNewsActivity
 import com.unit_3.sogong_test.R
+import de.hdodenhof.circleimageview.CircleImageView
 
 class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
     RecyclerView.Adapter<KeywordRVAdapter.ViewHolder>() {
@@ -36,6 +38,18 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
         fun bindItems(item: KeywordModel) {
             val keywordArea = itemView.findViewById<TextView>(R.id.keywordArea)
             val moreVertButton = itemView.findViewById<ImageButton>(R.id.moreVertBtn)
+            val imageArea = itemView.findViewById<CircleImageView>(R.id.imageArea)
+
+            // 이미지 로드
+            if (item.imageUrl.isNotEmpty()) {
+                Glide.with(itemView.context)
+                    .load(item.imageUrl)
+                    .placeholder(R.drawable.default_image) // 로드 중 보여줄 이미지
+                    .error(R.drawable.no_image) // 로드 실패 시 보여줄 이미지
+                    .into(imageArea)
+            } else {
+                imageArea.setImageResource(R.drawable.default_image) // 이미지가 없을 경우 기본 이미지 설정
+            }
 
             keywordArea.text = item.keyword
 

@@ -50,18 +50,6 @@ class TrendRVAdapter(private val keywords: MutableList<TrendKeywordsModel>) :
                 context.startActivity(intent)
             }
 
-//            starBtn.setOnClickListener {
-//                val keyword = keyword.keyword
-//
-//                if(keyword != null){
-//                    val database = Firebase.database
-//                    val myRef = database.getReference("keyword").child(Firebase.auth.currentUser!!.uid)
-//                    myRef.push().setValue(KeywordModel(keyword.toString()))
-//                    Toast.makeText(context,"나의 키워드에 ${keyword} 등록했습니다.", Toast.LENGTH_LONG).show()
-//                }
-//            }
-//        }
-//    }
 
             // Initialize Firebase
             val auth = FirebaseAuth.getInstance()
@@ -94,7 +82,7 @@ class TrendRVAdapter(private val keywords: MutableList<TrendKeywordsModel>) :
                             starBtn.setImageResource(R.drawable.star_trans)
                         } else {
                             // If the keyword is not starred, add it
-                            val newKeyword = KeywordModel(keyword.keyword, "", true)
+                            val newKeyword = KeywordModel(keyword.keyword, "", true, keyword.imageUrl)
                             database.push().setValue(newKeyword)
                             Toast.makeText(context, "나의 키워드에 ${keyword.keyword} 등록했습니다.", Toast.LENGTH_LONG).show()
                             starBtn.setImageResource(R.drawable.star)

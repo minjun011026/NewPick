@@ -10,6 +10,15 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageArea"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/default_image"
+                    />
+
                 <TextView
                     android:id="@+id/keywordArea"
                     android:text="키워드명"
@@ -20,7 +29,7 @@
                     android:layout_height="80dp"
                     android:gravity="center_vertical"
                     android:padding="15dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="2"/>
 
                 <ImageButton
                     android:id="@+id/moreVertBtn"
