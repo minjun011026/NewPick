@@ -45,6 +45,7 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
         val article = newsArticles[position]
         val keyword = article.keyword
         val title = article.title
+        val newsImageView = holder.newsImageView
 
         // Create a SpannableString for the title
         val spannableTitle = SpannableString(title)
@@ -66,6 +67,9 @@ class NewsRVAdapter(private val context: Context, private val newsArticles: List
             .load(article.imageUrl)
             .placeholder(R.drawable.no_image)
             .into(holder.newsImageView)
+
+        //둥글게
+        newsImageView.clipToOutline = true
 
         holder.itemView.setOnClickListener {
             Toast.makeText(context, "기사 클릭", Toast.LENGTH_LONG).show()

@@ -1,20 +1,23 @@
 //package com.unit_3.sogong_test
 //
+//import android.content.Context
 //import android.content.Intent
+//import android.util.Log
 //import android.view.LayoutInflater
+//import android.view.MenuItem
 //import android.view.View
 //import android.view.ViewGroup
 //import android.widget.ImageView
+//import android.widget.PopupMenu
 //import android.widget.TextView
+//import android.widget.Toast
+//import androidx.appcompat.app.AlertDialog
 //import androidx.fragment.app.FragmentActivity
 //import androidx.recyclerview.widget.RecyclerView
 //import com.bumptech.glide.Glide
 //import com.google.firebase.auth.FirebaseAuth
-//import com.google.firebase.database.DataSnapshot
-//import com.google.firebase.database.DatabaseError
-//import com.google.firebase.database.DatabaseReference
-//import com.google.firebase.database.FirebaseDatabase
-//import com.google.firebase.database.ValueEventListener
+//import com.google.firebase.database.*
+//import de.hdodenhof.circleimageview.CircleImageView
 //
 //class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Adapter<FeedRVAdapter.ViewHolder>() {
 //    private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("feeds")
@@ -46,21 +49,31 @@
 //            val commentsTextView = itemView.findViewById<TextView>(R.id.commentsTextView)
 //            val articleTextView = itemView.findViewById<TextView>(R.id.articleTextView)
 //            val articleImageView = itemView.findViewById<ImageView>(R.id.articleImageArea)
+//            val moreVertBtn = itemView.findViewById<ImageView>(R.id.moreVertBtn)
+//            val imageArea = itemView.findViewById<CircleImageView>(R.id.imageArea)
+//
+//
 //
 //            // Firebase에서 사용자 닉네임을 조회하여 설정
-//            usersDb.child(item.uid).child("nickname").addListenerForSingleValueEvent(object : ValueEventListener {
+//            usersDb.child(item.uid).addListenerForSingleValueEvent(object : ValueEventListener {
 //                override fun onDataChange(snapshot: DataSnapshot) {
-//                    val nickname = snapshot.getValue(String::class.java)
-//                    name.text = nickname ?: "Unknown"
+//                    if (snapshot.exists()) {
+//                        val nickname = snapshot.child("nickname").getValue(String::class.java)
+//                        Log.d("FeedRVAdapter", "Nickname for uid ${item.uid}: $nickname")
+//                        name.text = nickname ?: "Unknown"
+//                    } else {
+//                        Log.d("FeedRVAdapter", "User with uid ${item.uid} does not exist.")
+//                        name.text = "Unknown"
+//                    }
 //                }
 //
 //                override fun onCancelled(error: DatabaseError) {
 //                    // 오류 처리
+//                    Log.e("FeedRVAdapter", "Error fetching nickname for uid ${item.uid}: ${error.message}")
 //                    name.text = "Unknown"
 //                }
 //            })
 //
-////            name.text = item.uid
 //            title.text = item.title
 //            time.text = item.time
 //            content.text = item.content
@@ -77,13 +90,16 @@
 //                Glide.with(itemView.context).load(item.imageUrl).into(articleImageView)
 //            }
 //
-//
 //            // Check if articleTitle is null or empty
 //            if (item.articleTitle.isNullOrEmpty()) {
 //                articleTextView.visibility = View.GONE
 //            } else {
 //                articleTextView.visibility = View.VISIBLE
 //                articleTextView.text = item.articleTitle
+//            }
+//
+//            moreVertBtn.setOnClickListener {
+//                showPopupMenu(it, item)
 //            }
 //
 //            val currentUserId = auth.currentUser?.uid
@@ -128,15 +144,11 @@
 //
 //            articleTextView.setOnClickListener {
 //                val context = itemView.context
-//                val intent = Intent(context,WebViewActivity::class.java).apply {
+//                val intent = Intent(context, WebViewActivity::class.java).apply {
 //                    putExtra("link", item.link)
 //                }
 //                context.startActivity(intent)
 //            }
-//
-//
-//
-//
 //        }
 //
 //        private fun updateLikesInDatabase(item: FeedModel) {
@@ -150,8 +162,54 @@
 //                    // 업데이트 실패
 //                }
 //        }
+//
+//        private fun showPopupMenu(view: View, item: FeedModel) {
+//            val popupMenu = PopupMenu(view.context, view)
+//            popupMenu.inflate(R.menu.feed_popup)
+//            popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+//                when (menuItem.itemId) {
+//                    R.id.delete -> {
+//                        val currentUserId = auth.currentUser?.uid
+//                        if (currentUserId == item.uid) {
+//                            showDeleteDialog(view.context, item)
+//                        } else {
+//                            Toast.makeText(view.context, "삭제 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+//                        }
+//                        true
+//                    }
+//                    else -> false
+//                }
+//            }
+//            popupMenu.show()
+//        }
+//
+//        private fun showDeleteDialog(context: Context, item: FeedModel) {
+//            val builder = AlertDialog.Builder(context)
+//            builder.setTitle("게시물 삭제")
+//            builder.setMessage("정말 삭제하시겠습니까?")
+//            builder.setPositiveButton("삭제") { _, _ ->
+//                deleteFeedItem(item)
+//            }
+//            builder.setNegativeButton("취소", null)
+//            builder.show()
+//        }
+//
+//        private fun deleteFeedItem(item: FeedModel) {
+//            db.child(item.id).removeValue()
+//                .addOnSuccessListener {
+//                    items.remove(item)
+//                    notifyDataSetChanged()
+//                    Toast.makeText(itemView.context, "게시물이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+//                }
+//                .addOnFailureListener { e ->
+//                    Toast.makeText(itemView.context, "게시물 삭제에 실패했습니다.", Toast.LENGTH_SHORT).show()
+//                    Log.e("FeedRVAdapter", "Failed to delete feed item: ${e.message}")
+//                }
+//        }
 //    }
 //}
+//
+
 
 package com.unit_3.sogong_test
 
@@ -163,6 +221,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
@@ -172,6 +231,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import de.hdodenhof.circleimageview.CircleImageView
 
 class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Adapter<FeedRVAdapter.ViewHolder>() {
     private val db: DatabaseReference = FirebaseDatabase.getInstance().reference.child("feeds")
@@ -200,18 +260,29 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             val likeBtn = itemView.findViewById<ImageView>(R.id.likeBtn)
             val commentBtn = itemView.findViewById<ImageView>(R.id.commentBtn)
             val likesTextView = itemView.findViewById<TextView>(R.id.likesTextView)
+            val articleArea = itemView.findViewById<LinearLayout>(R.id.articleArea)
             val commentsTextView = itemView.findViewById<TextView>(R.id.commentsTextView)
             val articleTextView = itemView.findViewById<TextView>(R.id.articleTextView)
             val articleImageView = itemView.findViewById<ImageView>(R.id.articleImageArea)
             val moreVertBtn = itemView.findViewById<ImageView>(R.id.moreVertBtn)
+            val imageArea = itemView.findViewById<CircleImageView>(R.id.imageArea)
 
-            // Firebase에서 사용자 닉네임을 조회하여 설정
+            articleArea.clipToOutline = true
+
+            // Firebase에서 사용자 닉네임 및 프로필 사진을 조회하여 설정
             usersDb.child(item.uid).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val nickname = snapshot.child("nickname").getValue(String::class.java)
+                        val profilePictureUrl = snapshot.child("profile_picture").getValue(String::class.java)
+
                         Log.d("FeedRVAdapter", "Nickname for uid ${item.uid}: $nickname")
+                        Log.d("FeedRVAdapter", "Profile picture URL for uid ${item.uid}: $profilePictureUrl")
+
                         name.text = nickname ?: "Unknown"
+                        if (!profilePictureUrl.isNullOrEmpty()) {
+                            Glide.with(itemView.context).load(profilePictureUrl).into(imageArea)
+                        }
                     } else {
                         Log.d("FeedRVAdapter", "User with uid ${item.uid} does not exist.")
                         name.text = "Unknown"
@@ -359,4 +430,3 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
         }
     }
 }
-

@@ -19,6 +19,7 @@
             android:layout_height="80dp"
             android:layout_margin = "12dp"
             tools:src="@drawable/ic_launcher_foreground"
+            android:background="@drawable/rounded_corner"
             android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/titleTextView"

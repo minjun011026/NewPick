@@ -151,12 +151,14 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -190,6 +192,7 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
         private val likeCntTextView: TextView = itemView.findViewById(R.id.likeCntTextView)
         private val replyBtn: TextView = itemView.findViewById(R.id.replyBtn)
         private val moreVertBtn: ImageView = itemView.findViewById(R.id.moreVertBtn)
+        private val profileImageView : CircleImageView = itemView.findViewById(R.id.profileImageView)
 
         fun bind(comment: CommentModel) {
 
@@ -198,9 +201,16 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         val nickname = snapshot.child("nickname").getValue(String::class.java)
+                        val profilePictureUrl = snapshot.child("profile_picture").getValue(String::class.java)
+
                         Log.d("FeedRVAdapter", "Nickname for uid ${comment.userId}: $nickname")
+                        Log.d("FeedRVAdapter", "Profile picture URL for uid ${comment.userId}: $profilePictureUrl")
+
                         uidTextView.text = nickname ?: "Unknown"
-                    } else {
+                        if (!profilePictureUrl.isNullOrEmpty()) {
+                            Glide.with(itemView.context).load(profilePictureUrl).into(profileImageView)
+                        }
+                    }else {
                         Log.d("FeedRVAdapter", "User with uid ${comment.userId} does not exist.")
                         uidTextView.text = "Unknown"
                     }

@@ -47,6 +47,9 @@ class KeywordNewsAdapter(val newsItems: ArrayList<KeywordNewsModel>) : RecyclerV
             val newsImage = itemView.findViewById<ImageView>(R.id.newsImageView)
             val moreVertBtn = itemView.findViewById<ImageButton>(R.id.moreVertBtn)
 
+            //둥글게
+            newsImage.clipToOutline = true
+
             val keyword = item.keyword
 
             // Create a SpannableString for the title
