@@ -67,10 +67,10 @@
 
 
         <ImageView
-            android:id="@+id/addKeywordBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/plus_blue"
+            android:id="@+id/starBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/star_trans"
             android:layout_gravity="center"
             />
 
