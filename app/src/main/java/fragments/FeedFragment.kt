@@ -122,6 +122,10 @@ class FeedFragment : Fragment() {
                 // 내가 작성한 게시물 모아보기
                 filteredItems.addAll(items.filter { it.uid == currentUserId })
             }
+            2 -> {
+                //내가 좋아요 누른 게시물 모아보기
+                filteredItems.addAll(items.filter { it.likedUsers.contains(currentUserId) })
+            }
         }
         rvAdapter.notifyDataSetChanged()
     }
