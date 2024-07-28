@@ -64,56 +64,53 @@
                 android:layout_marginTop="8dp"
                 android:layout_weight="1" />
 
-            <!-- 하단 네비게이션 바 -->
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:weightSum="5"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <ImageView
-                    android:id="@+id/bottomNavigation_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_home_transparent" />
-
-                <ImageView
-                    android:id="@+id/bottomNavigation_local"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_local_transparent" />
-
-                <ImageView
-                    android:id="@+id/bottomNavigation_my_keyword"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/news" />
-
-                <ImageView
-                    android:id="@+id/bottomNavigation_feed"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/chat" />
-
-
-                <ImageView
-                    android:id="@+id/bottomNavigation_my_page"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_account_transparent" />
-            </LinearLayout>
         </LinearLayout>
+
+        <!-- 하단 네비게이션 바 -->
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/white"
+            android:weightSum="5"
+            android:layout_gravity="bottom">
+
+            <ImageView
+                android:id="@+id/bottomNavigation_home"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_home_trans" />
+
+            <ImageView
+                android:id="@+id/bottomNavigation_local"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_local_trans" />
+
+            <ImageView
+                android:id="@+id/bottomNavigation_my_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_keyword" />
+
+            <ImageView
+                android:id="@+id/bottomNavigation_feed"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_feed_trans" />
+
+
+            <ImageView
+                android:id="@+id/bottomNavigation_my_page"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_my_page_trans" />
+        </LinearLayout>
+
     </FrameLayout>
 </layout>
