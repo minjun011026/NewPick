@@ -3,6 +3,7 @@ package com.unit_3.sogong_test
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -16,6 +17,8 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private var isNicknameChecked = false
+    private var isPasswordVisible = false
+    private var isRepeatPasswordVisible = false
 
     public override fun onStart() {
         super.onStart()
@@ -34,9 +37,21 @@ class SignUpActivity : AppCompatActivity() {
 
         val registerBtn = findViewById<Button>(R.id.registerBtn)
         val showEqualsBtn = findViewById<ImageButton>(R.id.showequals)
+        val showPasswordButton = findViewById<ImageButton>(R.id.showPassword)
+        val showRepeatPasswordButton = findViewById<ImageButton>(R.id.showRepeatPassword)
+        val passwordEditText = findViewById<EditText>(R.id.passwordText)
+        val repeatPasswordEditText = findViewById<EditText>(R.id.repeatPasswordText)
 
         showEqualsBtn.setOnClickListener {
             checkNicknameAvailability()
+        }
+
+        showPasswordButton.setOnClickListener {
+            togglePasswordVisibility(passwordEditText, showPasswordButton)
+        }
+
+        showRepeatPasswordButton.setOnClickListener {
+            togglePasswordVisibility(repeatPasswordEditText, showRepeatPasswordButton)
         }
 
         registerBtn.setOnClickListener {
@@ -63,6 +78,22 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "모든 필드를 채워주세요.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    // 비밀번호 보기/숨기기 기능 메서드
+    private fun togglePasswordVisibility(passwordEditText: EditText, showPasswordButton: ImageButton) {
+        if (isPasswordVisible) {
+            // 현재 보이는 상태 -> 비밀번호 숨기기
+            passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            showPasswordButton.setImageResource(R.drawable.eye) // 눈 감김 아이콘
+        } else {
+            // 현재 숨겨진 상태 -> 비밀번호 보이기
+            passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            showPasswordButton.setImageResource(R.drawable.eye_off) // 눈 뜸 아이콘
+        }
+        isPasswordVisible = !isPasswordVisible
+        // 커서를 맨 끝으로 이동하여 보이는 텍스트를 확인
+        passwordEditText.setSelection(passwordEditText.text.length)
     }
 
     private fun checkNicknameAvailability() {
@@ -130,5 +161,4 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     data class User(val nickname: String, val email: String, val uid: String, val password: String)
-
 }
