@@ -89,7 +89,15 @@ class SignUpActivity : AppCompatActivity() {
                 emailLayout.error = null
             }
 
-            if (password.isEmpty() || password.length < 8 || !password.matches(".*[A-Za-z].*".toRegex()) || !password.matches(".*[0-9].*".toRegex()) || !password.matches(".*[@#\$%^&+=].*".toRegex())) {
+            // 비밀번호 검증을 위한 정규 표현식 업데이트
+            val passwordRegex = ".*[A-Za-z].*".toRegex() // 영문자 포함
+            val numberRegex = ".*[0-9].*".toRegex() // 숫자 포함
+            val specialCharRegex = ".*[@#\$%^&*()!].*".toRegex() // 특수 기호 포함
+
+            if (password.isEmpty() || password.length < 8 ||
+                !password.matches(passwordRegex) ||
+                !password.matches(numberRegex) ||
+                !password.matches(specialCharRegex)) {
                 passwordLayout.error = "숫자+영문자+특수문자 조합으로 8자리 이상 입력해 주세요."
                 isValid = false
             } else {
@@ -145,7 +153,10 @@ class SignUpActivity : AppCompatActivity() {
             }
             R.id.passwordLayout, R.id.repeatPasswordLayout -> {
                 val password = layout.editText?.text.toString().trim()
-                if (password.isEmpty() || password.length < 8 || !password.matches(".*[A-Za-z].*".toRegex()) || !password.matches(".*[0-9].*".toRegex()) || !password.matches(".*[@#\$%^&+=].*".toRegex())) {
+                if (password.isEmpty() || password.length < 8 ||
+                    !password.matches(".*[A-Za-z].*".toRegex()) ||
+                    !password.matches(".*[0-9].*".toRegex()) ||
+                    !password.matches(".*[@#\$%^&*()!].*".toRegex())) {
                     setErrorMessage(layout, messageView, "숫자+영문자+특수문자 조합으로 8자리 이상 입력해 주세요.", false)
                 } else {
                     setErrorMessage(layout, messageView, null, true)
