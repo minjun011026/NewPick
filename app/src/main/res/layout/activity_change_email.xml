@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:hint="새 이메일 입력" />
 
+    
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
