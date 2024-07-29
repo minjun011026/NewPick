@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.unit_3.sogong_test.FeedModel
 import com.unit_3.sogong_test.FeedRVAdapter
+import com.unit_3.sogong_test.FeedWriteActivity
 import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentFeedBinding
@@ -54,6 +55,10 @@ class FeedFragment : Fragment() {
 
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_feedFragment_to_homeFragment)
+        }
+
+        binding.floatingBtn.setOnClickListener {
+            startActivity(Intent(context, FeedWriteActivity::class.java))
         }
 
         // Setup RecyclerView

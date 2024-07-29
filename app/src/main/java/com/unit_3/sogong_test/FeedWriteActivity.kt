@@ -43,6 +43,10 @@ class FeedWriteActivity : AppCompatActivity() {
                 .into(articleImageArea)
         }
 
+        binding.previousBtn.setOnClickListener {
+            finish()
+        }
+
         binding.registerBtn.setOnClickListener {
             val title = binding.titleEditText.text.toString()
             val content = binding.contentEditText.text.toString()
