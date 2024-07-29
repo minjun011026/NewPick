@@ -3,8 +3,11 @@ package com.unit_3.sogong_test
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.unit_3.sogong_test.databinding.ActivityFeedWriteBinding
@@ -17,7 +20,7 @@ class FeedWriteActivity : AppCompatActivity() {
     private val TAG = "FeedWriteActivity"
     private val database = FirebaseDatabase.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    val currentUser = auth.currentUser
+    private val currentUser = auth.currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,19 @@ class FeedWriteActivity : AppCompatActivity() {
         val link = intent.getStringExtra("article_link")
         val article_title = intent.getStringExtra("article_title")
         val imageUrl = intent.getStringExtra("article_imageUrl")
-        Log.d("FeedWriteActivity", "link : $link, title : $article_title, imageUrl : $imageUrl")
+        Log.d(TAG, "link : $link, title : $article_title, imageUrl : $imageUrl")
+
+        val articleTextView: TextView = findViewById(R.id.articleTextView)
+        val articleImageArea: ImageView = findViewById(R.id.articleImageArea)
+
+        articleTextView.text = article_title
+
+        // Load the image using Glide
+        if (!imageUrl.isNullOrEmpty()) {
+            Glide.with(this)
+                .load(imageUrl)
+                .into(articleImageArea)
+        }
 
         binding.registerBtn.setOnClickListener {
             val title = binding.titleEditText.text.toString()
@@ -43,7 +58,7 @@ class FeedWriteActivity : AppCompatActivity() {
 
             // Ensure the postId is not null
             if (postId != null) {
-                val feed = FeedModel(postId, userId, title, time, content, article_title, link, imageUrl,0,0)
+                val feed = FeedModel(postId, userId, title, time, content, article_title, link, imageUrl, 0, 0)
                 newPostRef.setValue(feed)
             }
 
@@ -51,7 +66,7 @@ class FeedWriteActivity : AppCompatActivity() {
         }
     }
 
-    fun getTime(): String {
+    private fun getTime(): String {
         val currentDateTime = Calendar.getInstance().time
         val dateFormat = SimpleDateFormat("yyyy.MM.dd(E) HH:mm", Locale.KOREAN).format(currentDateTime)
         return dateFormat

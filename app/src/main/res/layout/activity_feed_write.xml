@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -10,13 +11,13 @@
         tools:context=".FeedWriteActivity">
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" >
+            android:layout_margin="10dp">
 
             <ImageButton
+                android:id="@+id/previousBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
@@ -43,15 +44,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
+                android:backgroundTint="#0E49A0"
                 android:text="완료"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
         <EditText
@@ -61,14 +60,14 @@
             android:hint="제목"
             android:fontFamily="@font/pretendard_semibold"
             android:layout_margin="20dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="#000000"/>
+            android:background="#000000" />
 
         <EditText
             android:id="@+id/contentEditText"
@@ -78,7 +77,34 @@
             android:hint="여기에 피드 문구를 작성하세요."
             android:fontFamily="@font/pretendard_regular"
             android:layout_margin="20dp"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corner">
+
+            <TextView
+                android:id="@+id/articleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#999999"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="기사 제목"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+            <ImageView
+                android:id="@+id/articleImageArea"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:scaleType="fitXY"/>
+
+
+        </LinearLayout>
 
 
 

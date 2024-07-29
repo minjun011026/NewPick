@@ -83,7 +83,6 @@
 
         </LinearLayout>
 
-
         <!-- 하단 네비게이션 바 -->
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -129,6 +128,18 @@
                 android:layout_weight="1"
                 android:src="@drawable/navigation_my_page_trans" />
         </LinearLayout>
+
+        <!-- 플로팅 액션 버튼 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pencil"
+            android:layout_marginBottom="80dp"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="#B5D7FF"
+            app:elevation="6dp" />
+
     </FrameLayout>
 
 </layout>
