@@ -42,6 +42,7 @@ class FeedFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
+            it.findNavController().navigate(R.id.action_feedFragment_to_mapNewsFragment)
             checkUserLocation()
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
