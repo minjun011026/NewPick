@@ -4,23 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
-import com.google.android.gms.maps.model.Circle
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -29,6 +25,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import com.google.firebase.database.ktx.database
+import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
@@ -52,11 +49,14 @@ class MyPageFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         imageView = binding.ivProfile
         auth = FirebaseAuth.getInstance()
+
+        // Fetch user info from Firebase
+        fetchUserInfoFromFirebase()
+
         imageView.setOnClickListener {
             showImagePickerDialog()
         }
-        //이미지 가져오기
-        loadImageFromDatabase()
+
         // Initialize UI components
         setupUI()
 
@@ -131,13 +131,6 @@ class MyPageFragment : Fragment() {
             setDarkMode(isChecked)
         }
 
-        // SharedPreferences에서 닉네임과 이메일 불러오기
-        val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
-        val email = sharedPreferences.getString("email", "기본 이메일")
-
-        binding.nicknameTextView.text = nickname
-        binding.emailTextView.text = email
-
         return binding.root
     }
 
@@ -170,11 +163,8 @@ class MyPageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // 닉네임과 이메일이 변경되었을 경우를 대비해 onResume에서 업데이트
-        val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
-        val email = sharedPreferences.getString("email", "기본 이메일")
-        binding.nicknameTextView.text = nickname
-        binding.emailTextView.text = email
+        // Fetch user info from Firebase to ensure updated details are shown
+        fetchUserInfoFromFirebase()
     }
 
     private fun showImagePickerDialog() {
@@ -225,6 +215,7 @@ class MyPageFragment : Fragment() {
                 // Handle unsuccessful uploads
             }
     }
+
     private fun saveImageUriToDatabase(downloadUri: String) {
         val user = auth.currentUser ?: return
         val database = Firebase.database
@@ -236,22 +227,43 @@ class MyPageFragment : Fragment() {
         imageView.setImageResource(R.drawable.default_image) // 기본 이미지 리소스 설정
         saveImageUriToDatabase(defaultImageUrl)
     }
-    private fun loadImageFromDatabase() {
+
+    private fun loadImageFromDatabase(imageUrl: String) {
+        if (imageUrl != defaultImageUrl) {
+            Glide.with(requireActivity()).load(imageUrl).into(imageView)
+        } else {
+            imageView.setImageResource(R.drawable.default_image)
+        }
+    }
+
+    private fun fetchUserInfoFromFirebase() {
         val user = auth.currentUser ?: return
         val database = Firebase.database
-        val reference = database.getReference("users").child(user.uid).child("profile_picture")
-        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+        val userRef = database.getReference("users").child(user.uid)
+
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val imageUrl = snapshot.getValue(String::class.java)
-                if (!imageUrl.isNullOrEmpty() && imageUrl != defaultImageUrl) {
-                    Glide.with(requireActivity()).load(imageUrl).into(imageView)
-                } else {
-                    imageView.setImageResource(R.drawable.default_image)
+                val nickname = snapshot.child("nickname").getValue(String::class.java) ?: "기본 닉네임"
+                val email = snapshot.child("email").getValue(String::class.java) ?: "기본 이메일"
+                val profilePictureUrl = snapshot.child("profile_picture").getValue(String::class.java) ?: defaultImageUrl
+
+                // Update SharedPreferences
+                with(sharedPreferences.edit()) {
+                    putString("nickname", nickname)
+                    putString("email", email)
+                    putString("profile_picture", profilePictureUrl)
+                    apply()
                 }
+
+                // Update UI
+                binding.nicknameTextView.text = nickname
+                binding.emailTextView.text = email
+                loadImageFromDatabase(profilePictureUrl)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle database error
+                Log.e("MyPageFragment", "Database error: ${error.message}")
             }
         })
     }
@@ -268,7 +280,6 @@ class MyPageFragment : Fragment() {
                     } else {
                         // No location, navigate to MapViewActivity
                         val intent = Intent(requireContext(), MapViewActivity::class.java)
-//                        intent.putExtra("from", "myPage")
                         startActivity(intent)
                     }
                 }
