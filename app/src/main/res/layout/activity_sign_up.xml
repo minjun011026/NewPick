@@ -28,100 +28,165 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nicknameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/insert_box">
+        app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/nameText"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nick Name"
-            android:background="@color/white"  />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/insert_box">
 
-        <ImageButton
-            android:id="@+id/showequals"
-            android:layout_width="67dp"
+            <EditText
+                android:id="@+id/nameText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Nick Name"
+                android:background="@android:color/transparent" />
+
+            <ImageButton
+                android:id="@+id/checkNicknameBtn"
+                android:layout_width="67dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/equals_id" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/nicknameMessage"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:src="@drawable/equals_id" />
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/emailText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Enter Email"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        android:background="@drawable/insert_box"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginRight="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/insert_box">
+        app:errorEnabled="true">
 
         <EditText
-            android:id="@+id/passwordText"
-            android:layout_width="0dp"
-            android:layout_height="73dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Email"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/insert_box" />
 
-        <ImageButton
-            android:id="@+id/showPassword"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:src="@drawable/eye_off" />
+        <TextView
+            android:id="@+id/emailMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
-    </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
+        app:errorEnabled="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/insert_box">
+
+            <EditText
+                android:id="@+id/passwordText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="73dp"
+                android:background="@android:color/transparent"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp" />
+
+            <ImageButton
+                android:id="@+id/showPassword"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:src="@drawable/eye_off" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/passwordMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/repeatPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/insert_box">
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/repeatPasswordText"
-            android:layout_width="0dp"
-            android:layout_height="73dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="Repeat Password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/insert_box">
 
-        <ImageButton
-            android:id="@+id/showRepeatPassword"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:src="@drawable/eye_off" />
+            <EditText
+                android:id="@+id/repeatPasswordText"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="73dp"
+                android:background="@android:color/transparent"
+                android:hint="Repeat Password"
+                android:inputType="textPassword"
+                android:padding="10dp" />
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/showRepeatPassword"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:src="@drawable/eye_off" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/repeatPasswordMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/registerBtn"
@@ -133,6 +198,6 @@
         android:text="Register"
         android:backgroundTint="@color/custom"
         android:textColor="@color/white"
-        android:textSize="30sp"/>
+        android:textSize="30sp" />
 
 </LinearLayout>
