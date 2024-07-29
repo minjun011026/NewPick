@@ -266,6 +266,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             val articleImageView = itemView.findViewById<ImageView>(R.id.articleImageArea)
             val moreVertBtn = itemView.findViewById<ImageView>(R.id.moreVertBtn)
             val imageArea = itemView.findViewById<CircleImageView>(R.id.imageArea)
+            val moreLinearLayout = itemView.findViewById<LinearLayout>(R.id.moreLinearLayout)
 
             articleArea.clipToOutline = true
 
@@ -364,7 +365,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                 commentFragment.show(activity.supportFragmentManager, commentFragment.tag)
             }
 
-            articleTextView.setOnClickListener {
+            moreLinearLayout.setOnClickListener {
                 val context = itemView.context
                 val intent = Intent(context, WebViewActivity::class.java).apply {
                     putExtra("link", item.link)

@@ -83,12 +83,6 @@
         android:background="@drawable/rounded_corner"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/articleImageArea"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:scaleType="fitXY"/>
-
         <TextView
             android:id="@+id/articleTextView"
             android:layout_width="match_parent"
@@ -99,6 +93,37 @@
             android:padding="4dp"
             android:textColor="@color/white"
             android:textSize="20sp"/>
+        <ImageView
+            android:id="@+id/articleImageArea"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:id="@+id/moreLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#999999"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="더 알아보기"
+                android:padding="4dp"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="260dp"
+                android:src="@drawable/arrow_back" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -110,6 +135,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/favorite"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/articleArea" />
 
     <ImageView
@@ -129,7 +155,8 @@
         android:layout_marginTop="10dp"
         android:text="좋아요 9999개"
         android:fontFamily="@font/pretendard_regular"
-        app:layout_constraintTop_toBottomOf="@id/likeBtn"/>
+        app:layout_constraintTop_toBottomOf="@id/likeBtn"
+        tools:ignore="MissingConstraints" />
 
     <!-- 댓글 수 표시를 위한 TextView 추가 -->
     <TextView

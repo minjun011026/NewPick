@@ -65,7 +65,7 @@ class MyPageFragment : Fragment() {
 
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_myPageFragment_to_mapNewsFragment)
+//            it.findNavController().navigate(R.id.action_myPageFragment_to_mapNewsFragment)
             checkUserLocation()
         }
         binding.bottomNavigationHome.setOnClickListener {
