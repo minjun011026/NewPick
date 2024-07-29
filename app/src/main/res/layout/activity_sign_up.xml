@@ -79,24 +79,31 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
-        app:errorEnabled="true">
+        app:errorEnabled="false"
+        app:boxBackgroundMode="outline">
 
-        <EditText
-            android:id="@+id/emailText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Email"
-            android:inputType="textEmailAddress"
-            android:background="@drawable/insert_box" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/emailMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text=""
-            android:textColor="@color/yellow"
-            android:textSize="12sp" />
+            <EditText
+                android:id="@+id/emailText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/insert_box" />
+
+            <TextView
+                android:id="@+id/emailMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="12sp" />
+        </LinearLayout>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
