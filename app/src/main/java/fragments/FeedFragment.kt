@@ -20,6 +20,7 @@ import com.google.firebase.database.*
 import com.unit_3.sogong_test.FeedModel
 import com.unit_3.sogong_test.FeedRVAdapter
 import com.unit_3.sogong_test.FeedWriteActivity
+import com.unit_3.sogong_test.FeedWriteActivity2
 import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentFeedBinding
@@ -58,7 +59,7 @@ class FeedFragment : Fragment() {
         }
 
         binding.floatingBtn.setOnClickListener {
-            startActivity(Intent(context, FeedWriteActivity::class.java))
+            startActivity(Intent(context, FeedWriteActivity2::class.java))
         }
 
         // Setup RecyclerView
