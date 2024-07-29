@@ -342,9 +342,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
                         if (contents==localName) {
                             val x = sheet.getCell(5, row).contents
                             val y = sheet.getCell(6, row).contents
-                            if(sheet.getCell(2, row).contents.isNotEmpty() && sheet.getCell(3, row).contents.isEmpty()) {
+                            if(sheet.getCell(2, row).contents.isNotEmpty() && sheet.getCell(3, row).contents.isEmpty() && sheet.getCell(5, row).contents.isNotEmpty() && sheet.getCell(6, row).contents.isNotEmpty()) {
                                 if(calculateDistance(curlatitude,curlongitude,x.toDouble(),y.toDouble()) < 10000.0)
-                                   nearCity.add(localName+ " " + sheet.getCell(2, row).contents)
+                                    nearCity.add(localName + " " + sheet.getCell(2, row).contents)
                             }
                         }
                         row++
