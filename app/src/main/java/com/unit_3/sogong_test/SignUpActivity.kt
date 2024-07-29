@@ -42,9 +42,9 @@ class SignUpActivity : AppCompatActivity() {
         val repeatPasswordText = findViewById<EditText>(R.id.repeatPasswordText)
 
         nicknameText.addTextChangedListener(createTextWatcher(findViewById(R.id.nicknameLayout), findViewById(R.id.nicknameMessage)))
-        emailText.addTextChangedListener(createTextWatcher(findViewById(R.id.emailLayout), findViewById(R.id.emailMessage)))
-        passwordText.addTextChangedListener(createTextWatcher(findViewById(R.id.passwordLayout), findViewById(R.id.passwordMessage)))
-        repeatPasswordText.addTextChangedListener(createTextWatcher(findViewById(R.id.repeatPasswordLayout), findViewById(R.id.repeatPasswordMessage)))
+//        emailText.addTextChangedListener(createTextWatcher(findViewById(R.id.emailLayout), findViewById(R.id.emailMessage)))
+//        passwordText.addTextChangedListener(createTextWatcher(findViewById(R.id.passwordLayout), findViewById(R.id.passwordMessage)))
+//        repeatPasswordText.addTextChangedListener(createTextWatcher(findViewById(R.id.repeatPasswordLayout), findViewById(R.id.repeatPasswordMessage)))
 
         showPasswordBtn.setOnClickListener {
             togglePasswordVisibility(passwordText, showPasswordBtn)
