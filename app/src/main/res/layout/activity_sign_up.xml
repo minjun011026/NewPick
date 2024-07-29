@@ -89,9 +89,15 @@
             android:inputType="textEmailAddress"
             android:background="@drawable/insert_box" />
 
-
+        <TextView
+            android:id="@+id/emailMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordLayout"
@@ -127,7 +133,6 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/eye_off" />
         </LinearLayout>
-
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -165,7 +170,6 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/eye_off" />
         </LinearLayout>
-
 
     </com.google.android.material.textfield.TextInputLayout>
 

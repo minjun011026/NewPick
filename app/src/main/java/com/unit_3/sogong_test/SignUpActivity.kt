@@ -41,10 +41,18 @@ class SignUpActivity : AppCompatActivity() {
         val passwordText = findViewById<EditText>(R.id.passwordText)
         val repeatPasswordText = findViewById<EditText>(R.id.repeatPasswordText)
 
-        nicknameText.addTextChangedListener(createTextWatcher(findViewById(R.id.nicknameLayout), findViewById(R.id.nicknameMessage)))
-//        emailText.addTextChangedListener(createTextWatcher(findViewById(R.id.emailLayout), findViewById(R.id.emailMessage)))
-//        passwordText.addTextChangedListener(createTextWatcher(findViewById(R.id.passwordLayout), findViewById(R.id.passwordMessage)))
-//        repeatPasswordText.addTextChangedListener(createTextWatcher(findViewById(R.id.repeatPasswordLayout), findViewById(R.id.repeatPasswordMessage)))
+        val nicknameLayout = findViewById<TextInputLayout>(R.id.nicknameLayout)
+        val emailLayout = findViewById<TextInputLayout>(R.id.emailLayout)
+        val passwordLayout = findViewById<TextInputLayout>(R.id.passwordLayout)
+        val repeatPasswordLayout = findViewById<TextInputLayout>(R.id.repeatPasswordLayout)
+
+        val emailMessage = findViewById<TextView>(R.id.emailMessage)
+        val nicknameMessage = findViewById<TextView>(R.id.nicknameMessage)
+
+        nicknameText.addTextChangedListener(createTextWatcher(nicknameLayout, nicknameMessage))
+        emailText.addTextChangedListener(createTextWatcher(emailLayout, emailMessage))
+        passwordText.addTextChangedListener(createTextWatcher(passwordLayout, null))
+        repeatPasswordText.addTextChangedListener(createTextWatcher(repeatPasswordLayout, null))
 
         showPasswordBtn.setOnClickListener {
             togglePasswordVisibility(passwordText, showPasswordBtn)
@@ -60,11 +68,6 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         registerBtn.setOnClickListener {
-            val emailLayout = findViewById<TextInputLayout>(R.id.emailLayout)
-            val passwordLayout = findViewById<TextInputLayout>(R.id.passwordLayout)
-            val repeatPasswordLayout = findViewById<TextInputLayout>(R.id.repeatPasswordLayout)
-            val nicknameLayout = findViewById<TextInputLayout>(R.id.nicknameLayout)
-
             val email = emailText.text.toString().trim()
             val password = passwordText.text.toString().trim()
             val repeatPassword = repeatPasswordText.text.toString().trim()
@@ -112,7 +115,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun createTextWatcher(layout: TextInputLayout, messageView: TextView): TextWatcher {
+    private fun createTextWatcher(layout: TextInputLayout, messageView: TextView?): TextWatcher {
         return object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 validateInput(layout, messageView)
@@ -123,7 +126,7 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateInput(layout: TextInputLayout, messageView: TextView) {
+    private fun validateInput(layout: TextInputLayout, messageView: TextView?) {
         val input = layout.editText?.text.toString().trim()
         when (layout.id) {
             R.id.nicknameLayout -> {
@@ -137,7 +140,7 @@ class SignUpActivity : AppCompatActivity() {
                 if (input.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(input).matches()) {
                     setErrorMessage(layout, messageView, "올바른 이메일 형식이 아닙니다.", false)
                 } else {
-                    setErrorMessage(layout, messageView, null, true)
+                    setErrorMessage(layout, messageView, "올바른 이메일 형식입니다.", true)
                 }
             }
             R.id.passwordLayout, R.id.repeatPasswordLayout -> {
@@ -151,17 +154,17 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun setErrorMessage(layout: TextInputLayout, messageView: TextView, message: String?, isValid: Boolean) {
+    private fun setErrorMessage(layout: TextInputLayout, messageView: TextView?, message: String?, isValid: Boolean) {
         if (isValid) {
             layout.error = null
             layout.boxStrokeColor = ContextCompat.getColor(this, R.color.green)
-            messageView.setTextColor(ContextCompat.getColor(this, R.color.green))
+            messageView?.setTextColor(ContextCompat.getColor(this, R.color.green))
         } else {
             layout.error = message
             layout.boxStrokeColor = ContextCompat.getColor(this, R.color.red)
-            messageView.setTextColor(ContextCompat.getColor(this, R.color.red))
+            messageView?.setTextColor(ContextCompat.getColor(this, R.color.red))
         }
-        messageView.text = message
+        messageView?.text = message
     }
 
     private fun togglePasswordVisibility(editText: EditText, button: ImageButton) {
@@ -187,6 +190,7 @@ class SignUpActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         setErrorMessage(nicknameLayout, nicknameMessage, "이미 사용 중인 닉네임입니다.", false)
+                        isNicknameChecked = false
                     } else {
                         setErrorMessage(nicknameLayout, nicknameMessage, "사용 가능한 닉네임입니다.", true)
                         isNicknameChecked = true
@@ -194,7 +198,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@SignUpActivity, "데이터베이스 오류: ${error.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUpActivity, "닉네임 체크 실패", Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -207,35 +211,38 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@SignUpActivity, "데이터베이스 오류: ${error.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUpActivity, "이메일 체크 실패", Toast.LENGTH_SHORT).show()
                     callback(false)
                 }
             })
     }
 
     private fun createUser(email: String, password: String, nickname: String) {
+        if (!isNicknameChecked) {
+            Toast.makeText(this, "닉네임을 확인해 주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val userId = auth.currentUser?.uid
-                    val user = User(nickname, email, userId ?: "", password)
+                    val userMap = hashMapOf("email" to email, "nickname" to nickname)
                     userId?.let {
-                        database.child(it).setValue(user)
+                        database.child(it).setValue(userMap).addOnCompleteListener { dbTask ->
+                            if (dbTask.isSuccessful) {
+                                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
-
-                    val sharedPreferences = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    editor.putString("nickname", nickname)
-                    editor.putString("email", email)
-                    editor.apply()
-
-                    Toast.makeText(baseContext, "회원가입 완료", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, LoginActivity::class.java))
                 } else {
-                    Toast.makeText(baseContext, "사용할 수 없는 이메일/비밀번호 형식입니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show()
                 }
             }
     }
-
-    data class User(val nickname: String, val email: String, val uid: String, val password: String)
 }
