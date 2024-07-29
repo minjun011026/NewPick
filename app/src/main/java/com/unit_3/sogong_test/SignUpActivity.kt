@@ -46,8 +46,8 @@ class SignUpActivity : AppCompatActivity() {
         val passwordLayout = findViewById<TextInputLayout>(R.id.passwordLayout)
         val repeatPasswordLayout = findViewById<TextInputLayout>(R.id.repeatPasswordLayout)
 
-        val emailMessage = findViewById<TextView>(R.id.emailMessage)
         val nicknameMessage = findViewById<TextView>(R.id.nicknameMessage)
+        val emailMessage = findViewById<TextView>(R.id.emailMessage)
 
         nicknameText.addTextChangedListener(createTextWatcher(nicknameLayout, nicknameMessage))
         emailText.addTextChangedListener(createTextWatcher(emailLayout, emailMessage))
