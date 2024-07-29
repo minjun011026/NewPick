@@ -38,7 +38,7 @@ object ApiSearchNews {
         requestHeaders["X-Naver-Client-Secret"] = clientSecret
         val responseBody = get(apiURL, requestHeaders)
 
-        parseData(responseBody)
+        parseData(responseBody, keyword)
 
         return newsItem
     }
@@ -92,7 +92,7 @@ object ApiSearchNews {
         }
     }
 
-    private fun parseData(responseBody: String) {
+    private fun parseData(responseBody: String, keyword: String) {
         var title: String
         var link:String
         var jsonObject: JSONObject? = null
@@ -107,7 +107,7 @@ object ApiSearchNews {
                 link = item.getString("link")
                 imageUrl = fetchImageUrlFromArticle(link).toString()
 
-                newsItem.add(KeywordNewsModel(title, link, imageUrl))
+                newsItem.add(KeywordNewsModel(keyword, title, link, imageUrl))
             }
         } catch (e: JSONException) {
             e.printStackTrace()

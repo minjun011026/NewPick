@@ -6,14 +6,22 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/nicknameEditText"
+        android:id="@+id/editTextNickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="새 닉네임을 입력하세요" />
+        android:hint="새 닉네임" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="현재 비밀번호"
+        android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonSave"
+        android:layout_width="375dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="저장" />
 </LinearLayout>

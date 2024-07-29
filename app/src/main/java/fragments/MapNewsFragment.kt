@@ -59,7 +59,6 @@ class MapNewsFragment : Fragment() {
         }
 
 
-
 //        val spinner = v.findViewById<Spinner>(R.id.city_spinner)
         val spinner = binding.citySpinner
 //        recyclerview = v.findViewById(R.id.rv)
@@ -108,6 +107,8 @@ class MapNewsFragment : Fragment() {
         }
         return binding.root
     }
+
+
 
     private fun handleCitySelection(city: String) {
         when (city) {

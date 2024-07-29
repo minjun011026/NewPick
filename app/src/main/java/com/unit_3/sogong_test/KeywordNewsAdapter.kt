@@ -2,6 +2,9 @@ package com.unit_3.sogong_test
 
 import android.content.Intent
 import android.os.Build
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fragments.SummaryDialogFragment
 
-
-
-class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : RecyclerView.Adapter<KeywordNewsAdapter.ViewHolder>(){
+class KeywordNewsAdapter(val newsItems: ArrayList<KeywordNewsModel>) : RecyclerView.Adapter<KeywordNewsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeywordNewsAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.news_rv_item, parent, false)
@@ -37,7 +38,7 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
         return newsItems.size
     }
 
-    inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         @RequiresApi(Build.VERSION_CODES.Q)
         fun bindItems(item: KeywordNewsModel) {
@@ -46,7 +47,26 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
             val newsImage = itemView.findViewById<ImageView>(R.id.newsImageView)
             val moreVertBtn = itemView.findViewById<ImageButton>(R.id.moreVertBtn)
 
-            newsTitle.text = item.title
+            //둥글게
+            newsImage.clipToOutline = true
+
+            val keyword = item.keyword
+
+            // Create a SpannableString for the title
+            val spannableTitle = SpannableString(item.title)
+            val keywordStartIndex = item.title.indexOf(keyword, ignoreCase = true)
+
+            if (keywordStartIndex != -1) {
+                val keywordEndIndex = keywordStartIndex + keyword.length
+                spannableTitle.setSpan(
+                    StyleSpan(android.graphics.Typeface.BOLD),
+                    keywordStartIndex,
+                    keywordEndIndex,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+
+            newsTitle.text = spannableTitle
 
             newsArea.setOnClickListener {
                 val activity = itemView.context as? FragmentActivity
@@ -154,4 +174,3 @@ class KeywordNewsAdapter (val newsItems : ArrayList<KeywordNewsModel>) : Recycle
         }
     }
 }
-

@@ -12,6 +12,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.TrendKeywordsModel
@@ -39,7 +45,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
+            checkUserLocation()
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
            it.findNavController().navigate(R.id.action_homeFragment_to_myKeywordFragment)
@@ -104,6 +110,30 @@ class HomeFragment : Fragment() {
                     Toast.makeText(requireContext(), "인기 검색어를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun checkUserLocation() {
+        val currentUserId = Firebase.auth.currentUser?.uid
+        currentUserId?.let {
+            val locationRef = Firebase.database.getReference("location").child(it)
+            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+                        // Location exists, navigate to MapNewsFragment
+                        view?.findNavController()?.navigate(R.id.action_homeFragment_to_mapNewsFragment)
+                    } else {
+                        // No location, navigate to MapViewActivity
+                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+//                        intent.putExtra("from", "home")
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+                }
+            })
         }
     }
 }

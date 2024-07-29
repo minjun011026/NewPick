@@ -30,22 +30,13 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:id="@+id/filterSpinner"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="피드"
-                    android:textSize="30sp"
-                    android:fontFamily="@font/ibmplexsanskr_semibold"
-                    android:layout_weight="1"
-                    android:gravity="start"/>
+                    android:entries="@array/feed_filter_options" />
 
-                <ImageView
-                    android:id="@+id/filterBtn"
-                    android:layout_width="59dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:padding="5dp"
-                    android:src="@drawable/filter" />
+
             </LinearLayout>
 
             <!-- 구분선 -->
@@ -59,62 +50,57 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"/>
+                android:layout_height="640dp"
+                android:layout_marginTop="8dp" />
 
 
 
-            <!-- 하단 네비게이션 바 -->
-            <LinearLayout
-                android:id="@+id/linearLayout3"
+        </LinearLayout>
+
+        <!-- 하단 네비게이션 바 -->
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/white"
+            android:weightSum="5"
+            android:layout_gravity="bottom">
+
+            <ImageView
+                android:id="@+id/bottomNavigation_home"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                android:weightSum="5"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_home_trans" />
 
-                <ImageView
-                    android:id="@+id/bottomNavigation_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/home" />
+            <ImageView
+                android:id="@+id/bottomNavigation_local"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_local_trans" />
 
-                <ImageView
-                    android:id="@+id/bottomNavigation_local"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_local_transparent" />
+            <ImageView
+                android:id="@+id/bottomNavigation_my_keyword"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_keyword_trans" />
 
-                <ImageView
-                    android:id="@+id/bottomNavigation_my_keyword"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_keyword_transparent" />
-
-                <ImageView
-                    android:id="@+id/bottomNavigation_feed"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/chat" />
+            <ImageView
+                android:id="@+id/bottomNavigation_feed"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_feed" />
 
 
-                <ImageView
-                    android:id="@+id/bottomNavigation_my_page"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/icon_account_transparent" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/bottomNavigation_my_page"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/navigation_my_page_trans" />
         </LinearLayout>
     </FrameLayout>
 

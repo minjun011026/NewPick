@@ -4,37 +4,39 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.database.ktx.database
+import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
+import de.hdodenhof.circleimageview.CircleImageView
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var sharedPreferences: SharedPreferences
     private val PICK_IMAGE_REQUEST = 1
-    private lateinit var imageView: ImageView
+    private lateinit var imageView: CircleImageView
     private var imageUri: Uri? = null
     private val defaultImageUrl = "URL_OF_DEFAULT_IMAGE"
     private lateinit var auth: FirebaseAuth
@@ -47,11 +49,14 @@ class MyPageFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         imageView = binding.ivProfile
         auth = FirebaseAuth.getInstance()
+
+        // Fetch user info from Firebase
+        fetchUserInfoFromFirebase()
+
         imageView.setOnClickListener {
             showImagePickerDialog()
         }
-        //이미지 가져오기
-        loadImageFromDatabase()
+
         // Initialize UI components
         setupUI()
 
@@ -61,6 +66,7 @@ class MyPageFragment : Fragment() {
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_mapNewsFragment)
+            checkUserLocation()
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)
@@ -84,13 +90,7 @@ class MyPageFragment : Fragment() {
         // 닉네임 변경 버튼 클릭 리스너 추가
         binding.buttonChangeNickname.setOnClickListener {
             val intent = Intent(requireContext(), ChangeNicknameActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 이메일 변경 버튼 클릭 리스너 추가
-        binding.buttonChangeEmail.setOnClickListener {
-            val intent = Intent(requireContext(), ChangeEmailActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_CHANGE_NICKNAME)
         }
 
         // 비밀번호 변경 버튼 클릭 리스너 추가
@@ -126,13 +126,6 @@ class MyPageFragment : Fragment() {
             setDarkMode(isChecked)
         }
 
-        // SharedPreferences에서 닉네임과 이메일 불러오기
-        val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
-        val email = sharedPreferences.getString("email", "기본 이메일")
-
-        binding.nicknameTextView.text = nickname
-        binding.emailTextView.text = email
-
         return binding.root
     }
 
@@ -163,13 +156,112 @@ class MyPageFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onResume() {
-        super.onResume()
-        // 닉네임과 이메일이 변경되었을 경우를 대비해 onResume에서 업데이트
-        val nickname = sharedPreferences.getString("nickname", "기본 닉네임")
-        val email = sharedPreferences.getString("email", "기본 이메일")
-        binding.nicknameTextView.text = nickname
-        binding.emailTextView.text = email
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK &&
+            data != null && data.data != null) {
+            imageUri = data.data
+            imageView.setImageURI(imageUri)
+            imageUri?.let { uri ->
+                uploadImageToFirebase(uri)
+            }
+        } else if (requestCode == REQUEST_CODE_CHANGE_NICKNAME && resultCode == Activity.RESULT_OK) {
+            val newNickname = data?.getStringExtra("nickname")
+            if (newNickname != null) {
+                binding.nicknameTextView.text = newNickname
+            }
+        }
+    }
+
+    private fun uploadImageToFirebase(fileUri: Uri) {
+        val user = auth.currentUser ?: return
+        val storageRef = Firebase.storage.reference
+        val fileRef = storageRef.child("uploads/${user.uid}/${System.currentTimeMillis()}.jpg")
+
+        fileRef.putFile(fileUri)
+            .addOnSuccessListener {
+                fileRef.downloadUrl.addOnSuccessListener { uri ->
+                    saveImageUriToDatabase(uri.toString())
+                }
+            }
+            .addOnFailureListener {
+                // Handle unsuccessful uploads
+            }
+    }
+
+    private fun saveImageUriToDatabase(downloadUri: String) {
+        val user = auth.currentUser ?: return
+        val database = Firebase.database
+        val reference = database.getReference("users").child(user.uid).child("profile_picture")
+        reference.setValue(downloadUri)
+    }
+
+    private fun setDefaultImage() {
+        imageView.setImageResource(R.drawable.default_image) // 기본 이미지 리소스 설정
+        saveImageUriToDatabase(defaultImageUrl)
+    }
+
+    private fun loadImageFromDatabase(imageUrl: String) {
+        if (imageUrl != defaultImageUrl) {
+            Glide.with(requireActivity()).load(imageUrl).into(imageView)
+        } else {
+            imageView.setImageResource(R.drawable.default_image)
+        }
+    }
+
+    private fun fetchUserInfoFromFirebase() {
+        val user = auth.currentUser ?: return
+        val database = Firebase.database
+        val userRef = database.getReference("users").child(user.uid)
+
+        userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val nickname = snapshot.child("nickname").getValue(String::class.java) ?: "기본 닉네임"
+                val email = snapshot.child("email").getValue(String::class.java) ?: "기본 이메일"
+                val profilePictureUrl = snapshot.child("profile_picture").getValue(String::class.java) ?: defaultImageUrl
+
+                // Update SharedPreferences
+                with(sharedPreferences.edit()) {
+                    putString("nickname", nickname)
+                    putString("email", email)
+                    putString("profile_picture", profilePictureUrl)
+                    apply()
+                }
+
+                // Update UI
+                binding.nicknameTextView.text = nickname
+                binding.emailTextView.text = email
+                loadImageFromDatabase(profilePictureUrl)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle database error
+                Log.e("MyPageFragment", "Database error: ${error.message}")
+            }
+        })
+    }
+
+    private fun checkUserLocation() {
+        val currentUserId = com.google.firebase.ktx.Firebase.auth.currentUser?.uid
+        currentUserId?.let {
+            val locationRef = com.google.firebase.ktx.Firebase.database.getReference("location").child(it)
+            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+                        // Location exists, navigate to MapNewsFragment
+                        view?.findNavController()?.navigate(R.id.action_myPageFragment_to_mapNewsFragment)
+                    } else {
+                        // No location, navigate to MapViewActivity
+                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+                }
+            })
+        }
     }
 
     private fun showImagePickerDialog() {
@@ -193,61 +285,7 @@ class MyPageFragment : Fragment() {
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK &&
-            data != null && data.data != null) {
-            imageUri = data.data
-            imageView.setImageURI(imageUri)
-            imageUri?.let { uri ->
-                uploadImageToFirebase(uri)
-            }
-        }
-    }
-
-    private fun uploadImageToFirebase(fileUri: Uri) {
-        val user = auth.currentUser ?: return
-        val storageRef = Firebase.storage.reference
-        val fileRef = storageRef.child("uploads/${user.uid}/${System.currentTimeMillis()}.jpg")
-
-        fileRef.putFile(fileUri)
-            .addOnSuccessListener {
-                fileRef.downloadUrl.addOnSuccessListener { uri ->
-                    saveImageUriToDatabase(uri.toString())
-                }
-            }
-            .addOnFailureListener {
-                // Handle unsuccessful uploads
-            }
-    }
-    private fun saveImageUriToDatabase(downloadUri: String) {
-        val user = auth.currentUser ?: return
-        val database = Firebase.database
-        val reference = database.getReference("users").child(user.uid).child("profile_picture")
-        reference.setValue(downloadUri)
-    }
-
-    private fun setDefaultImage() {
-        imageView.setImageResource(R.drawable.default_image) // 기본 이미지 리소스 설정
-        saveImageUriToDatabase(defaultImageUrl)
-    }
-    private fun loadImageFromDatabase() {
-        val user = auth.currentUser ?: return
-        val database = Firebase.database
-        val reference = database.getReference("users").child(user.uid).child("profile_picture")
-        reference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val imageUrl = snapshot.getValue(String::class.java)
-                if (!imageUrl.isNullOrEmpty() && imageUrl != defaultImageUrl) {
-                    Glide.with(requireActivity()).load(imageUrl).into(imageView)
-                } else {
-                    imageView.setImageResource(R.drawable.default_image)
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle database error
-            }
-        })
+    companion object {
+        private const val REQUEST_CODE_CHANGE_NICKNAME = 2
     }
 }

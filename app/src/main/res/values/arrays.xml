@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="feed_filter_options">
+        <item>전체 게시물 보기</item>
+        <item>나의 게시물 보기</item>
+        <item>내가 좋아한 게시물</item>
+    </string-array>
+</resources>

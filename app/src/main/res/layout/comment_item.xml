@@ -43,15 +43,17 @@
                 android:textSize="16sp" />
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/likeBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/favorite" />
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/favorite"
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/likeCntTextView"
@@ -59,7 +61,8 @@
                     android:layout_height="wrap_content"
                     android:text="좋아요 0개"
                     android:layout_marginStart="8dp"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:layout_gravity="center"/>
 
 
                 <TextView
@@ -68,6 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="답글 달기"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/pretendard_regular" />
 
 

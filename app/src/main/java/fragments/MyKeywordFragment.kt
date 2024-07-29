@@ -3,6 +3,7 @@ package fragments
 import KeywordRVAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +12,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.ktx.database
 import com.unit_3.sogong_test.KeywordModel
 import com.unit_3.sogong_test.MapViewActivity
 import com.unit_3.sogong_test.R
 import com.unit_3.sogong_test.databinding.FragmentMyKeywordBinding
-
 
 class MyKeywordFragment : Fragment() {
 
@@ -32,7 +32,6 @@ class MyKeywordFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -44,6 +43,7 @@ class MyKeywordFragment : Fragment() {
         binding.bottomNavigationLocal.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_mapNewsFragment)
             //startActivity(Intent(context, MapViewActivity::class.java))
+            checkUserLocation()
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myKeywordFragment_to_homeFragment)
@@ -60,7 +60,6 @@ class MyKeywordFragment : Fragment() {
             dialogFragment.show(childFragmentManager, "AddKeywordDialogFragment")
         }
 
-
         val rv: RecyclerView = binding.rv
 
         val items = ArrayList<KeywordModel>()
@@ -69,33 +68,62 @@ class MyKeywordFragment : Fragment() {
 
         rv.layoutManager = LinearLayoutManager(requireContext())
 
-
-        //데이터베이스에서 가져온 keyword들을 넣어주는 작업이 필요함.
+        // 데이터베이스에서 가져온 keyword들을 넣어주는 작업이 필요함.
         myRef.child(Firebase.auth.currentUser!!.uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 items.clear()
-                for(keyword in snapshot.children){
+                for (keyword in snapshot.children) {
                     try {
                         val getKeyword = keyword.getValue(KeywordModel::class.java)!!
                         getKeyword.url = keyword.key!!
                         items.add(getKeyword)
-                    }catch(e:Exception){
-
+                    } catch (e: Exception) {
+                        // Handle exception if any
                     }
                 }
                 rvAdapter.notifyDataSetChanged()
-            }
-            override fun onCancelled(error: DatabaseError) {
 
+                // Check if there are any keywords
+                if (items.isEmpty()) {
+                    binding.noKeywordTextview.visibility = View.VISIBLE
+                    rv.visibility = View.GONE
+                } else {
+                    binding.noKeywordTextview.visibility = View.GONE
+                    rv.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle database error if any
             }
         })
 
-
         return binding.root
     }
+    private fun checkUserLocation() {
+        val currentUserId = Firebase.auth.currentUser?.uid
+        currentUserId?.let {
+            val locationRef = Firebase.database.getReference("location").child(it)
+            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+                        // Location exists, navigate to MapNewsFragment
+                        view?.findNavController()?.navigate(R.id.action_myKeywordFragment_to_mapNewsFragment)
+                    } else {
+                        // No location, navigate to MapViewActivity
+                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+//                        intent.putExtra("from", "myKeyword")
+                        startActivity(intent)
+                    }
+                }
 
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+                }
+            })
+        }
+    }
 }
-
 
 
 
