@@ -138,11 +138,6 @@
                     android:layout_height="wrap_content"
                     android:text="닉네임 변경" />
 
-                <Button
-                    android:id="@+id/button_change_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="이메일 변경" />
 
                 <Button
                     android:id="@+id/button_change_password"

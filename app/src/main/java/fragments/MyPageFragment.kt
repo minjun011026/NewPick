@@ -89,13 +89,7 @@ class MyPageFragment : Fragment() {
         // 닉네임 변경 버튼 클릭 리스너 추가
         binding.buttonChangeNickname.setOnClickListener {
             val intent = Intent(requireContext(), ChangeNicknameActivity::class.java)
-            startActivity(intent)
-        }
-
-        // 이메일 변경 버튼 클릭 리스너 추가
-        binding.buttonChangeEmail.setOnClickListener {
-            val intent = Intent(requireContext(), ChangeEmailActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_CHANGE_NICKNAME)
         }
 
         // 비밀번호 변경 버튼 클릭 리스너 추가
@@ -161,33 +155,6 @@ class MyPageFragment : Fragment() {
         startActivity(intent)
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Fetch user info from Firebase to ensure updated details are shown
-        fetchUserInfoFromFirebase()
-    }
-
-    private fun showImagePickerDialog() {
-        val options = arrayOf("갤러리에서 사진 가져오기", "기본 이미지로 변경", "취소")
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("프로필 사진 변경")
-        builder.setItems(options) { dialog, which ->
-            when (which) {
-                0 -> openFileChooser()
-                1 -> setDefaultImage()
-                2 -> dialog.dismiss()
-            }
-        }
-        builder.show()
-    }
-
-    private fun openFileChooser() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK &&
@@ -196,6 +163,11 @@ class MyPageFragment : Fragment() {
             imageView.setImageURI(imageUri)
             imageUri?.let { uri ->
                 uploadImageToFirebase(uri)
+            }
+        } else if (requestCode == REQUEST_CODE_CHANGE_NICKNAME && resultCode == Activity.RESULT_OK) {
+            val newNickname = data?.getStringExtra("nickname")
+            if (newNickname != null) {
+                binding.nicknameTextView.text = newNickname
             }
         }
     }
@@ -289,5 +261,30 @@ class MyPageFragment : Fragment() {
                 }
             })
         }
+    }
+
+    private fun showImagePickerDialog() {
+        val options = arrayOf("갤러리에서 사진 가져오기", "기본 이미지로 변경", "취소")
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle("프로필 사진 변경")
+        builder.setItems(options) { dialog, which ->
+            when (which) {
+                0 -> openFileChooser()
+                1 -> setDefaultImage()
+                2 -> dialog.dismiss()
+            }
+        }
+        builder.show()
+    }
+
+    private fun openFileChooser() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
+
+    companion object {
+        private const val REQUEST_CODE_CHANGE_NICKNAME = 2
     }
 }
