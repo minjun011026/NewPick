@@ -90,9 +90,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="486dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1" />
+                android:layout_height="600dp" />
 
 
         </LinearLayout>
@@ -102,7 +100,7 @@
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:background="@color/white"
             android:weightSum="5"
             android:layout_gravity="bottom">
@@ -110,28 +108,28 @@
             <ImageView
                 android:id="@+id/bottomNavigation_home"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/navigation_home" />
 
             <ImageView
                 android:id="@+id/bottomNavigation_local"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/navigation_local_trans" />
 
             <ImageView
                 android:id="@+id/bottomNavigation_my_keyword"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/navigation_keyword_trans" />
 
             <ImageView
                 android:id="@+id/bottomNavigation_feed"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/navigation_feed_trans" />
 
@@ -139,7 +137,7 @@
             <ImageView
                 android:id="@+id/bottomNavigation_my_page"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/navigation_my_page_trans" />
         </LinearLayout>
