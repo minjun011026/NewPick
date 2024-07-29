@@ -42,7 +42,7 @@ class MyKeywordFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_keyword, container, false)
 
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
+            it.findNavController().navigate(R.id.action_myKeywordFragment_to_mapNewsFragment)
             //startActivity(Intent(context, MapViewActivity::class.java))
         }
         binding.bottomNavigationHome.setOnClickListener {

@@ -180,12 +180,12 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
     override fun onItemClick(item: String){
         if(addressBtn1.text.toString() == "+") {
-            addressBtn1.text = item.split(" ")[1]
+            addressBtn1.text = item
             btn1bg.setBackgroundColor(Color.parseColor("#6495ed"))
             delbtn1.setEnabled(true)
             delbtn1.visibility = View.VISIBLE
         }else if(addressBtn2.text.toString() == "+") {
-            addressBtn2.text = item.split(" ")[1]
+            addressBtn2.text = item
             btn2bg.setBackgroundColor(Color.parseColor("#6495ed"))
             delbtn2.setEnabled(true)
             delbtn2.visibility = View.VISIBLE
@@ -267,10 +267,15 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             }
         } else { // API 레벨이 33 미만인 경우
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-
             if (addresses != null) {
                 toast(addresses[0].adminArea)
-                addressName=addresses[0].locality
+                if(addresses[0].subLocality!=null) {
+                    toast(addresses[0].subLocality)
+                    addressName=addresses[0].subLocality
+                }else{
+                    toast(addresses[0].locality)
+                    addressName=addresses[0].locality
+                }
                 adminArea=addresses[0].adminArea
                 curlatitude = latitude
                 curlongitude = longitude
@@ -314,14 +319,13 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
                 nearCity.clear()
                 if (sheet != null) {
-                    val rowIndexStart = 1
                     val rowTotal = sheet.rows-1
                     Log.d("rowTotal", "$rowTotal")
 
-                    var row = rowIndexStart
+                    var row = 1
                     while (row < rowTotal) {
                         val contents = sheet.getCell(1, row).contents
-                        if (contents.contains(localName!!)) {
+                        if (contents==localName) {
                             val x = sheet.getCell(5, row).contents
                             val y = sheet.getCell(6, row).contents
                             if(sheet.getCell(2, row).contents.isNotEmpty() && sheet.getCell(3, row).contents.isEmpty()) {

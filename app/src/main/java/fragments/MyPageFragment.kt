@@ -60,7 +60,7 @@ class MyPageFragment : Fragment() {
 
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_mapNewsFragment)
+            it.findNavController().navigate(R.id.action_myPageFragment_to_mapNewsFragment)
         }
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)
