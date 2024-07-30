@@ -88,7 +88,7 @@ class AddKeywordDialogFragment : DialogFragment() {
     private fun saveKeywordToFirebase(keyword: String, imageUrl: String) {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("keyword").child(FirebaseAuth.getInstance().currentUser!!.uid)
-        myRef.push().setValue(KeywordModel(keyword, imageUrl)).addOnCompleteListener { task ->
+        myRef.push().setValue(KeywordModel(keyword, "", false, imageUrl)).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 // 키워드 저장 후 추천 키워드 가져오기
                 fetchRecommendedKeywords(keyword)
