@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -19,7 +18,7 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -50,6 +49,15 @@ class MyPageFragment : Fragment() {
         imageView = binding.ivProfile
         auth = FirebaseAuth.getInstance()
 
+        // Load dark mode preference
+        loadDarkModePreference()
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         // Fetch user info from Firebase
         fetchUserInfoFromFirebase()
 
@@ -57,25 +65,18 @@ class MyPageFragment : Fragment() {
             showImagePickerDialog()
         }
 
-        // Initialize UI components
-        setupUI()
-
-        // Load dark mode preference
-        loadDarkModePreference()
-
         // Bottom navigation click listeners
         binding.bottomNavigationLocal.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_myPageFragment_to_mapNewsFragment)
             checkUserLocation()
         }
         binding.bottomNavigationHome.setOnClickListener {
-            it.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)
+            view.findNavController().navigate(R.id.action_myPageFragment_to_homeFragment)
         }
         binding.bottomNavigationMyKeyword.setOnClickListener {
-            it.findNavController().navigate(R.id.action_myPageFragment_to_myKeywordFragment)
+            view.findNavController().navigate(R.id.action_myPageFragment_to_myKeywordFragment)
         }
         binding.bottomNavigationFeed.setOnClickListener {
-            it.findNavController().navigate(R.id.action_myPageFragment_to_feedFragment)
+            view.findNavController().navigate(R.id.action_myPageFragment_to_feedFragment)
         }
 
         // Handle click on "내가 북마크한 글"
@@ -83,28 +84,29 @@ class MyPageFragment : Fragment() {
             openBookmarkedNewsActivity()
         }
 
-        binding.myFeedTextView.setOnClickListener {
-            // Your code to handle "내가 작성한 글" click
+        // Handle click on "최근 본 아티클"
+        binding.recentArticlesTextView.setOnClickListener {
+            openRecentArticlesActivity()
         }
 
         // 닉네임 변경 버튼 클릭 리스너 추가
         binding.buttonChangeNickname.setOnClickListener {
-            val intent = Intent(requireContext(), ChangeNicknameActivity::class.java)
+            val intent = Intent(context, ChangeNicknameActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_CHANGE_NICKNAME)
         }
 
         // 비밀번호 변경 버튼 클릭 리스너 추가
         binding.buttonChangePassword.setOnClickListener {
-            val intent = Intent(requireContext(), VerifyCurrentPasswordActivity::class.java)
+            val intent = Intent(context, VerifyCurrentPasswordActivity::class.java)
             startActivity(intent)
         }
 
         // 로그아웃 버튼 클릭 리스너 추가
         binding.buttonLogout.setOnClickListener {
             firebaseAuth.signOut()
-            val intent = Intent(requireContext(), LoginActivity::class.java)
+            val intent = Intent(context, LoginActivity::class.java)
             startActivity(intent)
-            requireActivity().finish()  // Close MyPageActivity
+            activity?.finish()  // Close MyPageActivity
         }
 
         // 회원 탈퇴 버튼 클릭 리스너 추가
@@ -112,9 +114,9 @@ class MyPageFragment : Fragment() {
             val user = firebaseAuth.currentUser
             user?.delete()?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    val intent = Intent(context, LoginActivity::class.java)
                     startActivity(intent)
-                    requireActivity().finish()  // Close MyPageActivity
+                    activity?.finish()  // Close MyPageActivity
                 } else {
                     // Handle failure
                 }
@@ -125,34 +127,35 @@ class MyPageFragment : Fragment() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             setDarkMode(isChecked)
         }
-
-        return binding.root
-    }
-
-    private fun setupUI() {
-        // Initialize any additional UI components if needed
     }
 
     private fun loadDarkModePreference() {
         val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
-        binding.switchDarkMode.isChecked = isDarkMode
         AppCompatDelegate.setDefaultNightMode(
             if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
         )
+        binding.switchDarkMode.isChecked = isDarkMode
     }
 
     private fun setDarkMode(enabled: Boolean) {
-        AppCompatDelegate.setDefaultNightMode(
-            if (enabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
-        with(sharedPreferences.edit()) {
-            putBoolean("darkMode", enabled)
-            apply()
+        if (isAdded) {
+            AppCompatDelegate.setDefaultNightMode(
+                if (enabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            )
+            with(sharedPreferences.edit()) {
+                putBoolean("darkMode", enabled)
+                apply()
+            }
         }
     }
 
     private fun openBookmarkedNewsActivity() {
-        val intent = Intent(requireContext(), BookmarkedNewsActivity::class.java)
+        val intent = Intent(context, BookmarkedNewsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openRecentArticlesActivity() {
+        val intent = Intent(context, RecentArticlesActivity::class.java)
         startActivity(intent)
     }
 
@@ -161,14 +164,14 @@ class MyPageFragment : Fragment() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK &&
             data != null && data.data != null) {
             imageUri = data.data
-            imageView.setImageURI(imageUri)
             imageUri?.let { uri ->
+                imageView.setImageURI(uri)
                 uploadImageToFirebase(uri)
             }
         } else if (requestCode == REQUEST_CODE_CHANGE_NICKNAME && resultCode == Activity.RESULT_OK) {
             val newNickname = data?.getStringExtra("nickname")
-            if (newNickname != null) {
-                binding.nicknameTextView.text = newNickname
+            newNickname?.let {
+                binding.nicknameTextView.text = it
             }
         }
     }
@@ -229,9 +232,11 @@ class MyPageFragment : Fragment() {
                 }
 
                 // Update UI
-                binding.nicknameTextView.text = nickname
-                binding.emailTextView.text = email
-                loadImageFromDatabase(profilePictureUrl)
+                if (isAdded) {
+                    binding.nicknameTextView.text = nickname
+                    binding.emailTextView.text = email
+                    loadImageFromDatabase(profilePictureUrl)
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -242,40 +247,44 @@ class MyPageFragment : Fragment() {
     }
 
     private fun checkUserLocation() {
-        val currentUserId = com.google.firebase.ktx.Firebase.auth.currentUser?.uid
+        val currentUserId = Firebase.auth.currentUser?.uid
         currentUserId?.let {
-            val locationRef = com.google.firebase.ktx.Firebase.database.getReference("location").child(it)
+            val locationRef = Firebase.database.getReference("location").child(it)
             locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists() && snapshot.childrenCount > 0) {
-                        // Location exists, navigate to MapNewsFragment
-                        view?.findNavController()?.navigate(R.id.action_myPageFragment_to_mapNewsFragment)
-                    } else {
-                        // No location, navigate to MapViewActivity
-                        val intent = Intent(requireContext(), MapViewActivity::class.java)
-                        startActivity(intent)
+                    if (isAdded) {
+                        if (snapshot.exists() && snapshot.childrenCount > 0) {
+                            // Location exists, navigate to MapNewsFragment
+                            view?.findNavController()?.navigate(R.id.action_myPageFragment_to_mapNewsFragment)
+                        } else {
+                            // No location, navigate to MapViewActivity
+                            val intent = Intent(context, MapViewActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+                    Log.e("MyPageFragment", "Database error: ${error.message}")
                 }
             })
         }
     }
 
     private fun showImagePickerDialog() {
-        val options = arrayOf("갤러리에서 사진 가져오기", "기본 이미지로 변경", "취소")
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("프로필 사진 변경")
-        builder.setItems(options) { dialog, which ->
-            when (which) {
-                0 -> openFileChooser()
-                1 -> setDefaultImage()
-                2 -> dialog.dismiss()
+        if (isAdded) {
+            val options = arrayOf("갤러리에서 사진 가져오기", "기본 이미지로 변경", "취소")
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("프로필 사진 변경")
+            builder.setItems(options) { dialog, which ->
+                when (which) {
+                    0 -> openFileChooser()
+                    1 -> setDefaultImage()
+                    2 -> dialog.dismiss()
+                }
             }
+            builder.show()
         }
-        builder.show()
     }
 
     private fun openFileChooser() {

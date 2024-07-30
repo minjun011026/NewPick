@@ -194,7 +194,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/recent" /> <!-- Replace with your SVG icon -->
                     <TextView
-                        android:id="@+id/recentNews"
+                        android:id="@+id/recentArticlesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="최근 읽은 아티클"

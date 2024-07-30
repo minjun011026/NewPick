@@ -82,6 +82,7 @@
             android:name=".ChangeNewPasswordActivity" />
         <activity
             android:name=".MyPageActivity" />
+        <activity android:name=".RecentArticlesActivity"/>
         <activity
             android:name=".SplashActivity"
             android:exported="true">
