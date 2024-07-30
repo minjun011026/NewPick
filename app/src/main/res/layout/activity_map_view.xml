@@ -8,14 +8,68 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MapViewActivity"
-        >
+        tools:context=".MapViewActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--로고-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 상단 타이틀 -->
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ibmplexsanskr_semibold"
+                    android:paddingBottom="8dp"
+                    android:text="상세지역 설정"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/help"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/map_fragment"
             android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="550dp" />
+
+
 
 
         <LinearLayout
@@ -28,7 +82,9 @@
                 android:id="@+id/locationName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="내 지역(원하는 위치를 터치)"
+                android:text="내 지역"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"/>
@@ -36,6 +92,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -43,8 +100,8 @@
                     android:layout_marginLeft="60dp"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="#d3d3d3">
                     android:background="@drawable/city_button">
+
                     <Button
                         android:id="@+id/addressBtn1"
                         android:layout_width="110dp"
@@ -70,7 +127,6 @@
                     android:layout_marginLeft="60dp"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="#d3d3d3">
                     android:background="@drawable/city_button">
 
                     <Button
