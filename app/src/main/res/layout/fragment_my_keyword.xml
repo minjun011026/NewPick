@@ -63,18 +63,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="나의 관심 키워드"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
                     android:gravity="start"/>
 
+
                 <ImageView
                     android:id="@+id/addKeywordBtn"
-                    android:layout_width="59dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:padding="5dp"
-                    android:src="@drawable/add_round" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/add_btn"/>
+
+
             </LinearLayout>
 
             <!-- 구분선 -->
@@ -153,3 +155,18 @@
 
     </FrameLayout>
 </layout>
+
+
+    <!--                <Button-->
+    <!--                    android:id="@+id/addKeywordBtn"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="+ 추가"-->
+    <!--                    android:fontFamily="@font/pretendard_semibold"-->
+    <!--                    android:textSize="20sp"-->
+    <!--                    android:textColor="#6B7684"-->
+    <!--                    android:backgroundTint="#F2F2F5"-->
+    <!--                    android:gravity="center_vertical"-->
+    <!--                    android:layout_gravity="center" />-->
+
+

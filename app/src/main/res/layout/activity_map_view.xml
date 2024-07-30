@@ -8,8 +8,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MapViewActivity"
-        >
+        tools:context=".MapViewActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/pretendard_semibold"
+                android:text="상세지역 설정"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/map_fragment"
@@ -28,75 +57,86 @@
                 android:id="@+id/locationName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="내 지역(원하는 위치를 터치)"
+                android:text="내 지역"
                 android:textSize="20sp"
+                android:fontFamily="@font/pretendard_semibold"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/btn1bg"
-                    android:layout_marginLeft="60dp"
-                    android:layout_width="130dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:background="#d3d3d3">
-                    <Button
+                    <TextView
                         android:id="@+id/addressBtn1"
-                        android:layout_width="110dp"
+                        android:layout_width="120dp"
                         android:layout_height="50dp"
-                        android:text="+"
+                        android:gravity="center"
+                        android:text="     +"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:background="#00ff0000" />
 
-                    <ImageButton
+                    <TextView
                         android:id="@+id/delbtn1"
                         android:enabled="false"
                         android:visibility="gone"
-                        android:layout_width="wrap_content"
+                        android:text="X  "
+                        android:textColor="#ffffff"
+                        android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/x_button"/>
+                        android:gravity="center" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:id="@+id/btn2bg"
-                    android:layout_marginLeft="60dp"
-                    android:layout_width="130dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:background="#d3d3d3">
 
-                    <Button
+                    <TextView
                         android:id="@+id/addressBtn2"
-                        android:layout_width="110dp"
+                        android:layout_width="120dp"
                         android:layout_height="50dp"
-                        android:text="+"
+                        android:gravity="center"
+                        android:text="     +"
                         android:background="#00ff0000"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <ImageButton
+                    <TextView
                         android:id="@+id/delbtn2"
                         android:enabled="false"
                         android:visibility="gone"
-                        android:layout_width="wrap_content"
+                        android:text="X  "
+                        android:textColor="#ffffff"
+                        android:layout_width="20dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/x_button"/>
+                        android:gravity="center" />
 
                 </LinearLayout>
             </LinearLayout>
+
             <Button
                 android:id="@+id/locationSaveBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="저장"
+                android:fontFamily="@font/pretendard_semibold"
                 android:textSize="20sp"
+                android:backgroundTint="#0064FF"
                 android:layout_margin="20dp"/>
         </LinearLayout>
 

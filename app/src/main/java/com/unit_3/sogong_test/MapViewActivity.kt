@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -62,8 +63,8 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private lateinit var listViewAdapter : ListViewAdapter
-    private lateinit var addressBtn1 : Button
-    private lateinit var addressBtn2 : Button
+    private lateinit var addressBtn1 : TextView
+    private lateinit var addressBtn2 : TextView
     private lateinit var bottomSheetDialog: BottomSheetDialog
     var addressName : String = ""
     private val marker = Marker()
@@ -72,8 +73,8 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     private lateinit var adminArea : String
     private lateinit var btn1bg : LinearLayout
     private lateinit var btn2bg : LinearLayout
-    private lateinit var delbtn1 :ImageButton
-    private lateinit var delbtn2 :ImageButton
+    private lateinit var delbtn1 :TextView
+    private lateinit var delbtn2 :TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,9 +89,9 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         }
         btn1bg = findViewById<LinearLayout>(R.id.btn1bg)
         btn2bg = findViewById<LinearLayout>(R.id.btn2bg)
-        delbtn1 = findViewById<ImageButton>(R.id.delbtn1)
-        delbtn2 = findViewById<ImageButton>(R.id.delbtn2)
-        addressBtn1 = findViewById<Button>(R.id.addressBtn1)
+        delbtn1 = findViewById<TextView>(R.id.delbtn1)
+        delbtn2 = findViewById<TextView>(R.id.delbtn2)
+        addressBtn1 = findViewById<TextView>(R.id.addressBtn1)
         bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme)
         val city1 = intent.getStringExtra("지역1")
         val city2 = intent.getStringExtra("지역2")
@@ -115,7 +116,8 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
         delbtn1.setOnClickListener{
             addressBtn1.text = "+"
-            btn1bg.setBackgroundColor(Color.parseColor("#d3d3d3"))
+            addressBtn1.setTextColor(Color.parseColor("#000000"))
+            btn1bg.setBackgroundColor(Color.parseColor("#D9D9D9"))
             delbtn1.setEnabled(false)
             delbtn1.visibility = View.GONE
         }
@@ -139,7 +141,8 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
         delbtn2.setOnClickListener{
             addressBtn2.text = "+"
-            btn2bg.setBackgroundColor(Color.parseColor("#d3d3d3"))
+            addressBtn2.setTextColor(Color.parseColor("#000000"))
+            btn2bg.setBackgroundColor(Color.parseColor("#D9D9D9"))
             delbtn2.setEnabled(false)
             delbtn2.visibility = View.GONE
         }
@@ -167,13 +170,17 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
         if(city1!=null){
             addressBtn1.text = city1
-            btn1bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            addressBtn1.setTextColor(Color.parseColor("#ffffff"))
+            btn1bg.setBackgroundColor(Color.parseColor("#0064FF"))
+            delbtn1.setTextColor(Color.parseColor("#ffffff"))
             delbtn1.setEnabled(true)
             delbtn1.visibility = View.VISIBLE
         }
         if(city2!=null){
             addressBtn2.text = city2
-            btn2bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            addressBtn2.setTextColor(Color.parseColor("#ffffff"))
+            btn2bg.setBackgroundColor(Color.parseColor("#0064FF"))
+            delbtn2.setTextColor(Color.parseColor("#ffffff"))
             delbtn2.setEnabled(true)
             delbtn2.visibility = View.VISIBLE
         }
@@ -195,12 +202,16 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     override fun onItemClick(item: String){
         if(addressBtn1.text.toString() == "+") {
             addressBtn1.text = item
-            btn1bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            addressBtn1.setTextColor(Color.parseColor("#ffffff"))
+            btn1bg.setBackgroundColor(Color.parseColor("#0064FF"))
+            delbtn1.setTextColor(Color.parseColor("#ffffff"))
             delbtn1.setEnabled(true)
             delbtn1.visibility = View.VISIBLE
         }else if(addressBtn2.text.toString() == "+") {
             addressBtn2.text = item
-            btn2bg.setBackgroundColor(Color.parseColor("#6495ed"))
+            addressBtn2.setTextColor(Color.parseColor("#ffffff"))
+            btn2bg.setBackgroundColor(Color.parseColor("#0064FF"))
+            delbtn2.setTextColor(Color.parseColor("#ffffff"))
             delbtn2.setEnabled(true)
             delbtn2.visibility = View.VISIBLE
         }
