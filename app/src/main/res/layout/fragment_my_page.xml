@@ -155,7 +155,7 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="22dp"
-                        android:src="@drawable/icon_bookmark" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/bookmark" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/bookmarkedNewsTextView"
                         android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/write" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/myFeedTextView"
                         android:layout_width="wrap_content"
@@ -192,7 +192,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/recent" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/recentNews"
                         android:layout_width="wrap_content"
@@ -225,12 +225,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/nickname" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/button_change_nickname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="닉네임 변경"
+                        android:textColor="@color/black"
                         android:paddingStart="8dp" />
                 </LinearLayout>
 
@@ -242,12 +243,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/password" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/button_change_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="비밀번호 변경"
+                        android:textColor="@color/black"
                         android:paddingStart="8dp" />
                 </LinearLayout>
 
@@ -259,12 +261,13 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/image" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/button_change_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="이미지 변경"
+                        android:textColor="@color/black"
                         android:paddingStart="8dp" />
                 </LinearLayout>
 
@@ -291,24 +294,6 @@
                     android:paddingBottom="8dp"
                     android:text="다크모드" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="8dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/icon_bell" /> <!-- Replace with your SVG icon -->
-                    <TextView
-                        android:id="@+id/alam"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="알람설정"
-                        android:textColor="@color/black"
-                        android:paddingStart="8dp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -319,7 +304,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/cash" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/cash"
                         android:layout_width="wrap_content"
@@ -337,7 +322,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/language" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/language"
                         android:layout_width="wrap_content"
@@ -370,7 +355,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/version" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/verision"
                         android:layout_width="wrap_content"
@@ -388,7 +373,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/ask" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/moon"
                         android:layout_width="wrap_content"
@@ -406,7 +391,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/gongji" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/gongji"
                         android:layout_width="wrap_content"
@@ -424,7 +409,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                        android:src="@drawable/yak" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/Yak"
                         android:layout_width="wrap_content"
@@ -451,64 +436,42 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="8dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+
                     <TextView
                         android:id="@+id/information"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="정보동의설정"
                         android:textColor="@color/black"
+                        android:paddingBottom="8dp"
                         android:paddingStart="8dp" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="8dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+
                     <TextView
                         android:id="@+id/button_logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="로그아웃"
+                        android:textColor="@color/black"
+                        android:paddingBottom="8dp"
                         android:paddingStart="8dp" />
-                </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="8dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/buttonAccountDeletion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="회원탈퇴"
+                        android:textColor="@color/black"
+                        android:paddingBottom="8dp"
                         android:paddingStart="8dp" />
-                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="기능1" />
+                    android:text="" />
 
                 <TextView
                     android:layout_width="wrap_content"
