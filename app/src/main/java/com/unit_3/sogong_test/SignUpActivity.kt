@@ -132,7 +132,9 @@ class SignUpActivity : AppCompatActivity() {
                         emailMessage.text = "   이미 사용 중인 이메일입니다."
                         emailMessage.setTextColor(getColor(R.color.red))
                     } else {
-                        createUser(email, password, nickname)
+                        val intent = Intent(this, TermsActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
                     }
                 }
             }
@@ -146,7 +148,10 @@ class SignUpActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     user?.let {
                         val userId = it.uid
-                        val userData = mapOf("nickname" to nickname, "email" to email)
+                        val userData = mapOf(
+                            "email" to email,
+                            "nickname" to nickname
+                        )
                         database.child(userId).setValue(userData)
                             .addOnCompleteListener { dbTask ->
                                 if (dbTask.isSuccessful) {
