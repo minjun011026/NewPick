@@ -87,12 +87,13 @@
             android:id="@+id/articleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#999999"
             android:fontFamily="@font/pretendard_regular"
             android:text="기사 제목"
             android:padding="4dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
         <ImageView
             android:id="@+id/articleImageArea"
             android:layout_width="match_parent"
@@ -103,7 +104,6 @@
             android:id="@+id/moreLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#999999"
             android:orientation="horizontal">
 
             <TextView
@@ -112,7 +112,6 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:text="더 알아보기"
                 android:padding="4dp"
-                android:textColor="@color/white"
                 android:textSize="20sp"/>
 
             <ImageView
@@ -120,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="260dp"
-                android:src="@drawable/arrow_back" />
+                android:src="@drawable/arrow" />
 
 
         </LinearLayout>
