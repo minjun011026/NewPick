@@ -43,7 +43,7 @@
                     android:layout_marginLeft="60dp"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="#d3d3d3">
+                    android:background="@drawable/city_button">
                     <Button
                         android:id="@+id/addressBtn1"
                         android:layout_width="110dp"
@@ -69,7 +69,7 @@
                     android:layout_marginLeft="60dp"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:background="#d3d3d3">
+                    android:background="@drawable/city_button">
 
                     <Button
                         android:id="@+id/addressBtn2"
@@ -95,6 +95,8 @@
                 android:id="@+id/locationSaveBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_default"
+                android:textColor="@color/white"
                 android:text="저장"
                 android:textSize="20sp"
                 android:layout_margin="20dp"/>
