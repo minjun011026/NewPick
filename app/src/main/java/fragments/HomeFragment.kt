@@ -146,16 +146,16 @@
 
 package fragments
 
-import android.app.ProgressDialog
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -188,6 +188,7 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
+        // Navigation button setup
         binding.bottomNavigationLocal.setOnClickListener {
             checkUserLocation()
         }
@@ -197,27 +198,41 @@ class HomeFragment : Fragment() {
         binding.bottomNavigationMyPage.setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_myPageFragment)
         }
-
         binding.bottomNavigationFeed.setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_feedFragment)
         }
 
-        // 인기뉴스 리사이클러뷰 초기화
-// 인기뉴스 리사이클러뷰 초기화
+        // Initialize hot news RecyclerView
         binding.rvHotNews.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         hotNewsAdapter = HotNewsRVAdapter(hotNewsList)
         binding.rvHotNews.adapter = hotNewsAdapter
 
-        // Jsoup를 사용하여 인기 뉴스를 가져오는 작업을 실행합니다
+        // Fetch hot news
         FetchHotNewsTask().execute()
 
-        // RecyclerView 초기화
+        // Initialize trending keywords RecyclerView
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 
-        // Jsoup를 사용하여 인기 검색어를 가져오는 작업을 실행합니다
+        // Fetch trending keywords
         FetchTrendingKeywordsTask().execute()
 
+        // Setup help button click listener
+        binding.buttonHelp.setOnClickListener {
+            showHelpDialog()
+        }
+
         return binding.root
+    }
+
+    private fun showHelpDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("일별 인기 급상승 검색어")
+        builder.setMessage("일별 인기 급상승 검색어는 지난 24시간 동안의 모든 검색어 중에서 트래픽이 크게 증가한 검색어를 강조표시하며, 1시간마다 업데이트됩니다. 이러한 인기 급상승 검색어 페이지에는 특정 검색어 및 검색 횟수의 절댓값이 표시됩니다.")
+        builder.setPositiveButton("확인") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private inner class FetchHotNewsTask : AsyncTask<Void, Void, MutableList<HotNewsModel>>() {
@@ -286,10 +301,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
-
-
     private inner class FetchTrendingKeywordsTask : AsyncTask<Void, Void, MutableList<TrendKeywordsModel>>() {
         override fun doInBackground(vararg params: Void?): MutableList<TrendKeywordsModel> {
             val trendingKeywords = mutableListOf<TrendKeywordsModel>()
@@ -313,9 +324,7 @@ class HomeFragment : Fragment() {
         }
 
         override fun onPostExecute(result: MutableList<TrendKeywordsModel>?) {
-            if (result != null) {
-                super.onPostExecute(result.toMutableList())
-            }
+            super.onPostExecute(result)
             if (result != null) {
                 if (result.isNotEmpty()) {
                     for (keyword in result) {
