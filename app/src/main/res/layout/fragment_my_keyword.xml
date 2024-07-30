@@ -36,6 +36,7 @@
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:paddingBottom="8dp"
                     android:text="My keyword"
+                    android:textColor="@color/black"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -64,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="나의 관심 키워드"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
                     android:gravity="start"/>

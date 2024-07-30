@@ -12,18 +12,25 @@
         android:layout_gravity="center_vertical"
         android:fontFamily="@font/pretendard_semibold"
         android:textSize="18sp"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:ellipsize="end" />
 
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp">
 
     <ImageView
         android:id="@+id/imageArea"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:scaleType="fitXY"/>
+
+</androidx.cardview.widget.CardView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/moreLayout"
