@@ -380,23 +380,59 @@
                         android:paddingStart="8dp" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="문의하기" />
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                    <TextView
+                        android:id="@+id/moon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="문의하기"
+                        android:textColor="@color/black"
+                        android:paddingStart="8dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="공지사항" />
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                    <TextView
+                        android:id="@+id/gongji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="공지사항"
+                        android:textColor="@color/black"
+                        android:paddingStart="8dp" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="약관 및 정책" />
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                    <TextView
+                        android:id="@+id/Yak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="약관 및 정책"
+                        android:textColor="@color/black"
+                        android:paddingStart="8dp" />
+                </LinearLayout>
 
 
 
@@ -415,11 +451,23 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="정보동의설정" />
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/eye" /> <!-- Replace with your SVG icon -->
+                    <TextView
+                        android:id="@+id/information"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="정보동의설정"
+                        android:textColor="@color/black"
+                        android:paddingStart="8dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
