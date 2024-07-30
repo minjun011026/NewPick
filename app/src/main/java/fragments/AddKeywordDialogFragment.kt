@@ -1,5 +1,11 @@
 package fragments
 
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +21,17 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.select.Elements
 import kotlin.concurrent.thread
+import com.unit_3.sogong_test.BuildConfig
+
 
 class AddKeywordDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentAddKeywordDialogBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_keyword_dialog, container, false)
 
         binding.registerBtn.setOnClickListener {
@@ -76,15 +88,76 @@ class AddKeywordDialogFragment : DialogFragment() {
     private fun saveKeywordToFirebase(keyword: String, imageUrl: String) {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("keyword").child(FirebaseAuth.getInstance().currentUser!!.uid)
-        val keywordModel = KeywordModel(keyword = keyword, imageUrl = imageUrl)
-        myRef.push().setValue(keywordModel)
-            .addOnSuccessListener {
-                // 데이터 저장 성공
-                dismiss()
+        myRef.push().setValue(KeywordModel(keyword, imageUrl)).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // 키워드 저장 후 추천 키워드 가져오기
+                fetchRecommendedKeywords(keyword)
+            } else {
+                // 실패 처리 (예: 사용자에게 메시지 표시)
             }
-            .addOnFailureListener { error ->
-                // 데이터 저장 실패 처리
-                error.printStackTrace()
+        }
+    }
+
+    private fun fetchRecommendedKeywords(keyword: String) {
+        val client = OkHttpClient()
+        val requestBodyJson = JSONObject().apply {
+            put("model", "gpt-3.5-turbo")
+            put("messages", JSONArray().put(JSONObject().put("role", "user").put("content", "Suggest 3 related keywords for: $keyword")))
+            put("max_tokens", 50)
+        }.toString()
+
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val requestBody = requestBodyJson.toRequestBody(mediaType)
+
+        val request = Request.Builder()
+            .url("https://api.openai.com/v1/chat/completions")
+            .post(requestBody)
+            .addHeader("Authorization", "Bearer ${BuildConfig.OPENAI_API_KEY}")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+                // 실패 처리 (예: 사용자에게 메시지 표시)
             }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!it.isSuccessful) throw IOException("Unexpected code $it")
+
+                    val jsonResponse = JSONObject(it.body!!.string())
+                    val recommendations = jsonResponse.getJSONArray("choices")
+                        .getJSONObject(0)
+                        .getJSONObject("message")
+                        .getString("content")
+                        .split(",")
+
+                    // 프래그먼트가 유효한지 확인
+                    if (isAdded) {
+                        // 추천 키워드 다이얼로그 표시
+                        showRecommendedKeywordsDialog(recommendations)
+                    }
+                }
+            }
+        })
+    }
+
+
+    private fun showRecommendedKeywordsDialog(recommendations: List<String>) {
+        if (!isAdded) return // 프래그먼트가 활성 상태가 아닐 경우 종료
+
+        val dialog = RecommendedKeywordsDialogFragment.newInstance(recommendations) { selectedKeywords ->
+            saveRecommendedKeywords(selectedKeywords)
+        }
+        dialog.show(childFragmentManager, "RecommendedKeywordsDialog")
+    }
+
+    private fun saveRecommendedKeywords(selectedKeywords: List<String>) {
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("keyword").child(FirebaseAuth.getInstance().currentUser!!.uid)
+        for (keyword in selectedKeywords) {
+            myRef.push().setValue(KeywordModel(keyword))
+        }
     }
 }
+
