@@ -62,21 +62,26 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- MainActivity 설정 (일반 액티비티로) -->
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" /> <!-- SingUpActivity, SplashActivity 등의 설정 -->
+            android:exported="true" />
         <activity
             android:name=".BookmarkedNewsActivity"
             android:exported="true" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
-        <activity android:name=".ChangeNicknameActivity" />
-        <activity android:name=".ChangeEmailActivity" />
-        <activity android:name=".VerifyCurrentPasswordActivity" />
-        <activity android:name=".ChangeNewPasswordActivity" />
-        <activity android:name=".MyPageActivity" />
+        <activity
+            android:name=".ChangeNicknameActivity" />
+        <activity
+            android:name=".ChangeEmailActivity" />
+        <activity
+            android:name=".VerifyCurrentPasswordActivity" />
+        <activity
+            android:name=".ChangeNewPasswordActivity" />
+        <activity
+            android:name=".MyPageActivity" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -86,6 +91,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TermsActivity"
+            android:exported="true" />
     </application>
-
 </manifest>
