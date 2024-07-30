@@ -83,12 +83,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="급상승 검색어"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
-                    android:gravity="start"/>
+                    android:fontFamily="@font/ibmplexsanskr_semibold"
+                    android:gravity="start"
+                    android:text="오늘의 키워드 순위"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <ImageButton
                     android:id="@+id/button_help"
