@@ -129,13 +129,30 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@android:color/darker_gray" />
+
+                <!-- 나의 아티클 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:text="나의 아티클"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/bookmarkedNewsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="내가 북마크한 글"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/black"
                     android:onClick="openBookmarkedNewsActivity" />
 
                 <TextView
@@ -144,7 +161,15 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="내가 작성한 글"
-                    android:textColor="@color/blue" />
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/recentNews"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="최근 읽은 아티클"
+                    android:textColor="@color/black" />
 
                 <View
                     android:layout_width="match_parent"
@@ -161,19 +186,68 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <Button
+                <TextView
                     android:id="@+id/button_change_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
                     android:text="닉네임 변경" />
 
 
-                <Button
+
+                <TextView
                     android:id="@+id/button_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
+                    android:paddingBottom="8dp"
                     android:text="비밀번호 변경" />
+
+                <TextView
+                    android:id="@+id/button_change_imgage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="프로필 이미지 변경" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@android:color/darker_gray" />
+
+                <!-- 앱 설정 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="8dp"
+                    android:text="앱 설정"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/switch_dark_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="다크모드" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="알림설정" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="캐시삭제" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="언어설정" />
 
                 <View
                     android:layout_width="match_parent"
@@ -194,6 +268,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
+                    android:text="앱 버전" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
                     android:text="문의하기" />
 
                 <TextView
@@ -201,18 +281,13 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="공지사항" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="서비스 이용약관" />
+                    android:text="약관 및 정책" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="개인정보 처리방침" />
+
 
                 <View
                     android:layout_width="match_parent"
@@ -230,12 +305,10 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/button_account_deletion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="회원 탈퇴"
-                    android:textColor="@color/black" />
+                    android:text="정보동의설정" />
 
                 <TextView
                     android:id="@+id/button_logout"
@@ -245,28 +318,27 @@
                     android:text="로그아웃"
                     android:textColor="@color/black" />
 
-                <Switch
-                    android:id="@+id/switch_dark_mode"
+
+                <TextView
+                    android:id="@+id/button_account_deletion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
-                    android:text="다크모드" />
+                    android:text="회원 탈퇴"
+                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="기능1" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="8dp"
                     android:text="기능2" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="8dp"
-                    android:text="기능3" />
+
 
             </LinearLayout>
         </ScrollView>
