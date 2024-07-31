@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -22,6 +23,21 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private var isNicknameChecked = false
+    private val TERMS_REQUEST_CODE = 1
+
+    // Declare view variables at the class level
+    private lateinit var nicknameText: EditText
+    private lateinit var emailText: EditText
+    private lateinit var passwordText: EditText
+    private lateinit var repeatPasswordText: EditText
+
+    private lateinit var nicknameLayout: TextInputLayout
+    private lateinit var emailLayout: TextInputLayout
+    private lateinit var passwordLayout: TextInputLayout
+    private lateinit var repeatPasswordLayout: TextInputLayout
+
+    private lateinit var nicknameMessage: TextView
+    private lateinit var emailMessage: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,23 +46,24 @@ class SignUpActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference.child("users")
 
+        // Initialize view variables
+        nicknameText = findViewById(R.id.nameText)
+        emailText = findViewById(R.id.emailText)
+        passwordText = findViewById(R.id.passwordText)
+        repeatPasswordText = findViewById(R.id.repeatPasswordText)
+
+        nicknameLayout = findViewById(R.id.nicknameLayout)
+        emailLayout = findViewById(R.id.emailLayout)
+        passwordLayout = findViewById(R.id.passwordLayout)
+        repeatPasswordLayout = findViewById(R.id.repeatPasswordLayout)
+
+        nicknameMessage = findViewById(R.id.nicknameMessage)
+        emailMessage = findViewById(R.id.emailMessage)
+
         val registerBtn = findViewById<Button>(R.id.registerBtn)
         val showPasswordBtn = findViewById<ImageButton>(R.id.showPassword)
         val showRepeatPasswordBtn = findViewById<ImageButton>(R.id.showRepeatPassword)
         val checkNicknameBtn = findViewById<ImageButton>(R.id.checkNicknameBtn)
-
-        val nicknameText = findViewById<EditText>(R.id.nameText)
-        val emailText = findViewById<EditText>(R.id.emailText)
-        val passwordText = findViewById<EditText>(R.id.passwordText)
-        val repeatPasswordText = findViewById<EditText>(R.id.repeatPasswordText)
-
-        val nicknameLayout = findViewById<TextInputLayout>(R.id.nicknameLayout)
-        val emailLayout = findViewById<TextInputLayout>(R.id.emailLayout)
-        val passwordLayout = findViewById<TextInputLayout>(R.id.passwordLayout)
-        val repeatPasswordLayout = findViewById<TextInputLayout>(R.id.repeatPasswordLayout)
-
-        val nicknameMessage = findViewById<TextView>(R.id.nicknameMessage)
-        val emailMessage = findViewById<TextView>(R.id.emailMessage)
 
         nicknameText.addTextChangedListener(createTextWatcher(nicknameLayout, nicknameMessage))
         emailText.addTextChangedListener(createTextWatcher(emailLayout, emailMessage))
@@ -133,8 +150,7 @@ class SignUpActivity : AppCompatActivity() {
                         emailMessage.setTextColor(getColor(R.color.red))
                     } else {
                         val intent = Intent(this, TermsActivity::class.java)
-                        startActivity(intent)
-                        overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom)
+                        startActivityForResult(intent, TERMS_REQUEST_CODE)
                     }
                 }
             }
@@ -228,5 +244,20 @@ class SignUpActivity : AppCompatActivity() {
             button.setImageResource(R.drawable.eye_off)
         }
         editText.setSelection(editText.text.length)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == TERMS_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val isAgreed = data?.getBooleanExtra("isAgreed", false) ?: false
+            if (isAgreed) {
+                val email = emailText.text.toString().trim()
+                val password = passwordText.text.toString().trim()
+                val nickname = nicknameText.text.toString().trim()
+                createUser(email, password, nickname)
+            } else {
+                Toast.makeText(this, "동의하지 않으셨습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

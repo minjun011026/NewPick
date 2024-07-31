@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -29,8 +30,9 @@ class TermsActivity : AppCompatActivity() {
 
         acceptTermsBtn.setOnClickListener {
             if (ageCheckbox.isChecked && termsCheckbox.isChecked && privacyCheckbox.isChecked) {
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                val resultIntent = Intent()
+                resultIntent.putExtra("isAgreed", true)
+                setResult(Activity.RESULT_OK, resultIntent)
                 finish()
             } else {
                 Toast.makeText(this, "필수 항목에 동의해주세요.", Toast.LENGTH_SHORT).show()

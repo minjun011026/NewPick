@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login) // XML 레이아웃 파일 이름 확인
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference.child("users")
@@ -39,7 +39,6 @@ class LoginActivity : AppCompatActivity() {
         val registerBtn = findViewById<TextView>(R.id.registerBtn)
         showPasswordButton = findViewById(R.id.showPassword)
 
-
         // 비밀번호 보기/숨기기 버튼 클릭 리스너 설정
         showPasswordButton.setOnClickListener {
             togglePasswordVisibility()
@@ -47,24 +46,22 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 버튼 클릭 리스너 설정
         loginButton.setOnClickListener {
-            val input = usernameEditText.text.toString()
+            val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
 
-            if (input.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "빈 칸 없이 입력하세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (input.contains("@")) {
+            if (username.contains("@")) {
                 // 이메일로 로그인 시도
-                signInWithEmail(input, password)
+                signInWithEmail(username, password)
             } else {
                 // 닉네임으로 이메일 찾기 후 로그인 시도
-                signInWithNickname(input, password)
+                signInWithNickname(username, password)
             }
         }
-
-
 
         forgotPasswordBtn.setOnClickListener {
             startActivity(Intent(this, FindPasswordActivity::class.java))
@@ -80,11 +77,11 @@ class LoginActivity : AppCompatActivity() {
         if (isPasswordVisible) {
             // 현재 보이는 상태 -> 비밀번호 숨기기
             passwordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            showPasswordButton.setImageResource(R.drawable.eye) // 눈 감김 아이콘
+            showPasswordButton.setImageResource(R.drawable.eye_off) // 눈 감김 아이콘
         } else {
             // 현재 숨겨진 상태 -> 비밀번호 보이기
             passwordEditText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            showPasswordButton.setImageResource(R.drawable.eye_off) // 눈 뜸 아이콘
+            showPasswordButton.setImageResource(R.drawable.eye) // 눈 뜸 아이콘
         }
         isPasswordVisible = !isPasswordVisible
         // 커서를 맨 끝으로 이동하여 보이는 텍스트를 확인
