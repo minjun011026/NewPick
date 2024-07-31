@@ -12,6 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.unit_3.sogong_test.KeywordModel
@@ -39,7 +41,7 @@ class AddKeywordDialogFragment : DialogFragment() {
             val keyword = binding.keywordArea.text.toString()
 
             if (keyword.isNotEmpty()) {
-                // 네트워크 작업은 별도의 스레드에서 실행
+                // API 호출은 비동기적으로 수행
                 thread {
                     fetchImageUrlFromGoogle(keyword, { imageUrl ->
                         activity?.runOnUiThread {
@@ -47,6 +49,7 @@ class AddKeywordDialogFragment : DialogFragment() {
                         }
                     }, { error ->
                         // Handle the error
+                        Log.e("AddKeywordDialogFragment", "Error fetching image URL", error)
                         activity?.runOnUiThread {
                             dismiss()
                         }
@@ -95,14 +98,9 @@ class AddKeywordDialogFragment : DialogFragment() {
                 fetchRecommendedKeywords(keyword)
             } else {
                 // 실패 처리 (예: 사용자에게 메시지 표시)
+                Log.e("AddKeywordDialogFragment", "Failed to save keyword to Firebase")
             }
         }
-    }
-
-    // 추천 키워드가 선택되었을 때 호출되는 메서드
-    fun setRecommendedKeywords(recommendations: List<KeywordModel>) {
-        recommendedKeywords = recommendations
-        onRecommendedKeywordsFetched(recommendations) // 추천 키워드 버튼 생성
     }
 
     private fun fetchRecommendedKeywords(keyword: String) {
@@ -126,11 +124,15 @@ class AddKeywordDialogFragment : DialogFragment() {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
                 // 실패 처리 (예: 사용자에게 메시지 표시)
+                Log.e("AddKeywordDialogFragment", "Failed to fetch recommended keywords", e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!it.isSuccessful) throw IOException("Unexpected code $it")
+                    if (!it.isSuccessful) {
+                        Log.e("AddKeywordDialogFragment", "Unexpected code $it")
+                        return
+                    }
 
                     // 응답 본문을 문자열로 가져오기
                     val responseBody = it.body!!.string()
@@ -159,7 +161,9 @@ class AddKeywordDialogFragment : DialogFragment() {
 
                             if (remainingKeywords == 0 && isAdded) {
                                 // 모든 키워드의 이미지 URL을 가져온 후에 다이얼로그 표시
-                                showRecommendedKeywordsDialog(keywordModels)
+                                activity?.runOnUiThread {
+                                    dismissAndShowRecommendedDialog(keywordModels)
+                                }
                             }
                         }, { error ->
                             // 이미지 URL을 가져오지 못한 경우에도 리스트에 추가
@@ -168,7 +172,9 @@ class AddKeywordDialogFragment : DialogFragment() {
 
                             if (remainingKeywords == 0 && isAdded) {
                                 // 모든 키워드의 이미지 URL을 가져온 후에 다이얼로그 표시
-                                showRecommendedKeywordsDialog(keywordModels)
+                                activity?.runOnUiThread {
+                                    dismissAndShowRecommendedDialog(keywordModels)
+                                }
                             }
                         })
                     }
@@ -177,12 +183,12 @@ class AddKeywordDialogFragment : DialogFragment() {
         })
     }
 
-
-    private fun showRecommendedKeywordsDialog(recommendations: List<KeywordModel>) {
+    private fun dismissAndShowRecommendedDialog(recommendations: List<KeywordModel>) {
+        dismiss()
         val dialog = RecommendedKeywordsDialogFragment.newInstance(recommendations) { selectedKeywords ->
             saveRecommendedKeywords(selectedKeywords) // 선택된 키워드 저장
         }
-        dialog.show(childFragmentManager, "RecommendedKeywordsDialog")
+        dialog.show(parentFragmentManager, "RecommendedKeywordsDialog")
     }
 
     private fun saveRecommendedKeywords(selectedKeywords: List<KeywordModel>) {
