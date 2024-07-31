@@ -14,11 +14,18 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/keywordsTextView"
+        <LinearLayout
+            android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/keywordsListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/completeBtn"
@@ -33,5 +40,6 @@
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             tools:ignore="VisualLintButtonSize" />
+
     </LinearLayout>
 </layout>

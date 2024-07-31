@@ -1,5 +1,9 @@
 import java.util.Properties
 
+
+
+
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -9,6 +13,14 @@ plugins {
 android {
     namespace = "com.unit_3.sogong_test"
     compileSdk = 34
+
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include ("armeabi-v7a", "x86","arm64-v8a")
+        }
+    }
 
     defaultConfig {
         applicationId = "com.unit_3.sogong_test"
@@ -80,6 +92,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.media3:media3-common:1.4.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("org.jsoup:jsoup:1.15.3")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
