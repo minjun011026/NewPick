@@ -51,7 +51,7 @@
                         android:id="@+id/helpImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/help"
+                        android:src="@drawable/help_2"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -142,12 +142,12 @@
                     android:layout_marginVertical="8dp"
                     android:background="@android:color/darker_gray" />
 
-                <!-- 나의 아티클 -->
+                <!-- 나의 뉴스 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="8dp"
-                    android:text="나의 아티클"
+                    android:text="나의 뉴스"
                     android:textSize="18sp"
                     android:textColor="#696969"
                     android:textStyle="bold" />
@@ -171,23 +171,8 @@
                         android:text="내가 북마크한 글" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="8dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/write" /> <!-- Replace with your SVG icon -->
-                    <TextView
-                        android:id="@+id/myFeedTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="내가 작성한 글"
-                        android:textColor="@color/black"
-                        android:paddingStart="8dp" />
-                </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -202,7 +187,7 @@
                         android:id="@+id/recentArticlesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="최근 읽은 아티클"
+                        android:text="최근 읽은 뉴스"
                         android:textColor="@color/black"
                         android:paddingStart="8dp" />
                 </LinearLayout>
@@ -268,7 +253,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/image" /> <!-- Replace with your SVG icon -->
                     <TextView
-                        android:id="@+id/button_change_image"
+                        android:id="@+id/buttonChangeProfileImage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="이미지 변경"
@@ -311,7 +296,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/cash" /> <!-- Replace with your SVG icon -->
                     <TextView
-                        android:id="@+id/cash"
+                        android:id="@+id/buttonClearCache"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="캐시삭제"
@@ -334,7 +319,9 @@
                         android:layout_height="wrap_content"
                         android:text="언어설정"
                         android:textColor="@color/black"
-                        android:paddingStart="8dp" />
+                        android:paddingStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
                 </LinearLayout>
 
                 <View
@@ -362,12 +349,15 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/version" /> <!-- Replace with your SVG icon -->
                     <TextView
-                        android:id="@+id/verision"
+                        android:id="@+id/version"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="앱 버전"
                         android:textColor="@color/black"
-                        android:paddingStart="8dp" />
+                        android:paddingStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -403,7 +393,9 @@
                         android:layout_height="wrap_content"
                         android:text="공지사항"
                         android:textColor="@color/black"
-                        android:paddingStart="8dp" />
+                        android:paddingStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -448,7 +440,7 @@
                         android:layout_height="wrap_content"
                         android:text="정보동의설정"
                         android:textColor="@color/black"
-                        android:paddingBottom="8dp"
+                        android:paddingBottom="15dp"
                         android:paddingStart="8dp" />
 
 
@@ -458,7 +450,7 @@
                         android:layout_height="wrap_content"
                         android:text="로그아웃"
                         android:textColor="@color/black"
-                        android:paddingBottom="8dp"
+                        android:paddingBottom="15dp"
                         android:paddingStart="8dp" />
 
 
@@ -468,7 +460,7 @@
                         android:layout_height="wrap_content"
                         android:text="회원탈퇴"
                         android:textColor="@color/black"
-                        android:paddingBottom="8dp"
+                        android:paddingBottom="15dp"
                         android:paddingStart="8dp" />
 
 

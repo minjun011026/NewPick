@@ -52,7 +52,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/help"
+                    android:src="@drawable/help_2"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -98,14 +98,14 @@
 
                 <LinearLayout
                     android:id="@+id/btn1bg"
-                    android:layout_marginLeft="60dp"
-                    android:layout_width="130dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/city_button">
 
                     <Button
                         android:id="@+id/addressBtn1"
-                        android:layout_width="110dp"
+                        android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:text="+"
                         android:textColor="@color/black"
@@ -125,14 +125,14 @@
 
                 <LinearLayout
                     android:id="@+id/btn2bg"
-                    android:layout_marginLeft="60dp"
-                    android:layout_width="130dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/city_button">
 
                     <Button
                         android:id="@+id/addressBtn2"
-                        android:layout_width="110dp"
+                        android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:text="+"
                         android:background="#00ff0000"
