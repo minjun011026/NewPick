@@ -200,7 +200,7 @@ class AddKeywordDialogFragment : DialogFragment() {
                         setBackgroundColor(Color.LTGRAY) // 선택 해제 시 색상 변경
                     } else {
                         selectedKeywords.add(keyword) // 선택된 키워드 추가
-                        setBackgroundColor(Color.GREEN) // 선택 시 색상 변경
+                        setBackgroundColor(Color.parseColor("#0064FF")); // 선택 시 색상 변경
                     }
                 }
             }
