@@ -10,8 +10,6 @@
         android:id="@+id/imageArea"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:civ_border_color="@color/black"
-        app:civ_border_overlay="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
