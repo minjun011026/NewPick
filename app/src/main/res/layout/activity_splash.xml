@@ -11,27 +11,25 @@
         android:id="@+id/textViewCustomNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="당신을 위한 맞춤형 뉴스"
+        android:text="로딩중입니다"
         android:textColor="@android:color/black"
         android:textSize="27sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/imageViewLogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.627" />
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/splash_svg"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:lottie_rawRes="@raw/rabbit_run"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:layout_constraintTop_toBottomOf="@id/textViewCustomNews"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
-
+        android:layout_marginTop="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
