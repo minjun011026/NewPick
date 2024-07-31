@@ -28,6 +28,7 @@ import android.widget.Toast
 import android.widget.Button
 import android.graphics.Color
 import android.util.Log
+import org.json.JSONException
 
 class AddKeywordDialogFragment : DialogFragment() {
     private lateinit var binding: FragmentAddKeywordDialogBinding
@@ -106,9 +107,10 @@ class AddKeywordDialogFragment : DialogFragment() {
     private fun fetchRecommendedKeywords(keyword: String) {
         val client = OkHttpClient()
         val requestBodyJson = JSONObject().apply {
-            put("model", "gpt-3.5-turbo")
-            put("messages", JSONArray().put(JSONObject().put("role", "user").put("content", "이 사용자가 추가할 법한 관련 키워드를 JSON 배열 형식으로, 각 키워드를 큰따옴표로 감싸고 쉼표로 구분하여 3개 추천해줘: $keyword\n")))
+            put("model", "gpt-4o")
+            put("messages", JSONArray().put(JSONObject().put("role", "user").put("content", "{$keyword}와 관련된 인기 검색어를 받고 싶어. 최근 한달간 미디어에서 핫했던 3개의 연관 키워드를 추천해줬으면 좋겠어. JSON 배열 형식으로, 각 키워드를 큰따옴표로 감싸고 쉼표로 구분하여 응답을 보내줄래?")))
             put("max_tokens", 50)
+            put("temperature", 0.7)
         }.toString()
 
         val mediaType = "application/json; charset=utf-8".toMediaType()
@@ -123,7 +125,6 @@ class AddKeywordDialogFragment : DialogFragment() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
-                // 실패 처리 (예: 사용자에게 메시지 표시)
                 Log.e("AddKeywordDialogFragment", "Failed to fetch recommended keywords", e)
             }
 
@@ -134,44 +135,35 @@ class AddKeywordDialogFragment : DialogFragment() {
                         return
                     }
 
-                    // 응답 본문을 문자열로 가져오기
                     val responseBody = it.body!!.string()
                     Log.d("API Response", responseBody)
 
-                    val jsonResponse = JSONObject(responseBody)
-                    // JSON 응답에서 추천 키워드 가져오기
-                    val recommendationsString = jsonResponse.getJSONArray("choices")
-                        .getJSONObject(0)
-                        .getJSONObject("message")
-                        .getString("content")
+                    // 응답 본문에서 JSON 객체 추출
+                    val keywords = extractKeywordsFromResponse(responseBody)
 
-                    // JSON 배열로 변환
-                    val recommendations = JSONArray(recommendationsString).let { jsonArray ->
-                        List(jsonArray.length()) { jsonArray.getString(it).trim() }
+                    if (keywords.isNullOrEmpty()) {
+                        Log.e("AddKeywordDialogFragment", "No keywords found in response")
+                        return
                     }
 
-                    // 추천 키워드의 이미지 URL을 가져오기 위한 리스트 초기화
                     val keywordModels = mutableListOf<KeywordModel>()
-                    var remainingKeywords = recommendations.size
+                    var remainingKeywords = keywords.size
 
-                    recommendations.forEach { keyword ->
+                    keywords.forEach { keyword ->
                         fetchImageUrlFromGoogle(keyword, { imageUrl ->
                             keywordModels.add(KeywordModel(keyword, "", false, imageUrl))
                             remainingKeywords--
 
                             if (remainingKeywords == 0 && isAdded) {
-                                // 모든 키워드의 이미지 URL을 가져온 후에 다이얼로그 표시
                                 activity?.runOnUiThread {
                                     dismissAndShowRecommendedDialog(keywordModels)
                                 }
                             }
                         }, { error ->
-                            // 이미지 URL을 가져오지 못한 경우에도 리스트에 추가
                             keywordModels.add(KeywordModel(keyword, "", false, ""))
                             remainingKeywords--
 
                             if (remainingKeywords == 0 && isAdded) {
-                                // 모든 키워드의 이미지 URL을 가져온 후에 다이얼로그 표시
                                 activity?.runOnUiThread {
                                     dismissAndShowRecommendedDialog(keywordModels)
                                 }
@@ -183,17 +175,51 @@ class AddKeywordDialogFragment : DialogFragment() {
         })
     }
 
+    private fun extractKeywordsFromResponse(response: String): List<String>? {
+        return try {
+            // JSON 응답에서 "choices" 배열 추출
+            val jsonObject = JSONObject(response)
+            val choicesArray = jsonObject.getJSONArray("choices")
+
+            if (choicesArray.length() > 0) {
+                // 첫 번째 항목에서 "content" 필드 추출
+                val messageContent = choicesArray.getJSONObject(0)
+                    .getJSONObject("message")
+                    .getString("content")
+
+                // JSON 문자열에서 JSON 배열을 추출
+                val jsonArrayString = messageContent
+                    .trim()
+                    .removePrefix("```json\n")
+                    .removeSuffix("\n```")
+
+                // JSON 배열 파싱
+                val jsonArray = JSONArray(jsonArrayString)
+                List(jsonArray.length()) { jsonArray.getString(it).trim() }
+            } else {
+                null
+            }
+        } catch (e: JSONException) {
+            Log.e("AddKeywordDialogFragment", "Error parsing response", e)
+            null
+        }
+    }
+
+
+
     private fun dismissAndShowRecommendedDialog(recommendations: List<KeywordModel>) {
         dismiss()
-        val dialog = RecommendedKeywordsDialogFragment.newInstance(recommendations) { selectedKeywords ->
-            saveRecommendedKeywords(selectedKeywords) // 선택된 키워드 저장
-        }
+        val dialog =
+            RecommendedKeywordsDialogFragment.newInstance(recommendations) { selectedKeywords ->
+                saveRecommendedKeywords(selectedKeywords) // 선택된 키워드 저장
+            }
         dialog.show(parentFragmentManager, "RecommendedKeywordsDialog")
     }
 
     private fun saveRecommendedKeywords(selectedKeywords: List<KeywordModel>) {
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("keyword").child(FirebaseAuth.getInstance().currentUser!!.uid)
+        val myRef =
+            database.getReference("keyword").child(FirebaseAuth.getInstance().currentUser!!.uid)
         for (keyword in selectedKeywords) {
             myRef.push().setValue(KeywordModel(keyword.keyword, "", false, keyword.imageUrl))
         }
@@ -242,3 +268,4 @@ class AddKeywordDialogFragment : DialogFragment() {
         buttonLayout.addView(completeButton)
     }
 }
+
