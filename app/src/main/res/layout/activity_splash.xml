@@ -32,5 +32,5 @@
         app:layout_constraintTop_toBottomOf="@id/textViewCustomNews"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/news_click" />
+        app:lottie_rawRes="@raw/rabbit_run" />
 </androidx.constraintlayout.widget.ConstraintLayout>
