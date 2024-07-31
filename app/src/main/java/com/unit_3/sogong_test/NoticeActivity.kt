@@ -1,41 +1,28 @@
 package com.unit_3.sogong_test
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.Firebase
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
-import com.unit_3.sogong_test.databinding.ActivityNoticeBinding
+import androidx.recyclerview.widget.RecyclerView
+import android.widget.ImageButton
+import android.widget.TextView
 
 class NoticeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityNoticeBinding
+    private lateinit var previousBtn: ImageButton
+    private lateinit var textViewNotices: TextView
+    private lateinit var textView: TextView
+    private lateinit var recyclerViewBookmarkedNews: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityNoticeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_notice) // Ensure this matches your XML layout file name
 
-        // 공지사항 데이터를 Firebase에서 불러와 표시
-        loadNoticesFromFirebase()
-    }
+        // Initialize UI components
+        previousBtn = findViewById(R.id.previousBtn)
+        textViewNotices = findViewById(R.id.textViewNotices)
+        textView = findViewById(R.id.textview)
+        recyclerViewBookmarkedNews = findViewById(R.id.recyclerViewBookmarkedNews)
 
-    private fun loadNoticesFromFirebase() {
-        val database = Firebase.database
-        val noticeRef = database.getReference("notices")
-
-        noticeRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val notices = snapshot.children.mapNotNull { it.getValue(String::class.java) }
-                binding.textViewNotices.text = notices.joinToString("\n\n")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("NoticeActivity", "Database error: ${error.message}")
-            }
-        })
+        // Add any additional setup or functionality here
     }
 }

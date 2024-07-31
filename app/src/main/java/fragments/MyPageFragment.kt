@@ -7,10 +7,12 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.os.LocaleList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -30,6 +32,7 @@ import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
 import java.util.Locale
 
 class MyPageFragment : Fragment() {
@@ -157,6 +160,11 @@ class MyPageFragment : Fragment() {
         // 회원 탈퇴 버튼 클릭 리스너 추가
         binding.buttonAccountDeletion.setOnClickListener {
             showAccountDeletionConfirmationDialog()
+        }
+
+        // Clear Cache button click listener
+        binding.buttonClearCache.setOnClickListener {
+            showClearCacheConfirmationDialog()
         }
 
 
@@ -362,11 +370,21 @@ class MyPageFragment : Fragment() {
     private fun setLocale(languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
+
         val config = Configuration()
-        config.locale = locale
-        resources.updateConfiguration(config, resources.displayMetrics)
-        activity?.recreate() // Activity 재시작하여 언어 변경 반영
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            config.setLocales(LocaleList(locale))
+        } else {
+            config.setLocale(locale)
+        }
+
+        // Update the resources configuration with the new locale
+        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
+
+        // Recreate the activity to apply the new locale settings
+        activity?.recreate()
     }
+
 
     private fun showLogoutConfirmationDialog() {
         if (isAdded) {
@@ -408,6 +426,47 @@ class MyPageFragment : Fragment() {
             }
             builder.show()
         }
+    }
+
+
+    private fun showClearCacheConfirmationDialog() {
+        if (isAdded) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("캐시 삭제")
+            builder.setMessage("정말로 캐시를 삭제하시겠습니까?")
+            builder.setPositiveButton("예") { _, _ ->
+                clearCache()
+            }
+            builder.setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
+    private fun clearCache() {
+        try {
+            val cacheDir = requireContext().cacheDir
+            deleteDir(cacheDir)
+            Toast.makeText(context, "캐시가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(context, "캐시 삭제에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            Log.e("MyPageFragment", "Failed to clear cache", e)
+        }
+    }
+
+    private fun deleteDir(dir: File): Boolean {
+        if (dir.isDirectory) {
+            val children = dir.listFiles()
+            if (children != null) {
+                for (child in children) {
+                    if (!deleteDir(child)) {
+                        return false
+                    }
+                }
+            }
+        }
+        return dir.delete()
     }
 
 

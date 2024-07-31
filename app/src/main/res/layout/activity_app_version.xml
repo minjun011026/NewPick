@@ -3,26 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/textViewAppVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="앱 버전: "
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:padding="8dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewDeviceAppVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="기기 앱 버전: "
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/textViewUpdateMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>

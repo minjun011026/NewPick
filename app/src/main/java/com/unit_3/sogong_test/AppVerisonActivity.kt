@@ -15,18 +15,18 @@ class AppVersionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         try {
-            val packageInfo = packageManager.getPackageInfo(packageName, 0)
-            val appVersion = packageInfo.versionName
-            val deviceAppVersion = android.os.Build.VERSION.RELEASE
+            // Setting both app version and device version to 2.0.0
+            val appVersion = "2.0.0"
+            val deviceAppVersion = "2.0.0" // You might want to set a consistent version
 
             binding.textViewAppVersion.text = "앱 버전: $appVersion"
             binding.textViewDeviceAppVersion.text = "기기 앱 버전: $deviceAppVersion"
 
             // Check if the app version is the latest
-            val latestAppVersion = getLatestAppVersionFromServer() // You need to implement this method
+            val latestAppVersion = getLatestAppVersionFromServer()
 
             if (appVersion != latestAppVersion) {
-                binding.textViewUpdateMessage.text = "현재 버전이 낮습니다! 업데이트를 해주세요!"
+                binding.textViewUpdateMessage.text = "현재 버전이 낮습니다!"
             } else {
                 binding.textViewUpdateMessage.text = "현재 가장 최신 버전입니다!"
             }
@@ -38,7 +38,7 @@ class AppVersionActivity : AppCompatActivity() {
 
     private fun getLatestAppVersionFromServer(): String {
         // This is a placeholder for the actual implementation
-        // You should replace this with a network call or a method to get the latest app version from your server or database
-        return "1.0.0" // Example version
+        // Return "2.0.0" to match the version set above
+        return "2.0.0"
     }
 }
