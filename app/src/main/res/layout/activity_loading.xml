@@ -11,8 +11,10 @@
         android:id="@+id/textViewCustomNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="224dp"
-        android:text="당신을 위한 맞춤형 뉴스"
+        android:layout_marginTop="216dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="오늘의 인기 뉴스와 키워드를 \n 찾아보고 있어요"
         android:textColor="@android:color/black"
         android:textSize="27sp"
         android:textStyle="bold"
@@ -32,5 +34,5 @@
         app:layout_constraintTop_toBottomOf="@id/textViewCustomNews"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/news_click" />
+        app:lottie_rawRes="@raw/rabbit_run" />
 </androidx.constraintlayout.widget.ConstraintLayout>
