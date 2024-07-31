@@ -66,6 +66,16 @@ class MyPageFragment : Fragment() {
         // Fetch user info from Firebase
         fetchUserInfoFromFirebase()
 
+        // 프로필 이미지 클릭 리스너
+        imageView.setOnClickListener {
+            showImagePickerDialog()
+        }
+
+        // 이미지 변경 버튼 클릭 리스너
+        binding.buttonChangeProfileImage.setOnClickListener {
+            showImagePickerDialog()
+        }
+
         imageView.setOnClickListener {
             showImagePickerDialog()
         }
