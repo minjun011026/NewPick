@@ -89,8 +89,6 @@ class MapNewsFragment : Fragment() {
 //        val v= inflater.inflate(R.layout.fragment_map_news, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map_news, container, false)
 
-        //여기서 아마도..MainActivity 위에 있는 다른 fragment로 이동하는거라 아래처럼 하면 안되고
-        //mainActivitiy로 intent로 이동하 다음에 해당 fragment로 다시 이동해줘야될듯...?
 
         binding.bottomNavigationHome.setOnClickListener {
             it.findNavController().navigate(R.id.action_mapNewsFragment_to_homeFragment)

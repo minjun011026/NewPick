@@ -81,6 +81,8 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_map_view)
 
+        binding.previousBtn.setOnClickListener { finish() }
+
         bottomSheetView = LayoutInflater.from(applicationContext).inflate(R.layout.layout_bottom_sheet, null)
 
         if (!hasPermission()) {

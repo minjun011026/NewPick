@@ -136,7 +136,7 @@
             android:id="@+id/floatingBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/pencil"
+            android:src="@drawable/pencil_white"
             android:layout_marginBottom="80dp"
             android:layout_marginEnd="16dp"
             android:layout_gravity="bottom|end"
