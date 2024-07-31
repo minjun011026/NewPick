@@ -105,6 +105,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
 
         addressBtn1.setOnClickListener{
             btn2bg.setBackgroundResource(R.drawable.city_button)
+            addressBtn1.setTextColor(Color.parseColor("#ffffff"))
             addressBtn2.setTextColor(Color.parseColor("#000000"))
             if(addressBtn1.text.toString() == "+") {
                 if (addressName != "") {
