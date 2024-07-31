@@ -10,7 +10,6 @@
         android:id="@+id/imageArea"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/account_circle"
         app:civ_border_color="@color/black"
         app:civ_border_overlay="true"
         app:civ_border_width="0.5dp"

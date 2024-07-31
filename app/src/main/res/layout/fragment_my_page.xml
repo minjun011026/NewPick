@@ -95,7 +95,6 @@
                         android:id="@+id/ivProfile"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/default_image"
                         android:layout_gravity="center"/>
 
 
