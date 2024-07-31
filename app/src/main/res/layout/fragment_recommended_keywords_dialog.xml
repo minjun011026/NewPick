@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:padding="16dp">
         <TextView
+            android:id="@+id/titleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이런 키워드는 어떠세요?"
@@ -21,49 +22,29 @@
             android:fontFamily="@font/ibmplexsanskr_semibold"
             android:textSize="20sp"
             android:gravity="center"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="8dp" />
         <!-- 구분선 추가 -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/darker_gray" />
+
         <LinearLayout
             android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
             android:orientation="vertical"
-            android:gravity="center">
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
             <ListView
                 android:id="@+id/keywordsListView"
                 android:layout_width="347dp"
                 android:layout_height="wrap_content"
                 android:textSize="16sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/completeBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/complete"
-                android:layout_marginEnd="12dp"
-                tools:ignore="VisualLintButtonSize" />
-
-            <Button
-                android:id="@+id/cancelBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/cancel"
-                android:layout_marginStart="12dp"
-                tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
 
 

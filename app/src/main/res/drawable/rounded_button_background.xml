@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="16dp"/> <!-- 모서리 둥글기 설정 -->
+    <solid android:color="@android:color/darker_gray" /> <!-- 기본 배경색 설정 -->
+</shape>
