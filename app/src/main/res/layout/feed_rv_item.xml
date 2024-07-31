@@ -125,14 +125,14 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:text="더 알아보기"
                 android:textColor="@color/black"
-                android:padding="4dp"
+                android:layout_marginLeft="10dp"
                 android:textSize="15sp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="265dp"
+                android:layout_marginLeft="255dp"
                 android:src="@drawable/arrow" />
 
 
