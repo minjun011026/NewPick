@@ -69,6 +69,8 @@
             android:name=".VerifyCurrentPasswordActivity" />
         <activity
             android:name=".ChangeNewPasswordActivity" />
+        <activity android:name=".AppVersionActivity" />
+        <activity android:name=".NoticeActivity" />
         <activity
             android:name=".MyPageActivity" />
         <activity android:name=".RecentArticlesActivity"/>

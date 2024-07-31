@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -29,6 +30,7 @@ import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 import de.hdodenhof.circleimageview.CircleImageView
+import java.util.Locale
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
@@ -127,6 +129,24 @@ class MyPageFragment : Fragment() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             setDarkMode(isChecked)
         }
+
+        // 앱 버전 버튼 클릭 리스너 추가
+        binding.version.setOnClickListener {
+            val intent = Intent(context, AppVersionActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 공지사항 버튼 클릭 리스너 추가
+        binding.gongji.setOnClickListener {
+            val intent = Intent(context, NoticeActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 언어 설정 버튼 클릭 리스너 추가
+        binding.language.setOnClickListener {
+            showLanguageSelectionDialog()
+        }
+
     }
 
     private fun loadDarkModePreference() {
@@ -148,6 +168,7 @@ class MyPageFragment : Fragment() {
             }
         }
     }
+
 
     private fun openBookmarkedNewsActivity() {
         val intent = Intent(context, BookmarkedNewsActivity::class.java)
@@ -307,6 +328,75 @@ class MyPageFragment : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
+
+    private fun showLanguageSelectionDialog() {
+        if (isAdded) {
+            val languages = arrayOf("한국어", "영어", "중국어", "일본어")
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("언어 설정")
+            builder.setItems(languages) { dialog, which ->
+                when (which) {
+                    0 -> setLocale("ko")
+                    1 -> setLocale("en")
+                    2 -> setLocale("zh")
+                    3 -> setLocale("ja")
+                }
+            }
+            builder.show()
+        }
+    }
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        resources.updateConfiguration(config, resources.displayMetrics)
+        activity?.recreate() // Activity 재시작하여 언어 변경 반영
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        if (isAdded) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("로그아웃")
+            builder.setMessage("정말로 로그아웃하시겠습니까?")
+            builder.setPositiveButton("예") { dialog, _ ->
+                firebaseAuth.signOut()
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            builder.setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
+    private fun showAccountDeletionConfirmationDialog() {
+        if (isAdded) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("회원 탈퇴")
+            builder.setMessage("정말로 회원 탈퇴하시겠습니까?")
+            builder.setPositiveButton("예") { dialog, _ ->
+                val user = firebaseAuth.currentUser
+                user?.delete()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    } else {
+                        // Handle failure
+                    }
+                }
+            }
+            builder.setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
 
     companion object {
         private const val REQUEST_CODE_CHANGE_NICKNAME = 2

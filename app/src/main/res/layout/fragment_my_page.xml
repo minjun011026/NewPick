@@ -334,7 +334,9 @@
                         android:layout_height="wrap_content"
                         android:text="언어설정"
                         android:textColor="@color/black"
-                        android:paddingStart="8dp" />
+                        android:paddingStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
                 </LinearLayout>
 
                 <View
@@ -362,12 +364,15 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/version" /> <!-- Replace with your SVG icon -->
                     <TextView
-                        android:id="@+id/verision"
+                        android:id="@+id/version"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="앱 버전"
                         android:textColor="@color/black"
-                        android:paddingStart="8dp" />
+                        android:paddingStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -403,7 +408,9 @@
                         android:layout_height="wrap_content"
                         android:text="공지사항"
                         android:textColor="@color/black"
-                        android:paddingStart="8dp" />
+                        android:paddingStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true" />
                 </LinearLayout>
 
                 <LinearLayout
