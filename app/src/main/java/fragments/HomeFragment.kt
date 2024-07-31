@@ -146,15 +146,18 @@
 
 package fragments
 
-import android.app.AlertDialog
+
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -178,10 +181,56 @@ class HomeFragment : Fragment() {
     private val TAG = "HomeFragment"
     private val hotNewsList = mutableListOf<HotNewsModel>()
     private lateinit var hotNewsAdapter: HotNewsRVAdapter
+    private lateinit var popupWindow: PopupWindow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Initialize PopupWindow
+        val popupView = layoutInflater.inflate(R.layout.home_popup, null)
+        popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        // Set PopupWindow background and animations
+        popupWindow.setBackgroundDrawable(null)
+        popupWindow.isOutsideTouchable = true
+        popupWindow.isFocusable = true
+
+        // Apply elevation to PopupWindow
+        ViewCompat.setElevation(popupView, 8f) // Adjust elevation as needed
+
+        // Show PopupWindow when the help button is touched
+        binding.helpImageView.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // Show PopupWindow
+                    popupWindow.showAsDropDown(v, 0, 0)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Dismiss the PopupWindow when touched outside
+        binding.root.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                if (popupWindow.isShowing) {
+                    popupWindow.dismiss()
+                }
+            }
+            false
+        }
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -216,24 +265,10 @@ class HomeFragment : Fragment() {
         // Fetch trending keywords
         FetchTrendingKeywordsTask().execute()
 
-        // Setup help button click listener
-        binding.buttonHelp.setOnClickListener {
-            showHelpDialog()
-        }
 
         return binding.root
     }
 
-    private fun showHelpDialog() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("일별 인기 급상승 검색어")
-        builder.setMessage("일별 인기 급상승 검색어는 지난 24시간 동안의 모든 검색어 중에서 트래픽이 크게 증가한 검색어를 강조표시하며, 1시간마다 업데이트됩니다. 이러한 인기 급상승 검색어 페이지에는 특정 검색어 및 검색 횟수의 절댓값이 표시됩니다.")
-        builder.setPositiveButton("확인") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val dialog = builder.create()
-        dialog.show()
-    }
 
     private inner class FetchHotNewsTask : AsyncTask<Void, Void, MutableList<HotNewsModel>>() {
         override fun doInBackground(vararg params: Void?): MutableList<HotNewsModel> {
