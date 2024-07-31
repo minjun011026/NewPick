@@ -142,12 +142,12 @@
                     android:layout_marginVertical="8dp"
                     android:background="@android:color/darker_gray" />
 
-                <!-- 나의 아티클 -->
+                <!-- 나의 뉴스 -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="8dp"
-                    android:text="나의 아티클"
+                    android:text="나의 뉴스"
                     android:textSize="18sp"
                     android:textColor="#696969"
                     android:textStyle="bold" />
@@ -187,7 +187,7 @@
                         android:id="@+id/recentArticlesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="최근 읽은 아티클"
+                        android:text="최근 읽은 뉴스"
                         android:textColor="@color/black"
                         android:paddingStart="8dp" />
                 </LinearLayout>
