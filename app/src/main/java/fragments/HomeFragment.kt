@@ -1,8 +1,194 @@
+//package fragments
+//
+//import HomeViewModel
+//import android.content.Intent
+//import android.os.Bundle
+//import android.util.Log
+//import android.view.LayoutInflater
+//import android.view.MotionEvent
+//import android.view.View
+//import android.view.ViewGroup
+//import android.widget.PopupWindow
+//import android.widget.Toast
+//import androidx.core.view.ViewCompat
+//import androidx.databinding.DataBindingUtil
+//import androidx.fragment.app.Fragment
+//import androidx.fragment.app.viewModels
+//import androidx.lifecycle.Observer
+//import androidx.navigation.findNavController
+//import androidx.recyclerview.widget.LinearLayoutManager
+//import com.airbnb.lottie.LottieAnimationView
+//import com.google.firebase.Firebase
+//import com.google.firebase.auth.auth
+//import com.google.firebase.auth.ktx.auth
+//import com.google.firebase.database.DataSnapshot
+//import com.google.firebase.database.DatabaseError
+//import com.google.firebase.database.ValueEventListener
+//import com.google.firebase.database.database
+//import com.google.firebase.database.ktx.database
+//import com.unit_3.sogong_test.*
+//import com.unit_3.sogong_test.databinding.FragmentHomeBinding
+//
+//class HomeFragment : Fragment() {
+//
+//    private lateinit var binding: FragmentHomeBinding
+//    private val TAG = "HomeFragment"
+//    private val hotNewsList = mutableListOf<HotNewsModel>()
+//    private lateinit var hotNewsAdapter: HotNewsRVAdapter
+//    private lateinit var popupWindow: PopupWindow
+//    private lateinit var loadingAnimationView: LottieAnimationView
+//    private lateinit var loadingOverlay: View
+//
+//    private val viewModel: HomeViewModel by viewModels()
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        // Initialize PopupWindow
+//        val popupView = layoutInflater.inflate(R.layout.home_popup, null)
+//        popupWindow = PopupWindow(
+//            popupView,
+//            ViewGroup.LayoutParams.WRAP_CONTENT,
+//            ViewGroup.LayoutParams.WRAP_CONTENT,
+//            true
+//        )
+//
+//        // Set PopupWindow background and animations
+//        popupWindow.setBackgroundDrawable(null)
+//        popupWindow.isOutsideTouchable = true
+//        popupWindow.isFocusable = true
+//
+//        // Apply elevation to PopupWindow
+//        ViewCompat.setElevation(popupView, 8f) // Adjust elevation as needed
+//
+//        // Show PopupWindow when the help button is touched
+//        binding.helpImageView.setOnTouchListener { v, event ->
+//            when (event.action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    // Show PopupWindow
+//                    popupWindow.showAsDropDown(v, 0, 0)
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+//
+//        // Dismiss the PopupWindow when touched outside
+//        binding.root.setOnTouchListener { v, event ->
+//            if (event.action == MotionEvent.ACTION_DOWN) {
+//                if (popupWindow.isShowing) {
+//                    popupWindow.dismiss()
+//                }
+//            }
+//            false
+//        }
+//    }
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+//    ): View? {
+//        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+//
+//        // Initialize Lottie Animation View
+//        loadingAnimationView = binding.loadingAnimationView
+//        loadingOverlay = binding.loadingOverlay
+//
+//        // Navigation button setup
+//        binding.bottomNavigationLocal.setOnClickListener {
+//            checkUserLocation()
+//        }
+//        binding.bottomNavigationMyKeyword.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_homeFragment_to_myKeywordFragment)
+//        }
+//        binding.bottomNavigationMyPage.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_homeFragment_to_myPageFragment)
+//        }
+//        binding.bottomNavigationFeed.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_homeFragment_to_feedFragment)
+//        }
+//
+//        // Initialize hot news RecyclerView
+//        binding.rvHotNews.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        hotNewsAdapter = HotNewsRVAdapter(hotNewsList)
+//        binding.rvHotNews.adapter = hotNewsAdapter
+//
+//        // Initialize trending keywords RecyclerView
+//        binding.rv.layoutManager = LinearLayoutManager(requireContext())
+//
+//        // Observe data from ViewModel
+//        viewModel.hotNewsList.observe(viewLifecycleOwner, Observer { hotNews ->
+//            hotNews?.let {
+//                hotNewsAdapter.updateNewsList(it)
+//            }
+//            checkDataLoadCompletion()
+//        })
+//
+//        viewModel.trendingKeywordsList.observe(viewLifecycleOwner, Observer { trendingKeywords ->
+//            trendingKeywords?.let {
+//                binding.rv.adapter = TrendRVAdapter(it)
+//            }
+//            checkDataLoadCompletion()
+//        })
+//
+//        // Fetch data
+//        showLoadingAnimation()
+//        viewModel.fetchHotNews()
+//        viewModel.fetchTrendingKeywords()
+//
+//        return binding.root
+//    }
+//
+//    private fun showLoadingAnimation() {
+//        loadingOverlay.visibility = View.VISIBLE
+//        loadingAnimationView.visibility = View.VISIBLE
+//        loadingAnimationView.playAnimation()
+//    }
+//
+//    private fun hideLoadingAnimation() {
+//        loadingOverlay.visibility = View.GONE
+//        loadingAnimationView.visibility = View.GONE
+//        loadingAnimationView.cancelAnimation()
+//    }
+//
+//    private fun checkDataLoadCompletion() {
+//        if (viewModel.hotNewsList.value != null && viewModel.trendingKeywordsList.value != null) {
+//            hideLoadingAnimation()
+//        }
+//    }
+//
+//    private fun checkUserLocation() {
+//        val currentUserId = Firebase.auth.currentUser?.uid
+//        currentUserId?.let {
+//            val locationRef = Firebase.database.getReference("location").child(it)
+//            locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    if (snapshot.exists() && snapshot.childrenCount > 0) {
+//                        // Location exists, navigate to MapNewsFragment
+//                        view?.findNavController()?.navigate(R.id.action_homeFragment_to_mapNewsFragment)
+//                    } else {
+//                        // No location, navigate to MapViewActivity
+//                        val intent = Intent(requireContext(), MapViewActivity::class.java)
+//                        startActivity(intent)
+//                    }
+//                }
+//
+//                override fun onCancelled(error: DatabaseError) {
+//                    Log.e("MyKeywordFragment", "Database error: ${error.message}")
+//                }
+//            })
+//        }
+//    }
+//}
+
+
 package fragments
 
-
+import HomeViewModel
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,22 +198,23 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.LottieAnimationView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentHomeBinding
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.nodes.Element
-import java.io.IOException
 
 class HomeFragment : Fragment() {
 
@@ -36,6 +223,10 @@ class HomeFragment : Fragment() {
     private val hotNewsList = mutableListOf<HotNewsModel>()
     private lateinit var hotNewsAdapter: HotNewsRVAdapter
     private lateinit var popupWindow: PopupWindow
+    private lateinit var loadingAnimationView: LottieAnimationView
+    private lateinit var loadingOverlay: View
+
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,12 +275,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+
+        // Initialize Lottie Animation View
+        loadingAnimationView = binding.loadingAnimationView
+        loadingOverlay = binding.loadingOverlay
 
         // Navigation button setup
         binding.bottomNavigationLocal.setOnClickListener {
@@ -110,122 +303,47 @@ class HomeFragment : Fragment() {
         hotNewsAdapter = HotNewsRVAdapter(hotNewsList)
         binding.rvHotNews.adapter = hotNewsAdapter
 
-        // Fetch hot news
-        FetchHotNewsTask().execute()
-
         // Initialize trending keywords RecyclerView
         binding.rv.layoutManager = LinearLayoutManager(requireContext())
 
-        // Fetch trending keywords
-        FetchTrendingKeywordsTask().execute()
+        // Observe data from ViewModel
+        viewModel.hotNewsList.observe(viewLifecycleOwner, Observer { hotNews ->
+            hotNews?.let {
+                hotNewsAdapter.updateNewsList(it)
+            }
+        })
 
+        viewModel.trendingKeywordsList.observe(viewLifecycleOwner, Observer { trendingKeywords ->
+            trendingKeywords?.let {
+                binding.rv.adapter = TrendRVAdapter(it)
+            }
+        })
+
+        // Observe the combined LiveData for data loading completion
+        viewModel.allDataLoaded.observe(viewLifecycleOwner, Observer { allDataLoaded ->
+            if (allDataLoaded) {
+                hideLoadingAnimation()
+            }
+        })
+
+        // Fetch data
+        showLoadingAnimation()
+        viewModel.fetchHotNews()
+        viewModel.fetchTrendingKeywords()
 
         return binding.root
     }
 
-
-    private inner class FetchHotNewsTask : AsyncTask<Void, Void, MutableList<HotNewsModel>>() {
-        override fun doInBackground(vararg params: Void?): MutableList<HotNewsModel> {
-            val hotNews = mutableListOf<HotNewsModel>()
-            try {
-                val url = "https://media.naver.com/press/001/ranking?type=popular"
-                val doc: Document = Jsoup.connect(url).get()
-
-                // 1위부터 10위까지
-                for (i in 1..10) {
-                    val titleElement: Element? = doc.selectFirst("#ct > div.press_ranking_home > div:nth-child(3) > ul > li:nth-child($i) > a > div.list_content > strong")
-                    val linkElement: Element? = doc.selectFirst("#ct > div.press_ranking_home > div:nth-child(3) > ul > li:nth-child($i) > a")
-
-                    if (titleElement != null && linkElement != null) {
-                        val title = titleElement.text()
-                        val link = linkElement.attr("href")
-                        val imageUrl = fetchImageUrlFromArticle(link)
-
-                        hotNews.add(HotNewsModel(title, imageUrl, link))
-                    }
-                }
-
-                // 11위부터 20위까지
-                for (i in 1..10) {
-                    val titleElement: Element? = doc.selectFirst("#ct > div.press_ranking_home > div:nth-child(4) > ul > li:nth-child($i) > a > div.list_content > strong")
-                    val linkElement: Element? = doc.selectFirst("#ct > div.press_ranking_home > div:nth-child(4) > ul > li:nth-child($i) > a")
-
-                    if (titleElement != null && linkElement != null) {
-                        val title = titleElement.text()
-                        val link = linkElement.attr("href")
-                        val imageUrl = fetchImageUrlFromArticle(link)
-
-                        hotNews.add(HotNewsModel(title, imageUrl, link))
-                    }
-                }
-            } catch (e: IOException) {
-                Log.e(TAG, "IOException occurred while fetching data", e)
-            } catch (e: Exception) {
-                Log.e(TAG, "Exception occurred while fetching data", e)
-            }
-            return hotNews
-        }
-
-        private fun fetchImageUrlFromArticle(articleUrl: String): String {
-            return try {
-                val articleDoc: Document = Jsoup.connect(articleUrl).get()
-                val imageElement: Element? = articleDoc.selectFirst("meta[property=og:image]")
-                imageElement?.attr("content") ?: ""
-            } catch (e: IOException) {
-                Log.e(TAG, "IOException occurred while fetching image from article", e)
-                ""
-            } catch (e: Exception) {
-                Log.e(TAG, "Exception occurred while fetching image from article", e)
-                ""
-            }
-        }
-
-        override fun onPostExecute(result: MutableList<HotNewsModel>?) {
-            super.onPostExecute(result)
-            if (result != null) {
-                hotNewsAdapter.updateNewsList(result)
-            } else {
-                Toast.makeText(requireContext(), "Failed to fetch hot news", Toast.LENGTH_SHORT).show()
-            }
-        }
+    private fun showLoadingAnimation() {
+        loadingOverlay.visibility = View.VISIBLE
+        loadingAnimationView.visibility = View.VISIBLE
+        loadingAnimationView.playAnimation()
     }
 
-    private inner class FetchTrendingKeywordsTask : AsyncTask<Void, Void, MutableList<TrendKeywordsModel>>() {
-        override fun doInBackground(vararg params: Void?): MutableList<TrendKeywordsModel> {
-            val trendingKeywords = mutableListOf<TrendKeywordsModel>()
-            try {
-                val doc: Document = Jsoup.connect("https://trends.google.co.kr/trends/trendingsearches/daily/rss?geo=KR").get()
-                val items: List<Element> = doc.select("item") // RSS 피드에서 item 요소 선택
-
-                for (item in items) {
-                    val title = item.selectFirst("title")?.text()
-                    val searchCount = item.selectFirst("ht|approx_traffic")?.text()
-                    val imageUrl = item.selectFirst("ht|picture")?.text()
-
-                    trendingKeywords.add(TrendKeywordsModel(title.toString(), searchCount.toString(), imageUrl.toString()))
-                }
-            } catch (e: IOException) {
-                Log.e(TAG, "IOException occurred while fetching data", e)
-            } catch (e: Exception) {
-                Log.e(TAG, "Exception occurred while fetching data", e)
-            }
-            return trendingKeywords
-        }
-
-        override fun onPostExecute(result: MutableList<TrendKeywordsModel>?) {
-            super.onPostExecute(result)
-            if (result != null) {
-                if (result.isNotEmpty()) {
-                    for (keyword in result) {
-                        Log.d(TAG, "Trending Keyword: $keyword")
-                    }
-                    binding.rv.adapter = TrendRVAdapter(result)
-                } else {
-                    Log.d(TAG, "No trending keywords found")
-                    Toast.makeText(requireContext(), "인기 검색어를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+    private fun hideLoadingAnimation() {
+        loadingOverlay.visibility = View.GONE
+        loadingAnimationView.visibility = View.GONE
+        loadingAnimationView.cancelAnimation()
     }
 
     private fun checkUserLocation() {
@@ -251,3 +369,6 @@ class HomeFragment : Fragment() {
         }
     }
 }
+
+
+

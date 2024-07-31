@@ -151,5 +151,31 @@
                 android:layout_weight="1"
                 android:src="@drawable/navigation_my_page_trans"/>
         </LinearLayout>
+
+        <!-- Overlay for loading animation -->
+        <FrameLayout
+            android:id="@+id/loadingOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:visibility="visible">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:alpha="0.5" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingAnimationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lottie_rawRes="@raw/rabbit_run"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="70dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
+        </FrameLayout>
+
     </FrameLayout>
 </layout>
