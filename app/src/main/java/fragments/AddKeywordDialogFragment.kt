@@ -106,7 +106,7 @@ class AddKeywordDialogFragment : DialogFragment() {
     private fun fetchRecommendedKeywords(keyword: String) {
         val client = OkHttpClient()
         val requestBodyJson = JSONObject().apply {
-            put("model", "gpt-3.5-turbo")
+            put("model", "gpt-4-0613")
             put("messages", JSONArray().put(JSONObject().put("role", "user").put("content", "이 사용자가 추가할 법한 관련 키워드를 JSON 배열 형식으로, 각 키워드를 큰따옴표로 감싸고 쉼표로 구분하여 3개 추천해줘: $keyword\n")))
             put("max_tokens", 50)
         }.toString()
