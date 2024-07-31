@@ -282,7 +282,11 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
 
                         name.text = nickname ?: "Unknown"
                         if (!profilePictureUrl.isNullOrEmpty()) {
-                            Glide.with(itemView.context).load(profilePictureUrl).into(imageArea)
+                            if(profilePictureUrl == "URL_OF_DEFAULT_IMAGE"){
+                                imageArea.setImageResource(R.drawable.account_circle)
+                            }else{
+                                Glide.with(itemView.context).load(profilePictureUrl).into(imageArea)
+                            }
                         }
                     } else {
                         Log.d("FeedRVAdapter", "User with uid ${item.uid} does not exist.")
