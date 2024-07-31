@@ -34,7 +34,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="내가 북마크 한 글"
+        android:text="내가 북마크한 글"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
