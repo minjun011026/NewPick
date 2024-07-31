@@ -35,7 +35,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="내가 북마크한 글"
-        android:textColor="@color/black"
+        android:textColor="#2E2E2E"
         android:textSize="20sp" />
 
     <!--구분선-->

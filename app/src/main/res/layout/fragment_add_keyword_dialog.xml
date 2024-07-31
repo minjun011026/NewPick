@@ -49,7 +49,7 @@
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/ibmplexsanskr_medium"
                 android:text="등록"
-                android:textColor="#4B89DC" />
+                android:textColor="#4169E1" />
 
 
 

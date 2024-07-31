@@ -11,6 +11,7 @@
         android:text="댓글"
         android:layout_gravity="center"
         android:textSize="20sp"
+        android:textColor="#2E2E2E"
         android:fontFamily="@font/pretendard_semibold"/>
 
     <LinearLayout
@@ -63,6 +64,7 @@
             android:id="@+id/postCommentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#696969"
             android:text="게시" />
     </LinearLayout>
 </LinearLayout>

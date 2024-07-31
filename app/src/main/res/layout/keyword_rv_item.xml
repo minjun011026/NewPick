@@ -23,7 +23,7 @@
                     android:id="@+id/keywordArea"
                     android:text="키워드명"
                     android:textSize="20sp"
-                    android:textColor="#0064FF"
+                    android:textColor="#4169E1"
                     android:fontFamily="@font/pretendard_semibold"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"

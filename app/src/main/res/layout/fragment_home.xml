@@ -35,7 +35,7 @@
                     android:paddingBottom="8dp"
                     android:text="Home"
                     android:textSize="24sp"
-                    android:textColor="@color/black"
+                    android:textColor="#2E2E2E"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="인기 뉴스"
                     android:textSize="20sp"
-                    android:textColor="@color/black"
+                    android:textColor="#2E2E2E"
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
                     android:gravity="start"/>
@@ -87,7 +87,7 @@
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:gravity="start"
                     android:text="오늘의 키워드 순위"
-                    android:textColor="@color/black"
+                    android:textColor="#2E2E2E"
                     android:textSize="20sp" />
 
                 <ImageButton
@@ -104,7 +104,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"/>
+                android:layout_height="350dp" />
         </LinearLayout>
 
         <!-- 하단 네비게이션 바 -->

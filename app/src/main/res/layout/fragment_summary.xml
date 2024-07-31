@@ -36,7 +36,7 @@
             android:backgroundTint="@color/white"
             android:fontFamily="@font/ibmplexsanskr_medium"
             android:text="원문 기사 보기"
-            android:textColor="#4B89DC" />
+            android:textColor="#4169E1" />
 
         <ImageButton
             android:id="@+id/speakerBtn"

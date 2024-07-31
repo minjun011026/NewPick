@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이런 키워드는 어떠세요?"
-            android:textColor="@color/black"
+            android:textColor="#2E2E2E"
             android:fontFamily="@font/ibmplexsanskr_semibold"
             android:textSize="20sp"
             android:gravity="center"

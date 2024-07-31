@@ -24,7 +24,7 @@
         android:text="Register"
         android:gravity="center_horizontal"
         android:layout_marginTop="35dp"
-        android:textColor="@color/black"
+        android:textColor="#2E2E2E"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -188,7 +188,8 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:text="Register"
-        android:backgroundTint="@color/custom"
+        android:fontFamily="@font/pretendard_semibold"
+        android:background="@drawable/button_default"
         android:textColor="@color/white"
         android:textSize="30sp" />
 </LinearLayout>

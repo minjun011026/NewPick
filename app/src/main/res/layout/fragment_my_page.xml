@@ -40,7 +40,7 @@
                         android:fontFamily="@font/ibmplexsanskr_semibold"
                         android:paddingBottom="8dp"
                         android:text="My page"
-                        android:textColor="@color/black"
+                        android:textColor="#2E2E2E"
                         android:textSize="24sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
                         android:gravity="start"
                         android:text="마이페이지"
                         android:textSize="20sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="#2E2E2E"/>
                 </LinearLayout>
 
                 <!--구분선-->
@@ -91,7 +91,8 @@
                     android:paddingVertical="4dp"
                     android:text="회원정보"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#696969"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,7 +115,6 @@
                             android:id="@+id/nicknameTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
                             android:paddingBottom="8dp"
                             android:text="김나눔" />
 
@@ -123,7 +123,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
-                            android:textColor="@color/black"
                             android:text="nanseulgim365@gmail.com" />
 
                         <TextView
@@ -131,7 +130,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingBottom="8dp"
-                            android:textColor="@color/black"
                             android:text="서울 동작구 흑석동" />
                     </LinearLayout>
                 </LinearLayout>
@@ -151,6 +149,7 @@
                     android:paddingVertical="8dp"
                     android:text="나의 아티클"
                     android:textSize="18sp"
+                    android:textColor="#696969"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -169,8 +168,7 @@
                         android:layout_height="wrap_content"
                         android:onClick="openBookmarkedNewsActivity"
                         android:paddingStart="8dp"
-                        android:text="내가 북마크한 글"
-                        android:textColor="@color/black" />
+                        android:text="내가 북마크한 글" />
                 </LinearLayout>
 
                 <LinearLayout

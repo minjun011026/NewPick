@@ -31,7 +31,7 @@
                 android:fontFamily="@font/pretendard_semibold"
                 android:gravity="center"
                 android:text="키워드로 보는 뉴스"
-                android:textColor="@color/black"
+                android:textColor="#2E2E2E"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="키워드 영역"
-                android:textColor="#0064FF"
+                android:textColor="#4169E1"
                 android:textSize="20sp"
                 android:fontFamily="@font/pretendard_semibold"
                 />

@@ -35,7 +35,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="최근 본 뉴스"
-        android:textColor="@color/black"
+        android:textColor="#2E2E2E"
         android:textSize="20sp" />
 
     <!--구분선-->
@@ -53,7 +53,7 @@
         android:layout_height="818dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="아직 본 뉴스가 없습니다.\" />
+        android:text="아직 본 뉴스가 없습니다." />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecentArticles"
