@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,68 +9,55 @@
     android:background="@color/white"
     tools:context=".LoginActivity">
 
-    <!-- 앱 이름 및 로고 -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="-90dp">
 
-        <ImageView
-            android:layout_width="79dp"
-            android:layout_height="83dp"
-            android:src="@drawable/splash_svg" />
+    <!-- 뉴스와 친해지리 텍스트 -->
 
-        <TextView
-            android:id="@+id/appName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My News"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="10dp"/>
-    </LinearLayout>
-
-    <!-- 로그인 텍스트 -->
+    <!-- 설명 텍스트 -->
     <TextView
-        android:id="@+id/loginText"
-        android:layout_width="wrap_content"
+        android:id="@+id/headerText"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
-        android:text="Log In"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="#2E2E2E"
+        android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:layout_gravity="center"/>
+        android:text="뉴스와 친해지리"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subHeaderText"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="관심 있는 키워드로만 뉴스를 보고싶다면?"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
     <!-- 이메일 입력 -->
     <EditText
         android:id="@+id/username"
-        android:layout_width="350dp"
-        android:layout_height="73dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:background="@drawable/edit_text_border"
-        android:hint="Enter Username Or Email"
+        android:background="@drawable/password_border2"
+        android:hint=" "
         android:inputType="textEmailAddress"
         android:padding="10dp" />
 
-
     <!-- 비밀번호 입력 및 보기/숨기기 버튼 -->
     <LinearLayout
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/email_border2"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/password"
             android:layout_width="0dp"
-            android:layout_height="73dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dp" />
 
@@ -84,82 +70,80 @@
 
     </LinearLayout>
 
-    <!-- 비밀번호 찾기 및 회원가입 텍스트 -->
+    <!-- 아이디 찾기 및 비밀번호 찾기 텍스트 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:gravity="center">
+
+        <TextView
+            android:id="@+id/findUsernameBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아이디 찾기"
+            android:textColor="@color/blue"
+            android:textStyle="italic"
+            android:layout_gravity="center"
+            android:padding="4dp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" | "
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:padding="4dp" />
 
         <TextView
             android:id="@+id/forgotPasswordBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot password?"
-            android:textColor="@color/blue"
-            android:textStyle="italic"
             android:layout_gravity="center"
-            android:paddingBottom="4dp"
-            android:background="@android:color/transparent" />
-
-    </LinearLayout>
-
-    <!-- "Don't Have An Account? Register" 텍스트 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/registertext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:text="Don't Have An Account?"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/registerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:text="Register"
-            android:textStyle="bold"
-            android:textColor="@color/yellow" />
+            android:background="@android:color/transparent"
+            android:padding="4dp"
+            android:text="비밀번호 찾기"
+            android:textColor="@color/blue"
+            android:textStyle="italic" />
     </LinearLayout>
 
     <!-- 로그인 버튼 -->
-
-    <!-- or 텍스트 -->
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/black"
-        android:layout_marginTop="30dp" />
-
-
-    <!-- 구글 로그인 버튼 -->
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="350dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/button_default"
-        android:text="Log In"
-        android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/login_border"
+        android:textSize="20sp" />
+
+    <!--구분선-->
+    <View
+        android:layout_width="390dp"
+        android:layout_height="1dp"
+        android:layout_marginVertical="10dp"
+        android:background="@android:color/darker_gray" />
+
+    <!-- 회원가입 버튼 -->
+
+
+        <TextView
+            android:id="@+id/notMemberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:text="회원이 아니시라면?"
+            android:textColor="@color/black" />
+
+
 
     <Button
-        android:id="@+id/googleSignInButton"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/google_button"
-        android:text="" />
-
-
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/register_border"
+        android:textStyle="bold" />
 </LinearLayout>

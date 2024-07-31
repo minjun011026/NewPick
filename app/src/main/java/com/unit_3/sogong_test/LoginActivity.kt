@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         val forgotPasswordBtn = findViewById<TextView>(R.id.forgotPasswordBtn)
         val registerBtn = findViewById<TextView>(R.id.registerBtn)
         showPasswordButton = findViewById(R.id.showPassword)
-        val googleSignInButton = findViewById<Button>(R.id.googleSignInButton)
+
 
         // 비밀번호 보기/숨기기 버튼 클릭 리스너 설정
         showPasswordButton.setOnClickListener {
@@ -64,11 +64,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // 구글 로그인 버튼 클릭 리스너 설정
-        googleSignInButton.setOnClickListener {
-            // 구글 로그인 로직 추가
-            // ...
-        }
+
 
         forgotPasswordBtn.setOnClickListener {
             startActivity(Intent(this, FindPasswordActivity::class.java))
