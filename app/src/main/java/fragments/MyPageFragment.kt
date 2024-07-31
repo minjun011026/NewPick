@@ -4,12 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
+import android.os.LocaleList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -29,6 +32,8 @@ import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
 import com.unit_3.sogong_test.databinding.FragmentMyPageBinding
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
+import java.util.Locale
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
@@ -60,6 +65,16 @@ class MyPageFragment : Fragment() {
 
         // Fetch user info from Firebase
         fetchUserInfoFromFirebase()
+
+        // 프로필 이미지 클릭 리스너
+        imageView.setOnClickListener {
+            showImagePickerDialog()
+        }
+
+        // 이미지 변경 버튼 클릭 리스너
+        binding.buttonChangeProfileImage.setOnClickListener {
+            showImagePickerDialog()
+        }
 
         imageView.setOnClickListener {
             showImagePickerDialog()
@@ -127,6 +142,42 @@ class MyPageFragment : Fragment() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             setDarkMode(isChecked)
         }
+
+        // 앱 버전 버튼 클릭 리스너 추가
+        binding.version.setOnClickListener {
+            val intent = Intent(context, AppVersionActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 공지사항 버튼 클릭 리스너 추가
+        binding.gongji.setOnClickListener {
+            val intent = Intent(context, NoticeActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 언어 설정 버튼 클릭 리스너 추가
+        binding.language.setOnClickListener {
+            showLanguageSelectionDialog()
+        }
+
+        // 로그아웃 버튼 클릭 리스너 추가
+        binding.buttonLogout.setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+
+
+
+        // 회원 탈퇴 버튼 클릭 리스너 추가
+        binding.buttonAccountDeletion.setOnClickListener {
+            showAccountDeletionConfirmationDialog()
+        }
+
+        // Clear Cache button click listener
+        binding.buttonClearCache.setOnClickListener {
+            showClearCacheConfirmationDialog()
+        }
+
+
     }
 
     private fun loadDarkModePreference() {
@@ -148,6 +199,7 @@ class MyPageFragment : Fragment() {
             }
         }
     }
+
 
     private fun openBookmarkedNewsActivity() {
         val intent = Intent(context, BookmarkedNewsActivity::class.java)
@@ -307,6 +359,126 @@ class MyPageFragment : Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
+
+    private fun showLanguageSelectionDialog() {
+        if (isAdded) {
+            val languages = arrayOf("한국어", "영어", "중국어", "일본어")
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("언어 설정")
+            builder.setItems(languages) { dialog, which ->
+                when (which) {
+                    0 -> setLocale("ko")
+                    1 -> setLocale("en")
+                    2 -> setLocale("zh")
+                    3 -> setLocale("ja")
+                }
+            }
+            builder.show()
+        }
+    }
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+
+        val config = Configuration()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            config.setLocales(LocaleList(locale))
+        } else {
+            config.setLocale(locale)
+        }
+
+        // Update the resources configuration with the new locale
+        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
+
+        // Recreate the activity to apply the new locale settings
+        activity?.recreate()
+    }
+
+
+    private fun showLogoutConfirmationDialog() {
+        if (isAdded) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("로그아웃")
+            builder.setMessage("정말로 로그아웃하시겠습니까?")
+            builder.setPositiveButton("예") { dialog, _ ->
+                firebaseAuth.signOut()
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+            builder.setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
+    private fun showAccountDeletionConfirmationDialog() {
+        if (isAdded) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("회원 탈퇴")
+            builder.setMessage("정말로 회원 탈퇴하시겠습니까?")
+            builder.setPositiveButton("예") { dialog, _ ->
+                val user = firebaseAuth.currentUser
+                user?.delete()?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val intent = Intent(context, LoginActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    } else {
+                        // Handle failure
+                    }
+                }
+            }
+            builder.setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
+
+    private fun showClearCacheConfirmationDialog() {
+        if (isAdded) {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("캐시 삭제")
+            builder.setMessage("정말로 캐시를 삭제하시겠습니까?")
+            builder.setPositiveButton("예") { _, _ ->
+                clearCache()
+            }
+            builder.setNegativeButton("아니오") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        }
+    }
+
+    private fun clearCache() {
+        try {
+            val cacheDir = requireContext().cacheDir
+            deleteDir(cacheDir)
+            Toast.makeText(context, "캐시가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(context, "캐시 삭제에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            Log.e("MyPageFragment", "Failed to clear cache", e)
+        }
+    }
+
+    private fun deleteDir(dir: File): Boolean {
+        if (dir.isDirectory) {
+            val children = dir.listFiles()
+            if (children != null) {
+                for (child in children) {
+                    if (!deleteDir(child)) {
+                        return false
+                    }
+                }
+            }
+        }
+        return dir.delete()
+    }
+
 
     companion object {
         private const val REQUEST_CODE_CHANGE_NICKNAME = 2
