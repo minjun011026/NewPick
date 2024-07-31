@@ -103,6 +103,11 @@ class AddKeywordDialogFragment : DialogFragment() {
             }
         }
     }
+    // 추천 키워드가 선택되었을 때 호출되는 메서드
+    fun setRecommendedKeywords(recommendations: List<String>) {
+        recommendedKeywords = recommendations
+        onRecommendedKeywordsFetched(recommendations) // 추천 키워드 버튼 생성
+    }
 
     private fun fetchRecommendedKeywords(keyword: String) {
         val client = OkHttpClient()
@@ -174,6 +179,7 @@ class AddKeywordDialogFragment : DialogFragment() {
         for (keyword in selectedKeywords) {
             myRef.push().setValue(KeywordModel(keyword))
         }
+        dismiss()
     }
     // 키워드 추천 후 추천 키워드를 다이얼로그로 표시하는 메서드 추가
     private fun onRecommendedKeywordsFetched(recommendations: List<String>) {

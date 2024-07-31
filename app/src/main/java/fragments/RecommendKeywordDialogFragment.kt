@@ -103,6 +103,20 @@ class RecommendedKeywordsDialogFragment : DialogFragment() {
             return fragment
         }
     }
+    private fun dismissAddKeywordDialog() {
+        // 키워드 등록 다이얼로그를 종료하는 로직을 추가합니다.
+        val addKeywordDialog = childFragmentManager.findFragmentByTag("AddKeywordDialogFragment") as? AddKeywordDialogFragment
+        addKeywordDialog?.dismiss()
+    }
+    private fun onCompleteButtonClick() {
+        if (selectedKeywords.isNotEmpty()) {
+            onKeywordsSelected?.invoke(selectedKeywords)
+            dismiss() // 추천 키워드 다이얼로그 종료
+            dismissAddKeywordDialog() // 키워드 등록 다이얼로그 종료
+        } else {
+            Toast.makeText(context, "키워드를 선택하세요.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = AlertDialog.Builder(requireContext())
@@ -129,14 +143,10 @@ class RecommendedKeywordsDialogFragment : DialogFragment() {
         val completeButton = Button(context).apply {
             text = "완료"
             setOnClickListener {
-                if (selectedKeywords.isNotEmpty()) {
-                    onKeywordsSelected?.invoke(selectedKeywords)
-                    dismiss()
-                } else {
-                    Toast.makeText(context, "키워드를 선택하세요.", Toast.LENGTH_SHORT).show()
-                }
+                onCompleteButtonClick() // 수정한 메서드 호출
             }
         }
+
         buttonLayout.addView(completeButton)
 
         dialog.setView(buttonLayout)
