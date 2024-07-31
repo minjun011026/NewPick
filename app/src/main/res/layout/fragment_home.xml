@@ -94,7 +94,7 @@
                     android:id="@+id/helpImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/help"
+                    android:src="@drawable/help_2"
                     android:background="@color/white"/>
 
 
