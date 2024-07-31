@@ -13,33 +13,59 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이런 키워드는 어떠세요?"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ibmplexsanskr_semibold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:paddingBottom="16dp" />
+        <!-- 구분선 추가 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="8dp" />
         <LinearLayout
             android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:gravity="center">
 
             <ListView
                 android:id="@+id/keywordsListView"
-                android:layout_width="match_parent"
+                android:layout_width="347dp"
                 android:layout_height="wrap_content"
                 android:textSize="16sp" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/completeBtn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/complete"
-            tools:ignore="VisualLintButtonSize" />
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/cancelBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            tools:ignore="VisualLintButtonSize" />
+            <Button
+                android:id="@+id/completeBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/complete"
+                android:layout_marginEnd="12dp"
+                tools:ignore="VisualLintButtonSize" />
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:layout_marginStart="12dp"
+                tools:ignore="VisualLintButtonSize" />
+        </LinearLayout>
+
 
     </LinearLayout>
 </layout>

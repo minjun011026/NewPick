@@ -154,17 +154,17 @@
                     android:paddingVertical="8dp">
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="22dp"
+                        android:layout_width="18dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/bookmark" /> <!-- Replace with your SVG icon -->
                     <TextView
                         android:id="@+id/bookmarkedNewsTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="내가 북마크한 글"
-                        android:textColor="@color/black"
+                        android:onClick="openBookmarkedNewsActivity"
                         android:paddingStart="8dp"
-                        android:onClick="openBookmarkedNewsActivity" />
+                        android:text="내가 북마크한 글"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
