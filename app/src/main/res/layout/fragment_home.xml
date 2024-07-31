@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="인기 뉴스"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/ibmplexsanskr_semibold"
                     android:layout_weight="1"
@@ -88,7 +88,7 @@
                     android:gravity="start"
                     android:text="오늘의 키워드 순위"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/button_help"
