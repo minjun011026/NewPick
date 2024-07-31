@@ -147,6 +147,19 @@ class MyPageFragment : Fragment() {
             showLanguageSelectionDialog()
         }
 
+        // 로그아웃 버튼 클릭 리스너 추가
+        binding.buttonLogout.setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+
+
+
+        // 회원 탈퇴 버튼 클릭 리스너 추가
+        binding.buttonAccountDeletion.setOnClickListener {
+            showAccountDeletionConfirmationDialog()
+        }
+
+
     }
 
     private fun loadDarkModePreference() {
