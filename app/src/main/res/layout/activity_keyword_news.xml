@@ -44,7 +44,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:orientation="vertical">
@@ -64,14 +64,16 @@
                 android:layout_height="0.5dp"
                 android:background="#999999" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
 
         </LinearLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/newsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
 
     </LinearLayout>
 

@@ -19,17 +19,20 @@
             android:id="@+id/newsImageView"
             android:layout_width="120dp"
             android:layout_height="80dp"
-            android:layout_margin = "12dp"
+            android:layout_marginTop = "12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="6dp"
             tools:src="@drawable/ic_launcher_foreground"
             android:background="@drawable/rounded_corner"
             android:scaleType="fitXY"/>
+
         <TextView
             android:id="@+id/titleTextView"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="80dp"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
+            android:textSize="15sp"
             tools:text="News Title" />
 
     </LinearLayout>
@@ -39,7 +42,6 @@
         android:id="@+id/moreVertBtn"
         android:layout_width="24dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="12dp"
         android:background="@android:color/transparent"
         android:src="@drawable/more_vert"
