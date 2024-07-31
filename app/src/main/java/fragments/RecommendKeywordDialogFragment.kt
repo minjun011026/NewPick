@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.unit_3.sogong_test.KeywordModel
 
-
 class RecommendedKeywordsDialogFragment : DialogFragment() {
 
     private lateinit var recommendations : List<String>
