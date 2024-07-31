@@ -223,24 +223,38 @@ class MyPageFragment : Fragment() {
                 val email = snapshot.child("email").getValue(String::class.java) ?: "기본 이메일"
                 val profilePictureUrl = snapshot.child("profile_picture").getValue(String::class.java) ?: defaultImageUrl
 
-                // Update SharedPreferences
-                with(sharedPreferences.edit()) {
-                    putString("nickname", nickname)
-                    putString("email", email)
-                    putString("profile_picture", profilePictureUrl)
-                    apply()
-                }
+                // 위치 정보 가져오기
+                val locationRef = database.getReference("location").child(user.uid)
+                locationRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(locationSnapshot: DataSnapshot) {
+                        val locations = locationSnapshot.children.mapNotNull { it.getValue(String::class.java) }
+                        val userLocation = if (locations.isNotEmpty()) locations[0] else "위치 정보 없음"
 
-                // Update UI
-                if (isAdded) {
-                    binding.nicknameTextView.text = nickname
-                    binding.emailTextView.text = email
-                    loadImageFromDatabase(profilePictureUrl)
-                }
+                        // Update SharedPreferences
+                        with(sharedPreferences.edit()) {
+                            putString("nickname", nickname)
+                            putString("email", email)
+                            putString("profile_picture", profilePictureUrl)
+                            putString("user_location", userLocation)
+                            apply()
+                        }
+
+                        // Update UI
+                        if (isAdded) {
+                            binding.nicknameTextView.text = nickname
+                            binding.emailTextView.text = email
+                            binding.textViewUserLocation.text = "내 위치: $userLocation"
+                            loadImageFromDatabase(profilePictureUrl)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.e("MyPageFragment", "Database error: ${error.message}")
+                    }
+                })
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Handle database error
                 Log.e("MyPageFragment", "Database error: ${error.message}")
             }
         })
