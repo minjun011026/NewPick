@@ -27,10 +27,6 @@
             android:name=".MapNewsActivity"
             android:exported="false" />
         <activity
-            android:name=".CityNewsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Sogong_test" />
-        <activity
             android:name=".FeedWriteActivity"
             android:exported="false" />
 
@@ -57,11 +53,6 @@
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -74,8 +65,6 @@
             android:exported="false" />
         <activity
             android:name=".ChangeNicknameActivity" />
-        <activity
-            android:name=".ChangeEmailActivity" />
         <activity
             android:name=".VerifyCurrentPasswordActivity" />
         <activity
