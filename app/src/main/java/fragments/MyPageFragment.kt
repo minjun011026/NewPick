@@ -252,7 +252,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun setDefaultImage() {
-        imageView.setImageResource(R.drawable.default_image) // 기본 이미지 리소스 설정
+        imageView.setImageResource(R.drawable.account_circle) // 기본 이미지 리소스 설정
         saveImageUriToDatabase(defaultImageUrl)
     }
 
@@ -260,7 +260,7 @@ class MyPageFragment : Fragment() {
         if (imageUrl != defaultImageUrl) {
             Glide.with(requireActivity()).load(imageUrl).into(imageView)
         } else {
-            imageView.setImageResource(R.drawable.default_image)
+            imageView.setImageResource(R.drawable.account_circle)
         }
     }
 
