@@ -82,7 +82,7 @@ class RecommendedKeywordsDialogFragment : DialogFragment() {
                         // 선택 시 배경을 변경하기 위해 Drawable을 변경
                         val selectedBackground = GradientDrawable().apply {
                             shape = GradientDrawable.RECTANGLE
-                            cornerRadius = 40f // 모서리 둥글
+                            cornerRadius = 50f // 모서리 둥글
                             setColor(Color.parseColor("#0064FF")) // 선택 시 색상 변경
                         }
                         background = selectedBackground // 배경 변경
