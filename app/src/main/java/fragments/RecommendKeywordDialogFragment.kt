@@ -19,76 +19,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.unit_3.sogong_test.KeywordModel
 
 
-//class RecommendedKeywordsDialogFragment : DialogFragment() {
-//    private lateinit var binding: FragmentRecommendedKeywordsDialogBinding
-//    private var selectedKeywords = mutableListOf<String>()
-//
-//    companion object {
-//        private const val ARG_KEYWORDS = "keywords"
-//
-//        fun newInstance(keywords: List<String>, onKeywordsSelected: (List<String>) -> Unit): RecommendedKeywordsDialogFragment {
-//            val fragment = RecommendedKeywordsDialogFragment()
-//            val args = Bundle()
-//            args.putStringArrayList(ARG_KEYWORDS, ArrayList(keywords))
-//            fragment.arguments = args
-//            fragment.onKeywordsSelected = onKeywordsSelected
-//            return fragment
-//        }
-//    }
-//
-//    private var onKeywordsSelected: ((List<String>) -> Unit)? = null
-//
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-//        binding = FragmentRecommendedKeywordsDialogBinding.inflate(inflater, container, false)
-//
-//        val keywords = arguments?.getStringArrayList(ARG_KEYWORDS) ?: emptyList()
-//        setupKeywordButtons(keywords)
-//
-//        binding.completeBtn.setOnClickListener {
-//            saveRecommendedKeywords(selectedKeywords) // 키워드 저장 호출
-//            onKeywordsSelected?.invoke(selectedKeywords)
-//            dismiss()
-//        }
-//
-//        binding.cancelBtn.setOnClickListener {
-//            dismiss()
-//        }
-//
-//        return binding.root
-//    }
-//
-//    private fun setupKeywordButtons(keywords: List<String>) {
-//        val buttonLayout = binding.buttonLayout // 버튼을 추가할 레이아웃
-//
-//        // 기존 버튼 제거
-//        buttonLayout.removeAllViews()
-//
-//        keywords.forEach { keyword ->
-//            val button = Button(context).apply {
-//                text = keyword
-//                setOnClickListener {
-//                    if (selectedKeywords.contains(keyword)) {
-//                        selectedKeywords.remove(keyword) // 이미 선택된 키워드라면 제거
-//                        setBackgroundColor(Color.LTGRAY) // 선택 해제 시 색상 변경
-//                    } else {
-//                        selectedKeywords.add(keyword) // 선택된 키워드 추가
-//                        setBackgroundColor(Color.GREEN) // 선택 시 색상 변경
-//                    }
-//                }
-//            }
-//            buttonLayout.addView(button)
-//        }
-//    }
-//
-//    private fun saveRecommendedKeywords(selectedKeywords: List<String>) {
-//        val database = FirebaseDatabase.getInstance()
-//        val myRef = database.getReference("keyword").child(FirebaseAuth.getInstance().currentUser!!.uid)
-//        for (keyword in selectedKeywords) {
-//            myRef.push().setValue(KeywordModel(keyword))
-//        }
-//    }
-//}
-
 class RecommendedKeywordsDialogFragment : DialogFragment() {
 
     private lateinit var recommendations: List<String>
@@ -140,16 +70,23 @@ class RecommendedKeywordsDialogFragment : DialogFragment() {
             buttonLayout.addView(button)
         }
 
-        val completeButton = Button(context).apply {
-            text = "완료"
-            setOnClickListener {
-                onCompleteButtonClick() // 수정한 메서드 호출
-            }
+        //        val completeButton = Button(context).apply {
+//            text = "완료"
+//            setOnClickListener {
+//                onCompleteButtonClick() // 수정한 메서드 호출
+//            }
+//        }
+        dialog.setView(buttonLayout)
+        dialog.setTitle("추천 키워드 선택")
+        dialog.setPositiveButton("확인") { _, _ ->
+            onKeywordsSelected?.invoke(selectedKeywords)
         }
-
-        buttonLayout.addView(completeButton)
+        dialog.setNegativeButton("취소", null)
+//
+//        buttonLayout.addView(completeButton)
 
         dialog.setView(buttonLayout)
         return dialog.create()
+
     }
 }

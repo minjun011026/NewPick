@@ -163,7 +163,7 @@ class AddKeywordDialogFragment : DialogFragment() {
     }
 
     private fun showRecommendedKeywordsDialog(recommendations: List<String>) {
-        if (!isAdded) return // 프래그먼트가 활성 상태가 아닐 경우 종료
+//        if (!isAdded) return // 프래그먼트가 활성 상태가 아닐 경우 종료
 
         val dialog = RecommendedKeywordsDialogFragment.newInstance(recommendations) { selectedKeywords ->
             saveRecommendedKeywords(selectedKeywords) // 선택된 키워드 저장
@@ -223,4 +223,3 @@ class AddKeywordDialogFragment : DialogFragment() {
     }
 
 }
-
