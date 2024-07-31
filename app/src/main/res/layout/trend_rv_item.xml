@@ -52,7 +52,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textColor="#3f63bf"
+                    android:textColor="#0064FF"
                     android:textSize="15sp" />
 
                 <TextView

@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="키워드 영역"
-                android:textColor="#0E49A0"
+                android:textColor="#0064FF"
                 android:textSize="20sp"
                 android:fontFamily="@font/pretendard_semibold"
                 />
