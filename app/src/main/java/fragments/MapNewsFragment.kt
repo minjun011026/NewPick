@@ -240,7 +240,7 @@ class MapNewsFragment : Fragment() {
     private val cities = ArrayList<String>()
     private lateinit var popupWindow: PopupWindow
     private lateinit var myRef: DatabaseReference
-    private val newsItems = ArrayList<KeywordNewsModel>()
+    private var newsItems = ArrayList<KeywordNewsModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
