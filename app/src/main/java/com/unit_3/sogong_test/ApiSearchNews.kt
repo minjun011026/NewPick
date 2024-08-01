@@ -19,8 +19,9 @@ object ApiSearchNews {
     var clientId: String = BuildConfig.Naver_Client_ID
     var clientSecret: String = BuildConfig.Naver_Client_Secret
 
-    val newsItem = ArrayList<KeywordNewsModel>()
+    lateinit var newsItem : ArrayList<KeywordNewsModel>
     fun main(keyword : String) : ArrayList<KeywordNewsModel>{
+        newsItem = ArrayList()
         var text: String? = null
         try {
             text = URLEncoder.encode(keyword, "UTF-8")

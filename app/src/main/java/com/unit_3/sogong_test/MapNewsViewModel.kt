@@ -32,4 +32,8 @@ class MapNewsViewModel : ViewModel() {
             _dataLoaded.value = true
         }
     }
+
+    fun clearNews() {
+        _newsItems.value = emptyList()
+    }
 }
