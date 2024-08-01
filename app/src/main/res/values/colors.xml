@@ -13,5 +13,11 @@
     <color name="g.yellow">#FBBB00</color>
     <color name="green">#18B610</color>
 
+    <color name="button_login_normal_color">#0064FF</color>
+    <color name="button_login_pressed_color">#0051CC</color> <!-- 눌렸을 때 조금 어두운 색상 -->
+
+    <color name="button_register_normal_color">#D2D8DD</color>
+    <color name="button_register_pressed_color">#A6AEB3</color> <!-- 눌렸을 때 조금 어두운 색상 -->
+
 
 </resources>

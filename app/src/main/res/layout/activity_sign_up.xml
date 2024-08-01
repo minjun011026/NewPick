@@ -197,5 +197,6 @@
         android:background="@drawable/register_border_blue"
         android:fontFamily="@font/pretendard_semibold"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:stateListAnimator="@animator/button_press_elevation"/>
 </LinearLayout>
