@@ -111,16 +111,17 @@
     </LinearLayout>
 
     <!-- 로그인 버튼 -->
+
+    <!--구분선-->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/button_login_background"
-        android:textSize="20sp"
-        android:stateListAnimator="@animator/button_press_elevation" />
+        android:stateListAnimator="@animator/button_press_elevation"
+        android:textSize="20sp" />
 
-    <!--구분선-->
     <View
         android:layout_width="390dp"
         android:layout_height="1dp"
