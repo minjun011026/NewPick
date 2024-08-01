@@ -190,7 +190,7 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
         private val commentTextView: TextView = itemView.findViewById(R.id.commentTextView)
         private val likeBtn: ImageView = itemView.findViewById(R.id.likeBtn)
         private val likeCntTextView: TextView = itemView.findViewById(R.id.likeCntTextView)
-        private val replyBtn: TextView = itemView.findViewById(R.id.replyBtn)
+//        private val replyBtn: TextView = itemView.findViewById(R.id.replyBtn)
         private val moreVertBtn: ImageView = itemView.findViewById(R.id.moreVertBtn)
         private val profileImageView : CircleImageView = itemView.findViewById(R.id.profileImageView)
 
@@ -261,9 +261,9 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
                 showPopupMenu(it, comment, itemView.context)
             }
 
-            replyBtn.setOnClickListener {
-                // Implement reply functionality here
-            }
+//            replyBtn.setOnClickListener {
+//                // Implement reply functionality here
+//            }
         }
 
         private fun updateCommentLikes(comment: CommentModel) {
