@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_bookmark"
-        android:title="북마크에 저장하기"
+        android:title="북마크 저장"
         android:icon="@drawable/icon_bookmark"
         android:actionLayout="@layout/menu_layout"/>
     <item
         android:id="@+id/menu_share_link"
-        android:title="친구에게 공유하기"
+        android:title="링크 공유"
         android:icon="@drawable/icon_share_url"
         android:actionLayout="@layout/menu_layout"/>
     <item
         android:id="@+id/menu_posting"
-        android:title="피드에 게시물 쓰기"
+        android:title="피드 글쓰기"
         android:icon="@drawable/write_feed"
         android:actionLayout="@layout/menu_layout"/>
 </menu>

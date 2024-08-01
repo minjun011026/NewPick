@@ -215,6 +215,7 @@ package com.unit_3.sogong_test
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -225,6 +226,7 @@ import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -243,6 +245,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
         return ViewHolder(v)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: FeedRVAdapter.ViewHolder, position: Int) {
         holder.bindItems(items[position])
     }
@@ -252,6 +255,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        @RequiresApi(Build.VERSION_CODES.Q)
         fun bindItems(item: FeedModel) {
             val name = itemView.findViewById<TextView>(R.id.nameTextView)
             val title = itemView.findViewById<TextView>(R.id.titleTextView)
@@ -282,7 +286,11 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
 
                         name.text = nickname ?: "Unknown"
                         if (!profilePictureUrl.isNullOrEmpty()) {
-                            Glide.with(itemView.context).load(profilePictureUrl).into(imageArea)
+                            if(profilePictureUrl == "URL_OF_DEFAULT_IMAGE"){
+                                imageArea.setImageResource(R.drawable.account_circle)
+                            }else{
+                                Glide.with(itemView.context).load(profilePictureUrl).into(imageArea)
+                            }
                         }
                     } else {
                         Log.d("FeedRVAdapter", "User with uid ${item.uid} does not exist.")
@@ -386,6 +394,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                 }
         }
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         private fun showPopupMenu(view: View, item: FeedModel) {
             val popupMenu = PopupMenu(view.context, view)
             popupMenu.inflate(R.menu.feed_popup)
@@ -403,6 +412,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                     else -> false
                 }
             }
+            popupMenu.setForceShowIcon(true)
             popupMenu.show()
         }
 
