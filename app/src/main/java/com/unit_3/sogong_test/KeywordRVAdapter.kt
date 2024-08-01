@@ -1,4 +1,5 @@
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -6,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
@@ -25,6 +27,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
         return ViewHolder(v)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(items[position])
     }
@@ -35,6 +38,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         fun bindItems(item: KeywordModel) {
             val keywordArea = itemView.findViewById<TextView>(R.id.keywordArea)
             val moreVertButton = itemView.findViewById<ImageButton>(R.id.moreVertBtn)
@@ -69,6 +73,7 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
             }
         }
 
+        @RequiresApi(Build.VERSION_CODES.Q)
         private fun showPopupMenu(view: View, item: KeywordModel) {
             val popupMenu = PopupMenu(view.context, view)
             popupMenu.menuInflater.inflate(R.menu.popup, popupMenu.menu)
@@ -79,14 +84,16 @@ class KeywordRVAdapter(private val items: ArrayList<KeywordModel>) :
                         deleteKeyword(item)
                         true
                     }
-                    R.id.action_bell -> {
-                        Toast.makeText(itemView.context, "Bell 클릭: ${item.keyword}", Toast.LENGTH_SHORT).show()
-                        // 여기에 Bell 버튼 클릭 시 처리할 로직 추가
-                        true
-                    }
+//                    R.id.action_bell -> {
+//                        Toast.makeText(itemView.context, "Bell 클릭: ${item.keyword}", Toast.LENGTH_SHORT).show()
+//                        // 여기에 Bell 버튼 클릭 시 처리할 로직 추가
+//                        true
+//                    }
                     else -> false
                 }
             }
+
+            popupMenu.setForceShowIcon(true)
             popupMenu.show()
         }
 
