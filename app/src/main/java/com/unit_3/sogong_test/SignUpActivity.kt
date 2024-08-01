@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -171,16 +172,19 @@ class SignUpActivity : AppCompatActivity() {
                         database.child(userId).setValue(userData)
                             .addOnCompleteListener { dbTask ->
                                 if (dbTask.isSuccessful) {
-                                    Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                                    val intent = Intent(this, MainActivity::class.java)
+                                    Log.d("SignUp", "회원가입이 완료되었습니다.")
+                                    Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()  // 회원가입 완료 문구 추가
+                                    val intent = Intent(this, LoginActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 } else {
+                                    Log.e("SignUp", "회원가입에 실패했습니다.", dbTask.exception)
                                     Toast.makeText(this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
                                 }
                             }
                     }
                 } else {
+                    Log.e("SignUp", "회원가입에 실패했습니다.", task.exception)
                     Toast.makeText(this, "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -261,4 +265,3 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 }
-
