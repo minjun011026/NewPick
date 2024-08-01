@@ -343,17 +343,17 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                         likesTextView.text = "좋아요 ${item.likes}개"
                         likeBtn.setImageResource(R.drawable.heart)
 
-                        // 알림 데이터 저장
-                        val notificationId = db.child("notifications").child(item.uid).push().key
-                        val notificationMessage = "${getUserNickname(currentUserId)}님이 귀하의 게시물을 좋아요 하였습니다."
-                        val notification = mapOf(
-                            "type" to "like",
-                            "message" to notificationMessage,
-                            "timestamp" to System.currentTimeMillis()
-                        )
-                        if (notificationId != null) {
-                            db.child("notifications").child(item.uid).child(notificationId).setValue(notification)
-                        }
+//                        // 알림 데이터 저장
+//                        val notificationId = db.child("notifications").child(item.uid).push().key
+//                        val notificationMessage = "${getUserNickname(currentUserId)}님이 귀하의 게시물을 좋아요 하였습니다."
+//                        val notification = mapOf(
+//                            "type" to "like",
+//                            "message" to notificationMessage,
+//                            "timestamp" to System.currentTimeMillis()
+//                        )
+//                        if (notificationId != null) {
+//                            db.child("notifications").child(item.uid).child(notificationId).setValue(notification)
+//                        }
                     } else {
                         // 좋아요 취소
                         item.likes -= 1
