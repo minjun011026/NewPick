@@ -88,7 +88,7 @@ class SignUpActivity : AppCompatActivity() {
                         isNicknameChecked = false
                     } else {
                         nicknameMessage.text = "   사용 가능한 닉네임입니다."
-                        nicknameMessage.setTextColor(getColor(R.color.green))
+                        nicknameMessage.setTextColor(getColor(R.color.blue))
                         isNicknameChecked = true
                     }
                 }
