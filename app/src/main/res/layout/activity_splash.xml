@@ -11,7 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="275dp"
         android:layout_height="36dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:src="@drawable/newpick"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:id="@+id/textViewCustomNews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="170dp"
         android:gravity="center"
         android:text="당신을 위한 맞춤형 뉴스"
         android:textColor="@android:color/black"
@@ -33,41 +33,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:id="@+id/lottieAnimationView1"-->
-<!--        android:layout_width="124dp"-->
-<!--        android:layout_height="130dp"-->
-<!--        android:layout_marginEnd="84dp"-->
-<!--        android:layout_marginBottom="104dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:lottie_autoPlay="true"-->
-<!--        app:lottie_loop="false"-->
-<!--        app:lottie_rawRes="@raw/hand_click" />-->
-
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:id="@+id/lottieAnimationView2"-->
-<!--        android:layout_width="749dp"-->
-<!--        android:layout_height="393dp"-->
-<!--        android:layout_marginEnd="4dp"-->
-<!--        android:layout_marginBottom="36dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:lottie_autoPlay="true"-->
-<!--        app:lottie_loop="false"-->
-<!--        app:lottie_rawRes="@raw/news_pick" />-->
-
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView2"
-        android:layout_width="500dp"
-        android:layout_height="300dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/lottieAnimationView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/run_rabbit"/>
+        app:lottie_rawRes="@raw/hand_click" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView2"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="116dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_rawRes="@raw/news_pick" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
