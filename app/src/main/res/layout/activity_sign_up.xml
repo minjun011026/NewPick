@@ -56,9 +56,11 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="Nick Name"
+                android:hint="\n닉네임을 입력하세요"
                 android:background="@android:color/transparent"
-                android:padding="10dp" />
+                android:padding="7dp"
+                android:textSize="12sp"
+                />
 
             <ImageButton
                 android:id="@+id/checkNicknameBtn"
@@ -97,7 +99,9 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="  Enter Email"
+                android:hint="\n이메일을 입력하세요"
+                android:padding="7dp"
+                android:textSize="12sp"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/password_border2" />
 
@@ -134,10 +138,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="Enter Password"
+                android:hint="\n비밀번호를 입력하세요"
+                android:padding="7dp"
+                android:textSize="12sp"
                 android:inputType="textPassword"
                 android:background="@android:color/transparent"
-                android:padding="10dp" />
+                />
 
             <ImageButton
                 android:id="@+id/showPassword"
@@ -172,10 +178,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:hint="Repeat Password"
+                android:hint="\n비밀번호를 한 번 더 입력하세요"
+                android:padding="7dp"
+                android:textSize="12sp"
                 android:inputType="textPassword"
                 android:background="@android:color/transparent"
-                android:padding="10dp" />
+             />
 
             <ImageButton
                 android:id="@+id/showRepeatPassword"

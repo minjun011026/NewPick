@@ -110,13 +110,13 @@
             android:textStyle="italic" />
     </LinearLayout>
 
-    <!-- 로그인 버튼 -->
 
-    <!--구분선-->
+    <!-- 로그인 버튼 -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/button_login_background"
         android:stateListAnimator="@animator/button_press_elevation"
@@ -129,7 +129,6 @@
         android:background="@android:color/darker_gray" />
 
     <!-- 회원가입 버튼 -->
-
     <TextView
         android:id="@+id/notMemberText"
         android:layout_width="wrap_content"
@@ -145,6 +144,9 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_register_background"
-        android:textStyle="bold"
-        android:stateListAnimator="@animator/button_press_elevation" />
+        android:stateListAnimator="@animator/button_press_elevation"
+        android:textStyle="bold" />
+
+
+
 </LinearLayout>
