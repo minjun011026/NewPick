@@ -105,9 +105,9 @@
 
                     <Button
                         android:id="@+id/addressBtn1"
-                        android:layout_width="150dp"
+                        android:layout_width="130dp"
                         android:layout_height="50dp"
-                        android:text="+"
+                        android:text="          +"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:background="#00ff0000" />
@@ -132,9 +132,9 @@
 
                     <Button
                         android:id="@+id/addressBtn2"
-                        android:layout_width="150dp"
+                        android:layout_width="130dp"
                         android:layout_height="50dp"
-                        android:text="+"
+                        android:text="          +"
                         android:background="#00ff0000"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
