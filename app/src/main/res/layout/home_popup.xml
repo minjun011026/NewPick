@@ -11,7 +11,7 @@
         android:id="@+id/popup_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" ' 일별 인기 급상승 검색어 '는 지난 24시간 동안의 모든 검색어 중에서 트래픽이 크게 증가한 검색어를 강조표시하며, 1시간마다 업데이트됩니다. \n 이러한 인기 급상승 검색어 페이지에는 \n특정 검색어 및 검색 횟수의 절댓값이 표시됩니다. "
+        android:text=" ' 일별 인기 급상승 검색어 '는 지난 24시간 동안의 모든 검색어 중에서 트래픽이 크게 증가한 검색어를 강조표시하며, 1시간마다 \n업데이트됩니다. \n 이러한 인기 급상승 검색어 페이지에는 \n특정 검색어 및 검색 횟수의 절댓값이 \n표시됩니다. "
         android:textSize="16sp"
         android:lineSpacingExtra="6dp"
         android:gravity="center"

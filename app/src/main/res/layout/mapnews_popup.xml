@@ -11,7 +11,7 @@
         android:id="@+id/popup_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" ' 지역뉴스 ' 에서는 내 근처 지역의 뉴스들을 한 번에 확인할 수 있습니다. \n 왼쪽 상단에서 최대 2개 지역을 선택할 수 있으며, 상세 지역 설정을 통해 내가 원하는 지역을 선택할 수 있습니다."
+        android:text=" ' 지역뉴스 ' 에서는 내 근처 지역의 \n뉴스들을 한 번에 확인할 수 있습니다. \n 왼쪽 상단에서 최대 2개 지역을 선택할 수 있으며, 상세 지역 설정을 통해 내가 원하는 지역을 선택할 수 있습니다."
         android:textSize="16sp"
         android:lineSpacingExtra="6dp"
         android:gravity="center"

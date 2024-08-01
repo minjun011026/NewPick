@@ -11,7 +11,7 @@
         android:id="@+id/popup_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" ' 나의 키워드 ' 화면은 사용자가 관심있는 키워드를 직접 추가할 수 있는 기능을 제공합니다.\n키워드 클릭시 해당 키워드와 관련된 \n뉴스목록들을 확인할 수 있습니다."
+        android:text=" ' 나의 키워드 ' 화면은 사용자가 관심있는 키워드를 직접 추가할 수 있는 \n기능을 제공합니다.\n키워드 클릭시 해당 키워드와 관련된 \n뉴스목록들을 확인할 수 있습니다."
         android:textSize="16sp"
         android:lineSpacingExtra="6dp"
         android:gravity="center"
