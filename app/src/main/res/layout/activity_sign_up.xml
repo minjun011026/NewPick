@@ -194,7 +194,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="40dp"
-        android:background="@drawable/register_border_blue"
+        android:background="@drawable/button_register_blue_background"
         android:fontFamily="@font/pretendard_semibold"
         android:textColor="@color/white"
         android:textSize="30sp"
