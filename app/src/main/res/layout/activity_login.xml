@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="뉴스와 친해지리"
+        android:text="관심 있는 키워드로만 \n뉴스를 보고싶다면?"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -30,9 +30,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="관심 있는 키워드로만 뉴스를 보고싶다면?"
+        android:layout_marginLeft="3dp"
+        android:text="당신이 원하는 뉴스만 쏙쏙!"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="16sp" />
 
     <!-- 이메일 입력 -->
     <EditText
@@ -146,7 +147,6 @@
         android:background="@drawable/button_register_background"
         android:stateListAnimator="@animator/button_press_elevation"
         android:textStyle="bold" />
-
 
 
 </LinearLayout>

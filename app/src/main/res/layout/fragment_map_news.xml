@@ -45,7 +45,7 @@
                             android:layout_gravity="center"
                             android:fontFamily="@font/ibmplexsanskr_semibold"
                             android:paddingBottom="8dp"
-                            android:text="지역 뉴스"
+                            android:text="Local"
                             android:textColor="#2E2E2E"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
