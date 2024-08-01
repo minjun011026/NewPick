@@ -22,7 +22,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/star"
+                    android:src="@drawable/logo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -101,6 +101,7 @@
 
 
             <!-- 키워드 리스트 -->
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"

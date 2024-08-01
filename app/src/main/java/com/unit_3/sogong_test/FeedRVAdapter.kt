@@ -281,9 +281,6 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                         val nickname = snapshot.child("nickname").getValue(String::class.java)
                         val profilePictureUrl = snapshot.child("profile_picture").getValue(String::class.java)
 
-                        Log.d("FeedRVAdapter", "Nickname for uid ${item.uid}: $nickname")
-                        Log.d("FeedRVAdapter", "Profile picture URL for uid ${item.uid}: $profilePictureUrl")
-
                         name.text = nickname ?: "Unknown"
                         if (!profilePictureUrl.isNullOrEmpty()) {
                             if(profilePictureUrl == "URL_OF_DEFAULT_IMAGE"){
@@ -293,13 +290,11 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                             }
                         }
                     } else {
-                        Log.d("FeedRVAdapter", "User with uid ${item.uid} does not exist.")
                         name.text = "Unknown"
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    // 오류 처리
                     Log.e("FeedRVAdapter", "Error fetching nickname for uid ${item.uid}: ${error.message}")
                     name.text = "Unknown"
                 }
@@ -313,7 +308,6 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
 
             articleTextView.text = item.articleTitle
 
-            // Use Glide to load image and handle visibility
             if (item.imageUrl.isNullOrEmpty()) {
                 articleImageView.visibility = View.GONE
             } else {
@@ -321,7 +315,6 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                 Glide.with(itemView.context).load(item.imageUrl).into(articleImageView)
             }
 
-            // Check if articleTitle is null or empty
             if (item.articleTitle.isNullOrEmpty()) {
                 articleTextView.visibility = View.GONE
             } else {
@@ -335,21 +328,32 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
 
             val currentUserId = auth.currentUser?.uid
 
-            // Update like button icon based on user's like status
-            if (item.likedUsers.contains(currentUserId)) {
-                likeBtn.setImageResource(R.drawable.heart)
-            } else {
-                likeBtn.setImageResource(R.drawable.favorite)
-            }
+            if (currentUserId != null) {
+                if (item.likedUsers.contains(currentUserId)) {
+                    likeBtn.setImageResource(R.drawable.heart)
+                } else {
+                    likeBtn.setImageResource(R.drawable.favorite)
+                }
 
-            likeBtn.setOnClickListener {
-                if (currentUserId != null) {
+                likeBtn.setOnClickListener {
                     if (!item.likedUsers.contains(currentUserId)) {
                         // 좋아요 추가
                         item.likes += 1
                         item.likedUsers.add(currentUserId)
                         likesTextView.text = "좋아요 ${item.likes}개"
                         likeBtn.setImageResource(R.drawable.heart)
+
+                        // 알림 데이터 저장
+                        val notificationId = db.child("notifications").child(item.uid).push().key
+                        val notificationMessage = "${getUserNickname(currentUserId)}님이 귀하의 게시물을 좋아요 하였습니다."
+                        val notification = mapOf(
+                            "type" to "like",
+                            "message" to notificationMessage,
+                            "timestamp" to System.currentTimeMillis()
+                        )
+                        if (notificationId != null) {
+                            db.child("notifications").child(item.uid).child(notificationId).setValue(notification)
+                        }
                     } else {
                         // 좋아요 취소
                         item.likes -= 1
@@ -382,6 +386,21 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
             }
         }
 
+        private fun getUserNickname(userId: String): String {
+            var nickname = "Unknown"
+            val ref = usersDb.child(userId)
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    nickname = snapshot.child("nickname").getValue(String::class.java) ?: "Unknown"
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("FeedRVAdapter", "Error fetching nickname: ${error.message}")
+                }
+            })
+            return nickname
+        }
+
         private fun updateLikesInDatabase(item: FeedModel) {
             val itemRef = db.child(item.id)
             itemRef.child("likes").setValue(item.likes)
@@ -390,7 +409,7 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                     // 성공적으로 업데이트됨
                 }
                 .addOnFailureListener { e ->
-                    // 업데이트 실패
+                    Log.e("FeedRVAdapter", "Failed to update likes: ${e.message}")
                 }
         }
 

@@ -55,7 +55,7 @@ class MyPageFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         // Load dark mode preference
-        loadDarkModePreference()
+
 
         return binding.root
     }
@@ -138,10 +138,6 @@ class MyPageFragment : Fragment() {
             }
         }
 
-        // 다크 모드 스위치 리스너 추가
-        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            setDarkMode(isChecked)
-        }
 
         // 앱 버전 버튼 클릭 리스너 추가
         binding.version.setOnClickListener {
@@ -180,13 +176,7 @@ class MyPageFragment : Fragment() {
 
     }
 
-    private fun loadDarkModePreference() {
-        val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
-        AppCompatDelegate.setDefaultNightMode(
-            if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
-        binding.switchDarkMode.isChecked = isDarkMode
-    }
+
 
     private fun setDarkMode(enabled: Boolean) {
         if (isAdded) {

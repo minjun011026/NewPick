@@ -1,5 +1,6 @@
 package com.unit_3.sogong_test
 
+
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
@@ -26,18 +27,20 @@ class FeedWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed_write)
 
-        val link = intent.getStringExtra("article_link")
-        val article_title = intent.getStringExtra("article_title")
-        val imageUrl = intent.getStringExtra("article_imageUrl")
-        Log.d(TAG, "link : $link, title : $article_title, imageUrl : $imageUrl")
+        // Safely extract extras from the Intent
+        val link = intent.getStringExtra("article_link") ?: "" // Default to empty string if null
+        val articleTitle = intent.getStringExtra("article_title") ?: "" // Default to empty string if null
+        val imageUrl = intent.getStringExtra("article_imageUrl") ?: "" // Default to empty string if null
+
+        Log.d(TAG, "link : $link, title : $articleTitle, imageUrl : $imageUrl")
 
         val articleTextView: TextView = findViewById(R.id.articleTextView)
         val articleImageArea: ImageView = findViewById(R.id.articleImageArea)
 
-        articleTextView.text = article_title
+        articleTextView.text = articleTitle
 
         // Load the image using Glide
-        if (!imageUrl.isNullOrEmpty()) {
+        if (imageUrl.isNotEmpty()) {
             Glide.with(this)
                 .load(imageUrl)
                 .into(articleImageArea)
@@ -52,19 +55,16 @@ class FeedWriteActivity : AppCompatActivity() {
             val content = binding.contentEditText.text.toString()
             Log.d(TAG, title)
             Log.d(TAG, content)
-            val userId = currentUser!!.uid
+            val userId = currentUser?.uid ?: "" // Safely handle null currentUser
             val time = getTime()
             val feedRef = database.getReference("feeds")
 
             // Create a unique ID for the new post
             val newPostRef = feedRef.push()
-            val postId = newPostRef.key
+            val postId = newPostRef.key ?: return@setOnClickListener // Handle null postId
 
-            // Ensure the postId is not null
-            if (postId != null) {
-                val feed = FeedModel(postId, userId, title, time, content, article_title, link, imageUrl, 0, 0)
-                newPostRef.setValue(feed)
-            }
+            val feed = FeedModel(postId, userId, title, time, content, articleTitle, link, imageUrl, 0, 0)
+            newPostRef.setValue(feed)
 
             finish()
         }
