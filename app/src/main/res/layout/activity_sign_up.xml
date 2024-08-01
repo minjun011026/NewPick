@@ -10,25 +10,31 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/headerText"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:gravity="center_horizontal"
-        android:text="앱 이름"
-        android:textSize="24sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="35dp"
-        android:textColor="#2E2E2E"
-        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="10dp"
+        android:text="뉴스와 친해지리"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/subHeaderText"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="관심 있는 키워드로만 뉴스를 보고싶다면?"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+
     <com.google.android.material.textfield.TextInputLayout
+
         android:id="@+id/nicknameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +49,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/insert_box">
+            android:background="@drawable/nickname_border">
 
             <EditText
                 android:id="@+id/nameText"
@@ -93,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Enter Email"
                 android:inputType="textEmailAddress"
-                android:background="@drawable/insert_box" />
+                android:background="@drawable/password_border2" />
 
             <TextView
                 android:id="@+id/emailMessage"
@@ -119,7 +125,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/insert_box"
+            android:background="@drawable/email_border2"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -158,7 +164,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/insert_box">
+            android:layout_marginTop="14dp"
+            android:background="@drawable/email_border2">
 
             <EditText
                 android:id="@+id/repeatPasswordText"
@@ -182,14 +189,13 @@
 
     <Button
         android:id="@+id/registerBtn"
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="40dp"
-        android:text="Register"
+        android:background="@drawable/register_border_blue"
         android:fontFamily="@font/pretendard_semibold"
-        android:background="@drawable/button_default"
         android:textColor="@color/white"
         android:textSize="30sp" />
 </LinearLayout>
