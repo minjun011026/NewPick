@@ -10,7 +10,6 @@
     android:background="@color/white"
     tools:context=".LoginActivity">
 
-
     <!-- 뉴스와 친해지리 텍스트 -->
 
     <!-- 설명 텍스트 -->
@@ -117,8 +116,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:background="@drawable/login_border"
-        android:textSize="20sp" />
+        android:background="@drawable/button_login_background"
+        android:textSize="20sp"
+        android:stateListAnimator="@animator/button_press_elevation" />
 
     <!--구분선-->
     <View
@@ -129,16 +129,13 @@
 
     <!-- 회원가입 버튼 -->
 
-
-        <TextView
-            android:id="@+id/notMemberText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-5dp"
-            android:text="회원이 아니시라면?"
-            android:textColor="@color/black" />
-
-
+    <TextView
+        android:id="@+id/notMemberText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-5dp"
+        android:text="회원이 아니시라면?"
+        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/registerBtn"
@@ -146,6 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/register_border"
-        android:textStyle="bold" />
+        android:background="@drawable/button_register_background"
+        android:textStyle="bold"
+        android:stateListAnimator="@animator/button_press_elevation" />
 </LinearLayout>
