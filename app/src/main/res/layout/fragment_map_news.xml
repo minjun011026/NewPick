@@ -158,7 +158,7 @@
                     android:id="@+id/loadingAnimationView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:lottie_rawRes="@raw/rabbit_run"
+                    app:lottie_rawRes="@raw/run_rabbit"
                     android:layout_gravity="center_vertical"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true" />
