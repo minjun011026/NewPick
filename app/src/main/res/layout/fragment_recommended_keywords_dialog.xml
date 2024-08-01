@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="match_parent"
@@ -33,18 +35,32 @@
         <LinearLayout
             android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="170dp"
             android:layout_marginTop="4dp"
+            android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingStart="24dp"
             android:paddingEnd="24dp">
 
+            <TextView
+                android:id="@+id/loadingMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AI가 추천해줄 키워드를 가져오고 있어요!"
+                android:fontFamily="@font/pretendard_regular"
+                android:textSize="16sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="visible"/>
+
             <ListView
                 android:id="@+id/keywordsListView"
-                android:layout_width="347dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:visibility="gone"/>
         </LinearLayout>
 
 
