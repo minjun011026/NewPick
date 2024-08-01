@@ -49,7 +49,7 @@ class TrendKeywordActivity : AppCompatActivity() {
 
     private fun fetchNewsArticles(keyword: String): List<NewsModel> {
         val encodedKeyword = URLEncoder.encode(keyword, "UTF-8")
-        val apiURL = "https://openapi.naver.com/v1/search/news.json?query=$encodedKeyword&display=15&start=1&sort=sim"
+        val apiURL = "https://openapi.naver.com/v1/search/news.json?query=$encodedKeyword&display=20&start=1&sort=sim"
         val url = URL(apiURL)
         val connection = url.openConnection() as HttpURLConnection
         connection.requestMethod = "GET"
