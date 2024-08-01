@@ -50,6 +50,23 @@ class RecommendedKeywordsDialogFragment : DialogFragment() {
         }
     }
 
+    private fun dismissAddKeywordDialog() {
+        // 키워드 등록 다이얼로그를 종료하는 로직을 추가합니다.
+        val addKeywordDialog =
+            childFragmentManager.findFragmentByTag("AddKeywordDialogFragment") as? AddKeywordDialogFragment
+        addKeywordDialog?.dismiss()
+    }
+
+    private fun onCompleteButtonClick() {
+        if (selectedKeywords.isNotEmpty()) {
+            onKeywordsSelected?.invoke(selectedKeywords)
+            dismiss() // 추천 키워드 다이얼로그 종료
+            dismissAddKeywordDialog() // 키워드 등록 다이얼로그 종료
+        } else {
+            Toast.makeText(context, "키워드를 선택하세요.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(context),
@@ -74,6 +91,16 @@ class RecommendedKeywordsDialogFragment : DialogFragment() {
 
             positiveButton?.setTextColor(Color.parseColor("#4169E1")) // 확인 버튼 색상
             negativeButton?.setTextColor(Color.parseColor("#ff0000")) // 취소 버튼 색상
+
+            // 확인 버튼 클릭 시 처리
+            positiveButton?.setOnClickListener {
+                onCompleteButtonClick()
+            }
+
+            // 취소 버튼 클릭 시 처리
+            negativeButton?.setOnClickListener {
+                dismiss() // 다이얼로그 종료
+            }
         }
 
         // 데이터 로딩
