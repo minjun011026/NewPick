@@ -23,14 +23,15 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="16dp">
 
-    <ImageView
-        android:id="@+id/imageArea"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="fitXY"/>
-
 </androidx.cardview.widget.CardView>
 
+
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:id="@+id/imageArea"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/moreLayout"
