@@ -17,10 +17,10 @@
 
             <ImageButton
                 android:id="@+id/previousBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@color/white"
-                android:src="@drawable/arrow_back_ios"
+                android:src="@drawable/arrow_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

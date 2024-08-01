@@ -17,8 +17,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/arrow_back_ios"
+            android:src="@drawable/arrow_back"
             android:gravity="center"
+            android:backgroundTint="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
