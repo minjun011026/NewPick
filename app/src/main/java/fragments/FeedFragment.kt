@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.PopupWindow
 import android.widget.Spinner
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -32,6 +35,7 @@ class FeedFragment : Fragment() {
     private val items = mutableListOf<FeedModel>()
     private val filteredItems = mutableListOf<FeedModel>()
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var popupWindow: PopupWindow
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +65,48 @@ class FeedFragment : Fragment() {
         binding.floatingBtn.setOnClickListener {
             startActivity(Intent(context, FeedWriteActivity2::class.java))
         }
+
+        // Initialize PopupWindow
+        val popupView = layoutInflater.inflate(R.layout.feed_popup, null)
+        popupWindow = PopupWindow(
+            popupView,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            true
+        )
+
+        // Set PopupWindow background and animations
+        popupWindow.setBackgroundDrawable(null)
+        popupWindow.isOutsideTouchable = true
+        popupWindow.isFocusable = true
+
+        // Apply elevation to PopupWindow
+        ViewCompat.setElevation(popupView, 8f) // Adjust elevation as needed
+
+        // Show PopupWindow when the help button is touched
+        binding.helpImageView2.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // Show PopupWindow
+                    popupWindow.showAsDropDown(v, 0, 0)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Dismiss the PopupWindow when touched outside
+        binding.root.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                if (popupWindow.isShowing) {
+                    popupWindow.dismiss()
+                }
+            }
+            false
+        }
+
+
+
 
         // Setup RecyclerView
         val rv: RecyclerView = binding.rv
