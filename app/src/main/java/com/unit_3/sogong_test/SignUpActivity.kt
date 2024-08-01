@@ -83,11 +83,11 @@ class SignUpActivity : AppCompatActivity() {
             if (nickname.isNotEmpty()) {
                 checkNicknameExists(nickname) { exists ->
                     if (exists) {
-                        nicknameMessage.text = "   이미 사용 중인 닉네임입니다!"
+                        nicknameMessage.text = "  이미 사용 중인 닉네임입니다!"
                         nicknameMessage.setTextColor(getColor(R.color.red))
                         isNicknameChecked = false
                     } else {
-                        nicknameMessage.text = "   사용 가능한 닉네임입니다."
+                        nicknameMessage.text = "  사용 가능한 닉네임입니다."
                         nicknameMessage.setTextColor(getColor(R.color.blue))
                         isNicknameChecked = true
                     }
@@ -146,7 +146,7 @@ class SignUpActivity : AppCompatActivity() {
             if (isValid && isNicknameChecked) {
                 checkEmailExists(email) { exists ->
                     if (exists) {
-                        emailMessage.text = "   이미 사용 중인 이메일입니다."
+                        emailMessage.text = "  이미 사용 중인 이메일입니다."
                         emailMessage.setTextColor(getColor(R.color.red))
                     } else {
                         val intent = Intent(this, TermsActivity::class.java)

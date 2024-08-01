@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="모두 동의합니다"
+        android:text="약관동의"
         android:textSize="26sp"
         android:gravity="center"
         android:layout_marginBottom="24dp" />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="모두 동의합니다."
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginBottom="16dp" />
 
     <View
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="만 14세 이상입니다 (필수)"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginBottom="16dp" />
 
     <CheckBox
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="이용약관 동의 (필수)"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginBottom="16dp" />
 
     <CheckBox
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="개인정보 수집 및 이용에 관한 동의 (필수)"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginBottom="16dp" />
 
     <CheckBox
@@ -57,17 +57,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="광고 전송 및 권유에 관한 선택적 동의 (선택)"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/acceptTermsBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="동의하고 진행"
-        android:backgroundTint="@color/custom"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:background="@drawable/agree_botton"
+         />
 </LinearLayout>
 
 
