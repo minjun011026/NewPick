@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="365dp"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -18,20 +18,21 @@
         android:maxLines="1"
         android:ellipsize="end" />
 
-<androidx.cardview.widget.CardView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="16dp">
-
-</androidx.cardview.widget.CardView>
-
-
-    <ImageView
-        android:layout_marginTop="8dp"
-        android:id="@+id/imageArea"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitXY" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp">
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:id="@+id/imageArea"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:scaleType="fitXY" />
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/moreLayout"
