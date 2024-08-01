@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ class BookmarkedNewsActivity : AppCompatActivity() {
     private lateinit var adapter: BookmarkedNewsAdapter
     private lateinit var dbHelper: DatabaseHelper
 
-    private lateinit var previousBtn: ImageButton
+    private lateinit var previousBtn: ImageView
     private lateinit var recyclerView: RecyclerView
     private lateinit var noBookmarkedTextView: TextView
 
@@ -27,8 +28,8 @@ class BookmarkedNewsActivity : AppCompatActivity() {
         newsItem = ArrayList()
         adapter = BookmarkedNewsAdapter(this, newsItem)
 
-        previousBtn = findViewById(R.id.previousBtn)
-        recyclerView = findViewById(R.id.recyclerViewBookmarkedNews)
+        previousBtn = findViewById(R.id.backBtn)
+        recyclerView = findViewById(R.id.rv)
         noBookmarkedTextView = findViewById(R.id.no_bookmarked_textview)
 
         recyclerView.adapter = adapter
