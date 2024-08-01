@@ -30,7 +30,7 @@ object ApiSearchNews {
         }
 
         val apiURL =
-            "https://openapi.naver.com/v1/search/news.json?query=$text&display=10&start=1&sort=sim"
+            "https://openapi.naver.com/v1/search/news.json?query=$text&display=15&start=1&sort=sim"
 
 
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
