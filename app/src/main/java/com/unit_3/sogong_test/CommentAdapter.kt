@@ -208,7 +208,12 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
 
                         uidTextView.text = nickname ?: "Unknown"
                         if (!profilePictureUrl.isNullOrEmpty()) {
-                            Glide.with(itemView.context).load(profilePictureUrl).into(profileImageView)
+                            if (profilePictureUrl == "URL_OF_DEFAULT_IMAGE") {
+                                profileImageView.setImageResource(R.drawable.account_circle)
+                            } else {
+                                Glide.with(itemView.context).load(profilePictureUrl)
+                                    .into(profileImageView)
+                            }
                         }
                     }else {
                         Log.d("FeedRVAdapter", "User with uid ${comment.userId} does not exist.")

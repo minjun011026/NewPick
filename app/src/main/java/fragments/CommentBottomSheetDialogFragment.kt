@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -63,6 +67,17 @@ class CommentBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         loadComments()
 
+        // Apply rounded corners to the BottomSheet
+        (dialog as? BottomSheetDialog)?.let { bottomSheetDialog ->
+            bottomSheetDialog.setOnShowListener {
+                val bottomSheet = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+                bottomSheet?.let {
+                    val shapeDrawable = ContextCompat.getDrawable(requireContext(), R.drawable.bottom_sheet_background)
+                    bottomSheet.background = shapeDrawable
+                    ViewCompat.setBackgroundTintList(bottomSheet, null) // Clear tint
+                }
+            }
+        }
         return view
     }
 
