@@ -25,33 +25,33 @@ class MainActivity : AppCompatActivity() {
         handleIntent(intent)
     }
 
-//    private fun handleIntent(intent: Intent?) {
-//        if (intent != null) {
-//            val fromActivity = intent.getStringExtra("fromActivity")
-//            if (fromActivity == "MapViewActivity") {
-//                replaceFragment(MapNewsFragment())
-//            } else {
-//                val fragmentName = intent.getStringExtra("fragmentName")
-//                if (fragmentName != null) {
-//                    when (fragmentName) {
-//                        "HomeFragment" -> replaceFragment(HomeFragment())
-//                        "MyKeywordFragment" -> replaceFragment(MyKeywordFragment())
-//                        "MyPageFragment" -> replaceFragment(MyPageFragment())
-//                        "FeedFragment" -> replaceFragment(FeedFragment())
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     private fun handleIntent(intent: Intent?) {
         if (intent != null) {
             val fromActivity = intent.getStringExtra("fromActivity")
             if (fromActivity == "MapViewActivity") {
                 replaceFragment(MapNewsFragment())
+            } else {
+                val fragmentName = intent.getStringExtra("fragmentName")
+                if (fragmentName != null) {
+                    when (fragmentName) {
+                        "HomeFragment" -> replaceFragment(HomeFragment())
+                        "MyKeywordFragment" -> replaceFragment(MyKeywordFragment())
+                        "MyPageFragment" -> replaceFragment(MyPageFragment())
+                        "FeedFragment" -> replaceFragment(FeedFragment())
+                    }
+                }
             }
         }
     }
+
+//    private fun handleIntent(intent: Intent?) {
+//        if (intent != null) {
+//            val fromActivity = intent.getStringExtra("fromActivity")
+//            if (fromActivity == "MapViewActivity") {
+//                replaceFragment(MapNewsFragment())
+//            }
+//        }
+//    }
 
     private fun replaceFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
