@@ -145,7 +145,7 @@
                 android:id="@+id/loadingOverlay"
                 android:layout_marginTop="78dp"
                 android:layout_width="match_parent"
-                android:layout_height="700dp"
+                android:layout_height="680dp"
                 android:background="@android:color/white"
                 android:visibility="visible">
 
@@ -153,7 +153,7 @@
                     android:id="@+id/loadingTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="토끼가 오늘의 뉴스를 가져오고 있어요"
+                    android:text="토끼가 우리 동네 소식을 가져오고 있어요!"
                     android:textColor="#2E2E2E"
                     android:fontFamily="@font/pretendard_semibold"
                     android:textSize="20sp"
