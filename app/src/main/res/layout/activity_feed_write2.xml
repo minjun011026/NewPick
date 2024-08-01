@@ -101,8 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:orientation="vertical"
-            android:background="@drawable/rounded_corner">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/articleTextView"
@@ -111,14 +110,24 @@
                 android:fontFamily="@font/pretendard_regular"
                 android:text="기사 제목"
                 android:textColor="#2E2E2E"
-                android:padding="4dp"
+                android:paddingBottom="4dp"
                 android:textSize="20sp"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:visibility="invisible"/>
-            <ImageView
-                android:id="@+id/articleImageArea"
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:scaleType="fitXY"/>
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp">
+
+                <ImageView
+                    android:id="@+id/articleImageArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:scaleType="fitXY"/>
+
+            </androidx.cardview.widget.CardView>
 
 
         </LinearLayout>

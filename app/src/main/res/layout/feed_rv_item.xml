@@ -79,7 +79,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentTextView"
-        android:background="@drawable/rounded_corner"
         android:orientation="vertical">
 
         <TextView
@@ -88,8 +87,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
             android:text="기사 제목"
+            android:paddingBottom="4dp"
             android:textColor="#2E2E2E"
-            android:padding="4dp"
             android:textSize="18sp"
             android:maxLines="1"
             android:ellipsize="end"/>
@@ -120,7 +119,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_regular"
                 android:text="더 알아보기"
-                android:layout_marginLeft="10dp"
                 android:textSize="15sp"
                 />
 
@@ -128,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="255dp"
+                android:layout_marginLeft="275dp"
                 android:src="@drawable/arrow" />
 
 
