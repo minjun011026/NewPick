@@ -172,7 +172,6 @@
                 android:layout_height="wrap_content"
                 app:lottie_rawRes="@raw/rabbit_run"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="70dp"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true" />
         </FrameLayout>
