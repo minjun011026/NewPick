@@ -107,12 +107,12 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             btn2bg.setBackgroundResource(R.drawable.city_button)
             addressBtn1.setTextColor(Color.parseColor("#ffffff"))
             addressBtn2.setTextColor(Color.parseColor("#000000"))
-            if(addressBtn1.text.toString() == "+") {
+            if(addressBtn1.text.toString() == "          +") {
                 if (addressName != "") {
                     readExcel(addressName)
                     bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
                     bottomSheetDialog.setContentView(bottomSheetView)
-                    addressBtn1.text = "+"
+                    addressBtn1.text = "          +"
                     bottomSheetDialog.show()
                     addressName = ""
                 }
@@ -124,7 +124,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         }
 
         delbtn1.setOnClickListener{
-            addressBtn1.text = "+"
+            addressBtn1.text = "          +"
             btn1bg.setBackgroundResource(R.drawable.city_button)
             delbtn1.setEnabled(false)
             delbtn1.visibility = View.GONE
@@ -136,12 +136,12 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         addressBtn2.setOnClickListener{
             btn1bg.setBackgroundResource(R.drawable.city_button)
             addressBtn1.setTextColor(Color.parseColor("#000000"))
-            if(addressBtn2.text.toString() == "+") {
+            if(addressBtn2.text.toString() == "          +") {
                 if (addressName != "") {
                     readExcel(addressName)
                     bottomSheetView.findViewById<ListView>(R.id.listView).adapter = listViewAdapter
                     bottomSheetDialog.setContentView(bottomSheetView)
-                    addressBtn2.text = "+"
+                    addressBtn2.text = "          +"
                     bottomSheetDialog.show()
                     addressName = ""
                 }
@@ -153,7 +153,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         }
 
         delbtn2.setOnClickListener{
-            addressBtn2.text = "+"
+            addressBtn2.text = "          +"
             btn2bg.setBackgroundResource(R.drawable.city_button)
             delbtn2.setEnabled(false)
             delbtn2.visibility = View.GONE
@@ -166,10 +166,10 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
             val database = Firebase.database
             val myRef = database.getReference("location").child(Firebase.auth.currentUser!!.uid)
             myRef.removeValue()
-            if(addressBtn1.text.toString()!="+") {
+            if(addressBtn1.text.toString()!="          +") {
                 myRef.push().setValue(addressBtn1.text.toString())
             }
-            if(addressBtn2.text.toString()!="+"){
+            if(addressBtn2.text.toString()!="          +"){
                 myRef.push().setValue(addressBtn2.text.toString())
             }
 
@@ -209,13 +209,13 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
     }
 
     override fun onItemClick(item: String){
-        if(addressBtn1.text.toString() == "+") {
+        if(addressBtn1.text.toString() == "          +") {
             addressBtn1.text = item
             btn1bg.setBackgroundResource(R.drawable.button_default)
             delbtn1.setEnabled(true)
             delbtn1.visibility = View.VISIBLE
             addressBtn1.setTextColor(Color.parseColor("#FFFFFF"))
-        }else if(addressBtn2.text.toString() == "+") {
+        }else if(addressBtn2.text.toString() == "          +") {
             addressBtn2.text = item
             btn2bg.setBackgroundResource(R.drawable.button_default)
             delbtn2.setEnabled(true)
