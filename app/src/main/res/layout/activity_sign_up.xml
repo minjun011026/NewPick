@@ -97,7 +97,7 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Email"
+                android:hint="  Enter Email"
                 android:inputType="textEmailAddress"
                 android:background="@drawable/password_border2" />
 
