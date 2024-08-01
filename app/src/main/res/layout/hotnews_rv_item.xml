@@ -21,10 +21,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:cardCornerRadius="16dp">
 
         <ImageView
-            android:layout_marginTop="8dp"
             android:id="@+id/imageArea"
             android:layout_width="match_parent"
             android:layout_height="190dp"
