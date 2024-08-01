@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@drawable/keywordhelp_popup"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/popup_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" '피드'페이지에서는 다른 사용자들과 뉴스를 통해 정보나 의견을 주고받는 커뮤니티 기반의 플랫폼입니다. \n \n 각 뉴스의 더보기 버튼을 통해 해당 뉴스를 공유해 직접 글을 쓸 수 있으며 오른쪽 하단의 글쓰기 이모티콘을 클릭 후 원하는 뉴스기사의 링크를 붙이면 해당 기사를 공유한 글을 쓸 수 있습니다."
+        android:textSize="16sp"
+        android:lineSpacingExtra="6dp"
+        android:gravity="center"
+        android:textAlignment="center"/>
+
+</LinearLayout>
