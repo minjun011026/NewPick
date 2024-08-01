@@ -196,6 +196,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
@@ -225,6 +226,7 @@ class HomeFragment : Fragment() {
     private lateinit var popupWindow: PopupWindow
     private lateinit var loadingAnimationView: LottieAnimationView
     private lateinit var loadingOverlay: View
+    private lateinit var loadingTextView : TextView
 
     private val viewModel: HomeViewModel by viewModels()
 

@@ -155,10 +155,23 @@
         <!-- Overlay for loading animation -->
         <FrameLayout
             android:id="@+id/loadingOverlay"
+            android:layout_marginTop="78dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
+            android:layout_height="700dp"
+            android:background="@android:color/white"
             android:visibility="visible">
+
+            <TextView
+                android:id="@+id/loadingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="토끼가 오늘의 뉴스를 가져오고 있어요"
+                android:textColor="#2E2E2E"
+                android:fontFamily="@font/pretendard_semibold"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginTop="140dp"/>
+
 
             <View
                 android:layout_width="match_parent"
@@ -175,6 +188,7 @@
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true" />
         </FrameLayout>
+
 
     </FrameLayout>
 </layout>
