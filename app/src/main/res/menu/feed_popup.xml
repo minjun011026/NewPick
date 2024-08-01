@@ -3,5 +3,5 @@
     <item
         android:id="@+id/delete"
         android:title="삭제"
-        android:icon="@drawable/delete_icon_button"/>
+        android:icon="@drawable/ic_delete"/>
 </menu>

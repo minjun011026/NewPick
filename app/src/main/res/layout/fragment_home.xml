@@ -43,6 +43,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- 실시간 키워드 섹션 -->
@@ -96,8 +99,8 @@
                     android:id="@+id/helpImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/help_2"
-                    android:background="@color/white"/>
+                    android:background="@color/white"
+                    android:src="@drawable/help_2" />
 
 
             </LinearLayout>
