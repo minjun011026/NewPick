@@ -265,16 +265,17 @@ class MyPageFragment : Fragment() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        Log.e("MyPageFragment", "Database error: ${error.message}")
+                        Log.e("MyPageFragment", "Location database error: ${error.message}")
                     }
                 })
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e("MyPageFragment", "Database error: ${error.message}")
+                Log.e("MyPageFragment", "User database error: ${error.message}")
             }
         })
     }
+
 
     private fun checkUserLocation() {
         val currentUserId = Firebase.auth.currentUser?.uid
@@ -346,18 +347,13 @@ class MyPageFragment : Fragment() {
         Locale.setDefault(locale)
 
         val config = Configuration()
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            config.setLocales(LocaleList(locale))
-        } else {
-            config.setLocale(locale)
-        }
-
-        // Update the resources configuration with the new locale
+        config.setLocale(locale)
         requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
 
         // Recreate the activity to apply the new locale settings
         activity?.recreate()
     }
+
 
     private fun showLogoutConfirmationDialog() {
         if (isAdded) {
@@ -440,6 +436,7 @@ class MyPageFragment : Fragment() {
         }
         return dir.delete()
     }
+
 
     companion object {
         private const val REQUEST_CODE_CHANGE_NICKNAME = 2
