@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="180dp"
         android:layout_marginLeft="10dp"
-        android:text="뉴스와 친해지리"
+        android:text="당신을 위한 맞춤형 뉴스"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -28,7 +28,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
-        android:text="관심 있는 키워드로만 뉴스를 보고싶다면?"
+        android:text="지금 바로 시작하세요"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
