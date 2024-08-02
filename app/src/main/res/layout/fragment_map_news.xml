@@ -145,9 +145,10 @@
                 android:id="@+id/loadingOverlay"
                 android:layout_marginTop="78dp"
                 android:layout_width="match_parent"
-                android:layout_height="690dp"
+                android:layout_height="match_parent"
                 android:background="@android:color/white"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:layout_marginBottom="60dp">
 
                 <TextView
                     android:id="@+id/loadingTextView"
