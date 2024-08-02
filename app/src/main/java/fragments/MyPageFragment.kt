@@ -26,7 +26,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
-import com.google.firebase.database.ktx.database
 import com.google.firebase.storage.ktx.storage
 import com.google.firebase.storage.storage
 import com.unit_3.sogong_test.*
@@ -55,7 +54,11 @@ class MyPageFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         // Load dark mode preference
+        val isDarkMode = sharedPreferences.getBoolean("darkMode", false)
+        setDarkMode(isDarkMode)
 
+        // Refresh UI with current locale
+        refreshUI()
 
         return binding.root
     }
@@ -73,10 +76,6 @@ class MyPageFragment : Fragment() {
 
         // 이미지 변경 버튼 클릭 리스너
         binding.buttonChangeProfileImage.setOnClickListener {
-            showImagePickerDialog()
-        }
-
-        imageView.setOnClickListener {
             showImagePickerDialog()
         }
 
@@ -118,26 +117,13 @@ class MyPageFragment : Fragment() {
 
         // 로그아웃 버튼 클릭 리스너 추가
         binding.buttonLogout.setOnClickListener {
-            firebaseAuth.signOut()
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(intent)
-            activity?.finish()  // Close MyPageActivity
+            showLogoutConfirmationDialog()
         }
 
         // 회원 탈퇴 버튼 클릭 리스너 추가
         binding.buttonAccountDeletion.setOnClickListener {
-            val user = firebaseAuth.currentUser
-            user?.delete()?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(context, LoginActivity::class.java)
-                    startActivity(intent)
-                    activity?.finish()  // Close MyPageActivity
-                } else {
-                    // Handle failure
-                }
-            }
+            showAccountDeletionConfirmationDialog()
         }
-
 
         // 앱 버전 버튼 클릭 리스너 추가
         binding.version.setOnClickListener {
@@ -156,27 +142,11 @@ class MyPageFragment : Fragment() {
             showLanguageSelectionDialog()
         }
 
-        // 로그아웃 버튼 클릭 리스너 추가
-        binding.buttonLogout.setOnClickListener {
-            showLogoutConfirmationDialog()
-        }
-
-
-
-        // 회원 탈퇴 버튼 클릭 리스너 추가
-        binding.buttonAccountDeletion.setOnClickListener {
-            showAccountDeletionConfirmationDialog()
-        }
-
         // Clear Cache button click listener
         binding.buttonClearCache.setOnClickListener {
             showClearCacheConfirmationDialog()
         }
-
-
     }
-
-
 
     private fun setDarkMode(enabled: Boolean) {
         if (isAdded) {
@@ -190,7 +160,6 @@ class MyPageFragment : Fragment() {
         }
     }
 
-
     private fun openBookmarkedNewsActivity() {
         val intent = Intent(context, BookmarkedNewsActivity::class.java)
         startActivity(intent)
@@ -200,6 +169,11 @@ class MyPageFragment : Fragment() {
         val intent = Intent(context, RecentArticlesActivity::class.java)
         startActivity(intent)
     }
+
+    private fun refreshUI() {
+        binding.textViewUserLocation.text = getString(R.string.user_location) // 예시로 사용
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -385,7 +359,6 @@ class MyPageFragment : Fragment() {
         activity?.recreate()
     }
 
-
     private fun showLogoutConfirmationDialog() {
         if (isAdded) {
             val builder = AlertDialog.Builder(requireActivity())
@@ -428,7 +401,6 @@ class MyPageFragment : Fragment() {
         }
     }
 
-
     private fun showClearCacheConfirmationDialog() {
         if (isAdded) {
             val builder = AlertDialog.Builder(requireActivity())
@@ -468,7 +440,6 @@ class MyPageFragment : Fragment() {
         }
         return dir.delete()
     }
-
 
     companion object {
         private const val REQUEST_CODE_CHANGE_NICKNAME = 2
