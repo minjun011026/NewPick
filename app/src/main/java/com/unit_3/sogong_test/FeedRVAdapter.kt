@@ -288,6 +288,8 @@ class FeedRVAdapter(private val items: MutableList<FeedModel>) : RecyclerView.Ad
                             }else{
                                 Glide.with(itemView.context).load(profilePictureUrl).into(imageArea)
                             }
+                        }else{
+                            imageArea.setImageResource(R.drawable.account_circle)
                         }
                     } else {
                         name.text = "Unknown"
