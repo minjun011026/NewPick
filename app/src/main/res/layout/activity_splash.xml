@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
         android:gravity="center"
-        android:text="당신을 위한 맞춤형 뉴스"
+        android:text="뉴스를 픽하다 "
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"

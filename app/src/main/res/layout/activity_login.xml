@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="당신의 뉴스를 픽하다"
+        android:text="관심 있는 키워드로만 \n뉴스를 보고싶다면?"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -31,7 +31,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="3dp"
-        android:text="당신이 원하는 뉴스만 쏙쏙!"
+        android:text="원하는 뉴스만 쏙쏙!"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
