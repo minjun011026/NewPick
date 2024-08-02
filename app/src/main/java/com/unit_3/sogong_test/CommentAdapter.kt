@@ -214,6 +214,8 @@ class CommentsAdapter(private var comments: MutableList<CommentModel>) : Recycle
                                 Glide.with(itemView.context).load(profilePictureUrl)
                                     .into(profileImageView)
                             }
+                        }else{
+                            profileImageView.setImageResource(R.drawable.account_circle)
                         }
                     }else {
                         Log.d("FeedRVAdapter", "User with uid ${comment.userId} does not exist.")
