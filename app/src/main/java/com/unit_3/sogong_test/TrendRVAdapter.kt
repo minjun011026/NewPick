@@ -44,7 +44,7 @@ class TrendRVAdapter(private val keywords: MutableList<TrendKeywordsModel>) :
                 .into(imageArea)
 
             trendItem.setOnClickListener {
-                Toast.makeText(context, "키워드 클릭: ${keyword}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "키워드 클릭: ${keyword.keyword}", Toast.LENGTH_LONG).show()
                 val intent = Intent(context, TrendKeywordActivity::class.java)
                 intent.putExtra("keyword_title", keyword.keyword)  // 필요한 필드만을 전달
                 context.startActivity(intent)
