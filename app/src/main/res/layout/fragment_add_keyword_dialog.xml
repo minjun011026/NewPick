@@ -35,7 +35,7 @@
             <Button
                 android:id="@+id/cancelBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:background="@android:color/white"
                 android:fontFamily="@font/ibmplexsanskr_medium"
                 android:text="취소"
@@ -47,7 +47,7 @@
             <Button
                 android:id="@+id/registerBtn"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="20dp"
                 android:background="@android:color/white"
                 android:fontFamily="@font/ibmplexsanskr_medium"
