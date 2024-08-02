@@ -136,6 +136,7 @@ class MapViewActivity : AppCompatActivity() , OnMapReadyCallback, OnItemClickLis
         addressBtn2.setOnClickListener{
             btn1bg.setBackgroundResource(R.drawable.city_button)
             addressBtn1.setTextColor(Color.parseColor("#000000"))
+            addressBtn2.setTextColor(Color.parseColor("#ffffff"))
             if(addressBtn2.text.toString() == "          +") {
                 if (addressName != "") {
                     readExcel(addressName)
