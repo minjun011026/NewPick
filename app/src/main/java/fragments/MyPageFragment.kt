@@ -276,6 +276,7 @@ class MyPageFragment : Fragment() {
         })
     }
 
+//    d
 
     private fun checkUserLocation() {
         val currentUserId = Firebase.auth.currentUser?.uid
