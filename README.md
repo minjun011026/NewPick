@@ -14,7 +14,6 @@
 - **실시간 업데이트**: 최신 뉴스를 실시간으로 업데이트합니다.
 - **사용자 피드백**: 뉴스 추천의 정확성을 높이기 위해 사용자 피드백을 수집합니다.
 
-
 ### 🛠️ 기술 스택
 
 - **프론트엔드**: React, Redux
@@ -25,17 +24,36 @@
 
 프로젝트에 기여해주신 모든 분들께 감사드립니다!
 
-- [백준규](https://github.com/Codingbaek), [백준규-2](https://github.com/junekyu02) 
-- [박성진](https://github.com/macboy5)
-- [신민준](https://github.com/minjun011026)
-- [김난슬](https://github.com/seulnan)
-
+<div>
+  <a href="https://github.com/Codingbaek">
+    <img src="https://avatars.githubusercontent.com/u/xxxx?v=4" width="100" alt="백준규" />
+    <br />
+    백준규
+  </a>
+  <a href="https://github.com/junekyu02">
+    <img src="https://avatars.githubusercontent.com/u/xxxx?v=4" width="100" alt="백준규-2" />
+    <br />
+    백준규-2
+  </a>
+  <a href="https://github.com/macboy5">
+    <img src="https://avatars.githubusercontent.com/u/xxxx?v=4" width="100" alt="박성진" />
+    <br />
+    박성진
+  </a>
+  <a href="https://github.com/minjun011026">
+    <img src="https://avatars.githubusercontent.com/u/xxxx?v=4" width="100" alt="신민준" />
+    <br />
+    신민준
+  </a>
+  <a href="https://github.com/seulnan">
+    <img src="https://avatars.githubusercontent.com/u/xxxx?v=4" width="100" alt="김난슬" />
+    <br />
+    김난슬
+  </a>
+</div>
 
 ### 👥 시연영상
-
-
 
 ---
 
 **감사합니다!**
-
