@@ -14,23 +14,6 @@
 - **실시간 업데이트**: 최신 뉴스를 실시간으로 업데이트합니다.
 - **사용자 피드백**: 뉴스 추천의 정확성을 높이기 위해 사용자 피드백을 수집합니다.
 
-### 🔧 설치 방법
-
-1. 이 저장소를 클론합니다:
-    ```bash
-    git clone https://github.com/yourusername/your-repository.git
-    ```
-
-2. 필요한 패키지를 설치합니다:
-    ```bash
-    cd your-repository
-    npm install
-    ```
-
-3. 애플리케이션을 실행합니다:
-    ```bash
-    npm start
-    ```
 
 ### 🛠️ 기술 스택
 
@@ -42,17 +25,15 @@
 
 프로젝트에 기여해주신 모든 분들께 감사드립니다!
 
-- [기여자 1](https://github.com/contributor1)
-- [기여자 2](https://github.com/contributor2)
-- [기여자 3](https://github.com/contributor3)
+- [백준규](https://github.com/Codingbaek), [백준규-2](https://github.com/junekyu02) 
+- [박성진](https://github.com/macboy5)
+- [신민준](https://github.com/minjun011026)
+- [김난슬](https://github.com/seulnan)
 
-### 📄 라이센스
 
-이 프로젝트는 [MIT 라이센스](LICENSE) 하에 배포됩니다.
+### 👥 시연영상
 
-### 📫 문의하기
 
-문제가 있거나 추가적인 도움이 필요하시면, [이메일](mailto:your-email@example.com)로 연락 주시기 바랍니다.
 
 ---
 
