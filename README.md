@@ -1,15 +1,18 @@
 # 뉴픽
 ### 관심있는 키워드로만 뉴스를 보고 싶다면? 당신이 원하는 뉴스만 쏙쏙!
 
-![뉴픽 온보딩](https://github.com/user-attachments/assets/6bfb0285-f226-43a0-be8e-84180066afd9)
+![image](https://github.com/user-attachments/assets/c44fe91f-d786-43db-aabd-4bcb66300b58)
+
 
 
 ## 세부페이지
 
-![홈 키워드 페이지](https://github.com/user-attachments/assets/598f0dda-2998-40d0-a8f6-285658ab0d3e)
+![image](https://github.com/user-attachments/assets/1acd28e7-cef0-4124-9f4b-39416b44dbc5)
 
 
-![로컬 페이지](https://github.com/user-attachments/assets/4dda4045-fcc2-470f-b8e0-889da3f3fa01)
+
+![image](https://github.com/user-attachments/assets/cc6fbcf3-782b-4324-8523-f1ab9a64209f)
+
 
 
 
