@@ -3,6 +3,13 @@
 
 ![image](https://github.com/user-attachments/assets/51c5d867-6b7e-4e58-9e19-7cfebc4bf773)
 
+## 세부페이지
+
+![image](https://github.com/user-attachments/assets/1acd28e7-cef0-4124-9f4b-39416b44dbc5)
+
+
+
+![image](https://github.com/user-attachments/assets/cc6fbcf3-782b-4324-8523-f1ab9a64209f)
 
 ## 시연영상
 
